@@ -450,13 +450,21 @@ esetleg Claude Designbe. Ezt a struktúra explicit módon támogatja:
 
 | # | kérdés | Build 1 kezelése |
 |---|---|---|
-| 7 | **KONTAKT ADATOK.** Milyen címek, telefonszámok, e-mail címek, cégadatok mennek ki? | Build 1 szándékosan hamis, felismerhető placeholderekkel megy: `example@example.com`, `+00 000 000 0000`, `Example Street 1, 00000 Example City`. |
+| 7 | **KONTAKT ADATOK.** Milyen címek, telefonszámok, e-mail címek, cégadatok mennek ki? | Szándékosan hamis, felismerhető placeholderek: `info@example.com`, `+00 000 000 0000`, `Example Street 1, 00000 Example City`. Automatikusan ellenőrizve — lásd lent. |
+| 9 | **A 16 ORSZÁG MEGNEVEZÉSE.** Sem a tartalmi spec, sem a brandbook nem sorolja fel őket, a Global Footprint térképhez viszont 16 konkrét pont kell. | `data/locations.js` 16 jelölt placeholder-pozícióval, látható badge-dzsel a térkép alatt. |
+| 10 | **Media cikkek valós tartalma.** | 3 placeholder cikk, jelölve. Az egyik a frissítés módját dokumentálja — ez marad élesben is. |
+| 11 | **Career pozíciók valós listája.** | 3 placeholder pozíció a `data/jobs.js`-ben, jelölve. |
+| 12 | **Az 5 jogi dokumentum szövege** (Code of Conduct, Compliance & Ethics, Supplier Requirements, Privacy Policy, Legal Notice). | 5 kattintható stub oldal „content pending" jelöléssel. |
 
-> ⚠️ **A kontaktadatok bekérése kötelező lépés az élesítés előtt.** Minden placeholder
-> `<!-- TODO(client): valós kontaktadat bekérendő -->` jelöléssel **és** látható
-> badge-dzsel szerepel. A `docs/HANDOFF.md` nyitott tételként vezeti, a
-> `docs/CHANGELOG.md` pedig minden érintett commitnál emlékeztet rá. Ez a tétel
-> **nem zárható le fejlesztői oldalról** — csak ügyfél-adatszolgáltatással.
+> ⚠️ **Az 5 tétel egyike sem zárható le fejlesztői oldalról** — mind ügyfél-adatszolgáltatást
+> igényel. Minden placeholder `<!-- TODO(client): … -->` megjegyzéssel **és** látható
+> badge-dzsel szerepel, és a `tools/check_placeholders.py` leltározza őket a
+> `docs/HANDOFF.md`-be.
+>
+> A kontaktadatokra külön gép is vigyáz: a `check_placeholders.py` **hibával leáll**,
+> ha bármelyik e-mail cím nem `example.com` / `example.org` / `example.net` végű.
+> Így valós kontaktadat nem hiányozhat észrevétlenül, és kitalált „hihető" adat nem
+> csúszhat élesbe.
 
 ---
 
