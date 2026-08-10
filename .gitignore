@@ -1,0 +1,20 @@
+# OS
+Thumbs.db
+Desktop.ini
+.DS_Store
+
+# Editor
+.vscode/
+.idea/
+*.swp
+
+# Származtatott / generált assetek — a forrásból bármikor újraelőállíthatók.
+# A pipeline-t a docs/HANDOFF.md írja le.
+/build/
+/dist/
+/tmp/
+*.log
+
+# Nagy köztes videó-renderek (a végleges, optimalizált assetek
+# az assets/video/ alatt viszont VERZIÓKÖVETETTEK)
+/work/video/

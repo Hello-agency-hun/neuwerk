@@ -1,0 +1,47 @@
+Package Report
+
+-----------------------------------------------------------------------------
+Document:
+Name: neuwerk_brandbook_FINAL.ai
+Color Mode: CMYK color
+Color Profile: none
+Ruler Units: pixels
+Artboard Dimensions: 841,92 px x 594,96 px
+Show Images in Outline Mode: OFF
+Highlight Substituted Fonts: OFF
+Highlight Substituted Glyphs: OFF
+Preserve Text Editability
+Simulate Colored Paper: OFF
+
+-----------------------------------------------------------------------------
+Spot Color Objects:
+
+-----------------------------------------------------------------------------
+Missing Fonts:NONE
+
+-----------------------------------------------------------------------------
+Protected Fonts that were not packaged:NONE
+
+-----------------------------------------------------------------------------
+Fonts:
+Poppins (OTF)
+Poppins Medium (OTF)
+Poppins SemiBold (OTF)
+Poppins Bold (OTF)
+Lora Regular (OTF)
+Lora Medium (OTF)
+Lora SemiBold (OTF)
+Lora Bold (OTF)
+Lora Italic (OTF)
+
+-----------------------------------------------------------------------------
+Embedded Fonts:
+NONE
+
+-----------------------------------------------------------------------------
+Missing Links:
+NONE
+
+-----------------------------------------------------------------------------
+Linked Images:
+NONE
