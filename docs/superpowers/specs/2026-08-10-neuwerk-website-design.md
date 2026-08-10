@@ -199,8 +199,8 @@ Nincs dropdown. Az első kettő főoldali anker; aloldalról `/#who-we-are` alak
 **Footer:** Responsibility hub + 5 dokumentum, Integrity Line, kontakt,
 footer claim (*„NEUWERK turns expertise into impact"*), Regent tulajdonosi sor.
 
-> **Nyitott:** az „Identity" nav-címke sántít. Alternatívák: `Our story`, `About`.
-> Build 1-ben `Identity`, ügyfél-visszajelzésre változtatható.
+> **Eldöntve (2026-08-10):** a nav-címke marad **`Identity`**. Ha az ügyfél átírja,
+> egyetlen `partials/header.html` sor és a 16 oldal keresés-cseréje.
 
 ---
 
@@ -240,29 +240,42 @@ H.264 + AAC, 35,9 MB. **Vágás nincs benne**, végig egy folyamatos kameramozg�
 | 22,0–26,0 | **SPEC** címkártya |
 | 26,0–28,3 | neuwerk endcard — *„Built on expertise. Driven by progress."* |
 
+**A SPEC nem kerül sehova.** Ügyfél-visszajelzés (2026-08-10): a `SPEC` szó itt egyszerűen
+a *specification* rövidítése, nem márkanév. **Semmilyen formában nem használjuk** —
+sem címkártyaként, sem szövegként, sem a jelenetbe komponált narancs betűkként.
+
+Vágási pont ebből: a narancs SPEC betűk **20,0 és 20,5 mp között** állnak össze, a zászlós
+szakasz **18,0 mp-től** jön. A felhasználható anyag felső határa ezért **17,0 mp** —
+két és fél másodperc ráhagyással.
+
 **Feldolgozás**
 
-1. Vágás: **4,0–15,5 mp** (transzparens stúdió-szekvencia). Ez az egyetlen szakasz, ami
-   hurkolható — semleges szürke háttér, folyamatos kameraorbit, nincs fény- vagy
-   napszakváltás. Az úton játszódó részek alkonyat→nappal rámpája nem hurkolható.
-2. Audiósáv eltávolítása
+1. Vágás: **4,0–17,0 mp**. Egyetlen fájl szolgálja ki a herót és a Solutions scrubot is:
+   - a hero a **4,0–15,5** tartományt pörgeti (transzparens stúdió-szekvencia — semleges
+     szürke háttér, folyamatos kameraorbit, nincs napszakváltás, ezért ez az egyetlen
+     hurkolható szakasz),
+   - a Solutions a teljes **4,0–17,0** tartományt scrubbolja, mert a multi-material
+     leképezéshez kell a 15,5–17,0 közötti visszafényezés is.
+2. Audiósáv eltávolítása (digitális csend)
 3. **50%-os split-tone grade**: árnyékok `#1b1e52` felé, csúcsfények hideg fehér felé,
    az eredeti fényrajz és a futómű részletessége **változatlanul megmarad**.
    A meleg (réz) pixelek maszkolva és a valódi Sun `#ffa500`-ra emelve.
-4. Crossfade-hurok: az utolsó ~0,5 mp visszaúszik az elsőbe
-5. Encode: H.264 + WebM, `+faststart`, poszterkép az első frame-ből
+4. **A hurokvágás nem égetődik bele.** A hero böngészőben old crossfade-et: ~15,3 mp-nél
+   visszaugrik 4,0-ra egy rövid (kb. 200 ms) opacitás-átúszással. Így ugyanaz a fájl
+   scrubbolható a Solutionsnél anélkül, hogy egy beégetett átúszás átvillanna rajta.
+5. Encode: H.264 + WebM, `+faststart`, poszterkép a 4,0 mp-es frame-ből
 
 **Célméretek (mérve, nem becsülve)**
 
 | változat | méret |
 |---|---|
-| orbit-szegmens, 1920, CRF 28 | **3,5 MB** |
-| orbit-szegmens, 1280, CRF 28 | **1,75 MB** |
+| 4,0–15,5 mp (11,5 s), 1920, CRF 28 | 3,5 MB |
+| 4,0–15,5 mp (11,5 s), 1280, CRF 28 | 1,75 MB |
+| **4,0–17,0 mp (13 s), 1920, CRF 28 — becsült** | **~4,0 MB** |
 | (referencia) teljes film, 1600, CRF 30 | 3,9 MB |
 
 Desktop: 1920-as változat. Mobil: 1280-as vagy poszterkép, hálózattól függően.
-
-**A SPEC kártya nem kerül az oldalra** — lásd 10. pont.
+Egy fájl → egy letöltés → egy cache, két funkcióra.
 
 ---
 
@@ -276,11 +289,33 @@ WebGL-ben ennél csak rosszabbat, lassabbat és nehezebben átadhatót lehetne �
 Helyette: a Solutions szekcióban ugyanaz a videó scroll-scrubbolva fut, a 4 pillér
 pedig a videó idővonalára ugrik. Ugyanaz a hatás, töredék kódból, minden böngészőben.
 
-**Fontos taxonómia-ütközés:** a videó tengelye `SAFETY / PERFORMANCE / EFFICIENCY /
-COMFORT` — ezek **előnyök**. A tartalmi spec Solutions szekciója viszont
-`fluid handling / thermal management / sealing & damping / multi-material` — ezek
-**képességek**. Két különböző rendszer. Kezelés: a hero viszi az előnyöket
-(a videóba égetve), a Solutions a képességeket. Ügyfél-egyeztetést igényel.
+**Taxonómia — feloldva.** A videó tengelye `SAFETY / PERFORMANCE / EFFICIENCY / COMFORT`
+(**előnyök**, a képbe égetve), a Solutions szekcióé `fluid handling / thermal management /
+sealing & damping / multi-material` (**képességek**). Nem ugyanaz, de nem is kell, hogy az
+legyen: a videó minden képességhez tartalmaz egy olyan szakaszt, ami vizuálisan pontosan
+azt mutatja. Ügyfél-döntés (2026-08-10): használjuk a legjobban illeszkedő szegmenseket.
+
+**Képesség → videószakasz leképezés**
+
+| képesség | szakasz | mi látszik |
+|---|---|---|
+| Fluid handling systems | **9,5–11,0 mp** | a teljes narancs cső- és vezetékhálózat kigyulladva, végig az alvázon |
+| Thermal management | **11,5–13,0 mp** | alsó kameraállás a battery pack hűtőlemezére |
+| Sealing and damping | **14,0–15,5 mp** | szórt, diszkrét narancs elemek: bakok, szilentek, csillapítók |
+| Multi-material applications | **15,5–17,0 mp** | a visszafényezés: karosszéria, alváz és komponensek egyszerre, külön anyagként |
+
+A padlóra vetített `SAFETY` / `PERFORMANCE` / stb. feliratok ezekben a szakaszokban
+láthatók. Mivel más taxonómiát jelölnek, mint a fölöttük megjelenő pillércímke, két
+kezelési mód lehetséges — implementációkor eldöntendő:
+
+- **a)** a scrub-nézetben a videó alsó sávja levágva (a feliratok a padlón vannak,
+  tehát a képkocka alsó harmadában) — egyszerű, nem kell utómunka
+- **b)** a feliratok meghagyva, mert előnyként olvasva erősítik a képességet
+
+Alapértelmezés: **a)**. Ha az ügyfél a feliratokat is látni akarja, b)-re váltunk.
+
+**Ha egy szegmens nem elég jó**, a hiányzó vizuál Higgsfielddel újragenerálható —
+statikus renderként, a fenti szakasz helyett. Ez tartalék, nem alapterv.
 
 ---
 
@@ -337,6 +372,40 @@ neuwerk-web/
 └── README.md
 ```
 
+### 8.1 Media és Career tartalommodell
+
+Mindkettő ugyanazt a mintát követi: **egy szerkeszthető lista + egy renderelő szkript.**
+Nincs CMS, nincs build, nincs admin felület.
+
+```js
+// data/news.js
+window.NEUWERK_NEWS = [
+  {
+    slug:     "how-to-update-this-page",
+    date:     "2026-08-10",
+    title:    "…",
+    excerpt:  "…",
+    image:    "assets/img/news/…",
+    placeholder: true            // → látható badge a kártyán
+  },
+];
+```
+
+A `media.html` és a `career.html` ebből rendereli a listát. A cikkeknek külön statikus
+HTML oldaluk van a `media/<slug>.html` alatt, hogy a linkek megoszthatók és
+indexelhetők legyenek.
+
+**Build 1 tartalma**
+
+- **3 placeholder cikk**, mindegyik látható badge-dzsel.
+  Az egyik cikk címe és tartalma **arról szól, hogyan tudják maguk frissíteni és bővíteni
+  a cikklistát**: melyik fájlt kell szerkeszteni, milyen mezők vannak, hogyan kell új
+  oldalt hozzáadni, mekkora legyen a kép. Így a placeholder egyben a felhasználói
+  dokumentáció, és nem vész el egy külön PDF-ben, amit senki nem nyit meg.
+- **Placeholder pozíciólista** a Careeren, ugyanezzel a logikával.
+
+Ugyanez a leírás bekerül a `docs/HANDOFF.md`-be is, fejlesztői nyelven.
+
 ---
 
 ## 9. Átadhatóság
@@ -357,18 +426,31 @@ esetleg Claude Designbe. Ezt a struktúra explicit módon támogatja:
 
 ---
 
-## 10. Nyitott kérdések az ügyfél felé
+## 10. Ügyfélkérdések — státusz
 
-| # | kérdés | miért számít |
+### 10.1 Lezárva (2026-08-10)
+
+| # | kérdés | döntés |
 |---|---|---|
-| 1 | **A SPEC élő almárka, vagy leselejtezett?** A videó utolsó harmada egy `SPEC` névre fut ki, ami sehol nincs a tartalmi specben. A forrásfájl neve `OESL_animatik` — ez a Continental-korszak anyaga, utólag ráragasztott neuwerk endcarddal. | Ha leselejtezett, a videó ezen része semmiképp nem mehet ki. Jelenlegi feltételezés: **nem használjuk.** |
-| 2 | **A négy előny vs. a négy képesség** (7. pont) | Két párhuzamos taxonómia fut az anyagokban |
-| 3 | **Media tartalom.** A spec csak annyit ír: „Content?" | 3 demo cikk placeholder tartalommal készül |
-| 4 | **Career pozíciók forrása.** Statikus lista, vagy külső ATS? | Build 1: statikus `jobs.js` placeholder tételekkel |
-| 5 | **A valódi brand font.** A brandbook Poppinst *ajánl* („a logotype karakteréhez vizuálisan legközelebb álló"), nem előír. Ha készül egyedi vágat, cserélhető. | Egyetlen `--nw-font` változóból jön minden |
-| 6 | **Az „Identity" nav-címke** | Lásd 4. pont |
-| 7 | **Kontakt adatok.** Milyen címek, telefonszámok, e-mailek mennek ki? | Nincs űrlap; Build 1 placeholder adatokkal |
-| 8 | **Színeltérés.** A videó endcardján a slash `#c9901c`, a vektoros logóban `#ffa500`. A videó gradingje húzta el. | Az oldalon a vektoros érték megy |
+| 1 | A SPEC élő almárka? | **Nem.** A `SPEC` itt a *specification* rövidítése, nem márkanév. Semmilyen formában nem használjuk — sem címkártyaként, sem sehogy. Vágási pont: 17,0 mp. |
+| 2 | Négy előny vs. négy képesség | Használjuk a legjobban illeszkedő videószakaszt képességenként. Leképezés a 7. pontban. Ha egy szakasz nem elég jó, Higgsfielddel újragenerálható. |
+| 3 | Media tartalom | Placeholder cikkek, láthatóan jelölve. **Az egyik cikk arról szól, hogyan tudják majd frissíteni és bővíteni a cikklistát** — a placeholder egyben dokumentáció. |
+| 4 | Career pozíciók | Ugyanaz a minta: statikus lista, a `data/jobs.js` szerkesztésével frissül. |
+| 5 | Betűtípus | **A brandbookot követjük**: Poppins + Lora. |
+| 6 | „Identity" nav-címke | Marad. Az ügyfél átírhatja. |
+| 8 | Színeltérés (videó `#c9901c` vs. vektor `#ffa500`) | **A vektoros logó a mérvadó** → `#ffa500` mindenhol. |
+
+### 10.2 Nyitva — bekérendő az ügyféltől
+
+| # | kérdés | Build 1 kezelése |
+|---|---|---|
+| 7 | **KONTAKT ADATOK.** Milyen címek, telefonszámok, e-mail címek, cégadatok mennek ki? | Build 1 szándékosan hamis, felismerhető placeholderekkel megy: `example@example.com`, `+00 000 000 0000`, `Example Street 1, 00000 Example City`. |
+
+> ⚠️ **A kontaktadatok bekérése kötelező lépés az élesítés előtt.** Minden placeholder
+> `<!-- TODO(client): valós kontaktadat bekérendő -->` jelöléssel **és** látható
+> badge-dzsel szerepel. A `docs/HANDOFF.md` nyitott tételként vezeti, a
+> `docs/CHANGELOG.md` pedig minden érintett commitnál emlékeztet rá. Ez a tétel
+> **nem zárható le fejlesztői oldalról** — csak ügyfél-adatszolgáltatással.
 
 ---
 
@@ -387,6 +469,12 @@ esetleg Claude Designbe. Ezt a struktúra explicit módon támogatja:
 10. Minden szöveg-háttér pár megfelel a 3.6 táblázatnak. Külön ellenőrizendő:
     sehol nincs Sun szöveg világos háttéren, és egyetlen Sun-kitöltésű gombon
     sincs fehér felirat
+11. A `SPEC` szó **sehol nem jelenik meg** — sem a videóban, sem szövegben, sem
+    fájlnévben. A videó 17,0 mp-nél vágva.
+12. Minden kontaktadat felismerhetően placeholder (`example@example.com` mintázat),
+    látható badge-dzsel és `TODO(client)` megjegyzéssel. **Éles indulás előtt ez
+    blokkoló tétel** — a `docs/HANDOFF.md` nyitott listáján marad, amíg az ügyfél
+    nem szolgáltatja az adatokat.
 
 ---
 
@@ -405,3 +493,9 @@ esetleg Claude Designbe. Ezt a struktúra explicit módon támogatja:
 | 9 | Hero grade | 50% split-tone navy, Sun `#ffa500`-ra emelve |
 | 10 | Regent logó | footerben, diszkréten |
 | 11 | OESL logó | **nem** használjuk, csak szövegben említjük |
+| 12 | SPEC | semmilyen formában nem használjuk; a videó 17,0 mp-nél vágva |
+| 13 | Videófájlok száma | **egy** fájl (4,0–17,0 mp) szolgálja ki a herót és a scrubot is |
+| 14 | Képesség → videószakasz | leképezve (7. pont); Higgsfield csak tartalék |
+| 15 | Media / Career tartalom | placeholder, láthatóan jelölve; egy cikk a frissítés módját dokumentálja |
+| 16 | Betűtípus | brandbook szerint: Poppins + Lora |
+| 17 | Kontaktadatok | felismerhető `example@example.com` placeholderek; bekérés kötelező lépés |

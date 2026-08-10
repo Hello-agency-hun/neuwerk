@@ -40,3 +40,34 @@ Formátum: fordított időrend, legfrissebb legfelül.
 
 **Következő lépés**
 - Ügyfél-oldali spec review, majd implementációs terv
+
+---
+
+## 2026-08-10 (2) — Ügyfélkérdések lezárva, spec frissítve
+
+Nyolcból hét kérdés megválaszolva. A spec 6., 7., 8.1, 10., 11. és 12. pontja frissült.
+
+**Döntések**
+- **SPEC: nem használjuk semmilyen formában.** A szó itt a *specification* rövidítése,
+  nem márkanév. A videó vágási pontja ezért **17,0 mp** — a narancs SPEC betűk 20,0 és
+  20,5 mp között állnak össze, a zászlós szakasz 18,0-tól jön, tehát 2,5 mp a ráhagyás.
+- **Képesség → videószakasz leképezés** rögzítve: fluid handling 9,5–11,0 · thermal
+  management 11,5–13,0 · sealing and damping 14,0–15,5 · multi-material 15,5–17,0.
+  Ha egy szakasz nem elég jó, Higgsfielddel újragenerálható (tartalék, nem alapterv).
+- **Egyetlen videófájl** (4,0–17,0 mp) szolgálja ki a herót és a Solutions scrubot is.
+  A hurokvágás nem égetődik bele; a hero böngészőben old crossfade-et, hogy ugyanaz a
+  fájl scrubbolható maradjon.
+- **Media és Career: placeholder tartalom**, láthatóan jelölve. Az egyik cikk tartalma
+  arról szól, hogyan tudja az ügyfél maga frissíteni és bővíteni a listát — így a
+  placeholder egyben felhasználói dokumentáció.
+- **Betűtípus: a brandbook szerint**, Poppins + Lora.
+- **`Identity` nav-címke marad.**
+- **Színeltérés: a vektoros logó a mérvadó** → `#ffa500` mindenhol, a videó
+  `#c9901c` endcard-értéke nem.
+
+**⚠️ NYITOTT — bekérendő az ügyféltől**
+- **Valós kontaktadatok.** Build 1 felismerhető placeholderekkel megy
+  (`example@example.com`, `+00 000 000 0000`, `Example Street 1, 00000 Example City`).
+  Minden előfordulás `TODO(client)` jelöléssel és látható badge-dzsel.
+  **Ez blokkoló tétel az éles indulás előtt**, és nem zárható le fejlesztői oldalról.
+  Emlékeztető minden érintett commitban.
