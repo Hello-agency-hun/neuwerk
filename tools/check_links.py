@@ -9,9 +9,15 @@ ha valaki véletlenül CDN-t rak be.
 """
 import os
 import re
-import sys
 from pathlib import Path
 from urllib.parse import unquote, urlparse
+
+import sys
+
+# Windows Git Bash alatt a Python stdout alapból cp1250, amitől az ékezetes
+# kimenet szétesik. A fájl-IO mindenhol explicit utf-8, ez csak a konzol.
+if hasattr(sys.stdout, "reconfigure"):
+    sys.stdout.reconfigure(encoding="utf-8")
 
 ROOT = Path(__file__).resolve().parent.parent
 SKIP_DIRS = {".git", "work", "Arculat", "useful visual assets", "docs", "tools"}

@@ -30,6 +30,17 @@ A két ellenőrző a projekt kész-kritériumaiból jön: **nulla halott link** 
 python tools/check_links.py && python tools/check_placeholders.py
 ```
 
+> **Konzol-kódolás.** Windows Git Bash alatt a Python stdout alapból `cp1250`, amitől
+> az ékezetes kimenet szétesik. Ezért mindkét ellenőrző az importok után tartalmazza
+> ezt a blokkot — **ne vedd ki**:
+>
+> ```python
+> if hasattr(sys.stdout, "reconfigure"):
+>     sys.stdout.reconfigure(encoding="utf-8")
+> ```
+>
+> A fájl-IO mindenhol explicit `encoding="utf-8"`, ez csak a konzolt érinti.
+
 ---
 
 ## File structure

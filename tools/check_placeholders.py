@@ -9,8 +9,14 @@ Külön ellenőrzi, hogy minden gyanús kontaktminta (e-mail, telefonszám) plac
 Valós e-mail cím a Build 1-ben hiba.
 """
 import re
-import sys
 from pathlib import Path
+
+import sys
+
+# Windows Git Bash alatt a Python stdout alapból cp1250, amitől az ékezetes
+# kimenet szétesik. A fájl-IO mindenhol explicit utf-8, ez csak a konzol.
+if hasattr(sys.stdout, "reconfigure"):
+    sys.stdout.reconfigure(encoding="utf-8")
 
 ROOT = Path(__file__).resolve().parent.parent
 HANDOFF = ROOT / "docs" / "HANDOFF.md"
