@@ -23,6 +23,9 @@ Ezek egyike sem zárható le fejlesztői oldalról.
 Ezt a szakaszt a `python tools/check_placeholders.py` generálja. Ne szerkeszd kézzel.
 
 <!-- PLACEHOLDER-INVENTORY-START -->
+Generálva: `python tools/check_placeholders.py` — **0 tétel**
+
+_Nincs jelölt placeholder._
 <!-- PLACEHOLDER-INVENTORY-END -->
 
 ## Asset pipeline
