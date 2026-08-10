@@ -269,13 +269,19 @@ két és fél másodperc ráhagyással.
 
 | változat | méret |
 |---|---|
-| 4,0–15,5 mp (11,5 s), 1920, CRF 28 | 3,5 MB |
-| 4,0–15,5 mp (11,5 s), 1280, CRF 28 | 1,75 MB |
-| **4,0–17,0 mp (13 s), 1920, CRF 28 — becsült** | **~4,0 MB** |
-| (referencia) teljes film, 1600, CRF 30 | 3,9 MB |
+| **4,0–17,0 mp (13 s), 1920, CRF 28** | **4,36 MB** ← a szállítandó desktop asset |
+| **4,0–17,0 mp (13 s), 1280, CRF 28** | **2,16 MB** ← mobil |
+| (referencia) 4,0–15,5 mp, 1920 | 3,50 MB |
+| (referencia) teljes film, 1600, CRF 30 | 3,90 MB |
+
+Minden érték `-preset slow`, `-crf 28`, hang nélkül, `+faststart` mellett mérve.
+Eredeti: 35,9 MB → **4,36 MB**, nyolcadára.
 
 Desktop: 1920-as változat. Mobil: 1280-as vagy poszterkép, hálózattól függően.
 Egy fájl → egy letöltés → egy cache, két funkcióra.
+
+A grade (3. lépés) még nincs benne ezekben a számokban, de nem növeli érdemben a
+bitrátát — split-tone művelet, nem ad új részletet a képhez.
 
 ---
 
