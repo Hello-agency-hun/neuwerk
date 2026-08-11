@@ -1,0 +1,6 @@
+/* Szekció-layoutok. A tartalmat a későbbi taskok töltik fel. */
+
+/* A header fixed, ezért az első szekció alápadolása kell,
+   különben a cím a header alá csúszik. A heroban ezt a
+   100svh magasság oldja meg, itt viszont kézzel kell. */
+main > .nw-section:first-child { padding-block-start: calc(var(--nw-section-y) + var(--nw-header-h)); }
