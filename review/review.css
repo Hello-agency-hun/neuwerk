@@ -1,0 +1,56 @@
+/* Visszajelzés-widget. CSAK a review-buildben.
+   Szándékosan nem használ --nw-* tokent: a widget nem a brand része,
+   és nem szabad, hogy egy token-módosítás elrontsa a használhatóságát. */
+
+.nwr { position: fixed; inset-block-end: 20px; inset-inline-end: 20px; z-index: 9999;
+       font-family: system-ui, -apple-system, "Segoe UI", sans-serif; }
+
+.nwr__fab {
+  display: flex; align-items: center; gap: 0;
+  padding: 12px; border: 0; border-radius: 999px; cursor: pointer;
+  background: #ffa500; color: #1b1e52;      /* navy felirat: fehérrel 1,97:1 lenne */
+  font: 600 14px/1 inherit;
+  box-shadow: 0 6px 22px rgb(0 0 0 / 0.28);
+  transition: gap .22s ease, padding .22s ease, background .22s ease;
+}
+.nwr__fab-icon {
+  inline-size: 18px; block-size: 18px; flex: none;
+  background: currentColor;
+  -webkit-mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M4 4h16v11H8l-4 4V4z'/></svg>") center/contain no-repeat;
+          mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M4 4h16v11H8l-4 4V4z'/></svg>") center/contain no-repeat;
+}
+.nwr__fab-label { max-inline-size: 0; overflow: hidden; white-space: nowrap; transition: max-inline-size .22s ease; }
+/* Hoverre kinyílik -- ez a "hoover gomb". Fókuszra ugyanúgy, billentyűvel is. */
+.nwr__fab:hover, .nwr__fab:focus-visible { gap: 8px; padding-inline: 14px 18px; background: #ffb733; }
+.nwr__fab:hover .nwr__fab-label, .nwr__fab:focus-visible .nwr__fab-label { max-inline-size: 140px; }
+.nwr[data-open] .nwr__fab { gap: 8px; padding-inline: 14px 18px; }
+.nwr[data-open] .nwr__fab-label { max-inline-size: 140px; }
+
+.nwr__panel {
+  position: absolute; inset-block-end: 58px; inset-inline-end: 0;
+  inline-size: min(360px, calc(100vw - 40px));
+  display: grid; gap: 10px;
+  padding: 16px; border-radius: 12px;
+  background: #fff; color: #1b1e52;
+  box-shadow: 0 18px 50px rgb(0 0 0 / 0.3);
+}
+.nwr__head { margin: 0; font-weight: 700; font-size: 15px; }
+.nwr__where { margin: 0; font-size: 12px; color: #666; word-break: break-word; }
+.nwr__label { display: grid; gap: 4px; font-size: 12px; font-weight: 600; color: #444; }
+.nwr__input {
+  font: 400 14px/1.4 inherit; color: #1b1e52;
+  padding: 8px 10px; border: 1px solid #ccc; border-radius: 6px; background: #fff;
+}
+.nwr__input:focus-visible { outline: 2px solid #ffa500; outline-offset: 1px; border-color: #ffa500; }
+.nwr__area { resize: vertical; min-block-size: 84px; }
+.nwr__row { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+.nwr__send {
+  padding: 9px 18px; border: 0; border-radius: 999px; cursor: pointer;
+  background: #1b1e52; color: #fff; font: 600 14px/1 inherit;
+}
+.nwr__send:hover { background: #273993; }
+.nwr__dl { font-size: 12px; color: #666; }
+.nwr__msg { margin: 0; font-size: 12px; color: #156e4e; min-block-size: 1em; }
+.nwr__msg[data-error] { color: #b3261e; }
+
+@media print { .nwr { display: none; } }
