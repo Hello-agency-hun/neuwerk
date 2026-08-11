@@ -1,0 +1,142 @@
+/* =============================================================
+   neuwerk design tokens
+   Forrás: brandbook v1.1 (Arculat/01_neuwerk_brandbook/)
+   Ez az EGYETLEN fájl, ahol hex érték szerepelhet.
+   ============================================================= */
+
+:root {
+  /* --- Elsődleges paletta (brandbook 04) ------------------- */
+  --nw-navy:        #1b1e52;   /* Pantone 2766 C — nagy felületeken dominál */
+  --nw-white:       #ffffff;   /* egyenrangú vászon a navy-vel */
+  --nw-blue-1:      #273993;   /* a Neuwerk pattern színe */
+  --nw-blue-2:      #4e66af;
+  --nw-blue-3:      #8895cb;
+  --nw-blue-4:      #afc6e7;
+
+  /* --- Akcent ---------------------------------------------- */
+  /* Sun: max. a látható felület 10-15%-a. SOHA nem háttér. */
+  --nw-sun:         #ffa500;   /* Pantone 137 C */
+
+  /* --- Szürkék --------------------------------------------- */
+  --nw-black:       #000000;
+  --nw-grey-01:     #333333;
+  --nw-grey-02:     #666666;
+  --nw-grey-03:     #999999;
+  --nw-grey-04:     #b4b4b4;
+  --nw-grey-05:     #cccccc;
+  --nw-grey-06:     #e6e6e6;
+
+  /* --- Másodlagos paletta ----------------------------------
+     A brandbook KIZÁRÓLAG infografikára, diagramra, illusztrációra
+     engedi. Fő brandfelületen ne használd. */
+  --nw-mint:        #1eb78b;
+  --nw-azure:       #48c3cb;
+  --nw-melon:       #f37558;
+  --nw-levander:    #d18ab5;
+
+  /* --- Szemantikus párok -----------------------------------
+     Ezek kényszerítik ki a kontrasztszabályokat. Ha ezeket
+     használod, nem tudsz bukó párt leírni. Számított arányok
+     a specben (3.6). */
+  --nw-on-navy:            var(--nw-white);      /* 15,51:1  AAA */
+  --nw-on-navy-secondary:  var(--nw-blue-3);     /*  5,32:1  AA  */
+  --nw-on-navy-muted:      var(--nw-blue-4);     /*  8,90:1  AAA */
+  --nw-on-white:           var(--nw-navy);       /* 15,51:1  AAA */
+  --nw-on-white-secondary: var(--nw-grey-02);    /*  5,74:1  AA  */
+  --nw-on-sun:             var(--nw-navy);       /*  7,85:1  AAA
+                              SOHA ne legyen white: az 1,97:1 */
+
+  /* Sun mint SZÖVEG csak navy háttéren (7,85:1). Fehéren 1,97:1 → tilos. */
+  --nw-accent-on-navy:     var(--nw-sun);
+
+  /* --- Tipográfia ------------------------------------------
+     Poppins: headline, UI, gomb, kiemelés
+     Lora:    hosszú szöveg, idézet, editorial
+     Ha megjön az egyedi brand font, itt az egy sor. */
+  --nw-font-display: "Poppins", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --nw-font-body:    "Poppins", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --nw-font-editorial: "Lora", Georgia, "Times New Roman", serif;
+
+  --nw-fw-regular:  400;
+  --nw-fw-medium:   500;
+  --nw-fw-semibold: 600;
+  --nw-fw-bold:     700;
+
+  /* Fluid típusskála. clamp(min, preferált, max) */
+  --nw-text-xs:   clamp(0.75rem, 0.72rem + 0.15vw, 0.8125rem);
+  --nw-text-sm:   clamp(0.875rem, 0.85rem + 0.15vw, 0.9375rem);
+  --nw-text-base: clamp(1rem, 0.96rem + 0.2vw, 1.0625rem);
+  --nw-text-lg:   clamp(1.125rem, 1.05rem + 0.4vw, 1.375rem);
+  --nw-text-xl:   clamp(1.375rem, 1.2rem + 0.8vw, 1.75rem);
+  --nw-text-2xl:  clamp(1.75rem, 1.4rem + 1.6vw, 2.75rem);
+  --nw-text-3xl:  clamp(2.25rem, 1.6rem + 3vw, 4rem);
+  --nw-text-4xl:  clamp(2.75rem, 1.6rem + 5vw, 6rem);
+
+  --nw-leading-tight: 1.08;
+  --nw-leading-snug:  1.25;
+  --nw-leading-body:  1.6;
+  --nw-leading-loose: 1.75;   /* Lora-hoz, editorial szövegnél */
+
+  --nw-tracking-tight: -0.02em;
+  --nw-tracking-wide:   0.08em;
+
+  /* --- Térköz (8px alapskála) ------------------------------- */
+  --nw-space-1:  0.5rem;
+  --nw-space-2:  1rem;
+  --nw-space-3:  1.5rem;
+  --nw-space-4:  2rem;
+  --nw-space-6:  3rem;
+  --nw-space-8:  4rem;
+  --nw-space-12: 6rem;
+  --nw-space-16: 8rem;
+  --nw-space-24: 12rem;
+
+  /* Szekció-belmagasság, viewporttal skálázva */
+  --nw-section-y: clamp(4rem, 3rem + 8vw, 10rem);
+
+  /* --- Layout ----------------------------------------------- */
+  --nw-max-width:    1440px;
+  --nw-measure:      68ch;     /* olvasható sorhossz */
+  --nw-gutter:       clamp(1.25rem, 0.8rem + 2.4vw, 3rem);
+  --nw-header-h:     72px;
+
+  /* --- Forma ------------------------------------------------ */
+  --nw-radius-pill:  9999px;
+  --nw-radius-card:  4px;
+  --nw-pattern-tilt: -45deg;   /* a Neuwerk pattern dőlése */
+
+  /* --- Mozgás ----------------------------------------------- */
+  --nw-ease:        cubic-bezier(0.22, 1, 0.36, 1);
+  --nw-ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --nw-dur-fast:    180ms;
+  --nw-dur-base:    320ms;
+  --nw-dur-slow:    640ms;
+  --nw-dur-intro:   1200ms;
+
+  --nw-z-pattern: 0;
+  --nw-z-content: 10;
+  --nw-z-header:  100;
+  --nw-z-intro:   1000;
+}
+
+/* Szekció-témák. NEM felhasználói kapcsoló — szekció-tulajdonság.
+   A világos/sötét váltakozás maga a brand védjegye. */
+.nw-theme-dark {
+  --nw-bg:            var(--nw-navy);
+  --nw-fg:            var(--nw-on-navy);
+  --nw-fg-secondary:  var(--nw-on-navy-secondary);
+  --nw-fg-muted:      var(--nw-on-navy-muted);
+  --nw-accent-text:   var(--nw-sun);       /* 7,85:1 — engedélyezett */
+  --nw-rule:          rgb(255 255 255 / 0.14);
+  --nw-pattern-fill:  var(--nw-blue-1);    /* brandbook: csak ez, csak navy-n */
+}
+
+.nw-theme-light {
+  --nw-bg:            var(--nw-white);
+  --nw-fg:            var(--nw-on-white);
+  --nw-fg-secondary:  var(--nw-on-white-secondary);
+  --nw-fg-muted:      var(--nw-grey-02);
+  --nw-accent-text:   var(--nw-navy);      /* Sun fehéren 1,97:1 → TILOS */
+  --nw-rule:          rgb(27 30 82 / 0.14);
+  --nw-pattern-fill:  transparent;         /* világos szekcióban nincs pattern */
+}
