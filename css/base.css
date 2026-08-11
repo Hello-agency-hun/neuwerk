@@ -1,0 +1,147 @@
+/* Reset, tipográfia, layout primitívek. Tokenekre épül. */
+
+@font-face {
+  font-family: "Poppins"; font-style: normal; font-weight: 400;
+  font-display: swap; src: url("../assets/fonts/poppins-400.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Poppins"; font-style: normal; font-weight: 500;
+  font-display: swap; src: url("../assets/fonts/poppins-500.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Poppins"; font-style: normal; font-weight: 600;
+  font-display: swap; src: url("../assets/fonts/poppins-600.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Poppins"; font-style: normal; font-weight: 700;
+  font-display: swap; src: url("../assets/fonts/poppins-700.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Lora"; font-style: normal; font-weight: 400 700;
+  font-display: swap; src: url("../assets/fonts/lora-var.woff2") format("woff2-variations");
+}
+@font-face {
+  font-family: "Lora"; font-style: italic; font-weight: 400 700;
+  font-display: swap; src: url("../assets/fonts/lora-var-italic.woff2") format("woff2-variations");
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background: var(--nw-navy);
+  color: var(--nw-on-navy);
+  font-family: var(--nw-font-body);
+  font-size: var(--nw-text-base);
+  font-weight: var(--nw-fw-regular);
+  line-height: var(--nw-leading-body);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+h1, h2, h3, h4 {
+  margin: 0;
+  font-family: var(--nw-font-display);
+  font-weight: var(--nw-fw-bold);
+  line-height: var(--nw-leading-tight);
+  letter-spacing: var(--nw-tracking-tight);
+  text-wrap: balance;
+}
+
+h1 { font-size: var(--nw-text-4xl); }
+h2 { font-size: var(--nw-text-3xl); }
+h3 { font-size: var(--nw-text-xl); }
+h4 { font-size: var(--nw-text-lg); font-weight: var(--nw-fw-semibold); }
+
+p  { margin: 0 0 var(--nw-space-2); max-width: var(--nw-measure); text-wrap: pretty; }
+p:last-child { margin-bottom: 0; }
+
+img, svg, video { display: block; max-width: 100%; height: auto; }
+
+a { color: inherit; text-decoration-thickness: 1px; text-underline-offset: 0.2em; }
+
+ul, ol { margin: 0; padding: 0; list-style: none; }
+
+:focus-visible {
+  outline: 3px solid var(--nw-accent-text, var(--nw-sun));
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* --- Layout primitívek ------------------------------------- */
+
+.nw-shell {
+  width: 100%;
+  max-width: var(--nw-max-width);
+  margin-inline: auto;
+  padding-inline: var(--nw-gutter);
+}
+
+.nw-section {
+  position: relative;
+  isolation: isolate;
+  background: var(--nw-bg);
+  color: var(--nw-fg);
+  padding-block: var(--nw-section-y);
+  overflow: clip;   /* a nagy pill-formák nem okozhatnak vízszintes scrollt */
+}
+
+.nw-section > .nw-shell { position: relative; z-index: var(--nw-z-content); }
+
+.nw-eyebrow {
+  font-family: var(--nw-font-display);
+  font-size: var(--nw-text-sm);
+  font-weight: var(--nw-fw-semibold);
+  letter-spacing: var(--nw-tracking-wide);
+  text-transform: uppercase;
+  color: var(--nw-accent-text);
+  margin-bottom: var(--nw-space-2);
+}
+
+.nw-lead { font-size: var(--nw-text-lg); color: var(--nw-fg-secondary); }
+
+.nw-editorial {
+  font-family: var(--nw-font-editorial);
+  font-size: var(--nw-text-lg);
+  line-height: var(--nw-leading-loose);
+}
+
+.nw-sr-only {
+  position: absolute; width: 1px; height: 1px; padding: 0;
+  margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap;
+}
+
+.nw-skip-link {
+  position: absolute; top: 0; left: var(--nw-gutter);
+  transform: translateY(-120%);
+  z-index: calc(var(--nw-z-header) + 1);
+  padding: var(--nw-space-1) var(--nw-space-2);
+  background: var(--nw-sun); color: var(--nw-on-sun);
+  font-weight: var(--nw-fw-semibold);
+  transition: transform var(--nw-dur-fast) var(--nw-ease);
+}
+.nw-skip-link:focus-visible { transform: translateY(0); }
+
+/* --- Reveal --------------------------------------------------- */
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity var(--nw-dur-slow) var(--nw-ease),
+              transform var(--nw-dur-slow) var(--nw-ease);
+}
+[data-revealed] { opacity: 1; transform: none; }
+
+/* --- Reduced motion -----------------------------------------
+   Nem "kevesebb" mozgás: NULLA mozgás, és semmi nem törik el. */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 1ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 1ms !important;
+    scroll-behavior: auto !important;
+  }
+  [data-reveal] { opacity: 1; transform: none; }
+}
