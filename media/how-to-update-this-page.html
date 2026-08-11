@@ -43,9 +43,88 @@
 
 
 <main id="main">
-  <section class="nw-section nw-theme-dark">
-    <div class="nw-shell"><h1>How to update this page</h1></div>
-  </section>
+  <article class="nw-article">
+    <header class="nw-section nw-theme-dark nw-subhero">
+      <div class="nw-shell">
+        <p class="nw-eyebrow"><span class="nw-ph">Placeholder</span> Guide</p>
+        <h1 data-reveal>How to update this page</h1>
+        <p class="nw-article__date"><time datetime="2026-08-10">10 August 2026</time></p>
+      </div>
+    </header>
+
+    <div class="nw-section nw-theme-light">
+      <div class="nw-shell nw-article__body nw-editorial">
+        <p class="nw-lead">
+          This site has no content management system. Everything is plain files, which
+          means you can update it with a text editor and an upload. Here is how.
+        </p>
+
+        <h2>Adding a news article</h2>
+        <p>It takes two steps.</p>
+        <p>
+          <strong>First</strong>, open <code>data/news.js</code>. You will see a list of
+          entries. Copy one entry, paste it at the top of the list, and change the
+          fields. The <code>slug</code> becomes the file name, so use only lowercase
+          letters and hyphens. Remove <code>placeholder: true</code> once the article
+          is real &mdash; that line is what shows the orange badge.
+        </p>
+        <p>
+          <strong>Second</strong>, go to the <code>media/</code> folder, duplicate any
+          existing article file, and rename it to match your slug. For a slug of
+          <code>my-story</code>, the file must be <code>media/my-story.html</code>.
+          Open it and replace the heading, the date and the body text.
+        </p>
+
+        <h2>Removing an article</h2>
+        <p>
+          Delete its entry from <code>data/news.js</code> and delete the matching file
+          from <code>media/</code>. Do both &mdash; leaving the file behind is harmless,
+          but leaving the entry behind creates a broken link.
+        </p>
+
+        <h2>Adding a job opening</h2>
+        <p>
+          Open <code>data/jobs.js</code> and copy an entry the same way. Jobs have no
+          separate page, so this is a single step. If you have an application link, put
+          it in the <code>url</code> field; leave it empty and the title simply will not
+          be a link.
+        </p>
+
+        <h2>Updating the legal documents</h2>
+        <p>
+          The documents on the Acting Responsibly page are PDFs in
+          <code>assets/docs/</code>. To publish a real version, replace the PDF file
+          keeping the same file name. Nothing in the HTML needs to change and no link
+          will break.
+        </p>
+
+        <h2>Images</h2>
+        <p>
+          Put images in <code>assets/img/</code>. Save them at no more than 1600 pixels
+          wide and compress them before upload &mdash; a news thumbnail should be well
+          under 300 KB. Large images are the fastest way to make a page feel slow.
+        </p>
+
+        <h2>Checking your work</h2>
+        <p>
+          Open <code>index.html</code> in a browser and click through. You do not need a
+          server. If a link does not work, the most likely cause is a slug that does not
+          match its file name.
+        </p>
+
+        <h2>What you should not edit</h2>
+        <p>
+          Leave the <code>css/</code> and <code>js/</code> folders alone, and do not edit
+          the parts of a page between the <code>@partial:header</code> and
+          <code>@partial:footer</code> markers &mdash; those are repeated on every page
+          and must stay identical. If the navigation or footer needs to change, that is
+          a developer task.
+        </p>
+
+        <p><a class="nw-btn" href="../media.html">Back to Media</a></p>
+      </div>
+    </div>
+  </article>
 </main>
 
 <!-- @partial:footer -->
@@ -101,5 +180,6 @@
 
 
 <script src="../js/nav.js"></script>
+<script src="../js/reveal.js"></script>
 </body>
 </html>

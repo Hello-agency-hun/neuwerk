@@ -43,9 +43,38 @@
 
 
 <main id="main">
-  <section class="nw-section nw-theme-dark">
-    <div class="nw-shell"><h1>A new chapter begins</h1></div>
-  </section>
+  <article class="nw-article">
+    <header class="nw-section nw-theme-dark nw-subhero">
+      <div class="nw-shell">
+        <p class="nw-eyebrow"><span class="nw-ph">Placeholder</span> News</p>
+        <h1 data-reveal>A new chapter begins</h1>
+        <p class="nw-article__date"><time datetime="2026-08-01">1 August 2026</time></p>
+      </div>
+    </header>
+
+    <div class="nw-section nw-theme-light">
+      <div class="nw-shell nw-article__body nw-editorial">
+        <p>
+          neuwerk marks the beginning of a new chapter. Born from Continental&rsquo;s
+          former Original Equipment Solutions business area, the company now moves
+          forward with a distinct identity of its own.
+        </p>
+        <p>
+          The name combines two ideas that define who we are: NEU stands for renewal,
+          progress and the courage to evolve. WERK stands for our foundation:
+          engineering expertise, industrial capabilities and the craft to turn ideas
+          into reliable solutions.
+        </p>
+        <p data-placeholder>
+          <span class="nw-ph">Placeholder</span>
+          Full article text to follow.
+          <!-- TODO(client): valós cikkszöveg bekérendő -->
+        </p>
+
+        <p><a class="nw-btn" href="../media.html">Back to Media</a></p>
+      </div>
+    </div>
+  </article>
 </main>
 
 <!-- @partial:footer -->
@@ -101,5 +130,6 @@
 
 
 <script src="../js/nav.js"></script>
+<script src="../js/reveal.js"></script>
 </body>
 </html>

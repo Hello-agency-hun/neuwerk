@@ -43,8 +43,33 @@
 
 
 <main id="main">
-  <section class="nw-section nw-theme-dark">
-    <div class="nw-shell"><h1>News, Insights and Stories</h1></div>
+  <section class="nw-section nw-theme-dark nw-subhero">
+    <div class="nw-pattern" data-pattern aria-hidden="true">
+      <span class="nw-pattern__shape" data-depth="0.12"
+            style="right:-18%;top:-12%;width:82vmin;height:35vmin"></span>
+    </div>
+    <div class="nw-shell">
+      <p class="nw-eyebrow">Media</p>
+      <h1 data-reveal>News, Insights and Stories</h1>
+    </div>
+  </section>
+
+  <section class="nw-section nw-theme-light">
+    <div class="nw-shell">
+      <p class="nw-lead nw-prose" data-reveal>
+        Discover the latest company news, technology developments, customer success
+        stories and insights from across neuwerk. Learn how our people, expertise and
+        solutions are helping shape the future of mobility and beyond.
+      </p>
+
+      <ul class="nw-newslist" data-news></ul>
+
+      <p class="nw-note">
+        <span class="nw-ph">Placeholder</span>
+        Articles shown are examples. See
+        <a href="media/how-to-update-this-page.html">how to update this list</a>.
+      </p>
+    </div>
   </section>
 </main>
 
@@ -100,6 +125,10 @@
 <!-- /@partial:footer -->
 
 
+<script src="data/news.js"></script>
 <script src="js/nav.js"></script>
+<script src="js/pattern.js"></script>
+<script src="js/reveal.js"></script>
+<script src="js/lists.js"></script>
 </body>
 </html>

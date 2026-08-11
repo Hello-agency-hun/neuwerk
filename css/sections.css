@@ -211,3 +211,40 @@ main > .nw-section:first-child { padding-block-start: calc(var(--nw-section-y) +
 .nw-job__title { font-size: var(--nw-text-lg); }
 .nw-job__meta { font-size: var(--nw-text-sm); color: var(--nw-fg-secondary); margin-top: 0.25rem; }
 .nw-note { margin-top: var(--nw-space-3); font-size: var(--nw-text-sm); color: var(--nw-fg-secondary); }
+
+/* --- Hírlista és cikk ------------------------------------------- */
+.nw-newslist {
+  display: grid; gap: var(--nw-space-3);
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  margin-top: var(--nw-space-4);
+}
+.nw-news a {
+  display: block; block-size: 100%;
+  padding: var(--nw-space-3);
+  text-decoration: none;
+  border: 1px solid var(--nw-rule);
+  border-radius: var(--nw-radius-card);
+  transition: transform var(--nw-dur-base) var(--nw-ease),
+              border-color var(--nw-dur-base) var(--nw-ease);
+}
+.nw-news a:hover { transform: translateY(-4px); border-color: var(--nw-navy); }
+.nw-news time {
+  display: block; margin-bottom: 0.5rem;
+  font-size: var(--nw-text-xs);
+  letter-spacing: var(--nw-tracking-wide);
+  color: var(--nw-fg-secondary);
+}
+.nw-news h3 { font-size: var(--nw-text-lg); margin-bottom: 0.5rem; }
+.nw-news p  { font-size: var(--nw-text-sm); color: var(--nw-fg-secondary); }
+
+.nw-article__date { font-size: var(--nw-text-sm); color: var(--nw-fg-secondary); margin-top: var(--nw-space-2); }
+.nw-article__body { max-width: 72ch; }
+.nw-article__body > * + * { margin-top: var(--nw-space-2); }
+.nw-article__body h2 { font-size: var(--nw-text-xl); margin-top: var(--nw-space-6); margin-bottom: var(--nw-space-2); }
+.nw-article__body code {
+  font-family: ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+  font-size: 0.9em;
+  padding: 0.1em 0.35em;
+  background: var(--nw-grey-06);
+  border-radius: 3px;
+}

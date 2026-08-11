@@ -23,13 +23,16 @@ Ezek egyike sem zárható le fejlesztői oldalról.
 Ezt a szakaszt a `python tools/check_placeholders.py` generálja. Ne szerkeszd kézzel.
 
 <!-- PLACEHOLDER-INVENTORY-START -->
-Generálva: `python tools/check_placeholders.py` — **3 tétel**
+Generálva: `python tools/check_placeholders.py` — **6 tétel**
 
 | fájl | sor | tétel |
 |---|---|---|
 | `index.html` | 136 | a 16 ország tényleges listája bekérendő |
+| `media/neuwerk-begins.html` | 71 | valós cikkszöveg bekérendő |
+| `media/thermal-systems-milestone.html` | 67 | valós cikkszöveg bekérendő |
 | `data/jobs.js` | 14 | a valós nyitott pozíciók listája bekérendő |
 | `data/locations.js` | 7 | a 16 ország tényleges listája bekérendő |
+| `data/news.js` | 10 | a valós hírek és cikkek bekérendők |
 <!-- PLACEHOLDER-INVENTORY-END -->
 
 ## Asset pipeline
