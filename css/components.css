@@ -39,11 +39,16 @@
 .nw-header__logo img { height: 24px; width: auto; }   /* brandbook: min. 24 px */
 
 .nw-header__nav ul { display: flex; align-items: center; gap: var(--nw-space-3); }
+/* A :not(.nw-btn) KELL. Enélkül ez a szabály (0,1,1) felülírja a
+   .nw-btn--sun színét (0,1,0), és a header Contact gombján fehér
+   felirat lenne narancs alapon -- 1,97:1, bukott kontraszt. */
+.nw-header__nav a:not(.nw-btn) {
+  color: var(--nw-white);
+}
 .nw-header__nav a {
   font-family: var(--nw-font-display);
   font-size: var(--nw-text-sm);
   font-weight: var(--nw-fw-medium);
-  color: var(--nw-white);
   text-decoration: none;
 }
 .nw-header__nav a:not(.nw-btn):hover,

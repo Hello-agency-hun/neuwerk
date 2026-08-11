@@ -130,6 +130,16 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
   transform: translateY(18px);
   transition: opacity var(--nw-dur-slow) var(--nw-ease),
               transform var(--nw-dur-slow) var(--nw-ease);
+
+  /* FAILSAFE. Normál esetben a js/reveal.js teszi rá a [data-revealed]
+     attribútumot. Ha az IntersectionObserver bármiért nem tüzel --
+     JS-hiba, script-blokkoló, nem renderelő környezet --, a tartalom
+     opacity:0-n ragadna, azaz az oldal nagy része láthatatlan lenne.
+     Ezért 5 mp után CSS-ből mindenképp megjelenik. */
+  animation: nw-reveal-failsafe 1ms linear 5s forwards;
+}
+@keyframes nw-reveal-failsafe {
+  to { opacity: 1; transform: none; }
 }
 [data-revealed] { opacity: 1; transform: none; }
 
