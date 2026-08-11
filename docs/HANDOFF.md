@@ -1,6 +1,6 @@
 # Handoff — állapot és nyitott tételek
 
-Utolsó frissítés: 2026-08-11
+Utolsó frissítés: 2026-08-12
 
 ## Állapot
 
@@ -8,7 +8,7 @@ Utolsó frissítés: 2026-08-11
 
 10 oldal, nulla halott link, nulla külső hálózati kérés. A csomag
 kicsomagolva, szerver nélkül, duplakattintásra is végigkattintható.
-Leszállítható zip: `python tools/make_zip.py` -> 8,19 MB.
+Leszállítható zip: `python tools/make_zip.py` -> 12,12 MB.
 
 ## ⚠️ Blokkoló tételek éles indulás előtt
 
@@ -31,14 +31,14 @@ Generálva: `python tools/check_placeholders.py` — **9 tétel**
 
 | fájl | sor | tétel |
 |---|---|---|
-| `contact.html` | 64 | MINDEN kontaktadat placeholder, valós adatok bekérendők |
-| `index.html` | 136 | a 16 ország tényleges listája bekérendő |
+| `contact.html` | 63 | MINDEN kontaktadat placeholder, valós adatok bekérendők |
+| `index.html` | 161 | a 16 ország tényleges listája bekérendő |
 | `media/neuwerk-begins.html` | 71 | valós cikkszöveg bekérendő |
 | `media/thermal-systems-milestone.html` | 67 | valós cikkszöveg bekérendő |
-| `responsibility.html` | 67 | az 5 jogi dokumentum valós szövege bekérendő |
-| `responsibility.html` | 131 | Integrity Line csatorna és adatvédelmi nyilatkozat bekérendő |
+| `responsibility.html` | 66 | az 5 jogi dokumentum valós szövege bekérendő |
+| `responsibility.html` | 130 | Integrity Line csatorna és adatvédelmi nyilatkozat bekérendő |
 | `data/jobs.js` | 14 | a valós nyitott pozíciók listája bekérendő |
-| `data/locations.js` | 7 | a 16 ország tényleges listája bekérendő |
+| `data/locations.js` | 10 | a 16 ország tényleges listája bekérendő |
 | `data/news.js` | 10 | a valós hírek és cikkek bekérendők |
 <!-- PLACEHOLDER-INVENTORY-END -->
 
@@ -56,11 +56,29 @@ A leszállított zipben szándékosan NINCS benne — fejlesztői eszköz.
 
 Egyik sem fut a felhasználónál. Csak akkor futtasd, ha a forrás változik.
 
-    python tools/build_fonts.py    # TTF -> woff2, assets/fonts/
-    python tools/build_video.py    # ffmpeg + grade, assets/video/
-    python tools/build_docs.py     # placeholder PDF-ek, assets/docs/
-    python tools/build_map.py      # pont-rácsos világtérkép, assets/img/
-    python tools/make_zip.py       # leszállítható csomag, work/
+    python tools/build_fonts.py           # TTF -> woff2, assets/fonts/
+    python tools/build_video.py           # hero, ffmpeg + grade, assets/video/
+    python tools/build_solutions.py       # 4 pillérklip + poszter, assets/video/
+    python tools/build_subhero_images.py  # aloldal-hero JPEG-ek, assets/img/subhero/
+    python tools/build_docs.py            # placeholder PDF-ek, assets/docs/
+    python tools/build_map.py             # pont-rácsos világtérkép, assets/img/
+    python tools/make_zip.py              # leszállítható csomag, work/
+
+A `build_solutions.py` és a `build_subhero_images.py` forrása a `work/gen/`
+alatt van, ami git-ignorált. A véglegesített assetek viszont verziókövetettek,
+tehát a két szkriptet csak akkor kell futtatni, ha a nyers forrás cserélődik.
+
+### Beégetett felirat az animatikban — figyelmeztetés
+
+Az `OESL_animatikv_v29.mp4` padlójára rá van vetítve a SAFETY / PERFORMANCE /
+EFFICIENCY / COMFORT felirat, és **nem csak az alsó harmadban**: az EFFICIENCY
+szakaszban (kb. 12,5-14,0 s) a képkocka közepén, az akkumulátorcsomagon fut át.
+Vágással egyik szakaszban sem távolítható el. A Solutions szekció emiatt már
+nem ebből a fájlból dolgozik. A `hero-1920/1280.mp4` viszont **továbbra is
+tartalmazza a feliratot** (forrás 4,0-17,0 s); a hero szekcióban a `object-fit:
+cover` levágása viewport-arány függvényében kitakarja vagy nem. Ha a feliratnak
+sehol nem szabad látszania, a heróhoz feliratmentes forrásrender kell az
+ügyféltől — vágással ez sem oldható meg.
 
 ## Hogyan frissíti az ügyfél a tartalmat
 

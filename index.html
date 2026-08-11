@@ -188,7 +188,7 @@
         <ol class="nw-solutions__list" role="list">
           <li>
             <button type="button" class="nw-solutions__item" aria-pressed="true"
-                    data-from="5.0" data-to="7.6">
+                    data-solution="fluid">
               <span class="nw-solutions__num">01</span>
               <span class="nw-solutions__body">
                 <span class="nw-solutions__title">Fluid handling systems</span>
@@ -198,7 +198,7 @@
           </li>
           <li>
             <button type="button" class="nw-solutions__item" aria-pressed="false"
-                    data-from="7.6" data-to="10.0">
+                    data-solution="thermal">
               <span class="nw-solutions__num">02</span>
               <span class="nw-solutions__body">
                 <span class="nw-solutions__title">Thermal management</span>
@@ -208,7 +208,7 @@
           </li>
           <li>
             <button type="button" class="nw-solutions__item" aria-pressed="false"
-                    data-from="10.0" data-to="11.6">
+                    data-solution="sealing">
               <span class="nw-solutions__num">03</span>
               <span class="nw-solutions__body">
                 <span class="nw-solutions__title">Sealing and damping</span>
@@ -218,7 +218,7 @@
           </li>
           <li>
             <button type="button" class="nw-solutions__item" aria-pressed="false"
-                    data-from="11.4" data-to="13.0">
+                    data-solution="multi">
               <span class="nw-solutions__num">04</span>
               <span class="nw-solutions__body">
                 <span class="nw-solutions__title">Multi-material applications</span>
@@ -229,12 +229,28 @@
         </ol>
 
         <figure class="nw-solutions__stage">
-          <video class="nw-solutions__video" data-solutions-video
+          <!-- Pillérenként egy réteg. A váltás keresztúsztatás: a bejövő
+               réteg fölé úszik a kimenőnek, ami addig átlátszatlan marad,
+               így nincs átvillanó háttér. Mind a négy klip ugyanabban a
+               stúdióban, ugyanazon az autón készült és ugyanazt a
+               split-tone gradinget kapta, ezért az úsztatás nem
+               jelenetváltásnak, hanem átvilágításnak látszik. -->
+          <video class="nw-solutions__video is-active" data-solution="fluid"
                  muted playsinline preload="auto"
-                 poster="assets/video/hero-poster.jpg" aria-hidden="true">
-            <source src="assets/video/hero-1920.mp4" type="video/mp4" media="(min-width: 861px)">
-            <source src="assets/video/hero-1280.mp4" type="video/mp4">
-          </video>
+                 poster="assets/video/solution-fluid.jpg" aria-hidden="true"
+                 src="assets/video/solution-fluid.mp4"></video>
+          <video class="nw-solutions__video" data-solution="thermal"
+                 muted playsinline preload="metadata"
+                 poster="assets/video/solution-thermal.jpg" aria-hidden="true"
+                 src="assets/video/solution-thermal.mp4"></video>
+          <video class="nw-solutions__video" data-solution="sealing"
+                 muted playsinline preload="metadata"
+                 poster="assets/video/solution-sealing.jpg" aria-hidden="true"
+                 src="assets/video/solution-sealing.mp4"></video>
+          <video class="nw-solutions__video" data-solution="multi"
+                 muted playsinline preload="metadata"
+                 poster="assets/video/solution-multi.jpg" aria-hidden="true"
+                 src="assets/video/solution-multi.mp4"></video>
           <span class="nw-solutions__progress" data-solutions-progress aria-hidden="true"></span>
           <figcaption class="nw-solutions__caption" data-solutions-caption>Fluid handling systems</figcaption>
         </figure>

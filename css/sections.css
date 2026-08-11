@@ -324,7 +324,11 @@ main > .nw-section:first-child { padding-block-start: calc(var(--nw-section-y) +
 .nw-solutions__stage {
   position: relative;
   margin: 0;
-  aspect-ratio: 4 / 3;
+  /* 16:9 -- a négy klip pontosan ebben az arányban készült, így nem kell
+     CSS-ből nagyítani és vágni. A korábbi 4:3-as színpad `scale(1.24)`-gyel
+     próbálta lecsípni a beégetett padlófeliratot; az nem is működött (a
+     felirat nem az alsó harmadban ül), és a képet is felnagyította. */
+  aspect-ratio: 16 / 9;
   background: var(--nw-navy);
   border: 1px solid var(--nw-rule);
   border-radius: var(--nw-radius-card);
@@ -333,14 +337,23 @@ main > .nw-section:first-child { padding-block-start: calc(var(--nw-section-y) +
 @media (min-width: 901px) {
   .nw-solutions__stage { position: sticky; top: calc(var(--nw-header-h) + var(--nw-space-3)); }
 }
+
+/* Négy egymásra fektetett réteg. Alapból mind átlátszó; az aktív úszik be
+   fölülre, a leváltott alatta marad átlátszatlanul, amíg az úsztatás tart
+   (klasszikus A/B dissolve). Így sehol nem villan át a navy háttér. */
 .nw-solutions__video {
+  position: absolute; inset: 0;
   inline-size: 100%; block-size: 100%;
   object-fit: cover;
-  /* A padlóra vetített SAFETY/PERFORMANCE feliratok a képkocka alsó
-     harmadában vannak, és más taxonómiát jelölnek, mint a pillércímke.
-     Ezért az alsó sávot kivágjuk. */
-  object-position: center 34%;
-  transform: scale(1.24);
+  opacity: 0;
+  z-index: 0;
+  transition: opacity var(--nw-dur-slow) var(--nw-ease);
+}
+.nw-solutions__video.is-prev   { opacity: 1; z-index: 1; transition: none; }
+.nw-solutions__video.is-active { opacity: 1; z-index: 2; }
+
+@media (prefers-reduced-motion: reduce) {
+  .nw-solutions__video { transition: none; }
 }
 .nw-solutions__caption {
   position: absolute; inset-inline: 0; inset-block-end: 0;

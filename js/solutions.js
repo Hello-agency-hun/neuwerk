@@ -1,14 +1,18 @@
-/* Solutions: kattintásra a transzparens autó lejátssza az adott
-   képességhez tartozó szakaszt, majd megáll.
+/* Solutions: kattintásra a kiválasztott pillér saját klipje úszik be és
+   játszik le egyszer, majd megáll az utolsó képkockán.
 
-   Miért nem scroll-scrub: az előző változat a görgetéshez kötötte a
-   videó idejét, de a szekció végigfutása alatt gyakorlatilag egy
-   állóképnek látszott, és kattintásra sem történt semmi látható.
-   Kattintásra lejátszani egyértelműbb: az autó fordul egyet, aztán
-   megáll azon a rendszeren, amit a felirat mond.
+   Miért négy külön fájl és nem egy scrubbolt: a közös fájl a hero volt, amibe
+   bele van égetve a padlóra vetített SAFETY / PERFORMANCE / EFFICIENCY /
+   COMFORT tipográfia. Az a felirat nem az alsó harmadban ül -- az EFFICIENCY
+   szakaszban a képkocka közepén, az akkumulátorcsomagon fut át --, tehát sem
+   `object-position`-nel, sem vágással nem tüntethető el. A négy pillér ezért
+   saját, feliratmentes vágóképet kapott (tools/build_solutions.py).
 
-   A fájl a forrás 4,0-17,0 s tartományát tartalmazza, tehát lokálisan
-   0-13 s. A szakaszhatárok a data-from / data-to attribútumokban vannak.
+   Miért nem sima vágás: mind a négy klip ugyanabban a stúdióban, ugyanazon az
+   autón készült, és ugyanazt a split-tone gradinget kapta. Keresztúsztatásban
+   ezért nem jelenetváltásnak látszik, hanem annak, hogy ugyanaz az autó vált
+   át egy másik rendszer átvilágítására. A kimenő réteg az úsztatás alatt
+   átlátszatlan marad a bejövő alatt, így nem villan át a háttér.
 */
 (function () {
   "use strict";
@@ -16,28 +20,20 @@
   var root = document.querySelector("[data-solutions]");
   if (!root) return;
 
-  var video = root.querySelector("[data-solutions-video]");
+  var stage = root.querySelector(".nw-solutions__stage");
   var caption = root.querySelector("[data-solutions-caption]");
   var progress = root.querySelector("[data-solutions-progress]");
   var items = Array.prototype.slice.call(root.querySelectorAll(".nw-solutions__item"));
-  if (!video || !items.length) return;
+  var videos = Array.prototype.slice.call(root.querySelectorAll(".nw-solutions__video"));
+  if (!items.length || !videos.length) return;
 
   var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  var current = null;   // { from, to, item }
+  var byName = {};
+  videos.forEach(function (v) { byName[v.getAttribute("data-solution")] = v; });
+
+  var active = root.querySelector(".nw-solutions__video.is-active") || videos[0];
   var rafId = 0;
-
-  function segmentOf(item) {
-    return {
-      from: parseFloat(item.getAttribute("data-from")),
-      to: parseFloat(item.getAttribute("data-to")),
-      item: item,
-    };
-  }
-
-  function mark(item) {
-    items.forEach(function (b) { b.setAttribute("aria-pressed", String(b === item)); });
-    if (caption) caption.textContent = item.querySelector(".nw-solutions__title").textContent;
-  }
+  var prevTimer = 0;
 
   function setProgress(p) {
     if (progress) progress.style.setProperty("--p", Math.max(0, Math.min(1, p)));
@@ -45,33 +41,67 @@
 
   function stop() {
     if (rafId) { window.cancelAnimationFrame(rafId); rafId = 0; }
-    video.pause();
     root.removeAttribute("data-playing");
   }
 
   function watch() {
     rafId = window.requestAnimationFrame(watch);
-    if (!current) return;
-    var span = current.to - current.from;
-    setProgress(span > 0 ? (video.currentTime - current.from) / span : 1);
-    if (video.currentTime >= current.to) {
+    var d = active.duration;
+    if (!d || !isFinite(d)) return;
+    setProgress(active.currentTime / d);
+    if (active.ended || active.currentTime >= d - 0.02) {
       stop();
-      video.currentTime = current.to;
       setProgress(1);
     }
   }
 
-  function select(item, play) {
-    var seg = segmentOf(item);
-    current = seg;
-    mark(item);
-    stop();
-    setProgress(0);
+  function mark(item) {
+    items.forEach(function (b) { b.setAttribute("aria-pressed", String(b === item)); });
+    if (caption) caption.textContent = item.querySelector(".nw-solutions__title").textContent;
+  }
 
-    try { video.currentTime = seg.from; } catch (e) { /* metadata még nincs */ }
+  /* A leváltott réteg .is-prev-ként átlátszatlan marad, amíg a bejövő
+     beúszik, utána kerül vissza a sor végére. */
+  function swap(next) {
+    if (next === active) return;
+    var prev = active;
+    active = next;
+
+    window.clearTimeout(prevTimer);
+    videos.forEach(function (v) {
+      if (v !== prev && v !== next) v.classList.remove("is-prev", "is-active");
+    });
+    prev.classList.remove("is-active");
+    prev.classList.add("is-prev");
+    next.classList.add("is-active");
+
+    var hold = reduced ? 0 : 700;
+    prevTimer = window.setTimeout(function () {
+      prev.classList.remove("is-prev");
+      prev.pause();
+      try { prev.currentTime = 0; } catch (e) { /* metaadat még nincs */ }
+    }, hold);
+  }
+
+  function select(item, play) {
+    var name = item.getAttribute("data-solution");
+    var video = byName[name];
+    if (!video) return;
+
+    stop();
+    mark(item);
+    setProgress(0);
+    swap(video);
+
+    // A szomszédos klipeket csak akkor húzzuk be, ha a szekcióhoz tényleg
+    // hozzáért a felhasználó -- így az oldalbetöltés nem visz el 2,3 MB-ot.
+    warm();
+
+    try { video.currentTime = 0; } catch (e) { /* metaadat még nincs */ }
 
     if (!play || reduced) {
-      // Reduced motion: nincs lejátszás, csak a szakasz első képkockája.
+      // Reduced motion: nincs lejátszás, a klip első képkockája marad állva.
+      video.pause();
       setProgress(1);
       return;
     }
@@ -79,9 +109,22 @@
     root.setAttribute("data-playing", "");
     var p = video.play();
     if (p && typeof p.catch === "function") {
+      // Autoplay-tiltás esetén a poszter marad. Nem hiba, nem kell UI.
       p.catch(function () { stop(); setProgress(1); });
     }
     rafId = window.requestAnimationFrame(watch);
+  }
+
+  var warmed = false;
+  function warm() {
+    if (warmed) return;
+    warmed = true;
+    videos.forEach(function (v) {
+      if (v.getAttribute("preload") !== "auto") {
+        v.setAttribute("preload", "auto");
+        v.load();
+      }
+    });
   }
 
   items.forEach(function (item) {
@@ -101,11 +144,20 @@
     select(next, true);
   });
 
-  function init() {
-    video.pause();
-    select(items[0], false);
+  // Ha a szekció képbe ér, előtöltjük a többi klipet, hogy az első
+  // kattintás már ne várjon a hálózatra.
+  if (stage && "IntersectionObserver" in window) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+        warm();
+        io.disconnect();
+      });
+    }, { rootMargin: "200px" });
+    io.observe(stage);
   }
 
-  if (video.readyState >= 1) init();
-  else video.addEventListener("loadedmetadata", init, { once: true });
+  videos.forEach(function (v) { v.pause(); });
+  mark(items[0]);
+  setProgress(reduced ? 1 : 0);
 })();

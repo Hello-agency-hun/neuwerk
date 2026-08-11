@@ -18,3 +18,7 @@ Desktop.ini
 # Nagy köztes videó-renderek (a végleges, optimalizált assetek
 # az assets/video/ alatt viszont VERZIÓKÖVETETTEK)
 /work/
+
+# Python bytecode
+__pycache__/
+*.pyc
