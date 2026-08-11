@@ -139,10 +139,29 @@
    között van, optikai közepe 77,7%-nál. Középre igazítva a felirat
    láthatóan lejjebb csúszna a szomszédos szövegnél, ezért optikai
    korrekcióval emeljük meg. */
+/* A Regent logóban a wordmark fölött korona ül, ezért a kép geometriai
+   közepe NEM a wordmark közepe: lemérve a wordmark a kép 62-93%-a között
+   van, optikai közepe 77,7%-nál. Flexben középre igazítva a felirat
+   láthatóan lejjebb ülne a szomszédos szövegnél.
+
+   A megoldás NEM transform: az korábban egy negatív margóval együtt
+   szerepelt, és a kettő egymás ellen dolgozott. Helyette a kép a saját
+   dobozában van elhelyezve: a doboz csak a wordmark magasságát foglalja,
+   a korona pedig fölé lóg. Így a normál flex-középre igazítás pontos. */
+.nw-footer__owner picture,
+.nw-footer__owner .nw-footer__regent {
+  display: block;
+  block-size: 13px;              /* a wordmark tényleges magassága 34px-es képnél */
+  inline-size: 96px;
+  overflow: visible;
+  position: relative;
+}
 .nw-footer__owner img {
+  position: absolute;
+  inset-block-end: 0;            /* a wordmark alja a doboz aljához */
+  inset-inline-start: 0;
   height: 34px; width: auto; opacity: 0.9;
-  transform: translateY(-27.7%);
-  margin-block-end: calc(34px * -0.277);   /* a transform nem csökkenti a helyfoglalást */
+  margin-block-end: -2px;        /* a wordmark alatti apró üres sáv kompenzálása */
 }
 .nw-footer__copy { font-size: var(--nw-text-xs); color: var(--nw-fg-secondary); margin: 0; }
 

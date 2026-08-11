@@ -160,4 +160,22 @@
   videos.forEach(function (v) { v.pause(); });
   mark(items[0]);
   setProgress(reduced ? 1 : 0);
+
+  /* Az első klip magától elindul, amikor a szekció képbe ér.
+     Enélkül a látogató egy állóképet lát, és a szekció halottnak hatott --
+     pont az a "flow" hiányzott, amiért a videó egyáltalán ott van.
+     Egyszer fut le, utána a megállított utolsó képkockán marad; a további
+     lejátszást a pillérgombok vezérlik. Reduced motion mellett nem indul. */
+  if (!reduced && stage && "IntersectionObserver" in window) {
+    var started = false;
+    var autoIo = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting || started) return;
+        started = true;
+        autoIo.disconnect();
+        select(items[0], true);
+      });
+    }, { threshold: 0.35 });
+    autoIo.observe(stage);
+  }
 })();
