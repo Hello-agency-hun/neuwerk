@@ -1,0 +1,159 @@
+/* Header, footer, gomb, kártya, badge, pattern. */
+
+/* --- Gomb --------------------------------------------------- */
+.nw-btn {
+  display: inline-flex; align-items: center; gap: var(--nw-space-1);
+  padding: 0.75rem 1.5rem;
+  font-family: var(--nw-font-display);
+  font-size: var(--nw-text-sm);
+  font-weight: var(--nw-fw-semibold);
+  text-decoration: none;
+  border: 1px solid currentColor;
+  border-radius: var(--nw-radius-pill);
+  transition: background var(--nw-dur-fast) var(--nw-ease),
+              color var(--nw-dur-fast) var(--nw-ease);
+}
+.nw-btn:hover { background: var(--nw-fg); color: var(--nw-bg); }
+
+/* Sun-kitöltésű gomb. A felirat NAVY — fehérrel 1,97:1 lenne. */
+.nw-btn--sun {
+  background: var(--nw-sun);
+  color: var(--nw-on-sun);
+  border-color: var(--nw-sun);
+}
+.nw-btn--sun:hover { background: var(--nw-white); color: var(--nw-navy); border-color: var(--nw-white); }
+
+/* --- Header -------------------------------------------------- */
+.nw-header {
+  position: fixed; inset-block-start: 0; inset-inline: 0;
+  z-index: var(--nw-z-header);
+  background: transparent;
+  transition: background var(--nw-dur-base) var(--nw-ease);
+}
+.nw-header[data-scrolled] { background: var(--nw-navy); }
+
+.nw-header__inner {
+  display: flex; align-items: center; justify-content: space-between;
+  min-height: var(--nw-header-h);
+}
+.nw-header__logo img { height: 24px; width: auto; }   /* brandbook: min. 24 px */
+
+.nw-header__nav ul { display: flex; align-items: center; gap: var(--nw-space-3); }
+.nw-header__nav a {
+  font-family: var(--nw-font-display);
+  font-size: var(--nw-text-sm);
+  font-weight: var(--nw-fw-medium);
+  color: var(--nw-white);
+  text-decoration: none;
+}
+.nw-header__nav a:not(.nw-btn):hover,
+.nw-header__nav a:not(.nw-btn)[aria-current="page"] { color: var(--nw-sun); }
+
+.nw-header__toggle { display: none; background: none; border: 0; padding: var(--nw-space-1); cursor: pointer; }
+.nw-header__bars, .nw-header__bars::before, .nw-header__bars::after {
+  display: block; width: 22px; height: 2px; background: var(--nw-white);
+  transition: transform var(--nw-dur-fast) var(--nw-ease);
+}
+.nw-header__bars::before, .nw-header__bars::after { content: ""; position: relative; }
+.nw-header__bars::before { top: -7px; }
+.nw-header__bars::after  { top: 5px; }
+
+@media (max-width: 860px) {
+  .nw-header__toggle { display: block; }
+  .nw-header__nav {
+    position: fixed; inset: var(--nw-header-h) 0 auto 0;
+    background: var(--nw-navy);
+    padding: var(--nw-space-3) var(--nw-gutter) var(--nw-space-4);
+    transform: translateY(-120%);
+    transition: transform var(--nw-dur-base) var(--nw-ease);
+  }
+  .nw-header__nav[data-open] { transform: translateY(0); }
+  .nw-header__nav ul { flex-direction: column; align-items: flex-start; gap: var(--nw-space-2); }
+  .nw-header__nav a { font-size: var(--nw-text-lg); }
+}
+
+/* --- Footer --------------------------------------------------- */
+.nw-footer {
+  background: var(--nw-bg); color: var(--nw-fg);
+  padding-block: var(--nw-space-12) var(--nw-space-4);
+}
+.nw-footer__claim {
+  font-family: var(--nw-font-display);
+  font-size: var(--nw-text-2xl);
+  font-weight: var(--nw-fw-bold);
+  letter-spacing: var(--nw-tracking-tight);
+  max-width: 16ch;
+  margin-bottom: var(--nw-space-8);
+}
+.nw-footer__cols {
+  display: grid; gap: var(--nw-space-4);
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  padding-block: var(--nw-space-4);
+  border-block: 1px solid var(--nw-rule);
+}
+.nw-footer__cols h4 {
+  font-size: var(--nw-text-xs); letter-spacing: var(--nw-tracking-wide);
+  text-transform: uppercase; color: var(--nw-fg-secondary);
+  margin-bottom: var(--nw-space-2);
+}
+.nw-footer__cols li + li { margin-top: 0.5rem; }
+.nw-footer__cols a { font-size: var(--nw-text-sm); text-decoration: none; }
+.nw-footer__cols a:hover { color: var(--nw-sun); }
+.nw-footer__ext {
+  font-size: var(--nw-text-xs);
+  letter-spacing: var(--nw-tracking-wide);
+  color: var(--nw-fg-secondary);
+  margin-inline-start: 0.35rem;
+}
+
+.nw-footer__base {
+  display: flex; flex-wrap: wrap; align-items: center;
+  justify-content: space-between; gap: var(--nw-space-2);
+  padding-top: var(--nw-space-4);
+}
+.nw-footer__owner {
+  display: flex; align-items: center; gap: 0.5rem;
+  font-size: var(--nw-text-sm); color: var(--nw-fg-secondary); margin: 0;
+}
+.nw-footer__owner img { height: 22px; width: auto; opacity: 0.9; }
+.nw-footer__copy { font-size: var(--nw-text-xs); color: var(--nw-fg-secondary); margin: 0; }
+
+/* --- Placeholder badge ----------------------------------------
+   Az egész rendszert a body.is-wireframe kapcsolja. Éles előtt
+   egyetlen osztály levétele mindet elrejti. */
+.nw-ph { display: none; }
+.is-wireframe .nw-ph {
+  display: inline-block;
+  padding: 0.15em 0.6em;
+  border: 1px dashed var(--nw-sun);
+  border-radius: var(--nw-radius-pill);
+  font-family: var(--nw-font-display);
+  font-size: var(--nw-text-xs);
+  font-weight: var(--nw-fw-semibold);
+  letter-spacing: var(--nw-tracking-wide);
+  text-transform: uppercase;
+  color: var(--nw-accent-text);
+  vertical-align: middle;
+}
+.is-wireframe [data-placeholder] { outline: 1px dashed rgb(255 165 0 / 0.45); outline-offset: 4px; }
+
+/* --- Neuwerk pattern -----------------------------------------
+   A logó grafikai szimbólumából származó forma. Brandbook:
+   csak Blue tint 1 navy háttéren, nagy léptékben. Szekciónként
+   legfeljebb 3 forma, mindegyik legalább 40vmin. */
+.nw-pattern {
+  position: absolute; inset: 0;
+  z-index: var(--nw-z-pattern);
+  pointer-events: none;
+  overflow: clip;
+}
+.nw-pattern__shape {
+  position: absolute;
+  background: var(--nw-pattern-fill);
+  border-radius: var(--nw-radius-pill);
+  transform: rotate(var(--nw-pattern-tilt)) translate3d(0, var(--shift, 0), 0);
+  will-change: transform;
+  min-inline-size: 40vmin; min-block-size: 22vmin;
+}
+
+.nw-theme-light .nw-pattern { display: none; }   /* pattern csak sötét szekcióban */
