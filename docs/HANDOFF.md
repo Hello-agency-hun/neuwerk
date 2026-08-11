@@ -42,6 +42,16 @@ Generálva: `python tools/check_placeholders.py` — **9 tétel**
 | `data/news.js` | 10 | a valós hírek és cikkek bekérendők |
 <!-- PLACEHOLDER-INVENTORY-END -->
 
+## Design-segédlet grafikusnak
+
+`design-system.html` — élő stílusgyűjtemény. Ugyanazt a CSS-t tölti be, mint a
+weboldal, ezért nem tud elavulni. Élő színszerkesztőkkel, valós időben számolt
+kontraszt-táblázattal, komponensdemókkal és egy „mit hol találsz" listával.
+A módosított tokeneket a lap alján kimásolható `tokens.css` blokként adja vissza.
+
+Nyisd meg helyben: `python tools/serve.py`, majd `/design-system.html`.
+A leszállított zipben szándékosan NINCS benne — fejlesztői eszköz.
+
 ## Asset pipeline
 
 Egyik sem fut a felhasználónál. Csak akkor futtasd, ha a forrás változik.

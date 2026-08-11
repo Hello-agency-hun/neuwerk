@@ -134,7 +134,16 @@
   display: flex; align-items: center; gap: 0.5rem;
   font-size: var(--nw-text-sm); color: var(--nw-fg-secondary); margin: 0;
 }
-.nw-footer__owner img { height: 22px; width: auto; opacity: 0.9; }
+/* A Regent logóban a wordmark fölött korona ül, ezért a kép geometriai
+   közepe NEM a wordmark közepe -- lemérve a wordmark a kép 62-93%-a
+   között van, optikai közepe 77,7%-nál. Középre igazítva a felirat
+   láthatóan lejjebb csúszna a szomszédos szövegnél, ezért optikai
+   korrekcióval emeljük meg. */
+.nw-footer__owner img {
+  height: 34px; width: auto; opacity: 0.9;
+  transform: translateY(-27.7%);
+  margin-block-end: calc(34px * -0.277);   /* a transform nem csökkenti a helyfoglalást */
+}
 .nw-footer__copy { font-size: var(--nw-text-xs); color: var(--nw-fg-secondary); margin: 0; }
 
 /* --- Placeholder badge ----------------------------------------

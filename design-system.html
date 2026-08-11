@@ -1,0 +1,471 @@
+<!doctype html>
+<html lang="hu">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>neuwerk design system — élő segédlet</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" href="assets/brand/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="css/tokens.css">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/components.css">
+<link rel="stylesheet" href="css/sections.css">
+<style>
+  /* Csak ezt az oldalt érintő stílusok. A weboldal CSS-ét NEM módosítja. */
+  body { background: var(--nw-white); color: var(--nw-navy); }
+  .ds-wrap { max-width: 1180px; margin-inline: auto; padding: var(--nw-space-4) var(--nw-gutter) var(--nw-space-16); }
+  .ds-head { padding-block: var(--nw-space-8) var(--nw-space-4); border-bottom: 2px solid var(--nw-navy); }
+  .ds-head h1 { font-size: var(--nw-text-3xl); }
+  .ds-head p { max-width: 70ch; color: var(--nw-grey-02); margin-top: var(--nw-space-2); }
+  .ds-sec { padding-block: var(--nw-space-8); border-bottom: 1px solid var(--nw-grey-05); }
+  .ds-sec > h2 { font-size: var(--nw-text-2xl); margin-bottom: var(--nw-space-1); }
+  .ds-sec > .ds-hint { color: var(--nw-grey-02); font-size: var(--nw-text-sm); max-width: 78ch; margin-bottom: var(--nw-space-4); }
+  code, .ds-mono { font-family: ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace; font-size: 0.88em; }
+  code { background: var(--nw-grey-06); padding: 0.1em 0.35em; border-radius: 3px; }
+
+  .ds-grid { display: grid; gap: var(--nw-space-2); grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); }
+  .ds-swatch { border: 1px solid var(--nw-grey-05); border-radius: var(--nw-radius-card); overflow: hidden; }
+  .ds-swatch__chip { block-size: 84px; }
+  .ds-swatch__meta { padding: 0.6rem 0.75rem; font-size: var(--nw-text-xs); }
+  .ds-swatch__meta b { display: block; font-size: var(--nw-text-sm); }
+  .ds-swatch input[type="color"] { inline-size: 100%; block-size: 34px; border: 0; padding: 0; background: none; cursor: pointer; }
+
+  table.ds-table { inline-size: 100%; border-collapse: collapse; font-size: var(--nw-text-sm); }
+  .ds-table th, .ds-table td { text-align: left; padding: 0.55rem 0.7rem; border-bottom: 1px solid var(--nw-grey-05); vertical-align: top; }
+  .ds-table th { font-size: var(--nw-text-xs); text-transform: uppercase; letter-spacing: var(--nw-tracking-wide); color: var(--nw-grey-02); }
+  .ds-pass { color: #156e4e; font-weight: 600; }
+  .ds-fail { color: #b3261e; font-weight: 600; }
+  .ds-note { background: var(--nw-grey-06); border-left: 3px solid var(--nw-sun); padding: var(--nw-space-2); font-size: var(--nw-text-sm); margin-block: var(--nw-space-2); }
+  .ds-demo { padding: var(--nw-space-3); border: 1px dashed var(--nw-grey-04); border-radius: var(--nw-radius-card); }
+  .ds-demo + .ds-demo { margin-top: var(--nw-space-2); }
+  .ds-demo--dark { background: var(--nw-navy); }
+  .ds-row { display: flex; flex-wrap: wrap; gap: var(--nw-space-2); align-items: center; }
+  .ds-out { inline-size: 100%; min-block-size: 210px; font-family: ui-monospace, Consolas, monospace; font-size: 12px;
+            padding: var(--nw-space-2); border: 1px solid var(--nw-grey-04); border-radius: var(--nw-radius-card); }
+  .ds-toc { display: flex; flex-wrap: wrap; gap: 0.5rem 1rem; margin-block: var(--nw-space-3); font-size: var(--nw-text-sm); }
+  .ds-scale span { display: inline-block; background: var(--nw-blue-4); block-size: 14px; border-radius: 2px; }
+</style>
+</head>
+<body>
+<div class="ds-wrap">
+
+<header class="ds-head">
+  <p class="nw-eyebrow" style="color: var(--nw-navy)">neuwerk · design system</p>
+  <h1>Élő segédlet a design átvételéhez</h1>
+  <p>
+    Ez az oldal <strong>ugyanazt a CSS-t tölti be, mint a weboldal</strong>, ezért amit itt látsz,
+    az a valóság — nem egy külön karbantartott dokumentáció, ami elavulhat. Ha módosítod a
+    <code>css/tokens.css</code>-t, ez az oldal azonnal együtt változik.
+  </p>
+  <p>
+    A színeknél és a méreteknél <strong>élő szerkesztők</strong> vannak. Állítsd őket, nézd meg
+    az egész oldalon a hatást, majd a lap alján másold ki a kész <code>tokens.css</code> blokkot.
+    A böngésző nem tud fájlba írni, ezért a végén be kell illesztened.
+  </p>
+  <nav class="ds-toc">
+    <a href="#colors">Színek</a><a href="#contrast">Kontraszt</a><a href="#type">Tipográfia</a>
+    <a href="#space">Térköz</a><a href="#components">Komponensek</a><a href="#themes">Szekciótémák</a>
+    <a href="#pattern">Pattern</a><a href="#motion">Mozgás</a><a href="#where">Mit hol találsz</a>
+    <a href="#export">Export</a>
+  </nav>
+</header>
+
+<section class="ds-sec" id="colors">
+  <h2>Színek</h2>
+  <p class="ds-hint">
+    A brandbook v1.1 hiteles értékei. Kattints egy színmezőre és állítsd át — az egész oldal,
+    a komponensek és a kontraszt-táblázat is azonnal követi.
+  </p>
+  <div class="ds-note">
+    <strong>Két kőbe vésett szabály.</strong> A <em>Sun</em> soha nem lehet háttér, és nem
+    haladhatja meg a látható felület 10–15%-át. A <em>Neuwerk pattern</em> kizárólag
+    Blue&nbsp;tint&nbsp;1 lehet Navy háttéren, nagy léptékben.
+  </div>
+  <div class="ds-grid" id="ds-colors"></div>
+</section>
+
+<section class="ds-sec" id="contrast">
+  <h2>Kontraszt — élőben számolva</h2>
+  <p class="ds-hint">
+    Ez a táblázat a fenti színekből számol, minden változtatás után újra. Ha átállítasz egy
+    színt, itt azonnal látod, melyik páros bukik el. A WCAG AA küszöb törzsszövegre 4,5:1,
+    nagy szövegre 3:1; az AAA 7:1.
+  </p>
+  <table class="ds-table"><thead>
+    <tr><th>szemantikus token</th><th>előtér</th><th>háttér</th><th>arány</th><th>AA törzs</th><th>AAA</th><th>hol használjuk</th></tr>
+  </thead><tbody id="ds-contrast"></tbody></table>
+  <div class="ds-note" id="ds-contrast-warn"></div>
+</section>
+
+<section class="ds-sec" id="type">
+  <h2>Tipográfia</h2>
+  <p class="ds-hint">
+    Poppins (headline, UI, gomb) + Lora (hosszú szöveg, idézet). Mindkettő self-hosted woff2 az
+    <code>assets/fonts/</code> alatt — szándékosan nincs Google Fonts CDN, mert német ipari
+    ügyfélnél az GDPR-kockázat. Ha egyedi brand font érkezik, a <code>--nw-font-display</code> és
+    a <code>--nw-font-body</code> átírása elég.
+  </p>
+  <table class="ds-table"><thead>
+    <tr><th>token</th><th>számított méret</th><th>minta</th></tr>
+  </thead><tbody id="ds-type"></tbody></table>
+</section>
+
+<section class="ds-sec" id="space">
+  <h2>Térköz és layout</h2>
+  <p class="ds-hint">8px-es alapskála. A szekció-belmagasság viewporttal skálázódik.</p>
+  <table class="ds-table"><thead>
+    <tr><th>token</th><th>érték</th><th>arány</th></tr>
+  </thead><tbody id="ds-space"></tbody></table>
+</section>
+
+<section class="ds-sec" id="components">
+  <h2>Komponensek</h2>
+  <p class="ds-hint">
+    Ugyanazok az osztályok, mint a weboldalon. Amit itt látsz, az ott is így néz ki.
+  </p>
+
+  <h3 style="margin-top:var(--nw-space-4)">Gombok</h3>
+  <div class="ds-demo ds-demo--dark nw-theme-dark">
+    <div class="ds-row">
+      <a class="nw-btn nw-btn--sun" href="#components">Primary — Sun</a>
+      <a class="nw-btn" href="#components">Secondary</a>
+    </div>
+  </div>
+  <div class="ds-demo nw-theme-light">
+    <div class="ds-row">
+      <a class="nw-btn nw-btn--sun" href="#components">Primary — Sun</a>
+      <a class="nw-btn" href="#components">Secondary</a>
+    </div>
+  </div>
+  <div class="ds-note">
+    A Sun-gomb felirata <strong>navy</strong>, nem fehér. Fehérrel 1,97:1 lenne, ami bukik.
+    Ezt a <code>--nw-on-sun</code> token kényszeríti ki — ne írd felül közvetlen <code>color</code>
+    értékkel.
+  </div>
+
+  <h3 style="margin-top:var(--nw-space-4)">Placeholder badge</h3>
+  <p class="ds-hint">
+    A <code>&lt;body class="is-wireframe"&gt;</code> kapcsolja. Éles indulás előtt ezt az egy
+    osztályt kell levenni, és minden placeholder-jelölés eltűnik.
+  </p>
+  <div class="ds-demo nw-theme-light is-wireframe">
+    <p style="margin:0"><span class="nw-ph">Placeholder</span> Példa jelölt tartalomra.</p>
+  </div>
+
+  <h3 style="margin-top:var(--nw-space-4)">Kártyák</h3>
+  <div class="ds-demo nw-theme-light">
+    <ul class="nw-cards" style="margin-top:0">
+      <li><a href="#components"><h3>Kártyacím</h3><p>Rövid leíró sor a kártyán.</p>
+        <span class="nw-cards__go" aria-hidden="true">&rarr;</span></a></li>
+      <li><a href="#components"><h3>Második</h3><p>Hover állapotban megemelkedik.</p>
+        <span class="nw-cards__go" aria-hidden="true">&rarr;</span></a></li>
+    </ul>
+  </div>
+
+  <h3 style="margin-top:var(--nw-space-4)">Listasor — hover-interakcióval</h3>
+  <div class="ds-demo ds-demo--dark nw-theme-dark">
+    <ol class="nw-principles" style="margin-top:0">
+      <li><span class="nw-principles__num">01</span><span class="nw-principles__text">Vidd fölé az egeret</span></li>
+      <li><span class="nw-principles__num">02</span><span class="nw-principles__text">A narancs csík a bal szélen fut</span></li>
+    </ol>
+  </div>
+</section>
+
+<section class="ds-sec" id="themes">
+  <h2>Szekciótémák</h2>
+  <p class="ds-hint">
+    Nem felhasználói dark mode kapcsoló, hanem <strong>szekció-tulajdonság</strong>. A világos és
+    sötét szekciók váltakozása maga a brand ritmusa. Egy szekcióra a
+    <code>.nw-theme-dark</code> vagy a <code>.nw-theme-light</code> osztályt teszed, és minden
+    szín ehhez igazodik.
+  </p>
+  <div class="ds-demo ds-demo--dark nw-theme-dark">
+    <p class="nw-eyebrow" style="margin-bottom:.5rem">Eyebrow</p>
+    <p style="color:var(--nw-fg);margin:0 0 .35rem"><strong>Elsődleges szöveg</strong> — <code style="background:rgba(255,255,255,.12);color:inherit">--nw-fg</code></p>
+    <p style="color:var(--nw-fg-secondary);margin:0 0 .35rem">Másodlagos — <code style="background:rgba(255,255,255,.12);color:inherit">--nw-fg-secondary</code></p>
+    <p style="color:var(--nw-fg-muted);margin:0">Halvány — <code style="background:rgba(255,255,255,.12);color:inherit">--nw-fg-muted</code></p>
+  </div>
+  <div class="ds-demo nw-theme-light">
+    <p class="nw-eyebrow" style="margin-bottom:.5rem">Eyebrow</p>
+    <p style="color:var(--nw-fg);margin:0 0 .35rem"><strong>Elsődleges szöveg</strong></p>
+    <p style="color:var(--nw-fg-secondary);margin:0">Másodlagos</p>
+  </div>
+  <div class="ds-note">
+    Világos szekcióban az <code>--nw-accent-text</code> szándékosan <strong>navy</strong>, nem Sun:
+    a narancs fehér háttéren 1,97:1, tehát szövegként tilos. Kitöltésként és vonalként viszont
+    ott is használható.
+  </div>
+</section>
+
+<section class="ds-sec" id="pattern">
+  <h2>Neuwerk pattern</h2>
+  <p class="ds-hint">
+    A logó grafikai szimbólumából származó forma. A brandbook merch-guideline szó szerinti
+    szabálya: <em>„kizárólag Blue Tint 01-ben, Navy Blue háttéren… mindig bátran és jól láthatóan,
+    lehetőleg nagyobb felületet lefedve. A kisméretű, túl sűrű vagy pusztán dekoratív használat
+    kerülendő."</em>
+  </p>
+  <div class="ds-demo ds-demo--dark nw-theme-dark" style="position:relative;min-height:230px;overflow:hidden">
+    <div class="nw-pattern" aria-hidden="true">
+      <span class="nw-pattern__shape" style="left:-14%;top:-30%;width:62%;height:150%"></span>
+      <span class="nw-pattern__shape" style="right:-20%;bottom:-40%;width:58%;height:150%"></span>
+    </div>
+    <p style="position:relative;z-index:2;color:var(--nw-fg);margin:0">
+      Szekciónként legfeljebb 3 forma, mindegyik legalább 40vmin.
+    </p>
+  </div>
+  <div class="ds-note">
+    Világos szekcióban a pattern <strong>nincs</strong> — a <code>--nw-pattern-fill</code> ott
+    <code>transparent</code>. Ez nem elfelejtett eset, hanem a brandbook megkötése.
+  </div>
+</section>
+
+<section class="ds-sec" id="motion">
+  <h2>Mozgás</h2>
+  <p class="ds-hint">
+    Minden animáció kikapcsol <code>prefers-reduced-motion: reduce</code> mellett, és ilyenkor
+    a tartalom azonnal a végállapotban jelenik meg — nem tűnik el.
+  </p>
+  <table class="ds-table"><thead><tr><th>token</th><th>érték</th><th>mire</th></tr></thead>
+  <tbody id="ds-motion"></tbody></table>
+  <div class="ds-note">
+    <strong>Két failsafe van a rendszerben, ne vedd ki őket.</strong> Az intro overlay és a
+    <code>[data-reveal]</code> elemek CSS-animációval akkor is megjelennek, ha a JS nem fut le.
+    Enélkül egy script-blokkoló képes elrejteni a teljes oldalt.
+  </div>
+</section>
+
+<section class="ds-sec" id="where">
+  <h2>Mit hol találsz</h2>
+  <table class="ds-table"><thead><tr><th>ha ezt akarod változtatni…</th><th>…ezt szerkeszd</th></tr></thead>
+  <tbody>
+    <tr><td>bármelyik szín, méret, betűtípus, időzítés</td><td><code>css/tokens.css</code> — ez az egyetlen fájl hex értékekkel</td></tr>
+    <tr><td>reset, tipográfiai alapok, layout primitívek</td><td><code>css/base.css</code></td></tr>
+    <tr><td>header, footer, gomb, badge, pattern, kártya</td><td><code>css/components.css</code></td></tr>
+    <tr><td>szekció-elrendezések (hero, solutions, térkép…)</td><td><code>css/sections.css</code></td></tr>
+    <tr><td>navigációs pontok, footer linkek</td><td>minden oldalon a <code>&lt;!-- @partial:header --&gt;</code> és <code>@partial:footer</code> jelölők között; a <code>partials/</code> a referencia-másolat</td></tr>
+    <tr><td>hírek, cikkek</td><td><code>data/news.js</code> + egy új fájl a <code>media/</code> alatt</td></tr>
+    <tr><td>állásajánlatok</td><td><code>data/jobs.js</code></td></tr>
+    <tr><td>térképpontok</td><td><code>data/locations.js</code></td></tr>
+    <tr><td>jogi dokumentumok</td><td>a PDF cseréje az <code>assets/docs/</code> alatt, azonos fájlnévvel — a HTML nem változik</td></tr>
+    <tr><td>hero videó vágása vagy színezése</td><td><code>tools/build_video.py</code>, majd futtatás</td></tr>
+    <tr><td>világtérkép sűrűsége vagy színe</td><td><code>tools/build_map.py</code>, majd futtatás</td></tr>
+    <tr><td>leszállítható csomag tartalma</td><td><code>tools/make_zip.py</code></td></tr>
+  </tbody></table>
+  <div class="ds-note">
+    <strong>Három szabály, amit a projekt betart, és amit érdemes megtartani.</strong>
+    Nincs build lépés. Nincs <code>fetch()</code> — a csomagnak <code>file://</code>-ből is
+    működnie kell. Nincs külső hálózati kérés — se CDN font, se CDN script.
+  </div>
+</section>
+
+<section class="ds-sec" id="export">
+  <h2>Export</h2>
+  <p class="ds-hint">
+    A fenti szerkesztőkkel beállított értékek. Másold be a <code>css/tokens.css</code>
+    <code>:root</code> blokkjába a megfelelő sorok helyére.
+  </p>
+  <div class="ds-row" style="margin-bottom:var(--nw-space-2)">
+    <button class="nw-btn nw-btn--sun" type="button" id="ds-copy">Vágólapra</button>
+    <button class="nw-btn" type="button" id="ds-reset" style="color:var(--nw-navy)">Alaphelyzet</button>
+    <span id="ds-copy-msg" style="font-size:var(--nw-text-sm);color:var(--nw-grey-02)"></span>
+  </div>
+  <textarea class="ds-out" id="ds-export" readonly spellcheck="false"></textarea>
+</section>
+
+</div>
+
+<script>
+/* Élő design-segédlet.
+
+   Minden érték a TÉNYLEGESEN betöltött css/tokens.css-ből olvasódik ki
+   getComputedStyle-lal -- nincs külön másolat, ami elavulhatna. A
+   szerkesztők a :root inline stílusát írják, tehát a hatás azonnal
+   végigfut az egész oldalon és minden komponensdemón.
+*/
+(function () {
+  "use strict";
+  var root = document.documentElement;
+  var read = function (n) { return getComputedStyle(root).getPropertyValue(n).trim(); };
+
+  var COLORS = [
+    ["--nw-navy",     "Navy Blue",   "elsődleges, nagy felületeken dominál · Pantone 2766 C"],
+    ["--nw-white",    "White",       "egyenrangú vászon a navy-vel"],
+    ["--nw-blue-1",   "Blue tint 1", "a Neuwerk pattern színe"],
+    ["--nw-blue-2",   "Blue tint 2", "tonális mélység · szöveget NEM hordoz"],
+    ["--nw-blue-3",   "Blue tint 3", "másodlagos szöveg sötét háttéren"],
+    ["--nw-blue-4",   "Blue tint 4", "halvány rétegek"],
+    ["--nw-sun",      "Sun",         "akcent · max. 10–15% · SOHA nem háttér · Pantone 137 C"],
+    ["--nw-grey-02",  "Grey 02",     "másodlagos szöveg világos háttéren"],
+    ["--nw-grey-06",  "Grey 06",     "halvány felületek"]
+  ];
+
+  var PAIRS = [
+    ["--nw-on-navy",            "--nw-white",   "--nw-navy",  "elsődleges szöveg sötéten"],
+    ["--nw-on-navy-secondary",  "--nw-blue-3",  "--nw-navy",  "másodlagos szöveg sötéten"],
+    ["--nw-on-navy-muted",      "--nw-blue-4",  "--nw-navy",  "halvány szöveg sötéten"],
+    ["--nw-on-white",           "--nw-navy",    "--nw-white", "elsődleges szöveg világoson"],
+    ["--nw-on-white-secondary", "--nw-grey-02", "--nw-white", "másodlagos szöveg világoson"],
+    ["--nw-on-sun",             "--nw-navy",    "--nw-sun",   "Sun-gomb felirata"],
+    ["--nw-accent-on-navy",     "--nw-sun",     "--nw-navy",  "akcentszöveg sötéten"],
+    ["(tiltott)",               "--nw-white",   "--nw-sun",   "fehér a Sun-on — ezért navy a felirat"],
+    ["(tiltott)",               "--nw-sun",     "--nw-white", "Sun szöveg fehéren"]
+  ];
+
+  var TYPE = ["--nw-text-xs","--nw-text-sm","--nw-text-base","--nw-text-lg",
+              "--nw-text-xl","--nw-text-2xl","--nw-text-3xl","--nw-text-4xl"];
+  var SPACE = ["--nw-space-1","--nw-space-2","--nw-space-3","--nw-space-4",
+               "--nw-space-6","--nw-space-8","--nw-space-12","--nw-space-16"];
+  var MOTION = [
+    ["--nw-dur-fast", "hover, apró állapotváltás"],
+    ["--nw-dur-base", "menü, kártya, szekcióváltás"],
+    ["--nw-dur-slow", "belépő animáció"],
+    ["--nw-dur-intro","logó intro"],
+    ["--nw-ease",     "alapértelmezett easing"]
+  ];
+
+  function hex(v) {
+    v = (v || "").trim();
+    if (v.charAt(0) === "#") return v.length === 4
+      ? "#" + v[1] + v[1] + v[2] + v[2] + v[3] + v[3] : v;
+    var m = v.match(/\d+/g);
+    if (!m) return "#000000";
+    return "#" + m.slice(0, 3).map(function (n) {
+      return ("0" + parseInt(n, 10).toString(16)).slice(-2);
+    }).join("");
+  }
+  function lum(h) {
+    h = hex(h).slice(1);
+    var c = [0, 2, 4].map(function (i) {
+      var v = parseInt(h.substr(i, 2), 16) / 255;
+      return v <= 0.04045 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4);
+    });
+    return 0.2126 * c[0] + 0.7152 * c[1] + 0.0722 * c[2];
+  }
+  function ratio(a, b) {
+    var x = lum(a), y = lum(b), hi = Math.max(x, y), lo = Math.min(x, y);
+    return (hi + 0.05) / (lo + 0.05);
+  }
+
+  var overrides = {};
+
+  function buildColors() {
+    document.getElementById("ds-colors").innerHTML = COLORS.map(function (c) {
+      var val = hex(read(c[0]));
+      return '<div class="ds-swatch">' +
+        '<div class="ds-swatch__chip" style="background:var(' + c[0] + ')"></div>' +
+        '<div class="ds-swatch__meta"><b>' + c[1] + '</b>' +
+        '<span class="ds-mono" data-hexlabel="' + c[0] + '">' + val + '</span>' +
+        '<div style="color:var(--nw-grey-02);margin:.35rem 0 .4rem">' + c[2] + '</div>' +
+        '<input type="color" value="' + val + '" data-token="' + c[0] + '" aria-label="' + c[1] + '">' +
+        '</div></div>';
+    }).join("");
+
+    Array.prototype.forEach.call(document.querySelectorAll('input[data-token]'), function (inp) {
+      inp.addEventListener("input", function () {
+        var t = inp.getAttribute("data-token");
+        overrides[t] = inp.value;
+        root.style.setProperty(t, inp.value);
+        var label = document.querySelector('[data-hexlabel="' + t + '"]');
+        if (label) label.textContent = inp.value;
+        refresh();
+      });
+    });
+  }
+
+  function buildContrast() {
+    var fails = 0, expectedFails = 0;
+    document.getElementById("ds-contrast").innerHTML = PAIRS.map(function (p) {
+      var fg = read(p[1]), bg = read(p[2]);
+      var r = ratio(fg, bg);
+      var aa = r >= 4.5, aaa = r >= 7;
+      var forbidden = p[0] === "(tiltott)";
+      if (!aa && !forbidden) fails++;
+      if (!aa && forbidden) expectedFails++;
+      return "<tr><td><code>" + p[0] + "</code></td>" +
+        '<td><span style="display:inline-block;width:12px;height:12px;border:1px solid #ccc;vertical-align:middle;background:var(' + p[1] + ')"></span> <code>' + p[1] + "</code></td>" +
+        '<td><span style="display:inline-block;width:12px;height:12px;border:1px solid #ccc;vertical-align:middle;background:var(' + p[2] + ')"></span> <code>' + p[2] + "</code></td>" +
+        '<td class="ds-mono">' + r.toFixed(2) + ":1</td>" +
+        '<td class="' + (aa ? "ds-pass" : "ds-fail") + '">' + (aa ? "PASS" : "FAIL") + "</td>" +
+        '<td class="' + (aaa ? "ds-pass" : "") + '">' + (aaa ? "PASS" : "—") + "</td>" +
+        "<td>" + p[3] + "</td></tr>";
+    }).join("");
+
+    var w = document.getElementById("ds-contrast-warn");
+    if (fails) {
+      w.innerHTML = "<strong>⚠ " + fails + " használatban lévő páros bukik.</strong> " +
+        "Állítsd vissza a színt, vagy válassz másik szemantikus tokent — az AA küszöb " +
+        "törzsszövegre 4,5:1.";
+      w.style.borderLeftColor = "#b3261e";
+    } else {
+      w.innerHTML = "<strong>Minden használatban lévő páros megfelel.</strong> " +
+        "Az alsó két sor szándékosan bukik: ezek a tiltott kombinációk, ezért van a " +
+        "Sun-gombon navy felirat.";
+      w.style.borderLeftColor = "var(--nw-sun)";
+    }
+  }
+
+  function buildType() {
+    document.getElementById("ds-type").innerHTML = TYPE.map(function (t) {
+      var px = read(t);
+      return "<tr><td><code>" + t + "</code></td><td class=\"ds-mono\">" + px + "</td>" +
+        '<td style="font-family:var(--nw-font-display);font-size:var(' + t + ');line-height:1.15">Turning Expertise into Impact</td></tr>';
+    }).join("");
+  }
+
+  function buildSpace() {
+    document.getElementById("ds-space").innerHTML = SPACE.map(function (t) {
+      var v = read(t);
+      return "<tr><td><code>" + t + "</code></td><td class=\"ds-mono\">" + v + "</td>" +
+        '<td class="ds-scale"><span style="width:' + v + '"></span></td></tr>';
+    }).join("");
+  }
+
+  function buildMotion() {
+    document.getElementById("ds-motion").innerHTML = MOTION.map(function (m) {
+      return "<tr><td><code>" + m[0] + "</code></td><td class=\"ds-mono\">" + read(m[0]) + "</td><td>" + m[1] + "</td></tr>";
+    }).join("");
+  }
+
+  function buildExport() {
+    var keys = Object.keys(overrides);
+    var body = keys.length
+      ? keys.map(function (k) { return "  " + k + ": " + overrides[k] + ";"; }).join("\n")
+      : COLORS.map(function (c) { return "  " + c[0] + ": " + hex(read(c[0])) + ";"; }).join("\n");
+    document.getElementById("ds-export").value =
+      "/* css/tokens.css — :root blokk\n" +
+      (keys.length ? "   Csak a módosított tokenek. Cseréld le a megfelelő sorokat. */\n"
+                   : "   Jelenlegi állapot. Módosíts egy színt, és itt csak a változás jelenik meg. */\n") +
+      ":root {\n" + body + "\n}\n";
+  }
+
+  function refresh() { buildContrast(); buildType(); buildSpace(); buildMotion(); buildExport(); }
+
+  buildColors();
+  refresh();
+
+  document.getElementById("ds-copy").addEventListener("click", function () {
+    var ta = document.getElementById("ds-export");
+    var msg = document.getElementById("ds-copy-msg");
+    ta.removeAttribute("readonly"); ta.select();
+    var ok = false;
+    try { ok = document.execCommand("copy"); } catch (e) { ok = false; }
+    ta.setAttribute("readonly", "");
+    if (navigator.clipboard && !ok) {
+      navigator.clipboard.writeText(ta.value).then(function () { msg.textContent = "Másolva."; });
+    } else {
+      msg.textContent = ok ? "Másolva." : "Nem sikerült — jelöld ki és másold kézzel.";
+    }
+    window.setTimeout(function () { msg.textContent = ""; }, 2500);
+  });
+
+  document.getElementById("ds-reset").addEventListener("click", function () {
+    Object.keys(overrides).forEach(function (k) { root.style.removeProperty(k); });
+    overrides = {};
+    buildColors();
+    refresh();
+  });
+})();
+</script>
+</body>
+</html>
