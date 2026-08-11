@@ -248,3 +248,31 @@ main > .nw-section:first-child { padding-block-start: calc(var(--nw-section-y) +
   background: var(--nw-grey-06);
   border-radius: 3px;
 }
+
+/* --- Dokumentumlista -------------------------------------------- */
+.nw-doclist {
+  display: grid; gap: var(--nw-space-2);
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  margin-top: var(--nw-space-3);
+}
+.nw-doclist a {
+  display: flex; flex-direction: column; block-size: 100%;
+  padding: var(--nw-space-3);
+  text-decoration: none;
+  border: 1px solid var(--nw-rule);
+  border-radius: var(--nw-radius-card);
+  transition: transform var(--nw-dur-base) var(--nw-ease),
+              border-color var(--nw-dur-base) var(--nw-ease);
+}
+.nw-doclist a:hover { transform: translateY(-4px); border-color: var(--nw-fg); }
+.nw-doclist h3 { font-size: var(--nw-text-lg); margin-bottom: 0.5rem; }
+.nw-doclist p  { font-size: var(--nw-text-sm); color: var(--nw-fg-secondary); flex: 1; }
+.nw-doclist__meta {
+  display: inline-block; margin-top: var(--nw-space-2);
+  font-family: var(--nw-font-display);
+  font-size: var(--nw-text-xs);
+  font-weight: var(--nw-fw-semibold);
+  letter-spacing: var(--nw-tracking-wide);
+  color: var(--nw-accent-text);
+}
+.nw-doclist--dark { grid-template-columns: minmax(0, 420px); }

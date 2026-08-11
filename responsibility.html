@@ -43,8 +43,106 @@
 
 
 <main id="main">
-  <section class="nw-section nw-theme-dark">
-    <div class="nw-shell"><h1>Acting Responsibly</h1></div>
+  <section class="nw-section nw-theme-dark nw-subhero">
+    <div class="nw-pattern" data-pattern aria-hidden="true">
+      <span class="nw-pattern__shape" data-depth="0.12"
+            style="left:-20%;top:-12%;width:82vmin;height:35vmin"></span>
+    </div>
+    <div class="nw-shell">
+      <p class="nw-eyebrow">Legal and compliance</p>
+      <h1 data-reveal>Acting Responsibly</h1>
+    </div>
+  </section>
+
+  <section class="nw-section nw-theme-light">
+    <div class="nw-shell">
+      <p class="nw-lead nw-prose" data-reveal>
+        Integrity, accountability and compliance are fundamental to the way we conduct
+        business. We are committed to maintaining the highest standards of ethical
+        behavior, transparency and corporate responsibility across all our activities.
+      </p>
+
+      <h2 class="nw-section__sub" id="documents">Documents</h2>
+
+      <!-- TODO(client): az 5 jogi dokumentum valós szövege bekérendő -->
+      <ul class="nw-doclist" data-reveal data-reveal-delay="80">
+        <li data-placeholder>
+          <a href="assets/docs/code-of-conduct.pdf">
+            <h3><span class="nw-ph">Placeholder</span> Code of Conduct</h3>
+            <p>How we behave: integrity, fair competition, anti-corruption, conflicts
+               of interest, and respect in the workplace.</p>
+            <span class="nw-doclist__meta">PDF</span>
+          </a>
+        </li>
+        <li data-placeholder>
+          <a href="assets/docs/compliance-ethics.pdf">
+            <h3><span class="nw-ph">Placeholder</span> Compliance &amp; Ethics</h3>
+            <p>Our compliance framework, governance responsibilities, training
+               obligations and reporting duties.</p>
+            <span class="nw-doclist__meta">PDF</span>
+          </a>
+        </li>
+        <li data-placeholder>
+          <a href="assets/docs/supplier-requirements.pdf">
+            <h3><span class="nw-ph">Placeholder</span> Supplier Requirements</h3>
+            <p>What we expect from suppliers: quality, sustainability, human rights,
+               environmental and sourcing standards.</p>
+            <span class="nw-doclist__meta">PDF</span>
+          </a>
+        </li>
+        <li data-placeholder>
+          <a href="assets/docs/privacy-policy.pdf">
+            <h3><span class="nw-ph">Placeholder</span> Privacy Policy</h3>
+            <p>How we collect, use, store and protect personal data, and the rights
+               available to data subjects.</p>
+            <span class="nw-doclist__meta">PDF</span>
+          </a>
+        </li>
+        <li data-placeholder>
+          <a href="assets/docs/legal-notice.pdf">
+            <h3><span class="nw-ph">Placeholder</span> Legal Notice</h3>
+            <p>Company details, registration, responsible parties and liability
+               information for this website.</p>
+            <span class="nw-doclist__meta">PDF</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="nw-section nw-theme-dark" id="integrity-line">
+    <div class="nw-pattern" data-pattern aria-hidden="true">
+      <span class="nw-pattern__shape" data-depth="0.14"
+            style="right:-22%;bottom:-18%;width:88vmin;height:38vmin"></span>
+    </div>
+    <div class="nw-shell">
+      <p class="nw-eyebrow">Whistleblower reporting</p>
+      <h2 data-reveal>Integrity Line</h2>
+      <div class="nw-prose" data-reveal data-reveal-delay="80">
+        <p class="nw-lead">
+          neuwerk is committed to the highest standards of ethical behavior. The
+          Integrity Line allows employees, partners and third parties to report
+          concerns confidentially.
+        </p>
+        <p data-placeholder>
+          <span class="nw-ph">Placeholder</span>
+          Reporting channel details and the confidentiality statement will be provided
+          by neuwerk.
+          <!-- TODO(client): Integrity Line csatorna és adatvédelmi nyilatkozat bekérendő -->
+        </p>
+      </div>
+
+      <ul class="nw-doclist nw-doclist--dark" data-reveal data-reveal-delay="160">
+        <li data-placeholder>
+          <a href="assets/docs/whistleblower-procedure.pdf">
+            <h3><span class="nw-ph">Placeholder</span> Whistleblower Procedure</h3>
+            <p>How to raise a concern confidentially, what happens next, and the
+               protection against retaliation.</p>
+            <span class="nw-doclist__meta">PDF</span>
+          </a>
+        </li>
+      </ul>
+    </div>
   </section>
 </main>
 
@@ -101,5 +199,7 @@
 
 
 <script src="js/nav.js"></script>
+<script src="js/pattern.js"></script>
+<script src="js/reveal.js"></script>
 </body>
 </html>
