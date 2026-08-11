@@ -23,11 +23,12 @@ Ezek egyike sem zárható le fejlesztői oldalról.
 Ezt a szakaszt a `python tools/check_placeholders.py` generálja. Ne szerkeszd kézzel.
 
 <!-- PLACEHOLDER-INVENTORY-START -->
-Generálva: `python tools/check_placeholders.py` — **2 tétel**
+Generálva: `python tools/check_placeholders.py` — **3 tétel**
 
 | fájl | sor | tétel |
 |---|---|---|
 | `index.html` | 136 | a 16 ország tényleges listája bekérendő |
+| `data/jobs.js` | 14 | a valós nyitott pozíciók listája bekérendő |
 | `data/locations.js` | 7 | a 16 ország tényleges listája bekérendő |
 <!-- PLACEHOLDER-INVENTORY-END -->
 
