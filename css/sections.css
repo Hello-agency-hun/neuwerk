@@ -122,3 +122,54 @@ main > .nw-section:first-child { padding-block-start: calc(var(--nw-section-y) +
 .nw-scrub__pillars button[aria-pressed="true"] { border-top-color: var(--nw-sun); }
 .nw-scrub__pillars h3 { font-size: var(--nw-text-lg); margin-bottom: 0.5rem; }
 .nw-scrub__pillars p  { font-size: var(--nw-text-sm); color: var(--nw-fg-secondary); }
+
+/* --- Intro ----------------------------------------------------- */
+.nw-intro {
+  position: fixed; inset: 0; z-index: var(--nw-z-intro);
+  display: grid; place-items: center;
+  background: var(--nw-navy);
+  transition: opacity 480ms var(--nw-ease);
+}
+.nw-intro[data-done] { opacity: 0; pointer-events: none; }
+.nw-intro video { inline-size: min(60vw, 520px); block-size: auto; }
+
+/* --- Elvek ----------------------------------------------------- */
+.nw-principles {
+  display: grid; gap: var(--nw-space-2);
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  margin-top: var(--nw-space-6);
+}
+.nw-principles li {
+  padding-top: var(--nw-space-2);
+  border-top: 2px solid var(--nw-rule);
+  font-family: var(--nw-font-display);
+  font-size: var(--nw-text-lg);
+  font-weight: var(--nw-fw-medium);
+  line-height: var(--nw-leading-snug);
+}
+.nw-principles span {
+  display: block; margin-bottom: 0.5rem;
+  font-size: var(--nw-text-sm);
+  color: var(--nw-accent-text);
+  letter-spacing: var(--nw-tracking-wide);
+}
+
+/* --- Kártyák --------------------------------------------------- */
+.nw-cards {
+  display: grid; gap: var(--nw-space-3);
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  margin-top: var(--nw-space-4);
+}
+.nw-cards a {
+  display: block; block-size: 100%;
+  padding: var(--nw-space-3);
+  text-decoration: none;
+  border: 1px solid var(--nw-rule);
+  border-radius: var(--nw-radius-card);
+  transition: transform var(--nw-dur-base) var(--nw-ease),
+              border-color var(--nw-dur-base) var(--nw-ease);
+}
+.nw-cards a:hover { transform: translateY(-4px); border-color: var(--nw-navy); }
+.nw-cards h3 { margin-bottom: 0.5rem; }
+.nw-cards p  { font-size: var(--nw-text-sm); color: var(--nw-fg-secondary); }
+.nw-cards__go { display: inline-block; margin-top: var(--nw-space-2); color: var(--nw-accent-text); }
