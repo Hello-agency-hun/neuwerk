@@ -22,3 +22,6 @@ Desktop.ini
 # Python bytecode
 __pycache__/
 *.pyc
+
+# A review-build generalt kimenete (tools/build_review.py allitja elo)
+/feltoltesre/
