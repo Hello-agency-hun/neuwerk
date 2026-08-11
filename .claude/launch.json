@@ -1,0 +1,12 @@
+{
+  "version": "0.0.1",
+  "autoPort": true,
+  "configurations": [
+    {
+      "name": "neuwerk",
+      "runtimeExecutable": "python",
+      "runtimeArgs": ["tools/serve.py"],
+      "port": 8000
+    }
+  ]
+}
