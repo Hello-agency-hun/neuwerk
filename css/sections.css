@@ -88,3 +88,37 @@ main > .nw-section:first-child { padding-block-start: calc(var(--nw-section-y) +
   text-transform: uppercase;
   color: var(--nw-fg-secondary);
 }
+
+/* --- Solutions scrub ------------------------------------------ */
+.nw-scrub { margin-block: var(--nw-space-6); }
+.nw-scrub__stage {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  background: var(--nw-navy);
+  overflow: clip;
+}
+.nw-scrub__video {
+  inline-size: 100%; block-size: 100%; object-fit: cover;
+  /* A padlóra vetített SAFETY/PERFORMANCE feliratok a képkocka alsó
+     harmadában vannak, és más taxonómiát jelölnek, mint a pillércímke.
+     Ezért az alsó sávot levágjuk. */
+  object-position: center 32%;
+  transform: scale(1.18);
+}
+.nw-scrub__pillars {
+  display: grid; gap: var(--nw-space-2);
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  margin-top: var(--nw-space-4);
+}
+.nw-scrub__pillars button {
+  inline-size: 100%; text-align: left; cursor: pointer;
+  padding: var(--nw-space-2);
+  background: transparent; color: inherit;
+  border: 0; border-top: 2px solid var(--nw-rule);
+  font: inherit;
+  transition: border-color var(--nw-dur-fast) var(--nw-ease);
+}
+.nw-scrub__pillars button:hover { border-top-color: var(--nw-blue-3); }
+.nw-scrub__pillars button[aria-pressed="true"] { border-top-color: var(--nw-sun); }
+.nw-scrub__pillars h3 { font-size: var(--nw-text-lg); margin-bottom: 0.5rem; }
+.nw-scrub__pillars p  { font-size: var(--nw-text-sm); color: var(--nw-fg-secondary); }
