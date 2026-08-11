@@ -1,10 +1,14 @@
 # Handoff — állapot és nyitott tételek
 
-Utolsó frissítés: 2026-08-10
+Utolsó frissítés: 2026-08-11
 
 ## Állapot
 
-Build 1 fejlesztés alatt. Design spec jóváhagyva.
+**Build 1 kész, ügyfél-jóváhagyásra vár.**
+
+10 oldal, nulla halott link, nulla külső hálózati kérés. A csomag
+kicsomagolva, szerver nélkül, duplakattintásra is végigkattintható.
+Leszállítható zip: `python tools/make_zip.py` -> 8,19 MB.
 
 ## ⚠️ Blokkoló tételek éles indulás előtt
 
@@ -44,6 +48,9 @@ Egyik sem fut a felhasználónál. Csak akkor futtasd, ha a forrás változik.
 
     python tools/build_fonts.py    # TTF -> woff2, assets/fonts/
     python tools/build_video.py    # ffmpeg + grade, assets/video/
+    python tools/build_docs.py     # placeholder PDF-ek, assets/docs/
+    python tools/build_map.py      # pont-rácsos világtérkép, assets/img/
+    python tools/make_zip.py       # leszállítható csomag, work/
 
 ## Hogyan frissíti az ügyfél a tartalmat
 

@@ -1,4 +1,5 @@
-/* Szekció-layoutok. A tartalmat a későbbi taskok töltik fel. */
+/* Szekció-layoutok: hero, who-we-are, footprint, solutions, ambition,
+   aloldal-hero, névbontás, listák, cikk, dokumentumlista, kontakt. */
 
 /* A header fixed, ezért az első szekció alápadolása kell,
    különben a cím a header alá csúszik. A heroban ezt a
