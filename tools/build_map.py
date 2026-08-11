@@ -10,8 +10,10 @@ lekerekített formák, pill, kör. Egy pontokból rakott kontinens ebbe
 illeszkedik, egy fotórealisztikus sziluett nem. Ráadásul lényegesen
 kisebb és élesen skálázódik.
 
-A kimenet egyetlen statikus SVG, szín nélkül: a pontok `currentColor`-t
-öröklik, tehát a színt a CSS adja (--nw-pattern-fill / --nw-fg-secondary).
+A kimenet egyetlen statikus SVG, FIX brand színnel. Nem currentColor:
+az <img>-ben nem oldódna fel, a CSS mask pedig file://-ből kockázatos --
+a csomagnak viszont duplakattintásra is működnie kell. A térkép mindig
+navy szekcióban ül, ezért egyetlen szín elég: Blue tint 3.
 
 Futtatás csak akkor kell, ha a forrás vagy a rácssűrűség változik:
     python tools/build_map.py
@@ -37,6 +39,7 @@ COLS = 150
 # ezért 83 fok felett és 60 fok alatt levágjuk.
 LAT_TOP, LAT_BOTTOM = 83.0, -60.0
 DOT_R = 0.34          # pontsugár rácsegységben
+FILL = "#8895cb"      # Blue tint 3 -- a térkép mindig navy háttéren ül
 MASK_SCALE = 6        # a maszkot ennyiszeres felbontáson rajzoljuk, majd mintavételezünk
 
 
@@ -149,7 +152,7 @@ def main():
     svg = (
         f'<svg xmlns="http://www.w3.org/2000/svg" '
         f'viewBox="-0.5 -0.5 {COLS} {rows}" '
-        f'fill="currentColor" role="img" aria-label="World map">'
+        f'fill="{FILL}" role="img" aria-label="World map">'
         f"{body}</svg>"
     )
 
