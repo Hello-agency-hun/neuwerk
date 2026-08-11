@@ -42,6 +42,23 @@ Generálva: `python tools/check_placeholders.py` — **9 tétel**
 | `data/news.js` | 10 | a valós hírek és cikkek bekérendők |
 <!-- PLACEHOLDER-INVENTORY-END -->
 
+## Hero videó: a beégetett felirat ELFOGADOTT ÁLLAPOT
+
+Döntés (2026-08-12, ügyféloldali jóváhagyással): a hero videóban maradnak a
+padlóra vetített SAFETY / PERFORMANCE / EFFICIENCY / COMFORT feliratok.
+
+Ez tudatos döntés, nem elmaradt munka. Ne "javítsd":
+
+- A felirat NEM az alsó harmadban ül. Az EFFICIENCY szakaszban a képkocka
+  KÖZEPÉN fut át, az akkumulátorcsomagon; a PERFORMANCE szakaszban a felső
+  éle a képmagasság ~57%-át éri el. 3D-s padlóvetület, a kamera pedig kering,
+  tehát a felirat függőlegesen és vízszintesen is mozog. Nincs olyan fix
+  vágás, ami a teljes szakaszon eltüntetné.
+- A négy Solutions-klip ettől függetlenül feliratmentes: azokat külön
+  vágtuk és generáltuk (tools/build_solutions.py).
+- A végleges megoldás nem vágás, hanem egy felirat nélküli renderelés az
+  ügyfél projektfájljából. Ez a "Kérések az ügyfél felé" alatt szerepel.
+
 ## Design-segédlet grafikusnak
 
 `design-system.html` — élő stílusgyűjtemény. Ugyanazt a CSS-t tölti be, mint a
