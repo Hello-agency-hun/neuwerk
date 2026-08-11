@@ -27,8 +27,8 @@ Generálva: `python tools/check_placeholders.py` — **2 tétel**
 
 | fájl | sor | tétel |
 |---|---|---|
-| `index.html` | 135 | a 16 ország tényleges listája bekérendő |
-| `data\locations.js` | 7 | a 16 ország tényleges listája bekérendő |
+| `index.html` | 136 | a 16 ország tényleges listája bekérendő |
+| `data/locations.js` | 7 | a 16 ország tényleges listája bekérendő |
 <!-- PLACEHOLDER-INVENTORY-END -->
 
 ## Asset pipeline

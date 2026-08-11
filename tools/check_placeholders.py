@@ -43,7 +43,7 @@ def main():
         rel = f.relative_to(ROOT)
         for i, line in enumerate(f.read_text(encoding="utf-8", errors="replace").splitlines(), 1):
             for note in TODO_RE.findall(line):
-                todos.append((str(rel), i, note.strip()))
+                todos.append((rel.as_posix(), i, note.strip()))
             for addr in EMAIL_RE.findall(line):
                 if not addr.lower().endswith(ALLOWED_EMAIL_HOSTS):
                     bad_emails.append(f"{rel}:{i}  {addr}")
