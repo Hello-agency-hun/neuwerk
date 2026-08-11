@@ -23,10 +23,11 @@ Ezek egyike sem zárható le fejlesztői oldalról.
 Ezt a szakaszt a `python tools/check_placeholders.py` generálja. Ne szerkeszd kézzel.
 
 <!-- PLACEHOLDER-INVENTORY-START -->
-Generálva: `python tools/check_placeholders.py` — **8 tétel**
+Generálva: `python tools/check_placeholders.py` — **9 tétel**
 
 | fájl | sor | tétel |
 |---|---|---|
+| `contact.html` | 64 | MINDEN kontaktadat placeholder, valós adatok bekérendők |
 | `index.html` | 136 | a 16 ország tényleges listája bekérendő |
 | `media/neuwerk-begins.html` | 71 | valós cikkszöveg bekérendő |
 | `media/thermal-systems-milestone.html` | 67 | valós cikkszöveg bekérendő |

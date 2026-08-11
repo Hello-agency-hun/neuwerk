@@ -43,8 +43,52 @@
 
 
 <main id="main">
-  <section class="nw-section nw-theme-dark">
-    <div class="nw-shell"><h1>Let&rsquo;s talk</h1></div>
+  <section class="nw-section nw-theme-dark nw-subhero">
+    <div class="nw-pattern" data-pattern aria-hidden="true">
+      <span class="nw-pattern__shape" data-depth="0.12"
+            style="right:-20%;bottom:-16%;width:84vmin;height:36vmin"></span>
+    </div>
+    <div class="nw-shell">
+      <p class="nw-eyebrow">Contact</p>
+      <h1 data-reveal>Let&rsquo;s talk</h1>
+    </div>
+  </section>
+
+  <section class="nw-section nw-theme-light">
+    <div class="nw-shell">
+      <p class="nw-lead nw-prose" data-reveal>
+        We listen first. Tell us about your challenge and we will point you to the right
+        people.
+      </p>
+
+      <!-- TODO(client): MINDEN kontaktadat placeholder, valós adatok bekérendők -->
+      <ul class="nw-contact" data-reveal data-reveal-delay="80">
+        <li data-placeholder>
+          <h3><span class="nw-ph">Placeholder</span> Headquarters</h3>
+          <p class="nw-contact__addr">
+            Example Street 1<br>
+            00000 Example City<br>
+            Example Country
+          </p>
+          <p><a href="tel:+000000000000">+00 000 000 0000</a></p>
+          <p><a href="mailto:info@example.com">info@example.com</a></p>
+        </li>
+        <li data-placeholder>
+          <h3><span class="nw-ph">Placeholder</span> Media enquiries</h3>
+          <p><a href="mailto:press@example.com">press@example.com</a></p>
+        </li>
+        <li data-placeholder>
+          <h3><span class="nw-ph">Placeholder</span> Careers</h3>
+          <p><a href="mailto:careers@example.com">careers@example.com</a></p>
+          <p><a href="career.html">See open positions</a></p>
+        </li>
+        <li data-placeholder>
+          <h3><span class="nw-ph">Placeholder</span> Suppliers</h3>
+          <p><a href="mailto:suppliers@example.com">suppliers@example.com</a></p>
+          <p><a href="responsibility.html#documents">Supplier Requirements</a></p>
+        </li>
+      </ul>
+    </div>
   </section>
 </main>
 
@@ -101,5 +145,7 @@
 
 
 <script src="js/nav.js"></script>
+<script src="js/pattern.js"></script>
+<script src="js/reveal.js"></script>
 </body>
 </html>

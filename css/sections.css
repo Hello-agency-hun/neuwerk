@@ -276,3 +276,14 @@ main > .nw-section:first-child { padding-block-start: calc(var(--nw-section-y) +
   color: var(--nw-accent-text);
 }
 .nw-doclist--dark { grid-template-columns: minmax(0, 420px); }
+
+/* --- Kontakt ---------------------------------------------------- */
+.nw-contact {
+  display: grid; gap: var(--nw-space-4);
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  margin-top: var(--nw-space-6);
+}
+.nw-contact li { padding-top: var(--nw-space-2); border-top: 2px solid var(--nw-rule); }
+.nw-contact h3 { font-size: var(--nw-text-base); margin-bottom: var(--nw-space-1); }
+.nw-contact p  { font-size: var(--nw-text-sm); margin-bottom: 0.35rem; }
+.nw-contact__addr { color: var(--nw-fg-secondary); }
