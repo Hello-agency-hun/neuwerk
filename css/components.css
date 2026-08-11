@@ -51,8 +51,22 @@
   font-weight: var(--nw-fw-medium);
   text-decoration: none;
 }
+/* [aria-current="page"] = másik oldal, [aria-current="true"] = az épp
+   nézetben lévő szekció (scroll-spy). Egyszerre csak egy lehet aktív. */
 .nw-header__nav a:not(.nw-btn):hover,
-.nw-header__nav a:not(.nw-btn)[aria-current="page"] { color: var(--nw-sun); }
+.nw-header__nav a:not(.nw-btn)[aria-current] { color: var(--nw-sun); }
+.nw-header__nav a:not(.nw-btn) {
+  position: relative;
+  padding-block: 0.35rem;
+}
+.nw-header__nav a:not(.nw-btn)::after {
+  content: "";
+  position: absolute; inset-inline: 0; inset-block-end: 0;
+  block-size: 2px; background: var(--nw-sun);
+  transform: scaleX(0); transform-origin: left;
+  transition: transform var(--nw-dur-base) var(--nw-ease);
+}
+.nw-header__nav a:not(.nw-btn)[aria-current]::after { transform: scaleX(1); }
 
 .nw-header__toggle { display: none; background: none; border: 0; padding: var(--nw-space-1); cursor: pointer; }
 .nw-header__bars, .nw-header__bars::before, .nw-header__bars::after {

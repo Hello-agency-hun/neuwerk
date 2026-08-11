@@ -1,28 +1,33 @@
 /* A neuwerk jelenlét 16 országa.
 
-   FIGYELEM: az országok nevét sem a tartalmi spec, sem a brandbook
-   nem sorolja fel. Az alábbi lista PLACEHOLDER, kizárólag azért, hogy
-   a térkép működését be lehessen mutatni.
+   ================================================================
+   FIGYELEM — EZ NEM VALÓS ADAT.
+   Az országok listáját sem a tartalmi spec, sem a brandbook nem
+   tartalmazza. Az alábbi 16 tétel PLACEHOLDER: csak azért van itt,
+   hogy a térkép működését és a hover-viselkedést be lehessen mutatni.
+   A `placeholder: true` mező miatt a tooltip is jelöli.
 
    TODO(client): a 16 ország tényleges listája bekérendő -->
+   ================================================================
 
-   x, y: százalékos pozíció a world.svg viewBoxán belül.
+   x, y: százalékos pozíció a world.svg viewBoxán belül (150 x 60 rács,
+   equirectangular, 83°É és 60°D között vágva).
 */
 window.NEUWERK_LOCATIONS = [
-  { name: "Placeholder 01", x: 48.5, y: 30.0 },
-  { name: "Placeholder 02", x: 50.8, y: 32.5 },
-  { name: "Placeholder 03", x: 46.2, y: 34.8 },
-  { name: "Placeholder 04", x: 53.0, y: 28.4 },
-  { name: "Placeholder 05", x: 44.0, y: 38.0 },
-  { name: "Placeholder 06", x: 25.5, y: 36.0 },
-  { name: "Placeholder 07", x: 22.0, y: 42.0 },
-  { name: "Placeholder 08", x: 30.0, y: 62.0 },
-  { name: "Placeholder 09", x: 55.0, y: 44.0 },
-  { name: "Placeholder 10", x: 68.0, y: 42.0 },
-  { name: "Placeholder 11", x: 72.5, y: 38.0 },
-  { name: "Placeholder 12", x: 78.0, y: 36.0 },
-  { name: "Placeholder 13", x: 80.5, y: 33.0 },
-  { name: "Placeholder 14", x: 74.0, y: 52.0 },
-  { name: "Placeholder 15", x: 86.0, y: 70.0 },
-  { name: "Placeholder 16", x: 52.5, y: 58.0 }
+  { name: "Germany",        x: 50.6, y: 30.5, placeholder: true },
+  { name: "Czech Republic", x: 52.3, y: 32.0, placeholder: true },
+  { name: "Slovakia",       x: 53.4, y: 32.8, placeholder: true },
+  { name: "Hungary",        x: 53.2, y: 34.2, placeholder: true },
+  { name: "Romania",        x: 55.3, y: 34.6, placeholder: true },
+  { name: "Italy",          x: 50.9, y: 36.4, placeholder: true },
+  { name: "Spain",          x: 46.6, y: 37.8, placeholder: true },
+  { name: "Portugal",       x: 45.0, y: 38.2, placeholder: true },
+  { name: "Türkiye",        x: 57.6, y: 37.6, placeholder: true },
+  { name: "United States",  x: 24.5, y: 33.5, placeholder: true },
+  { name: "Mexico",         x: 21.8, y: 42.5, placeholder: true },
+  { name: "Brazil",         x: 32.4, y: 58.0, placeholder: true },
+  { name: "China",          x: 76.8, y: 35.5, placeholder: true },
+  { name: "India",          x: 69.4, y: 43.0, placeholder: true },
+  { name: "Japan",          x: 84.2, y: 34.0, placeholder: true },
+  { name: "South Africa",   x: 55.4, y: 61.0, placeholder: true }
 ];

@@ -76,38 +76,70 @@
 
   <section class="nw-section nw-theme-light" id="who-we-are">
     <div class="nw-shell">
-      <p class="nw-eyebrow">Who we are</p>
-      <h2 data-reveal>Built on Expertise.<br>Driven by Progress.</h2>
+      <div class="nw-who">
+        <div class="nw-who__aside">
+          <p class="nw-eyebrow">Who we are</p>
+          <h2 data-reveal>Built on Expertise.<br>Driven by Progress.</h2>
+          <p class="nw-origin" data-reveal data-reveal-delay="120">
+            <span class="nw-origin__from">Continental OES</span>
+            <span class="nw-origin__arrow" aria-hidden="true"></span>
+            <span class="nw-origin__to">neuwerk</span>
+          </p>
+        </div>
 
-      <div class="nw-prose" data-reveal data-reveal-delay="80">
-        <p class="nw-lead">
-          neuwerk combines engineering excellence, industrial expertise and trusted
-          customer relationships with a clear ambition for the future.
-        </p>
-        <p>
-          The company originates from Continental&rsquo;s former Original Equipment
-          Solutions business area and builds on decades of automotive expertise,
-          long-standing customer partnerships and deep industrial capabilities.
-          As an independent global company with approximately 14,000 employees in
-          16 countries, we continuously evolve to create greater value for our
-          customers, employees and partners.
-        </p>
-        <p>
-          Our strength lies in combining system understanding, engineering know-how,
-          multi-material expertise and industrial execution to transform complex
-          challenges into reliable, scalable solutions. From concept development and
-          simulation to industrialization and serial production, we help customers
-          turn ideas into reality.
-        </p>
-        <p>
-          Automotive remains our foundation and will continue to be at the heart of
-          our business. At the same time, we see attractive opportunities where our
-          unique combination of engineering expertise, material know-how, and
-          industrial execution can help solve complex challenges and deliver
-          reliable, scalable solutions.
-        </p>
+        <div class="nw-who__body">
+          <p class="nw-kinetic" data-kinetic>
+            neuwerk combines engineering excellence, industrial expertise and trusted
+            customer relationships with a clear ambition for the future.
+          </p>
+
+          <div class="nw-who__blocks">
+            <div class="nw-who__block" data-reveal>
+              <p class="nw-who__label">Origin</p>
+              <p>
+                The company originates from Continental&rsquo;s former Original Equipment
+                Solutions business area and builds on decades of automotive expertise,
+                long-standing customer partnerships and deep industrial capabilities.
+                As an independent global company with approximately 14,000 employees in
+                16 countries, we continuously evolve to create greater value for our
+                customers, employees and partners.
+              </p>
+            </div>
+
+            <div class="nw-who__block" data-reveal data-reveal-delay="80">
+              <p class="nw-who__label">Capability</p>
+              <p>
+                Our strength lies in combining system understanding, engineering know-how,
+                multi-material expertise and industrial execution to transform complex
+                challenges into reliable, scalable solutions. From concept development and
+                simulation to industrialization and serial production, we help customers
+                turn ideas into reality.
+              </p>
+            </div>
+
+            <div class="nw-who__block" data-reveal data-reveal-delay="160">
+              <p class="nw-who__label">Focus</p>
+              <p>
+                Automotive remains our foundation and will continue to be at the heart of
+                our business. At the same time, we see attractive opportunities where our
+                unique combination of engineering expertise, material know-how, and
+                industrial execution can help solve complex challenges and deliver
+                reliable, scalable solutions.
+              </p>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
+
+    <figure class="nw-band" data-reveal>
+      <img src="assets/img/car/systems.jpg" alt="Transparent vehicle chassis with the fluid and thermal circuits highlighted"
+           width="1600" height="557" loading="lazy">
+      <figcaption>
+        <span class="nw-band__mark" aria-hidden="true"></span>
+        Where neuwerk sits in the vehicle &mdash; fluid and thermal circuits, highlighted
+      </figcaption>
+    </figure>
   </section>
 
   <section class="nw-section nw-theme-dark" id="footprint">
@@ -145,99 +177,143 @@
     </div>
   </section>
 
-  <section class="nw-section nw-theme-dark" id="solutions" data-scrub>
+  <section class="nw-section nw-theme-dark" id="solutions" data-solutions>
+    <div class="nw-pattern" data-pattern aria-hidden="true">
+      <span class="nw-pattern__shape" data-depth="0.10"
+            style="right:-26%;top:-14%;width:86vmin;height:36vmin"></span>
+    </div>
+
     <div class="nw-shell">
       <p class="nw-eyebrow">Solutions</p>
       <h2 data-reveal>Engineering Solutions<br>That Create Value</h2>
-      <p class="nw-lead" data-reveal data-reveal-delay="80">
+      <p class="nw-lead nw-solutions__intro" data-reveal data-reveal-delay="80">
         Every day, our technologies help improve reliability, efficiency, safety and
         comfort across some of the world&rsquo;s most demanding applications.
       </p>
-    </div>
 
-    <div class="nw-scrub">
-      <div class="nw-scrub__stage">
-        <video class="nw-scrub__video" data-scrub-video
-               muted playsinline preload="auto"
-               poster="assets/video/hero-poster.jpg" aria-hidden="true">
-          <source src="assets/video/hero-1920.mp4" type="video/mp4" media="(min-width: 861px)">
-          <source src="assets/video/hero-1280.mp4" type="video/mp4">
-        </video>
+      <div class="nw-solutions" data-reveal data-reveal-delay="160">
+        <ol class="nw-solutions__list" role="list">
+          <li>
+            <button type="button" class="nw-solutions__item" aria-pressed="true"
+                    data-from="5.0" data-to="7.6">
+              <span class="nw-solutions__num">01</span>
+              <span class="nw-solutions__body">
+                <span class="nw-solutions__title">Fluid handling systems</span>
+                <span class="nw-solutions__desc">Lines, hoses and connectors that move media through the vehicle.</span>
+              </span>
+            </button>
+          </li>
+          <li>
+            <button type="button" class="nw-solutions__item" aria-pressed="false"
+                    data-from="7.6" data-to="10.0">
+              <span class="nw-solutions__num">02</span>
+              <span class="nw-solutions__body">
+                <span class="nw-solutions__title">Thermal management</span>
+                <span class="nw-solutions__desc">Cooling and heating systems that keep batteries and cabins in range.</span>
+              </span>
+            </button>
+          </li>
+          <li>
+            <button type="button" class="nw-solutions__item" aria-pressed="false"
+                    data-from="10.0" data-to="11.6">
+              <span class="nw-solutions__num">03</span>
+              <span class="nw-solutions__body">
+                <span class="nw-solutions__title">Sealing and damping</span>
+                <span class="nw-solutions__desc">Mounts, bushings and seals that isolate vibration and keep media in place.</span>
+              </span>
+            </button>
+          </li>
+          <li>
+            <button type="button" class="nw-solutions__item" aria-pressed="false"
+                    data-from="11.4" data-to="13.0">
+              <span class="nw-solutions__num">04</span>
+              <span class="nw-solutions__body">
+                <span class="nw-solutions__title">Multi-material applications</span>
+                <span class="nw-solutions__desc">Rubber, metal and thermoplastics integrated into functional systems.</span>
+              </span>
+            </button>
+          </li>
+        </ol>
+
+        <figure class="nw-solutions__stage">
+          <video class="nw-solutions__video" data-solutions-video
+                 muted playsinline preload="auto"
+                 poster="assets/video/hero-poster.jpg" aria-hidden="true">
+            <source src="assets/video/hero-1920.mp4" type="video/mp4" media="(min-width: 861px)">
+            <source src="assets/video/hero-1280.mp4" type="video/mp4">
+          </video>
+          <span class="nw-solutions__progress" data-solutions-progress aria-hidden="true"></span>
+          <figcaption class="nw-solutions__caption" data-solutions-caption>Fluid handling systems</figcaption>
+        </figure>
       </div>
-
-      <ul class="nw-scrub__pillars nw-shell">
-        <li><button type="button" data-scrub-to="6.2"  aria-pressed="false">
-          <h3>Fluid handling systems</h3>
-          <p>Lines, hoses and connectors that move media through the vehicle.</p>
-        </button></li>
-        <li><button type="button" data-scrub-to="8.2"  aria-pressed="false">
-          <h3>Thermal management</h3>
-          <p>Cooling and heating systems that keep batteries and cabins in range.</p>
-        </button></li>
-        <li><button type="button" data-scrub-to="10.7" aria-pressed="false">
-          <h3>Sealing and damping</h3>
-          <p>Mounts, bushings and seals that isolate vibration and keep media in place.</p>
-        </button></li>
-        <li><button type="button" data-scrub-to="12.4" aria-pressed="false">
-          <h3>Multi-material applications</h3>
-          <p>Rubber, metal and thermoplastics integrated into functional systems.</p>
-        </button></li>
-      </ul>
     </div>
 
     <div class="nw-shell">
-      <div class="nw-prose" data-reveal>
-        <p>
+      <div class="nw-lifecycle">
+        <p class="nw-lifecycle__lead" data-reveal>
           Our portfolio spans fluid handling systems, thermal management technologies,
           sealing and damping solutions, and advanced multi-material applications. By
           integrating rubber, metal, and thermoplastics into functional systems, we
           enable our customers to meet increasingly complex technical and industrial
           requirements.
         </p>
-        <p>
-          From virtual validation and prototyping to testing, industrialization and
-          global serial production, we provide end-to-end support throughout the
-          entire product lifecycle.
-        </p>
+
+        <p class="nw-eyebrow nw-lifecycle__label" data-reveal>End-to-end, across the lifecycle</p>
+        <ol class="nw-lifecycle__steps" role="list">
+          <li data-reveal data-reveal-delay="0"><span>Virtual validation</span></li>
+          <li data-reveal data-reveal-delay="70"><span>Prototyping</span></li>
+          <li data-reveal data-reveal-delay="140"><span>Testing</span></li>
+          <li data-reveal data-reveal-delay="210"><span>Industrialization</span></li>
+          <li data-reveal data-reveal-delay="280"><span>Global serial production</span></li>
+        </ol>
       </div>
     </div>
   </section>
 
-  <section class="nw-section nw-theme-dark" id="ambition">
+  <section class="nw-section nw-theme-dark nw-ambition" id="ambition">
     <div class="nw-pattern" data-pattern aria-hidden="true">
       <span class="nw-pattern__shape" data-depth="0.14"
-            style="left:-22%;bottom:-18%;width:86vmin;height:38vmin"></span>
+            style="left:-24%;top:-12%;width:96vmin;height:42vmin"></span>
+      <span class="nw-pattern__shape" data-depth="0.22"
+            style="right:-30%;bottom:-22%;width:104vmin;height:44vmin"></span>
     </div>
 
     <div class="nw-shell">
-      <p class="nw-eyebrow">Our ambition</p>
-      <h2 data-reveal>As Your Trusted Partner,<br>We Make the Difference</h2>
-
-      <div class="nw-prose" data-reveal data-reveal-delay="80">
-        <p>
-          We believe the best solutions begin with understanding our customers&rsquo;
-          challenges. That is why we listen first, collaborate closely, and focus on
-          creating solutions that generate measurable value.
-        </p>
-        <p>
-          Our ambition is to combine engineering excellence, industrial capabilities,
-          and customer understanding into an integrated approach that helps customers
-          solve complex challenges faster, more efficiently, and more sustainably. We
-          continuously evolve the way we innovate, collaborate, and deliver to remain
-          a trusted partner in a changing world.
-        </p>
-        <p>
-          Built on proven strengths and driven by a forward-looking mindset, we are
-          committed to creating lasting value for our customers, our people and our
-          business.
-        </p>
+      <div class="nw-ambition__head">
+        <div>
+          <p class="nw-eyebrow">Our ambition</p>
+          <h2 data-reveal>As Your Trusted Partner,<br>We Make the Difference</h2>
+        </div>
+        <div class="nw-ambition__intro">
+          <p data-reveal data-reveal-delay="80">
+            We believe the best solutions begin with understanding our customers&rsquo;
+            challenges. That is why we listen first, collaborate closely, and focus on
+            creating solutions that generate measurable value.
+          </p>
+          <p data-reveal data-reveal-delay="140">
+            Our ambition is to combine engineering excellence, industrial capabilities,
+            and customer understanding into an integrated approach that helps customers
+            solve complex challenges faster, more efficiently, and more sustainably. We
+            continuously evolve the way we innovate, collaborate, and deliver to remain
+            a trusted partner in a changing world.
+          </p>
+          <p data-reveal data-reveal-delay="200">
+            Built on proven strengths and driven by a forward-looking mindset, we are
+            committed to creating lasting value for our customers, our people and our
+            business.
+          </p>
+        </div>
       </div>
 
-      <ol class="nw-principles">
-        <li data-reveal data-reveal-delay="0"><span>01</span>Customer understanding before product thinking</li>
-        <li data-reveal data-reveal-delay="80"><span>02</span>Integrated engineering and industrial capabilities</li>
-        <li data-reveal data-reveal-delay="160"><span>03</span>Reliable execution from concept to production</li>
-        <li data-reveal data-reveal-delay="240"><span>04</span>Long-term value and sustainable competitiveness</li>
+      <ol class="nw-principles" role="list" data-principles>
+        <li data-reveal><span class="nw-principles__num">01</span>
+          <span class="nw-principles__text">Customer understanding before product thinking</span></li>
+        <li data-reveal data-reveal-delay="70"><span class="nw-principles__num">02</span>
+          <span class="nw-principles__text">Integrated engineering and industrial capabilities</span></li>
+        <li data-reveal data-reveal-delay="140"><span class="nw-principles__num">03</span>
+          <span class="nw-principles__text">Reliable execution from concept to production</span></li>
+        <li data-reveal data-reveal-delay="210"><span class="nw-principles__num">04</span>
+          <span class="nw-principles__text">Long-term value and sustainable competitiveness</span></li>
       </ol>
     </div>
   </section>
@@ -322,11 +398,12 @@
 <script src="js/nav.js"></script>
 <script src="js/pattern.js"></script>
 <script src="js/reveal.js"></script>
+<script src="js/kinetic.js"></script>
 <script src="js/counters.js"></script>
 <script src="data/locations.js"></script>
 <script src="js/map.js"></script>
 <script src="js/hero.js"></script>
-<script src="js/scrub.js"></script>
+<script src="js/solutions.js"></script>
 <script src="js/intro.js"></script>
 </body>
 </html>

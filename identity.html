@@ -43,11 +43,10 @@
 
 
 <main id="main">
-  <section class="nw-section nw-theme-dark nw-subhero">
-    <div class="nw-pattern" data-pattern aria-hidden="true">
-      <span class="nw-pattern__shape" data-depth="0.12"
-            style="right:-20%;top:-14%;width:84vmin;height:36vmin"></span>
-    </div>
+  <section class="nw-section nw-theme-dark nw-subhero nw-subhero--image">
+    <img class="nw-subhero__bg" src="assets/img/car/front.jpg" alt=""
+         width="1600" height="575" aria-hidden="true">
+    <div class="nw-subhero__scrim" aria-hidden="true"></div>
     <div class="nw-shell">
       <p class="nw-eyebrow">A new identity</p>
       <h1 data-reveal>Proud of where we came from.<br>
@@ -58,50 +57,90 @@
 
   <section class="nw-section nw-theme-light">
     <div class="nw-shell">
-      <div class="nw-prose nw-editorial" data-reveal>
-        <p>
-          neuwerk marks the beginning of a new chapter. Born from Continental&rsquo;s
-          former Original Equipment Solutions business area, the company now moves
-          forward with a distinct identity of its own.
-        </p>
-        <p>
-          The name combines two ideas that define who we are: NEU stands for renewal,
-          progress and the courage to evolve. WERK stands for our foundation:
-          engineering expertise, industrial capabilities and the craft to turn ideas
-          into reliable solutions.
-        </p>
-      </div>
+      <p class="nw-kinetic nw-kinetic--wide" data-kinetic>
+        neuwerk marks the beginning of a new chapter.
+      </p>
 
+      <div class="nw-who">
+        <div class="nw-who__aside">
+          <p class="nw-origin" data-reveal>
+            <span class="nw-origin__from">Continental OES</span>
+            <span class="nw-origin__arrow" aria-hidden="true"></span>
+            <span class="nw-origin__to">neuwerk</span>
+          </p>
+        </div>
+        <div class="nw-who__body">
+          <div class="nw-who__blocks">
+            <div class="nw-who__block" data-reveal>
+              <p class="nw-who__label">The break</p>
+              <p class="nw-editorial">
+                Born from Continental&rsquo;s former Original Equipment Solutions
+                business area, the company now moves forward with a distinct identity
+                of its own.
+              </p>
+            </div>
+            <div class="nw-who__block" data-reveal data-reveal-delay="80">
+              <p class="nw-who__label">The name</p>
+              <p class="nw-editorial">
+                The name combines two ideas that define who we are: NEU stands for
+                renewal, progress and the courage to evolve. WERK stands for our
+                foundation: engineering expertise, industrial capabilities and the
+                craft to turn ideas into reliable solutions.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="nw-shell">
       <ul class="nw-namesplit" data-reveal data-reveal-delay="80">
         <li><strong>NEU</strong><span>The courage to change.</span></li>
         <li><strong>WERK</strong><span>The craft to build it.</span></li>
-        <li><strong>neuwerk</strong><span>Together.</span></li>
+        <li class="nw-namesplit--sum"><strong>neuwerk</strong><span>Together.</span></li>
       </ul>
     </div>
   </section>
 
   <section class="nw-section nw-theme-dark">
+    <div class="nw-pattern" data-pattern aria-hidden="true">
+      <span class="nw-pattern__shape" data-depth="0.14"
+            style="right:-26%;top:-16%;width:98vmin;height:42vmin"></span>
+    </div>
     <div class="nw-shell">
-      <p class="nw-eyebrow">A design built to move forward</p>
-      <h2 data-reveal>Purposeful, distinctive<br>and built to perform</h2>
-      <div class="nw-prose" data-reveal data-reveal-delay="80">
-        <p>
-          The neuwerk visual identity reflects what the company stands for: expertise,
-          clarity and progress. The rising diagonal element symbolizes momentum and the
-          confidence to move forward. The clean wordmark represents focus, technical
-          excellence and strength of purpose.
-        </p>
-        <p>
-          Like our solutions, the identity is purposeful, distinctive and built to perform.
-        </p>
-        <p>
-          Built on German engineering heritage and shaped by decades of automotive
-          experience, neuwerk brings together what makes us strong with a clear ambition
-          for the future: to become more focused, more customer-centric and more
-          integrated as one independent company.
-        </p>
+      <div class="nw-ambition__head">
+        <div>
+          <p class="nw-eyebrow">A design built to move forward</p>
+          <h2 data-reveal>Purposeful, distinctive<br>and built to perform</h2>
+        </div>
+        <div class="nw-ambition__intro">
+          <p data-reveal data-reveal-delay="80">
+            The neuwerk visual identity reflects what the company stands for: expertise,
+            clarity and progress. The rising diagonal element symbolizes momentum and the
+            confidence to move forward. The clean wordmark represents focus, technical
+            excellence and strength of purpose.
+          </p>
+          <p data-reveal data-reveal-delay="140">
+            Like our solutions, the identity is purposeful, distinctive and built to perform.
+          </p>
+          <p data-reveal data-reveal-delay="200">
+            Built on German engineering heritage and shaped by decades of automotive
+            experience, neuwerk brings together what makes us strong with a clear ambition
+            for the future: to become more focused, more customer-centric and more
+            integrated as one independent company.
+          </p>
+        </div>
       </div>
     </div>
+
+    <figure class="nw-band" data-reveal>
+      <img src="assets/img/car/components.jpg" alt="Vehicle chassis with individual neuwerk components highlighted"
+           width="1600" height="540" loading="lazy">
+      <figcaption>
+        <span class="nw-band__mark" aria-hidden="true"></span>
+        The craft to build it &mdash; components integrated across the vehicle
+      </figcaption>
+    </figure>
   </section>
 </main>
 
@@ -160,5 +199,6 @@
 <script src="js/nav.js"></script>
 <script src="js/pattern.js"></script>
 <script src="js/reveal.js"></script>
+<script src="js/kinetic.js"></script>
 </body>
 </html>

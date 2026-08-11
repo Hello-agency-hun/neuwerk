@@ -46,26 +46,180 @@ main > .nw-section:first-child { padding-block-start: calc(var(--nw-section-y) +
 .nw-prose { margin-top: var(--nw-space-4); }
 .nw-prose > * + * { margin-top: var(--nw-space-2); }
 
+.nw-who {
+  display: grid;
+  gap: var(--nw-space-6);
+  grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  align-items: start;
+}
+@media (max-width: 900px) {
+  .nw-who { grid-template-columns: minmax(0, 1fr); gap: var(--nw-space-4); }
+}
+@media (min-width: 901px) {
+  /* A cím marad a helyén, amíg a szöveg elgördül mellette -- így a
+     szekció végig kontextusban van, és a jobb hasáb nem lóg a semmiben. */
+  .nw-who__aside { position: sticky; top: calc(var(--nw-header-h) + var(--nw-space-4)); }
+}
+
+/* Eredet-jelölés: Continental OES -> neuwerk. A nyíl a logó ferde
+   vonását idézi, ezért ugyanaz a dőlés, mint a patternnél. */
+.nw-origin {
+  display: flex; align-items: center; gap: var(--nw-space-2);
+  margin-top: var(--nw-space-4);
+  font-family: var(--nw-font-display);
+  font-size: var(--nw-text-sm);
+  font-weight: var(--nw-fw-medium);
+}
+.nw-origin__from { color: var(--nw-fg-secondary); }
+.nw-origin__to { color: var(--nw-fg); font-weight: var(--nw-fw-semibold); }
+.nw-origin__arrow {
+  inline-size: 34px; block-size: 3px;
+  background: var(--nw-sun);
+  border-radius: var(--nw-radius-pill);
+  transform: rotate(-24deg);
+}
+
+/* --- Kinetikus vezérmondat -------------------------------------- */
+.nw-kinetic {
+  font-family: var(--nw-font-display);
+  font-size: var(--nw-text-xl);
+  font-weight: var(--nw-fw-medium);
+  line-height: var(--nw-leading-snug);
+  letter-spacing: var(--nw-tracking-tight);
+  max-width: 30ch;
+  margin: 0 0 var(--nw-space-6);
+  color: var(--nw-fg);
+}
+/* A kiinduló halvány állapotot csak akkor tesszük rá, ha a JS
+   lefutott -- különben JS nélkül olvashatatlanul halvány maradna. */
+.nw-kinetic[data-kinetic-ready] .nw-kinetic__w {
+  color: var(--nw-grey-04);
+  transition: color 380ms var(--nw-ease);
+}
+.nw-kinetic[data-kinetic-ready] .nw-kinetic__w[data-on] { color: var(--nw-fg); }
+@media (prefers-reduced-motion: reduce) {
+  .nw-kinetic[data-kinetic-ready] .nw-kinetic__w { color: var(--nw-fg); transition: none; }
+}
+
+/* --- Tagolt törzsszöveg ----------------------------------------- */
+.nw-who__blocks { display: grid; gap: var(--nw-space-4); }
+.nw-who__block {
+  display: grid;
+  grid-template-columns: 7rem minmax(0, 1fr);
+  gap: var(--nw-space-2);
+  padding-block-start: var(--nw-space-3);
+  border-block-start: 1px solid var(--nw-rule);
+}
+@media (max-width: 640px) {
+  .nw-who__block { grid-template-columns: minmax(0, 1fr); gap: 0.5rem; }
+}
+.nw-who__label {
+  margin: 0;
+  font-family: var(--nw-font-display);
+  font-size: var(--nw-text-xs);
+  font-weight: var(--nw-fw-semibold);
+  letter-spacing: var(--nw-tracking-wide);
+  text-transform: uppercase;
+  color: var(--nw-fg-secondary);
+}
+.nw-who__block p:last-child { margin: 0; }
+
+/* --- Teljes szélességű képsáv ------------------------------------
+   Átvezet a világos Who we are-ből a sötét Global footprintbe. */
+.nw-band {
+  margin: var(--nw-space-8) 0 0;
+  position: relative;
+}
+.nw-band img {
+  inline-size: 100%; block-size: auto;
+  display: block;
+}
+.nw-band figcaption {
+  display: flex; align-items: center; gap: 0.75rem;
+  max-inline-size: var(--nw-max-width);
+  margin-inline: auto;
+  padding: var(--nw-space-2) var(--nw-gutter) 0;
+  font-size: var(--nw-text-sm);
+  color: var(--nw-fg-secondary);
+}
+.nw-band__mark {
+  flex: none;
+  inline-size: 22px; block-size: 3px;
+  background: var(--nw-sun);
+  border-radius: var(--nw-radius-pill);
+  transform: rotate(-24deg);
+}
+
 /* --- Global footprint ------------------------------------------ */
 .nw-map { margin-block: var(--nw-space-6); }
 .nw-map__canvas { position: relative; }
 /* A world.svg pont-rács, fix #8895cb kitöltéssel. Nem recolouroljuk --
    csak az áttetszőséget állítjuk, hogy a pulzáló pontok kiemelkedjenek. */
 .nw-map__base { inline-size: 100%; block-size: auto; opacity: 0.55; }
+/* A pont gomb, nem span: hoverrel megszerezhető információt
+   billentyűvel is meg kell tudni szerezni. */
 .nw-map__dot {
   position: absolute;
+  inline-size: 26px; block-size: 26px;   /* nagyobb kattintható felület */
+  margin: -13px 0 0 -13px;
+  padding: 0; border: 0; background: none; cursor: pointer;
+  display: grid; place-items: center;
+}
+.nw-map__dot::before {
+  content: "";
   inline-size: 10px; block-size: 10px;
-  margin: -5px 0 0 -5px;
   border-radius: 50%;
   background: var(--nw-sun);
+  transition: transform var(--nw-dur-fast) var(--nw-ease);
   animation: nw-pulse 2.6s var(--nw-ease-in-out) infinite;
+  animation-delay: inherit;
 }
+.nw-map__dot::after {
+  content: "";
+  position: absolute; inset: 0;
+  border: 1px solid var(--nw-sun);
+  border-radius: 50%;
+  opacity: 0; transform: scale(0.6);
+  transition: opacity var(--nw-dur-fast) var(--nw-ease),
+              transform var(--nw-dur-fast) var(--nw-ease);
+}
+.nw-map__dot:hover::before,
+.nw-map__dot[data-active]::before { transform: scale(1.6); animation-play-state: paused; }
+.nw-map__dot:hover::after,
+.nw-map__dot[data-active]::after { opacity: 1; transform: scale(1); }
+
 @keyframes nw-pulse {
   0%, 100% { transform: scale(1);   opacity: 1; }
   50%      { transform: scale(1.5); opacity: 0.55; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .nw-map__dot { animation: none; }
+  .nw-map__dot::before { animation: none; }
+}
+
+/* Tooltip. Egyetlen példány, a pontok mozgatják a helyére. */
+.nw-map__tip {
+  position: absolute;
+  z-index: 3;
+  transform: translate(-50%, calc(-100% - 16px));
+  padding: 0.35rem 0.7rem;
+  background: var(--nw-white);
+  color: var(--nw-navy);
+  border-radius: var(--nw-radius-pill);
+  font-family: var(--nw-font-display);
+  font-size: var(--nw-text-sm);
+  font-weight: var(--nw-fw-semibold);
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity var(--nw-dur-fast) var(--nw-ease);
+}
+.nw-map__tip[data-visible] { opacity: 1; }
+/* A placeholder-jelölés a tooltipen is rajta van, hogy egy képernyőképen
+   se lehessen valós adatnak nézni. */
+.is-wireframe .nw-map__tip[data-placeholder-label="placeholder"]::after {
+  content: " · placeholder";
+  font-weight: var(--nw-fw-regular);
+  color: var(--nw-grey-02);
 }
 .nw-map__note { font-size: var(--nw-text-sm); color: var(--nw-fg-secondary); margin-top: var(--nw-space-2); }
 
@@ -90,39 +244,167 @@ main > .nw-section:first-child { padding-block-start: calc(var(--nw-section-y) +
   color: var(--nw-fg-secondary);
 }
 
-/* --- Solutions scrub ------------------------------------------ */
-.nw-scrub { margin-block: var(--nw-space-6); }
-.nw-scrub__stage {
+/* --- Solutions: két hasáb --------------------------------------
+   Balra a képességlista, jobbra az autó. Kattintásra a videó lejátssza
+   az adott szakaszt -- a korábbi scroll-scrub gyakorlatilag állóképnek
+   látszott, ezért lett kattintás-vezérelt. */
+.nw-solutions__intro { max-width: 52ch; }
+
+.nw-solutions {
+  display: grid;
+  gap: var(--nw-space-4);
+  grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  align-items: start;
+  margin-top: var(--nw-space-6);
+}
+@media (max-width: 900px) {
+  .nw-solutions { grid-template-columns: minmax(0, 1fr); }
+  .nw-solutions__stage { order: -1; }   /* mobilon előbb a kép */
+}
+
+.nw-solutions__list { display: grid; gap: 0; }
+
+.nw-solutions__item {
+  inline-size: 100%;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: var(--nw-space-2);
+  align-items: start;
+  text-align: left;
+  cursor: pointer;
+  padding: var(--nw-space-3) var(--nw-space-2) var(--nw-space-3) 0;
+  background: none; color: inherit; font: inherit;
+  border: 0; border-block-start: 1px solid var(--nw-rule);
   position: relative;
-  aspect-ratio: 16 / 9;
+  transition: padding-inline-start var(--nw-dur-base) var(--nw-ease);
+}
+.nw-solutions__list li:last-child .nw-solutions__item { border-block-end: 1px solid var(--nw-rule); }
+
+/* A narancs jelölővonal a bal szélen fut, nem a teljes kereten --
+   így az akcent kis felületen marad. */
+.nw-solutions__item::before {
+  content: "";
+  position: absolute; inset-block: 0; inset-inline-start: 0;
+  inline-size: 2px; background: var(--nw-sun);
+  transform: scaleY(0); transform-origin: top;
+  transition: transform var(--nw-dur-base) var(--nw-ease);
+}
+.nw-solutions__item:hover { padding-inline-start: var(--nw-space-2); }
+.nw-solutions__item[aria-pressed="true"] { padding-inline-start: var(--nw-space-2); }
+.nw-solutions__item[aria-pressed="true"]::before { transform: scaleY(1); }
+
+.nw-solutions__num {
+  font-family: var(--nw-font-display);
+  font-size: var(--nw-text-sm);
+  font-weight: var(--nw-fw-semibold);
+  letter-spacing: var(--nw-tracking-wide);
+  color: var(--nw-fg-secondary);
+  padding-block-start: 0.25rem;
+  transition: color var(--nw-dur-base) var(--nw-ease);
+}
+.nw-solutions__item[aria-pressed="true"] .nw-solutions__num { color: var(--nw-sun); }
+
+.nw-solutions__body { display: block; }
+.nw-solutions__title {
+  display: block;
+  font-family: var(--nw-font-display);
+  font-size: var(--nw-text-lg);
+  font-weight: var(--nw-fw-semibold);
+  line-height: var(--nw-leading-snug);
+}
+.nw-solutions__desc {
+  display: block;
+  margin-block-start: 0.35rem;
+  font-size: var(--nw-text-sm);
+  color: var(--nw-fg-secondary);
+  max-inline-size: 46ch;
+}
+
+/* --- A színpad -------------------------------------------------- */
+.nw-solutions__stage {
+  position: relative;
+  margin: 0;
+  aspect-ratio: 4 / 3;
   background: var(--nw-navy);
+  border: 1px solid var(--nw-rule);
+  border-radius: var(--nw-radius-card);
   overflow: clip;
 }
-.nw-scrub__video {
-  inline-size: 100%; block-size: 100%; object-fit: cover;
+@media (min-width: 901px) {
+  .nw-solutions__stage { position: sticky; top: calc(var(--nw-header-h) + var(--nw-space-3)); }
+}
+.nw-solutions__video {
+  inline-size: 100%; block-size: 100%;
+  object-fit: cover;
   /* A padlóra vetített SAFETY/PERFORMANCE feliratok a képkocka alsó
      harmadában vannak, és más taxonómiát jelölnek, mint a pillércímke.
-     Ezért az alsó sávot levágjuk. */
-  object-position: center 32%;
-  transform: scale(1.18);
+     Ezért az alsó sávot kivágjuk. */
+  object-position: center 34%;
+  transform: scale(1.24);
 }
-.nw-scrub__pillars {
-  display: grid; gap: var(--nw-space-2);
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  margin-top: var(--nw-space-4);
+.nw-solutions__caption {
+  position: absolute; inset-inline: 0; inset-block-end: 0;
+  padding: var(--nw-space-3);
+  font-family: var(--nw-font-display);
+  font-size: var(--nw-text-base);
+  font-weight: var(--nw-fw-semibold);
+  color: var(--nw-white);
+  background: linear-gradient(to top, rgb(27 30 82 / 0.92), rgb(27 30 82 / 0));
 }
-.nw-scrub__pillars button {
-  inline-size: 100%; text-align: left; cursor: pointer;
-  padding: var(--nw-space-2);
-  background: transparent; color: inherit;
-  border: 0; border-top: 2px solid var(--nw-rule);
-  font: inherit;
-  transition: border-color var(--nw-dur-fast) var(--nw-ease);
+/* Lejátszás-állapotjelző: vékony narancs sáv a színpad tetején. */
+.nw-solutions__progress {
+  position: absolute; inset-block-start: 0; inset-inline: 0;
+  block-size: 2px; background: var(--nw-sun);
+  transform: scaleX(var(--p, 0)); transform-origin: left;
+  transition: transform 90ms linear;
+  opacity: 0;
 }
-.nw-scrub__pillars button:hover { border-top-color: var(--nw-blue-3); }
-.nw-scrub__pillars button[aria-pressed="true"] { border-top-color: var(--nw-sun); }
-.nw-scrub__pillars h3 { font-size: var(--nw-text-lg); margin-bottom: 0.5rem; }
-.nw-scrub__pillars p  { font-size: var(--nw-text-sm); color: var(--nw-fg-secondary); }
+.nw-solutions[data-playing] .nw-solutions__progress,
+[data-solutions][data-playing] .nw-solutions__progress { opacity: 1; }
+
+/* --- Lifecycle -------------------------------------------------- */
+.nw-lifecycle { margin-top: var(--nw-space-8); }
+.nw-lifecycle__lead {
+  font-size: var(--nw-text-lg);
+  color: var(--nw-fg-muted);
+  max-width: 62ch;
+}
+.nw-lifecycle__label { margin-top: var(--nw-space-6); }
+
+.nw-lifecycle__steps {
+  display: grid;
+  gap: var(--nw-space-2);
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  counter-reset: nw-step;
+}
+.nw-lifecycle__steps li {
+  position: relative;
+  padding-block-start: var(--nw-space-3);
+  counter-increment: nw-step;
+}
+/* A pont-és-vonal sáv adja a folyamat érzetét, szám nélkül is olvasható. */
+.nw-lifecycle__steps li::before {
+  content: "";
+  position: absolute; inset-block-start: 0; inset-inline: 0;
+  block-size: 1px; background: var(--nw-rule);
+}
+.nw-lifecycle__steps li::after {
+  content: "";
+  position: absolute; inset-block-start: -3px; inset-inline-start: 0;
+  inline-size: 7px; block-size: 7px; border-radius: 50%;
+  background: var(--nw-blue-3);
+  transition: background var(--nw-dur-base) var(--nw-ease),
+              transform var(--nw-dur-base) var(--nw-ease);
+}
+.nw-lifecycle__steps li:first-child::after,
+.nw-lifecycle__steps li:last-child::after { background: var(--nw-sun); }
+.nw-lifecycle__steps li:hover::after { transform: scale(1.5); background: var(--nw-sun); }
+.nw-lifecycle__steps span {
+  font-family: var(--nw-font-display);
+  font-size: var(--nw-text-base);
+  font-weight: var(--nw-fw-medium);
+  line-height: var(--nw-leading-snug);
+}
 
 /* --- Intro ----------------------------------------------------- */
 .nw-intro {
@@ -144,26 +426,71 @@ main > .nw-section:first-child { padding-block-start: calc(var(--nw-section-y) +
 .nw-intro[data-done] { opacity: 0; pointer-events: none; }
 .nw-intro video { inline-size: min(60vw, 520px); block-size: auto; }
 
-/* --- Elvek ----------------------------------------------------- */
+/* --- Our ambition ----------------------------------------------
+   A panasz az volt, hogy "túl kék és semmitmondó". Ezért a 4 elv
+   lett a szekció főszereplője: nagy sorok, hover-interakcióval --
+   és nem ismétli a Who we are szerkezetét. */
+.nw-ambition__head {
+  display: grid;
+  gap: var(--nw-space-4);
+  grid-template-columns: minmax(0, 6fr) minmax(0, 6fr);
+  align-items: start;
+}
+@media (max-width: 900px) {
+  .nw-ambition__head { grid-template-columns: minmax(0, 1fr); }
+}
+.nw-ambition__intro > * + * { margin-top: var(--nw-space-2); }
+.nw-ambition__intro p { color: var(--nw-fg-muted); }
+
 .nw-principles {
-  display: grid; gap: var(--nw-space-2);
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  margin-top: var(--nw-space-6);
+  margin-top: var(--nw-space-8);
+  border-block-start: 1px solid var(--nw-rule);
 }
 .nw-principles li {
-  padding-top: var(--nw-space-2);
-  border-top: 2px solid var(--nw-rule);
+  position: relative;
+  display: grid;
+  grid-template-columns: 4.5rem minmax(0, 1fr);
+  align-items: baseline;
+  gap: var(--nw-space-2);
+  padding-block: var(--nw-space-3);
+  border-block-end: 1px solid var(--nw-rule);
+  transition: padding-inline-start var(--nw-dur-base) var(--nw-ease);
+}
+/* A narancs csík csak hoverre jelenik meg, és csak a bal szélen --
+   így az akcent akkor sem lépi túl a 10-15%-os keretet, ha mind a
+   négy sor egyszerre látszik. */
+.nw-principles li::before {
+  content: "";
+  position: absolute; inset-block: 0; inset-inline-start: 0;
+  inline-size: 2px; background: var(--nw-sun);
+  transform: scaleY(0); transform-origin: center;
+  transition: transform var(--nw-dur-base) var(--nw-ease);
+}
+.nw-principles li:hover { padding-inline-start: var(--nw-space-2); }
+.nw-principles li:hover::before { transform: scaleY(1); }
+
+.nw-principles__num {
   font-family: var(--nw-font-display);
-  font-size: var(--nw-text-lg);
+  font-size: var(--nw-text-sm);
+  font-weight: var(--nw-fw-semibold);
+  letter-spacing: var(--nw-tracking-wide);
+  color: var(--nw-accent-text);
+}
+.nw-principles__text {
+  font-family: var(--nw-font-display);
+  font-size: var(--nw-text-2xl);
   font-weight: var(--nw-fw-medium);
   line-height: var(--nw-leading-snug);
+  letter-spacing: var(--nw-tracking-tight);
+  color: var(--nw-fg-secondary);
+  transition: color var(--nw-dur-base) var(--nw-ease);
 }
-.nw-principles span {
-  display: block; margin-bottom: 0.5rem;
-  font-size: var(--nw-text-sm);
-  color: var(--nw-accent-text);
-  letter-spacing: var(--nw-tracking-wide);
-}
+.nw-principles li:hover .nw-principles__text { color: var(--nw-fg); }
+
+/* A nem-hoverelt sorok NEM halványodnak tovább. Kipróbáltam a
+   --nw-blue-2-re halványítást, de az 2,84:1 navy-n -- bukott kontraszt
+   elsődleges tartalmon. A hoverelt sor kiemelése önmagában elég:
+   alap 5,32:1 (AA), hoverelve 15,51:1 (AAA). */
 
 /* --- Kártyák --------------------------------------------------- */
 .nw-cards {
@@ -288,3 +615,33 @@ main > .nw-section:first-child { padding-block-start: calc(var(--nw-section-y) +
 .nw-contact h3 { font-size: var(--nw-text-base); margin-bottom: var(--nw-space-1); }
 .nw-contact p  { font-size: var(--nw-text-sm); margin-bottom: 0.35rem; }
 .nw-contact__addr { color: var(--nw-fg-secondary); }
+
+/* --- Képes aloldal-hero ------------------------------------------
+   Az Identity panasza az volt, hogy tömör szövegfal. A hero így
+   kap egy vizuális belépőt, a szöveg olvashatóságát pedig a scrim
+   biztosítja -- kép fölött soha nem hagyunk szöveget scrim nélkül. */
+.nw-subhero--image { position: relative; isolation: isolate; overflow: clip; }
+.nw-subhero__bg {
+  position: absolute; inset: 0;
+  inline-size: 100%; block-size: 100%;
+  object-fit: cover; object-position: center 38%;
+  z-index: 0;
+}
+.nw-subhero__scrim {
+  position: absolute; inset: 0; z-index: 1;
+  background: linear-gradient(to top,
+    rgb(27 30 82 / 0.95) 0%, rgb(27 30 82 / 0.62) 55%, rgb(27 30 82 / 0.38) 100%);
+}
+.nw-subhero--image > .nw-shell { position: relative; z-index: 2; }
+
+/* Széles kinetikus mondat: aloldalon a vezérmondat egy sor, nem blokk. */
+.nw-kinetic--wide {
+  max-width: 22ch;
+  font-size: var(--nw-text-2xl);
+  font-weight: var(--nw-fw-bold);
+  margin-bottom: var(--nw-space-8);
+}
+
+/* A harmadik névbontás-elem az összegzés, ezért kiemelve. */
+.nw-namesplit--sum { border-block-start-width: 3px; }
+.nw-namesplit--sum strong { color: var(--nw-fg); }
