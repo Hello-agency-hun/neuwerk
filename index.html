@@ -43,9 +43,32 @@
 
 
 <main id="main">
-  <section class="nw-section nw-theme-dark">
-    <div class="nw-shell"><h1>neuwerk</h1></div>
+
+  <section class="nw-hero nw-theme-dark" data-hero>
+    <video class="nw-hero__video" data-hero-video
+           muted playsinline preload="metadata"
+           poster="assets/video/hero-poster.jpg"
+           aria-hidden="true">
+      <source src="assets/video/hero-1920.mp4" type="video/mp4" media="(min-width: 861px)">
+      <source src="assets/video/hero-1280.mp4" type="video/mp4">
+    </video>
+    <div class="nw-hero__scrim" aria-hidden="true"></div>
+
+    <div class="nw-hero__inner nw-shell">
+      <p class="nw-eyebrow">neuwerk</p>
+      <h1 class="nw-hero__title">Turning Expertise<br>into Impact</h1>
+      <p class="nw-hero__lead">
+        Built on decades of engineering excellence and driven by the ambition to create
+        lasting value for customers, partners and industries worldwide, in the
+        automotive industry.
+      </p>
+      <p class="nw-hero__actions">
+        <a class="nw-btn nw-btn--sun" href="#who-we-are">Discover neuwerk</a>
+        <a class="nw-btn" href="#solutions">Explore Solutions</a>
+      </p>
+    </div>
   </section>
+
 </main>
 
 <!-- @partial:footer -->
@@ -101,5 +124,9 @@
 
 
 <script src="js/nav.js"></script>
+<script src="js/pattern.js"></script>
+<script src="js/reveal.js"></script>
+<script src="js/counters.js"></script>
+<script src="js/hero.js"></script>
 </body>
 </html>

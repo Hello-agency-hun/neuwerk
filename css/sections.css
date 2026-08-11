@@ -4,3 +4,39 @@
    különben a cím a header alá csúszik. A heroban ezt a
    100svh magasság oldja meg, itt viszont kézzel kell. */
 main > .nw-section:first-child { padding-block-start: calc(var(--nw-section-y) + var(--nw-header-h)); }
+
+/* --- Hero ----------------------------------------------------- */
+.nw-hero {
+  position: relative;
+  isolation: isolate;
+  min-block-size: 100svh;
+  display: grid;
+  align-items: end;
+  background: var(--nw-navy);
+  color: var(--nw-on-navy);
+  overflow: clip;
+}
+.nw-hero__video {
+  position: absolute; inset: 0;
+  inline-size: 100%; block-size: 100%;
+  object-fit: cover;
+  z-index: 0;
+  transition: opacity 200ms linear;   /* a loop-átúszáshoz */
+}
+.nw-hero__scrim {
+  position: absolute; inset: 0; z-index: 1;
+  background:
+    linear-gradient(to top, rgb(27 30 82 / 0.92) 0%, rgb(27 30 82 / 0.35) 45%, rgb(27 30 82 / 0.15) 100%);
+}
+.nw-hero__inner {
+  position: relative; z-index: 2;
+  padding-block: var(--nw-space-12) var(--nw-space-8);
+}
+.nw-hero__title { font-size: var(--nw-text-4xl); margin-bottom: var(--nw-space-3); }
+.nw-hero__lead {
+  font-size: var(--nw-text-lg);
+  color: var(--nw-on-navy-muted);
+  max-width: 54ch;
+  margin-bottom: var(--nw-space-4);
+}
+.nw-hero__actions { display: flex; flex-wrap: wrap; gap: var(--nw-space-2); margin: 0; }
