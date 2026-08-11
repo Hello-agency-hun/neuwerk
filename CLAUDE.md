@@ -19,8 +19,18 @@ struktúrát és jóváhagyja. Leszállítás: egy zip, amit a saját szerverük
 3. **Nincs külső hálózati kérés.** Font, ikon, szkript mind lokális. Német ipari ügyfél,
    GDPR. Ne rakj be CDN-t.
 4. **A header/footer minden oldalon duplikálva van**, `<!-- @partial:header -->` és
-   `<!-- /@partial:header -->` jelölők között. Ha módosítod, mind a 16 oldalon módosítsd.
+   `<!-- /@partial:header -->` jelölők között. Ha módosítod, mind a 10 oldalon módosítsd.
    A `partials/` alatti fájlok referencia-másolatok.
+
+## Amendment 01 (2026-08-11)
+
+A `docs/superpowers/specs/2026-08-11-amendment-01.md` **felülírja** az eredeti specet:
+
+- a márkanév **mindig kisbetűs**: `neuwerk`, mondatkezdő helyzetben is
+- nincs `legal/` könyvtár és nincs `integrity-line.html` — a jogi dokumentumok
+  letölthető PDF-ek a `responsibility.html`-en, a whistleblower pedig annak
+  `#integrity-line` szekciója
+- ezért **10 oldal**, nem 16
 
 ## Design system
 
@@ -40,7 +50,7 @@ Három szabály, amit a brandbook kikényszerít:
     python tools/check_links.py
     python tools/check_placeholders.py
 
-Az első halott linket keres mind a 16 oldalon, a második leltározza a placeholdereket
+Az első halott linket keres mind a 10 oldalon, a második leltározza a placeholdereket
 és frissíti a `docs/HANDOFF.md` nyitott listáját.
 
 ## Mi placeholder és mi végleges
