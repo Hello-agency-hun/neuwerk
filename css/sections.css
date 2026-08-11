@@ -40,3 +40,51 @@ main > .nw-section:first-child { padding-block-start: calc(var(--nw-section-y) +
   margin-bottom: var(--nw-space-4);
 }
 .nw-hero__actions { display: flex; flex-wrap: wrap; gap: var(--nw-space-2); margin: 0; }
+
+/* --- Who we are ----------------------------------------------- */
+.nw-prose { margin-top: var(--nw-space-4); }
+.nw-prose > * + * { margin-top: var(--nw-space-2); }
+
+/* --- Global footprint ------------------------------------------ */
+.nw-map { margin-block: var(--nw-space-6); }
+.nw-map__canvas { position: relative; }
+/* A world.svg pont-rács, fix #8895cb kitöltéssel. Nem recolouroljuk --
+   csak az áttetszőséget állítjuk, hogy a pulzáló pontok kiemelkedjenek. */
+.nw-map__base { inline-size: 100%; block-size: auto; opacity: 0.55; }
+.nw-map__dot {
+  position: absolute;
+  inline-size: 10px; block-size: 10px;
+  margin: -5px 0 0 -5px;
+  border-radius: 50%;
+  background: var(--nw-sun);
+  animation: nw-pulse 2.6s var(--nw-ease-in-out) infinite;
+}
+@keyframes nw-pulse {
+  0%, 100% { transform: scale(1);   opacity: 1; }
+  50%      { transform: scale(1.5); opacity: 0.55; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .nw-map__dot { animation: none; }
+}
+.nw-map__note { font-size: var(--nw-text-sm); color: var(--nw-fg-secondary); margin-top: var(--nw-space-2); }
+
+.nw-stats {
+  display: grid; gap: var(--nw-space-4);
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  margin: 0; padding-top: var(--nw-space-4);
+  border-top: 1px solid var(--nw-rule);
+}
+.nw-stats dt {
+  font-family: var(--nw-font-display);
+  font-size: var(--nw-text-3xl);
+  font-weight: var(--nw-fw-bold);
+  line-height: 1;
+  color: var(--nw-fg);
+}
+.nw-stats dd {
+  margin: 0.5rem 0 0;
+  font-size: var(--nw-text-sm);
+  letter-spacing: var(--nw-tracking-wide);
+  text-transform: uppercase;
+  color: var(--nw-fg-secondary);
+}

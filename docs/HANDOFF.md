@@ -23,9 +23,12 @@ Ezek egyike sem zárható le fejlesztői oldalról.
 Ezt a szakaszt a `python tools/check_placeholders.py` generálja. Ne szerkeszd kézzel.
 
 <!-- PLACEHOLDER-INVENTORY-START -->
-Generálva: `python tools/check_placeholders.py` — **0 tétel**
+Generálva: `python tools/check_placeholders.py` — **2 tétel**
 
-_Nincs jelölt placeholder._
+| fájl | sor | tétel |
+|---|---|---|
+| `index.html` | 131 | a 16 ország tényleges listája bekérendő |
+| `data\locations.js` | 7 | a 16 ország tényleges listája bekérendő |
 <!-- PLACEHOLDER-INVENTORY-END -->
 
 ## Asset pipeline
