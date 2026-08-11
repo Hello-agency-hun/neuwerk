@@ -183,3 +183,23 @@ main > .nw-section:first-child { padding-block-start: calc(var(--nw-section-y) +
 .nw-cards h3 { margin-bottom: 0.5rem; }
 .nw-cards p  { font-size: var(--nw-text-sm); color: var(--nw-fg-secondary); }
 .nw-cards__go { display: inline-block; margin-top: var(--nw-space-2); color: var(--nw-accent-text); }
+
+/* --- Aloldal-hero --------------------------------------------- */
+.nw-subhero { min-block-size: 60svh; display: grid; align-items: end; }
+.nw-subhero h1 { font-size: var(--nw-text-3xl); }
+
+/* --- Névbontás ------------------------------------------------- */
+.nw-namesplit {
+  display: grid; gap: var(--nw-space-3);
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  margin-top: var(--nw-space-6);
+}
+.nw-namesplit li { padding-top: var(--nw-space-2); border-top: 2px solid var(--nw-sun); }
+.nw-namesplit strong {
+  display: block;
+  font-family: var(--nw-font-display);
+  font-size: var(--nw-text-2xl);
+  font-weight: var(--nw-fw-bold);
+  letter-spacing: var(--nw-tracking-tight);
+}
+.nw-namesplit span { font-size: var(--nw-text-sm); color: var(--nw-fg-secondary); }
