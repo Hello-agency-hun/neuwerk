@@ -22,7 +22,7 @@ ROOT = Path(__file__).resolve().parent.parent
 HANDOFF = ROOT / "docs" / "HANDOFF.md"
 START = "<!-- PLACEHOLDER-INVENTORY-START -->"
 END = "<!-- PLACEHOLDER-INVENTORY-END -->"
-SKIP_DIRS = {".git", "work", "Arculat", "useful visual assets", "docs", "tools"}
+SKIP_DIRS = {".git", "work", "Arculat", "useful visual assets", "docs", "tools", "partials"}
 
 TODO_RE = re.compile(r"TODO\(client\):\s*([^\-]*?)\s*-->")
 EMAIL_RE = re.compile(r"[\w.+-]+@[\w-]+\.[\w.]+")

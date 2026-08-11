@@ -20,7 +20,7 @@ if hasattr(sys.stdout, "reconfigure"):
     sys.stdout.reconfigure(encoding="utf-8")
 
 ROOT = Path(__file__).resolve().parent.parent
-SKIP_DIRS = {".git", "work", "Arculat", "useful visual assets", "docs", "tools"}
+SKIP_DIRS = {".git", "work", "Arculat", "useful visual assets", "docs", "tools", "partials"}
 REF_RE = re.compile(r'(?:href|src)\s*=\s*["\']([^"\']+)["\']', re.I)
 
 

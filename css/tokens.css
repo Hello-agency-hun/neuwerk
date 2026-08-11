@@ -8,7 +8,7 @@
   /* --- Elsődleges paletta (brandbook 04) ------------------- */
   --nw-navy:        #1b1e52;   /* Pantone 2766 C — nagy felületeken dominál */
   --nw-white:       #ffffff;   /* egyenrangú vászon a navy-vel */
-  --nw-blue-1:      #273993;   /* a Neuwerk pattern színe */
+  --nw-blue-1:      #273993;   /* a neuwerk pattern színe */
   --nw-blue-2:      #4e66af;
   --nw-blue-3:      #8895cb;
   --nw-blue-4:      #afc6e7;
@@ -103,7 +103,7 @@
   /* --- Forma ------------------------------------------------ */
   --nw-radius-pill:  9999px;
   --nw-radius-card:  4px;
-  --nw-pattern-tilt: -45deg;   /* a Neuwerk pattern dőlése */
+  --nw-pattern-tilt: -45deg;   /* a neuwerk pattern dőlése */
 
   /* --- Mozgás ----------------------------------------------- */
   --nw-ease:        cubic-bezier(0.22, 1, 0.36, 1);
