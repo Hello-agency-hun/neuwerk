@@ -49,7 +49,11 @@
       '<label class="nwr__label">Név<input class="nwr__input" data-nwr-author type="text" placeholder="pl. Ági"></label>' +
       '<div class="nwr__row">' +
         '<button class="nwr__send" type="submit">Küldés</button>' +
-        '<a class="nwr__dl" href="' + ENDPOINT + '?download=1">Összes letöltése</a>' +
+        '<span class="nwr__dls">' +
+          '<a class="nwr__dl" href="' + ENDPOINT + '?download=1">JSON</a>' +
+          '<a class="nwr__dl" href="' + ENDPOINT + '?zip=1">ZIP</a>' +
+          '<a class="nwr__dl" href="' + ENDPOINT + '?stat=1" target="_blank" rel="noopener">Összesítő</a>' +
+        '</span>' +
       '</div>' +
       '<p class="nwr__msg" data-nwr-msg role="status" aria-live="polite"></p>' +
     '</form>';
@@ -152,7 +156,7 @@
       .then(function (res) {
         if (!res.ok || !res.j.ok) throw new Error(res.j && res.j.error ? res.j.error : "Ismeretlen hiba");
         commentEl.value = "";
-        msgEl.textContent = "Mentve. Eddig " + res.j.count + " megjegyzés.";
+        msgEl.textContent = "Mentve (" + res.j.count + ". megjegyzés).";
         window.setTimeout(function () { msgEl.textContent = ""; }, 4000);
       })
       .catch(function (err) {
