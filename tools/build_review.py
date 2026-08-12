@@ -59,15 +59,28 @@ Feltöltés
 
 Hogyan használják a véleményezők
 --------------------------------
-Jobb alul egy narancs gomb. Fölé húzva kinyílik, rákattintva megnyílik a
-megjegyzés-panel. Automatikusan rögzíti, melyik oldalon és melyik szekciónál
-járnak, tehát csak a véleményt kell beírni. A név mezőt a böngésző megjegyzi.
+Jobb alul egy kis narancs gomb. RÁKATTINTVA kipattan a megjegyzés-panel,
+újra rákattintva (vagy az X-szel, vagy Esc-cel) eltűnik. Zárt állapotban
+csak a gomb látszik, az oldalból semmit nem takar.
+
+A panel automatikusan rögzíti, melyik oldalon és melyik szekciónál járnak,
+tehát csak a véleményt kell beírni. A név mezőt a böngésző megjegyzi.
 
 A megjegyzések letöltése
 ------------------------
-A panel alján az "Összes letöltése" link, vagy közvetlenül:
-    https://a-domained.hu/neuwerk-preview/feedback.php?download=1
-Ez adja vissza a teljes JSON-t. Ezt küldd vissza a fejlesztésnek.
+Minden megjegyzés KÜLÖN JSON fájlba kerül a feedback mappában, beszédes
+fájlnévvel (időbélyeg + oldal + azonosító). A panel alján három link:
+
+  JSON       - minden megjegyzés egy összesített fájlban
+  ZIP        - a külön fájlok egy csomagban (ha a tárhely tudja)
+  Összesítő  - oldalankénti, kategóriánkénti és szerzőnkénti darabszám
+
+Vagy közvetlenül:
+    .../feedback.php?download=1     összesített JSON
+    .../feedback.php?zip=1          ZIP
+    .../feedback.php?stat=1         összesítő
+
+Az összesített JSON-t küldd vissza a fejlesztésnek.
 
 Ha nem működik a mentés
 -----------------------

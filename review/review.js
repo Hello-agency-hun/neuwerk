@@ -40,6 +40,7 @@
       '<span class="nwr__fab-label">Megjegyzés</span>' +
     '</button>' +
     '<form class="nwr__panel" id="nwr-panel" hidden>' +
+      '<button class="nwr__close" type="button" data-nwr-close aria-label="Bezárás">×</button>' +
       '<p class="nwr__head">Megjegyzés ehhez az oldalhoz</p>' +
       '<p class="nwr__where"><span data-nwr-page></span><span data-nwr-section></span></p>' +
       '<label class="nwr__label">Miről szól<select class="nwr__input" data-nwr-cat></select></label>' +
@@ -121,6 +122,9 @@
 
   fab.addEventListener("click", function () {
     if (root.hasAttribute("data-open")) close(); else open();
+  });
+  root.querySelector("[data-nwr-close]").addEventListener("click", function () {
+    close(); fab.focus();
   });
   document.addEventListener("keydown", function (e) {
     if (e.key === "Escape" && root.hasAttribute("data-open")) { close(); fab.focus(); }

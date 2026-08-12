@@ -7,7 +7,8 @@
 
 .nwr__fab {
   display: flex; align-items: center; gap: 0;
-  padding: 12px; border: 0; border-radius: 999px; cursor: pointer;
+  padding: 11px; border: 0; border-radius: 999px; cursor: pointer;
+  opacity: 0.82;
   background: #ffa500; color: #1b1e52;      /* navy felirat: fehérrel 1,97:1 lenne */
   font: 600 14px/1 inherit;
   box-shadow: 0 6px 22px rgb(0 0 0 / 0.28);
@@ -21,20 +22,52 @@
 }
 .nwr__fab-label { max-inline-size: 0; overflow: hidden; white-space: nowrap; transition: max-inline-size .22s ease; }
 /* Hoverre kinyílik -- ez a "hoover gomb". Fókuszra ugyanúgy, billentyűvel is. */
-.nwr__fab:hover, .nwr__fab:focus-visible { gap: 8px; padding-inline: 14px 18px; background: #ffb733; }
+.nwr__fab:hover, .nwr__fab:focus-visible { gap: 8px; padding-inline: 14px 18px; background: #ffb733; opacity: 1; }
 .nwr__fab:hover .nwr__fab-label, .nwr__fab:focus-visible .nwr__fab-label { max-inline-size: 140px; }
-.nwr[data-open] .nwr__fab { gap: 8px; padding-inline: 14px 18px; }
+.nwr[data-open] .nwr__fab { gap: 8px; padding-inline: 14px 18px; opacity: 1; }
 .nwr[data-open] .nwr__fab-label { max-inline-size: 140px; }
 
-.nwr__panel {
+/* A panel ALAPBÓL REJTVE.
+
+   Itt volt a hiba: a display:grid felülírja a hidden attribútumot, mert
+   azt a böngésző egy sima display:none szabállyal valósítja meg, és azt
+   bármilyen szerzői display legyőzi. Emiatt a panel végig nyitva volt,
+   és eltakarta az oldal jobb alsó negyedét.
+
+   Ezért a láthatóságot NEM a hidden attribútum vezérli, hanem a
+   [data-open] állapot. A hidden attribútumot a JS csak a
+   kisegítő technológiák miatt tartja szinkronban. */
+.nwr__panel { display: none; }
+.nwr[data-open] .nwr__panel {
   position: absolute; inset-block-end: 58px; inset-inline-end: 0;
-  inline-size: min(360px, calc(100vw - 40px));
+  inline-size: min(340px, calc(100vw - 32px));
+  max-block-size: min(76vh, 560px);
+  overflow-y: auto;
   display: grid; gap: 10px;
   padding: 16px; border-radius: 12px;
   background: #fff; color: #1b1e52;
-  box-shadow: 0 18px 50px rgb(0 0 0 / 0.3);
+  box-shadow: 0 18px 50px rgb(0 0 0 / 0.34);
+  animation: nwr-pop 160ms cubic-bezier(0.22, 1, 0.36, 1);
 }
-.nwr__head { margin: 0; font-weight: 700; font-size: 15px; }
+@keyframes nwr-pop {
+  from { opacity: 0; transform: translateY(8px) scale(0.98); }
+  to   { opacity: 1; transform: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .nwr[data-open] .nwr__panel { animation: none; }
+}
+
+/* Bezáró X a panel sarkában -- a gomb messze lehet, ha a panel görgethető. */
+.nwr__close {
+  position: absolute; inset-block-start: 8px; inset-inline-end: 8px;
+  inline-size: 28px; block-size: 28px;
+  display: grid; place-items: center;
+  padding: 0; border: 0; border-radius: 50%;
+  background: none; color: #666; cursor: pointer;
+  font: 400 20px/1 inherit;
+}
+.nwr__close:hover { background: #eee; color: #1b1e52; }
+.nwr__head { margin: 0 32px 0 0; font-weight: 700; font-size: 15px; }
 .nwr__where { margin: 0; font-size: 12px; color: #666; word-break: break-word; }
 .nwr__label { display: grid; gap: 4px; font-size: 12px; font-weight: 600; color: #444; }
 .nwr__input {
