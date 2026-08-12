@@ -86,10 +86,29 @@ def inject(path: Path, prefix: str) -> None:
     path.write_text(html, encoding="utf-8")
 
 
+def clear_dir(d: Path) -> None:
+    """A mappa TARTALMÁT üríti, magát a mappát nem törli.
+
+    Windowson a shutil.rmtree(OUT) rendszeresen elhasal a záró rmdir-en,
+    ha bármi fogja a mappát -- egy nyitott terminál, a Fájlkezelő, egy
+    futó szerver. A tartalom addigra viszont már törlődött, tehát a
+    hívó egy üres mappát kap és azt hiszi, minden rendben. Ezért nem
+    töröljük a mappát: csak kiürítjük."""
+    if not d.exists():
+        return
+    for item in d.iterdir():
+        try:
+            if item.is_dir() and not item.is_symlink():
+                shutil.rmtree(item)
+            else:
+                item.unlink()
+        except PermissionError as e:
+            print(f"  figyelem: nem tudom törölni ({item.name}): {e}")
+
+
 def main():
-    if OUT.exists():
-        shutil.rmtree(OUT)
-    OUT.mkdir(parents=True)
+    OUT.mkdir(parents=True, exist_ok=True)
+    clear_dir(OUT)
 
     missing = [n for n in INCLUDE_FILES if not (ROOT / n).exists()]
     missing += [d for d in INCLUDE_DIRS if not (ROOT / d).is_dir()]
