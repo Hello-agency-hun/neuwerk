@@ -33,20 +33,20 @@ Generálva: `python tools/check_placeholders.py` — **18 tétel**
 |---|---|---|
 | `contact.html` | 77 | MINDEN kontaktadat placeholder, valós adatok bekérendők |
 | `feltoltesre/contact.html` | 77 | MINDEN kontaktadat placeholder, valós adatok bekérendők |
-| `feltoltesre/index.html` | 167 | a 16 ország tényleges listája bekérendő |
+| `feltoltesre/index.html` | 171 | a 16 ország tényleges listája bekérendő |
 | `feltoltesre/media/neuwerk-begins.html` | 84 | valós cikkszöveg bekérendő |
 | `feltoltesre/media/thermal-systems-milestone.html` | 80 | valós cikkszöveg bekérendő |
-| `feltoltesre/responsibility.html` | 80 | az 5 jogi dokumentum valós szövege bekérendő |
-| `feltoltesre/responsibility.html` | 143 | Integrity Line csatorna és adatvédelmi nyilatkozat bekérendő |
-| `index.html` | 166 | a 16 ország tényleges listája bekérendő |
-| `media/neuwerk-begins.html` | 84 | valós cikkszöveg bekérendő |
-| `media/thermal-systems-milestone.html` | 80 | valós cikkszöveg bekérendő |
-| `responsibility.html` | 84 | az 5 jogi dokumentum valós szövege bekérendő |
-| `responsibility.html` | 147 | Integrity Line csatorna és adatvédelmi nyilatkozat bekérendő |
+| `feltoltesre/responsibility.html` | 84 | az 5 jogi dokumentum valós szövege bekérendő |
+| `feltoltesre/responsibility.html` | 147 | Integrity Line csatorna és adatvédelmi nyilatkozat bekérendő |
+| `index.html` | 173 | a 16 ország tényleges listája bekérendő |
+| `legal-compliance.html` | 97 | az 5 jogi dokumentum valós szövege bekérendő |
+| `legal-compliance.html` | 169 | Integrity Line csatorna és adatvédelmi nyilatkozat bekérendő |
+| `media/neuwerk-begins.html` | 90 | valós cikkszöveg bekérendő |
+| `media/thermal-systems-milestone.html` | 86 | valós cikkszöveg bekérendő |
 | `data/jobs.js` | 23 | a valos nyitott poziciok listaja bekerendo |
 | `data/locations.js` | 10 | a 16 ország tényleges listája bekérendő |
-| `data/news.js` | 10 | a valós hírek és cikkek bekérendők |
-| `feltoltesre/data/jobs.js` | 14 | a valós nyitott pozíciók listája bekérendő |
+| `data/news.js` | 16 | a valós hírek és cikkek bekérendők |
+| `feltoltesre/data/jobs.js` | 23 | a valos nyitott poziciok listaja bekerendo |
 | `feltoltesre/data/locations.js` | 10 | a 16 ország tényleges listája bekérendő |
 | `feltoltesre/data/news.js` | 10 | a valós hírek és cikkek bekérendők |
 <!-- PLACEHOLDER-INVENTORY-END -->

@@ -32,6 +32,17 @@ A `docs/superpowers/specs/2026-08-11-amendment-01.md` **felülírja** az eredeti
   `#integrity-line` szekciója
 - ezért **10 oldal**, nem 16
 
+## Amendment 02 (2026-08-13)
+
+A `docs/superpowers/specs/2026-08-13-amendment-02.md` felülírja az Amendment 01-et
+a jogi dokumentumok elhelyezésében:
+
+- új, 11. oldal: `legal-compliance.html` (**Legal & Compliance**), kategóriákba
+  sorolt dokumentumokkal
+- a footerben **egy** link vezet ide, a korábbi két PDF-link helyett
+- az Integrity Line ide költözött, a `responsibility.html`-ről
+- a végleges kategórialistát az ügyfél küldi — a mostani három ideiglenes
+
 ## Design system
 
 Minden szín, méret és betűtípus a `css/tokens.css`-ben van, és a brandbook v1.1-ből jön
