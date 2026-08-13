@@ -31,8 +31,9 @@ html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
 
 body {
   margin: 0;
-  background: var(--nw-navy);
-  color: var(--nw-on-navy);
+  /* v2: az oldal alapja VILAGOS. A navy szovegszin lett, nem hatter. */
+  background: var(--nw-canvas);
+  color: var(--nw-ink);
   font-family: var(--nw-font-body);
   font-size: var(--nw-text-base);
   font-weight: var(--nw-fw-regular);
@@ -65,7 +66,9 @@ a { color: inherit; text-decoration-thickness: 1px; text-underline-offset: 0.2em
 ul, ol { margin: 0; padding: 0; list-style: none; }
 
 :focus-visible {
-  outline: 3px solid var(--nw-accent-text, var(--nw-sun));
+  /* A fokuszgyuru a szekcio temajahoz igazodik. Vilagoson a Sun
+     1,92:1 lenne a canvason, ezert ott a Blue tint 1 megy. */
+  outline: 3px solid var(--nw-accent-text, var(--nw-blue-1));
   outline-offset: 3px;
   border-radius: 2px;
 }

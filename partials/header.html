@@ -1,27 +1,41 @@
 <!-- @partial:header -->
 <a class="nw-skip-link" href="#main">Skip to content</a>
 <header class="nw-header" data-nav>
-  <div class="nw-header__inner nw-shell">
-    <a class="nw-header__logo" href="{{ROOT}}index.html" aria-label="neuwerk — home">
-      <img src="{{ROOT}}assets/brand/neuwerk-white.svg" alt="neuwerk" width="157" height="24">
-    </a>
+  <div class="nw-header__shell">
+    <div class="nw-header__bar">
+      <a class="nw-header__logo" href="{{ROOT}}index.html" aria-label="neuwerk, home">
+        <img src="{{ROOT}}assets/brand/neuwerk-navy.svg" alt="neuwerk" width="132" height="20">
+      </a>
 
-    <button class="nw-header__toggle" type="button"
-            aria-expanded="false" aria-controls="nw-nav" data-nav-toggle>
-      <span class="nw-sr-only">Menu</span>
-      <span class="nw-header__bars" aria-hidden="true"></span>
-    </button>
+      <nav class="nw-header__inline" aria-label="Main">
+        <a href="{{ROOT}}index.html#who-we-are">Who we are</a>
+        <a href="{{ROOT}}index.html#solutions">Solutions</a>
+        <a href="{{ROOT}}identity.html">Identity</a>
+        <a href="{{ROOT}}career.html">Career</a>
+        <a href="{{ROOT}}media.html">Media</a>
+      </nav>
 
-    <nav class="nw-header__nav" id="nw-nav" aria-label="Main">
-      <ul>
-        <li><a href="{{ROOT}}index.html#who-we-are">Who we are</a></li>
-        <li><a href="{{ROOT}}index.html#solutions">Solutions</a></li>
-        <li><a href="{{ROOT}}identity.html">Identity</a></li>
-        <li><a href="{{ROOT}}career.html">Career</a></li>
-        <li><a href="{{ROOT}}media.html">Media</a></li>
-        <li><a class="nw-btn nw-btn--sun" href="{{ROOT}}contact.html">Contact</a></li>
-      </ul>
-    </nav>
+      <div class="nw-header__actions">
+        <a class="nw-btn nw-btn--sun nw-btn--sm" href="{{ROOT}}contact.html">Contact</a>
+        <button class="nw-header__toggle" type="button"
+                aria-expanded="false" aria-controls="nw-menu" data-nav-toggle>
+          <span class="nw-sr-only">Menu</span>
+          <span class="nw-header__bars" aria-hidden="true"></span>
+        </button>
+      </div>
+    </div>
+
+    <div class="nw-header__panel" id="nw-menu" hidden>
+      <nav class="nw-header__big" aria-label="All pages">
+        <a href="{{ROOT}}index.html#who-we-are"><span>Who we are</span></a>
+        <a href="{{ROOT}}index.html#solutions"><span>Solutions</span></a>
+        <a href="{{ROOT}}identity.html"><span>Identity</span></a>
+        <a href="{{ROOT}}career.html"><span>Career</span></a>
+        <a href="{{ROOT}}media.html"><span>Media</span></a>
+        <a href="{{ROOT}}responsibility.html"><span>Responsibility</span></a>
+        <a href="{{ROOT}}contact.html"><span>Contact</span></a>
+      </nav>
+    </div>
   </div>
 </header>
 <!-- /@partial:header -->

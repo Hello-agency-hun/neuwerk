@@ -119,24 +119,106 @@
   --nw-z-intro:   1000;
 }
 
-/* Szekció-témák. NEM felhasználói kapcsoló — szekció-tulajdonság.
-   A világos/sötét váltakozás maga a brand védjegye. */
-.nw-theme-dark {
-  --nw-bg:            var(--nw-navy);
-  --nw-fg:            var(--nw-on-navy);
-  --nw-fg-secondary:  var(--nw-on-navy-secondary);
-  --nw-fg-muted:      var(--nw-on-navy-muted);
-  --nw-accent-text:   var(--nw-sun);       /* 7,85:1 — engedélyezett */
-  --nw-rule:          rgb(255 255 255 / 0.14);
-  --nw-pattern-fill:  var(--nw-blue-1);    /* brandbook: csak ez, csak navy-n */
+/* =============================================================
+   v2 — VILÁGOS-DOMINÁNS RENDSZER
+   =============================================================
+   Miért változott: az oldal túl közel került a Lufthansához. A mérés
+   szerint nem a színek a baj, hanem az arányok: mindkét rendszer
+   navy-domináns, meleg akcenttel. A Sun (#ffa500) és a Lufthansa-sárga
+   (#FFAD00) RGB-távolsága 8,0 -- megkülönböztethetetlen.
+
+   A megoldás három lépés:
+
+   1. A NAVY MOSTANTÓL SZÖVEGSZÍN, NEM HÁTTÉR.
+      Ez az egyetlen legnagyobb lépés. A navy-dominancia adta a
+      légitársaság-benyomást.
+
+   2. A SÖTÉT FELÜLETET A BLUE TINT 1 VISZI (#273993), nem a navy.
+      Telítettebb, elektromosabb, és a Lufthansa navy-jától 85,3
+      RGB-egységre van a korábbi 23,9 helyett -- 3,6-szor messzebb.
+
+   3. A SUN SZEREPE RADIKÁLISAN SZŰKÜL: logó, egyetlen primer CTA,
+      aktív állapot. Semmi más. A narancs sorszámok és hairline-ok
+      összeadódva adták a "sárgás" összbenyomást.
+
+   Számolt kontrasztok (WCAG 2.1):
+     világos alapon (#fbfcfe): navy 15,11 | tint1 9,77 | tint2 5,32
+     tint1 alapon (#273993):   fehér 10,03 | tint4 5,76 | Sun 5,08
+     A tint 3 és 4 világos alapon NEM szöveg (2,84 és 1,70) --
+     kizárólag felület és forma.
+   ============================================================= */
+
+:root {
+  /* --- Felületek ------------------------------------------- */
+  --nw-canvas:   #fbfcfe;   /* az oldal alapja: majdnem fehér, hajszálnyi hideg */
+  --nw-surface:  #ffffff;   /* kiemelt lapok, kártyák */
+  --nw-sunk:     #eef2fb;   /* süllyesztett sáv, tint 4-ből levezetve */
+  --nw-deep:     #273993;   /* a SÖTÉT felület: Blue tint 1, nem navy */
+  --nw-deeper:   #1e2c72;   /* a mély felület mélyebb vége, gradienshez */
+
+  /* --- Tinta ------------------------------------------------ */
+  --nw-ink:      #1b1e52;   /* navy MINT SZÖVEG, 15,11:1 a canvason */
+  --nw-ink-2:    #4e66af;   /* másodlagos szöveg világoson, 5,32:1 */
+
+  /* --- Hajszálvonalak --------------------------------------- */
+  --nw-line:        rgb(27 30 82 / 0.10);
+  --nw-line-strong: rgb(27 30 82 / 0.18);
+  --nw-line-dark:   rgb(255 255 255 / 0.16);
+
+  /* --- Tonális kékek felületnek ------------------------------
+     Nem AI-lila gradiens: a saját tintjeikből kevert, alacsony
+     kontrasztú mosás. Ez adja a "lágy formákat" világos alapon. */
+  --nw-wash-1: color-mix(in oklab, var(--nw-blue-4) 42%, white);
+  --nw-wash-2: color-mix(in oklab, var(--nw-blue-3) 26%, white);
+  --nw-wash-3: color-mix(in oklab, var(--nw-blue-4) 20%, white);
+
+  /* --- Lebegő nav ------------------------------------------- */
+  --nw-nav-h:      56px;
+  --nw-nav-inset:  14px;    /* mennyivel lóg be a viewport szélétől */
+  --nw-nav-radius: 18px;
+  --nw-nav-radius-open: 26px;
+  --nw-shadow-nav: 0 1px 2px rgb(27 30 82 / 0.06),
+                   0 8px 28px rgb(27 30 82 / 0.10);
+  --nw-shadow-lift: 0 2px 6px rgb(27 30 82 / 0.05),
+                    0 18px 44px rgb(27 30 82 / 0.12);
+
+  /* Egységes sarokkerekítés-rendszer. Egy skála, nincs keverés. */
+  --nw-r-sm:  8px;
+  --nw-r-md:  14px;
+  --nw-r-lg:  22px;
+  --nw-r-xl:  32px;
 }
 
+/* Szekció-témák. NEM felhasználói kapcsoló -- szekció-tulajdonság.
+   A világos az ALAPÉRTELMEZETT és a domináns; a mély kék a kivétel. */
 .nw-theme-light {
-  --nw-bg:            var(--nw-white);
-  --nw-fg:            var(--nw-on-white);
-  --nw-fg-secondary:  var(--nw-on-white-secondary);
-  --nw-fg-muted:      var(--nw-grey-02);
-  --nw-accent-text:   var(--nw-navy);      /* Sun fehéren 1,97:1 → TILOS */
-  --nw-rule:          rgb(27 30 82 / 0.14);
-  --nw-pattern-fill:  transparent;         /* világos szekcióban nincs pattern */
+  --nw-bg:            var(--nw-canvas);
+  --nw-fg:            var(--nw-ink);
+  --nw-fg-secondary:  var(--nw-ink-2);
+  --nw-fg-muted:      var(--nw-ink-2);
+  --nw-accent-text:   var(--nw-blue-1);   /* 9,77:1 -- a Sun itt tilos lenne */
+  --nw-rule:          var(--nw-line);
+  --nw-pattern-fill:  var(--nw-wash-1);   /* a pattern VILÁGOSBAN is él */
+}
+
+/* Süllyesztett világos sáv: ugyanaz a téma, más felület. */
+.nw-theme-sunk {
+  --nw-bg:            var(--nw-sunk);
+  --nw-fg:            var(--nw-ink);
+  --nw-fg-secondary:  var(--nw-ink-2);
+  --nw-fg-muted:      var(--nw-ink-2);
+  --nw-accent-text:   var(--nw-blue-1);
+  --nw-rule:          var(--nw-line-strong);
+  --nw-pattern-fill:  var(--nw-wash-2);
+}
+
+/* A mély felület. Blue tint 1, nem navy. */
+.nw-theme-dark {
+  --nw-bg:            var(--nw-deep);
+  --nw-fg:            var(--nw-white);
+  --nw-fg-secondary:  var(--nw-blue-4);   /* 5,76:1 a tint 1-en */
+  --nw-fg-muted:      var(--nw-blue-4);
+  --nw-accent-text:   var(--nw-blue-4);   /* NEM Sun: a Sun csak CTA és logó */
+  --nw-rule:          var(--nw-line-dark);
+  --nw-pattern-fill:  color-mix(in oklab, var(--nw-deeper) 70%, white 6%);
 }

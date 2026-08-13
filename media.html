@@ -16,27 +16,41 @@
 <!-- @partial:header -->
 <a class="nw-skip-link" href="#main">Skip to content</a>
 <header class="nw-header" data-nav>
-  <div class="nw-header__inner nw-shell">
-    <a class="nw-header__logo" href="index.html" aria-label="neuwerk — home">
-      <img src="assets/brand/neuwerk-white.svg" alt="neuwerk" width="157" height="24">
-    </a>
+  <div class="nw-header__shell">
+    <div class="nw-header__bar">
+      <a class="nw-header__logo" href="index.html" aria-label="neuwerk, home">
+        <img src="assets/brand/neuwerk-navy.svg" alt="neuwerk" width="132" height="20">
+      </a>
 
-    <button class="nw-header__toggle" type="button"
-            aria-expanded="false" aria-controls="nw-nav" data-nav-toggle>
-      <span class="nw-sr-only">Menu</span>
-      <span class="nw-header__bars" aria-hidden="true"></span>
-    </button>
+      <nav class="nw-header__inline" aria-label="Main">
+        <a href="index.html#who-we-are">Who we are</a>
+        <a href="index.html#solutions">Solutions</a>
+        <a href="identity.html">Identity</a>
+        <a href="career.html">Career</a>
+        <a href="media.html">Media</a>
+      </nav>
 
-    <nav class="nw-header__nav" id="nw-nav" aria-label="Main">
-      <ul>
-        <li><a href="index.html#who-we-are">Who we are</a></li>
-        <li><a href="index.html#solutions">Solutions</a></li>
-        <li><a href="identity.html">Identity</a></li>
-        <li><a href="career.html">Career</a></li>
-        <li><a href="media.html">Media</a></li>
-        <li><a class="nw-btn nw-btn--sun" href="contact.html">Contact</a></li>
-      </ul>
-    </nav>
+      <div class="nw-header__actions">
+        <a class="nw-btn nw-btn--sun nw-btn--sm" href="contact.html">Contact</a>
+        <button class="nw-header__toggle" type="button"
+                aria-expanded="false" aria-controls="nw-menu" data-nav-toggle>
+          <span class="nw-sr-only">Menu</span>
+          <span class="nw-header__bars" aria-hidden="true"></span>
+        </button>
+      </div>
+    </div>
+
+    <div class="nw-header__panel" id="nw-menu" hidden>
+      <nav class="nw-header__big" aria-label="All pages">
+        <a href="index.html#who-we-are"><span>Who we are</span></a>
+        <a href="index.html#solutions"><span>Solutions</span></a>
+        <a href="identity.html"><span>Identity</span></a>
+        <a href="career.html"><span>Career</span></a>
+        <a href="media.html"><span>Media</span></a>
+        <a href="responsibility.html"><span>Responsibility</span></a>
+        <a href="contact.html"><span>Contact</span></a>
+      </nav>
+    </div>
   </div>
 </header>
 <!-- /@partial:header -->

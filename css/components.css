@@ -23,72 +23,135 @@
 }
 .nw-btn--sun:hover { background: var(--nw-white); color: var(--nw-navy); border-color: var(--nw-white); }
 
-/* --- Header -------------------------------------------------- */
+/* --- Lebegő nav ------------------------------------------------
+   Nem teljes szélességű sáv: önálló, lekerekített, lebegő konténer.
+   A teljes szélességű navy utility-bar volt az egyik dolog, ami a
+   Lufthansára emlékeztetett.
+
+   Referencia: rivian.com. A kódjukat lemértük: a header egy rounded,
+   overflow-hidden konténer, ami NYITÁSKOR UGYANABBAN a dobozban nő
+   meg, és közben a saját sarokkerekítése animálódik. Nem dropdown
+   alatta: a menü belül van. Ezt vettük át, a palettájukat nem. */
 .nw-header {
-  position: fixed; inset-block-start: 0; inset-inline: 0;
+  position: fixed;
+  inset-block-start: var(--nw-nav-inset);
+  inset-inline: var(--nw-nav-inset);
   z-index: var(--nw-z-header);
-  background: transparent;
-  transition: background var(--nw-dur-base) var(--nw-ease);
+  display: flex;
+  justify-content: center;
+  pointer-events: none;
 }
-.nw-header[data-scrolled] { background: var(--nw-navy); }
 
-.nw-header__inner {
-  display: flex; align-items: center; justify-content: space-between;
-  min-height: var(--nw-header-h);
+.nw-header__shell {
+  pointer-events: auto;
+  inline-size: 100%;
+  max-inline-size: var(--nw-max-width);
+  background: rgb(255 255 255 / 0.82);
+  -webkit-backdrop-filter: blur(14px) saturate(150%);
+  backdrop-filter: blur(14px) saturate(150%);
+  border: 1px solid var(--nw-line);
+  border-radius: var(--nw-nav-radius);
+  box-shadow: var(--nw-shadow-nav);
+  overflow: clip;
+  transition: border-radius var(--nw-dur-base) var(--nw-ease),
+              box-shadow var(--nw-dur-base) var(--nw-ease),
+              background var(--nw-dur-base) var(--nw-ease);
 }
-.nw-header__logo img { height: 24px; width: auto; }   /* brandbook: min. 24 px */
+@supports not (backdrop-filter: blur(1px)) {
+  .nw-header__shell { background: rgb(255 255 255 / 0.97); }
+}
+.nw-header[data-scrolled] .nw-header__shell { box-shadow: var(--nw-shadow-lift); }
+.nw-header[data-open] .nw-header__shell {
+  border-radius: var(--nw-nav-radius-open);
+  background: rgb(255 255 255 / 0.97);
+}
 
-.nw-header__nav ul { display: flex; align-items: center; gap: var(--nw-space-3); }
-/* A :not(.nw-btn) KELL. Enélkül ez a szabály (0,1,1) felülírja a
-   .nw-btn--sun színét (0,1,0), és a header Contact gombján fehér
-   felirat lenne narancs alapon -- 1,97:1, bukott kontraszt. */
-.nw-header__nav a:not(.nw-btn) {
-  color: var(--nw-white);
+.nw-header__bar {
+  display: flex; align-items: center; gap: var(--nw-space-3);
+  min-block-size: var(--nw-nav-h);
+  padding-inline: var(--nw-space-3);
 }
-.nw-header__nav a {
+.nw-header__logo { display: flex; align-items: center; }
+.nw-header__logo img { height: 20px; width: auto; }
+
+.nw-header__inline { display: flex; align-items: center; gap: var(--nw-space-3); margin-inline: auto; }
+.nw-header__inline a {
+  position: relative;
+  padding-block: 0.4rem;
   font-family: var(--nw-font-display);
   font-size: var(--nw-text-sm);
   font-weight: var(--nw-fw-medium);
+  color: var(--nw-ink);
   text-decoration: none;
+  transition: color var(--nw-dur-fast) var(--nw-ease);
 }
-/* [aria-current="page"] = másik oldal, [aria-current="true"] = az épp
-   nézetben lévő szekció (scroll-spy). Egyszerre csak egy lehet aktív. */
-.nw-header__nav a:not(.nw-btn):hover,
-.nw-header__nav a:not(.nw-btn)[aria-current] { color: var(--nw-sun); }
-.nw-header__nav a:not(.nw-btn) {
-  position: relative;
-  padding-block: 0.35rem;
-}
-.nw-header__nav a:not(.nw-btn)::after {
+.nw-header__inline a:hover,
+.nw-header__inline a[aria-current] { color: var(--nw-blue-1); }
+.nw-header__inline a::after {
   content: "";
   position: absolute; inset-inline: 0; inset-block-end: 0;
-  block-size: 2px; background: var(--nw-sun);
+  block-size: 2px; border-radius: 2px; background: var(--nw-blue-1);
   transform: scaleX(0); transform-origin: left;
   transition: transform var(--nw-dur-base) var(--nw-ease);
 }
-.nw-header__nav a:not(.nw-btn)[aria-current]::after { transform: scaleX(1); }
+.nw-header__inline a[aria-current]::after { transform: scaleX(1); }
 
-.nw-header__toggle { display: none; background: none; border: 0; padding: var(--nw-space-1); cursor: pointer; }
+.nw-header__actions { display: flex; align-items: center; gap: var(--nw-space-1); }
+
+.nw-header__toggle {
+  inline-size: 38px; block-size: 38px;
+  display: flex; align-items: center; justify-content: center;
+  background: none; border: 0; padding: 0; cursor: pointer;
+  border-radius: var(--nw-r-sm);
+}
 .nw-header__bars, .nw-header__bars::before, .nw-header__bars::after {
-  display: block; width: 22px; height: 2px; background: var(--nw-white);
-  transition: transform var(--nw-dur-fast) var(--nw-ease);
+  display: block; inline-size: 18px; block-size: 2px; border-radius: 2px;
+  background: var(--nw-ink);
+  transition: transform var(--nw-dur-base) var(--nw-ease),
+              background var(--nw-dur-fast) var(--nw-ease);
 }
 .nw-header__bars::before, .nw-header__bars::after { content: ""; position: relative; }
-.nw-header__bars::before { top: -7px; }
-.nw-header__bars::after  { top: 5px; }
+.nw-header__bars::before { top: -6px; }
+.nw-header__bars::after  { top: 4px; }
+.nw-header[data-open] .nw-header__bars { background: transparent; }
+.nw-header[data-open] .nw-header__bars::before { transform: translateY(6px) rotate(45deg); }
+.nw-header[data-open] .nw-header__bars::after  { transform: translateY(-4px) rotate(-45deg); }
 
-@media (max-width: 860px) {
-  .nw-header__toggle { display: block; }
-  .nw-header__nav {
-    position: fixed; inset: var(--nw-header-h) 0 auto 0;
-    background: var(--nw-navy);
-    padding: var(--nw-space-3) var(--nw-gutter) var(--nw-space-4);
-    transform: translateY(-120%);
-    transition: transform var(--nw-dur-base) var(--nw-ease);
-  }
-  .nw-header__nav[data-open] { transform: translateY(0); }
-  .nw-header__nav ul { flex-direction: column; align-items: flex-start; gap: var(--nw-space-2); }
-  .nw-header__nav a { font-size: var(--nw-text-lg); }
+/* A kinyíló panel UGYANEBBEN a konténerben. */
+.nw-header__panel {
+  border-block-start: 1px solid var(--nw-line);
+  padding: var(--nw-space-3) var(--nw-space-3) var(--nw-space-4);
+}
+.nw-header__big { display: grid; gap: 0.15rem; }
+.nw-header__big a {
+  display: block;
+  padding-block: 0.5rem;
+  font-family: var(--nw-font-display);
+  font-size: var(--nw-text-2xl);
+  font-weight: var(--nw-fw-semibold);
+  letter-spacing: var(--nw-tracking-tight);
+  color: var(--nw-ink);
+  text-decoration: none;
+  opacity: 0;
+  transform: translateY(10px);
+  animation: nw-menu-in 420ms var(--nw-ease) forwards;
+  animation-delay: calc(var(--i, 0) * 45ms);
+}
+.nw-header__big a span {
+  display: inline-block;
+  transition: transform var(--nw-dur-base) var(--nw-ease),
+              color var(--nw-dur-base) var(--nw-ease);
+}
+.nw-header__big a:hover span { transform: translateX(10px); color: var(--nw-blue-1); }
+
+@keyframes nw-menu-in { to { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: reduce) {
+  .nw-header__big a { opacity: 1; transform: none; animation: none; }
+}
+
+@media (max-width: 900px) {
+  .nw-header__inline { display: none; }
+  .nw-header__actions { margin-inline-start: auto; }
 }
 
 /* --- Footer --------------------------------------------------- */
@@ -203,4 +266,6 @@
   min-inline-size: 40vmin; min-block-size: 22vmin;
 }
 
-.nw-theme-light .nw-pattern { display: none; }   /* pattern csak sötét szekcióban */
+/* v2: a pattern VILAGOS szekcioban is el, csak halvanyabb toltessel
+   (--nw-pattern-fill temankent van beallitva). A v1-ben csak soteten
+   letezett, ezert a vilagos szekciok teljesen dísztelenek voltak. */

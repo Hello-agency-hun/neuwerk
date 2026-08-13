@@ -6,23 +6,30 @@
   if (!header) return;
 
   var toggle = header.querySelector("[data-nav-toggle]");
-  var nav = header.querySelector(".nw-header__nav");
+  var panel = header.querySelector(".nw-header__panel");
 
-  if (toggle && nav) {
+  if (toggle && panel) {
     toggle.addEventListener("click", function () {
-      var open = nav.hasAttribute("data-open");
-      if (open) {
-        nav.removeAttribute("data-open");
+      var isOpen = header.hasAttribute("data-open");
+      if (isOpen) {
+        header.removeAttribute("data-open");
+        panel.hidden = true;
       } else {
-        nav.setAttribute("data-open", "");
+        header.setAttribute("data-open", "");
+        panel.hidden = false;
+        // Lepcsozetes belepes: az index a CSS animation-delay-hez kell.
+        Array.prototype.forEach.call(panel.querySelectorAll("a"), function (a, i) {
+          a.style.setProperty("--i", i);
+        });
       }
-      toggle.setAttribute("aria-expanded", String(!open));
+      toggle.setAttribute("aria-expanded", String(!isOpen));
     });
 
     // Esc zárja, és a fókusz visszakerül a gombra
     document.addEventListener("keydown", function (e) {
-      if (e.key === "Escape" && nav.hasAttribute("data-open")) {
-        nav.removeAttribute("data-open");
+      if (e.key === "Escape" && header.hasAttribute("data-open")) {
+        header.removeAttribute("data-open");
+        panel.hidden = true;
         toggle.setAttribute("aria-expanded", "false");
         toggle.focus();
       }
@@ -50,7 +57,7 @@
   //    aktívnak, amelyik szekció épp a nézetben van.
 
   var here = window.location.pathname.split("/").pop() || "index.html";
-  var links = Array.prototype.slice.call(header.querySelectorAll(".nw-header__nav a[href]"));
+  var links = Array.prototype.slice.call(header.querySelectorAll(".nw-header__inline a[href]"));
   var anchors = [];   // { link, section }
 
   links.forEach(function (a) {
