@@ -58,8 +58,16 @@
 
 <main id="main">
   <section class="nw-section nw-theme-dark nw-subhero nw-subhero--image">
-    <img class="nw-subhero__bg" src="assets/img/subhero/identity.jpg" alt=""
-         width="2400" height="1018" decoding="async">
+    <!-- Rovid, nema, loopolo klip a statikus kep helyett. A Rivian-minta
+         a benchmarkbol: "short videos, feels fresh". Ez a klip mar
+         feliratmentes (tools/build_solutions.py), tehat nem kellett hozza
+         uj render az ugyfeltol. A poszter a klip elso kepkockaja, tehat
+         reduced motion es autoplay-tiltas eseten is ugyanaz latszik. -->
+    <video class="nw-subhero__bg" data-subhero-video
+           muted playsinline autoplay loop preload="metadata"
+           poster="assets/video/solution-multi.jpg" aria-hidden="true">
+      <source src="assets/video/solution-multi.mp4" type="video/mp4">
+    </video>
     <div class="nw-subhero__scrim" aria-hidden="true"></div>
     <div class="nw-shell">
       <p class="nw-eyebrow">A new identity</p>
@@ -128,9 +136,9 @@
             confidence to move forward. The clean wordmark represents focus, technical
             excellence and strength of purpose.
           </p>
-          <p data-reveal data-reveal-delay="140">
-            Like our solutions, the identity is purposeful, distinctive and built to perform.
-          </p>
+          <blockquote class="nw-pullquote" data-reveal data-reveal-delay="140">
+            <p>Like our solutions, the identity is purposeful, distinctive and built to perform.</p>
+          </blockquote>
           <p data-reveal data-reveal-delay="200">
             Built on German engineering heritage and shaped by decades of automotive
             experience, neuwerk brings together what makes us strong with a clear ambition
@@ -208,6 +216,7 @@
 <script src="js/nav.js"></script>
 <script src="js/pattern.js"></script>
 <script src="js/reveal.js"></script>
+<script src="js/hero.js"></script>
 <script src="js/kinetic.js"></script>
 </body>
 </html>

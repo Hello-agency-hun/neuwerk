@@ -41,3 +41,16 @@
     }, FADE_MS);
   });
 })();
+
+/* A subhero hatterklipek ugyanazt a szabalyt kovetik, mint a hero:
+   reduced motion mellett allnak, es a poszterkep marad. */
+(function () {
+  "use strict";
+  var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (!reduced) return;
+  Array.prototype.forEach.call(document.querySelectorAll("[data-subhero-video]"), function (v) {
+    v.removeAttribute("autoplay");
+    v.loop = false;
+    v.pause();
+  });
+})();

@@ -68,6 +68,16 @@ Ez tudatos döntés, nem elmaradt munka. Ne "javítsd":
 - A végleges megoldás nem vágás, hanem egy felirat nélküli renderelés az
   ügyfél projektfájljából. Ez a "Kérések az ügyfél felé" alatt szerepel.
 
+## Az intro eltavolitva (2026-08-12)
+
+A logo reveal intro kikerult a fooldalrol. Indok: nem toltotte ki a
+kepernyot, ezert nem premium belepokent hatott, hanem egy lebego dobozkent
+a semmiben. Torolve: a markup, a js/intro.js es a .nw-intro CSS.
+
+Az `assets/video/intro.mp4` (8 KB) SZANDEKOSAN a helyen maradt, es a
+tools/build_video.py tovabbra is eloallitja. Ha egyszer teljes kepernyos
+belepot akarunk, az asset kesz.
+
 ## Design-segédlet grafikusnak
 
 `design-system.html` — élő stílusgyűjtemény. Ugyanazt a CSS-t tölti be, mint a

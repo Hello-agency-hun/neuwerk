@@ -72,3 +72,46 @@
   window.addEventListener("scroll", onScroll, { passive: true });
   window.addEventListener("resize", onScroll, { passive: true });
 })();
+
+/* Kinetikus statement: a szavak alulrol usznak be, sajat maszkjuk mogul.
+
+   Kulon a szo-alapu bevilagitastol (data-kinetic), mert ez mas mozgas:
+   ott a szoveg SZINE valtozik gorgetesre, itt a szavak BEUSZNAK egyszer,
+   amikor a blokk kepbe er.
+
+   Miert CSS es nem mp4: igy a szoveg kijelolheto marad, a kepernyoolvaso
+   felolvassa, elesen skalazodik, es nulla byte. */
+(function () {
+  "use strict";
+
+  var nodes = document.querySelectorAll("[data-kinetic-lines]");
+  if (!nodes.length) return;
+
+  var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  Array.prototype.forEach.call(nodes, function (el) {
+    var words = el.textContent.trim().split(/\s+/);
+    el.textContent = "";
+    words.forEach(function (w, i) {
+      var mask = document.createElement("span");
+      mask.className = "nw-kw";
+      mask.style.setProperty("--i", i);
+      var inner = document.createElement("span");
+      inner.textContent = w;
+      mask.appendChild(inner);
+      el.appendChild(mask);
+      if (i < words.length - 1) el.appendChild(document.createTextNode(" "));
+    });
+
+    if (reduced || !("IntersectionObserver" in window)) {
+      el.setAttribute("data-on", "");
+      return;
+    }
+    var io = new IntersectionObserver(function (entries) {
+      if (!entries[0].isIntersecting) return;
+      el.setAttribute("data-on", "");
+      io.disconnect();
+    }, { threshold: 0.4 });
+    io.observe(el);
+  });
+})();

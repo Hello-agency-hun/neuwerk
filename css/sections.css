@@ -421,26 +421,6 @@ main > article > header.nw-section {
   line-height: var(--nw-leading-snug);
 }
 
-/* --- Intro ----------------------------------------------------- */
-.nw-intro {
-  position: fixed; inset: 0; z-index: var(--nw-z-intro);
-  display: grid; place-items: center;
-  background: var(--nw-deep);
-  transition: opacity 480ms var(--nw-ease);
-
-  /* FAILSAFE. Az overlay az egész oldalt takarja, és normál esetben a
-     js/intro.js veszi le. Ha az bármiért nem fut le -- script-blokkoló,
-     hálózati hiba, JS-hiba --, akkor JS nélkül is el kell tűnnie,
-     különben a teljes site elérhetetlen marad egy navy képernyő mögött.
-     Ezért egy tisztán CSS-es kivezető: 4 mp után mindenképp eltűnik. */
-  animation: nw-intro-failsafe 400ms var(--nw-ease) 4s forwards;
-}
-@keyframes nw-intro-failsafe {
-  to { opacity: 0; visibility: hidden; pointer-events: none; }
-}
-.nw-intro[data-done] { opacity: 0; pointer-events: none; }
-.nw-intro video { inline-size: min(60vw, 520px); block-size: auto; }
-
 /* --- Our ambition ----------------------------------------------
    A panasz az volt, hogy "túl kék és semmitmondó". Ezért a 4 elv
    lett a szekció főszereplője: nagy sorok, hover-interakcióval --
@@ -719,4 +699,89 @@ main > article > header.nw-section {
   flex: none; inline-size: 22px; block-size: 3px;
   background: var(--nw-sun); border-radius: var(--nw-radius-pill);
   transform: rotate(-24deg);
+}
+
+/* --- Statement-blokk (Aptiv-minta) --------------------------------
+   Egyetlen nagy allitas, sajat szekcioban. NEM split-header: nincs
+   mellette magyarazo bekezdes, nincs eyebrow, nincs CTA. Az allitas
+   maga a tartalom.
+
+   Dramaturgiai helye a "kik vagyunk" es a "mit csinalunk" kozotti
+   valtas. Egyben megtori a szekcio-elrendezesek ismetlodeset is. */
+.nw-statement {
+  background: var(--nw-bg);
+  color: var(--nw-fg);
+  padding-block: clamp(5rem, 4rem + 9vw, 11rem);
+  border-block: 1px solid var(--nw-rule);
+}
+.nw-statement__line {
+  margin: 0;
+  max-inline-size: 20ch;
+  font-family: var(--nw-font-display);
+  font-size: clamp(2rem, 1.2rem + 4.2vw, 5rem);
+  font-weight: var(--nw-fw-bold);
+  line-height: 1.04;
+  letter-spacing: var(--nw-tracking-tight);
+  text-wrap: balance;
+}
+
+/* --- Pull-quote ---------------------------------------------------
+   A brandbook a Lorat editorial szerepre irja elo. Egy oldalon egyszer,
+   ott ahol a mondat tenyleg allitas, nem folyoszoveg. */
+.nw-pullquote {
+  margin: var(--nw-space-6) 0;
+  padding-inline-start: var(--nw-space-3);
+  border-inline-start: 3px solid var(--nw-blue-2);
+}
+.nw-pullquote p {
+  margin: 0;
+  font-family: var(--nw-font-editorial);
+  font-style: italic;
+  font-size: var(--nw-text-xl);
+  /* Az italic leszarhagas miatt 1.1 a minimum, kulonben a g es a p
+     alja levagodik. */
+  line-height: 1.25;
+  padding-block-end: 0.15em;
+  color: var(--nw-fg);
+  max-inline-size: 34ch;
+}
+
+/* A subhero hattere lehet kep VAGY video, ugyanaz a szabaly. */
+video.nw-subhero__bg { object-fit: cover; }
+
+
+/* --- Kinetikus statement ------------------------------------------
+   A szavak alulrol usznak be, sajat maszkjuk mogul, lepcsozetesen.
+   CSS-bol es nem videobol, mert igy a szoveg kijelolheto marad, a
+   kepernyoolvaso felolvassa, elesen skalazodik minden felbontason,
+   es nulla byte. Egy mp4 mindharmat elveszitene. */
+.nw-statement__line .nw-kw {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: bottom;
+  padding-block-end: 0.08em;   /* a leszarhagas (p, g, y) ne vagodjon le */
+}
+.nw-statement__line .nw-kw > span {
+  display: inline-block;
+  transform: translateY(105%);
+  transition: transform 900ms cubic-bezier(0.16, 1, 0.3, 1);
+  transition-delay: calc(var(--i, 0) * 90ms);
+}
+.nw-statement__line[data-on] .nw-kw > span { transform: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  .nw-statement__line .nw-kw > span { transform: none; transition: none; }
+}
+
+/* --- Lebego brand-sav ---------------------------------------------
+   A formak lassan usznak. Nem particle-rendszer: harom nagy alakzat,
+   ahogy a brandbook eloirja, csak epp nem allnak. */
+@media (prefers-reduced-motion: no-preference) {
+  .nw-brandband__shape { animation: nw-drift 26s ease-in-out infinite alternate; }
+  .nw-brandband__shape:nth-child(2) { animation-duration: 34s; animation-delay: -6s; }
+  .nw-brandband__shape:nth-child(3) { animation-duration: 30s; animation-delay: -13s; }
+}
+@keyframes nw-drift {
+  from { transform: rotate(-45deg) translate3d(0, 0, 0); }
+  to   { transform: rotate(-45deg) translate3d(6%, -4%, 0); }
 }
