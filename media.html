@@ -69,13 +69,46 @@
 
   <section class="nw-section nw-theme-light">
     <div class="nw-shell">
-      <p class="nw-lead nw-prose" data-reveal>
-        Discover the latest company news, technology developments, customer success
-        stories and insights from across neuwerk. Learn how our people, expertise and
-        solutions are helping shape the future of mobility and beyond.
-      </p>
+      <div class="nw-prose" data-reveal>
+        <p class="nw-lead">
+          Company news, technology developments and customer success stories.
+        </p>
+        <p>
+          Learn how our people, expertise and solutions are helping shape the future
+          of mobility and beyond.
+        </p>
+      </div>
 
-      <ul class="nw-newslist" data-news></ul>
+      <ul class="nw-newslist" data-news>
+        <!-- Statikus alap. A js/lists.js ezt irja felul a data/news.js
+             tartalmaval. Azert van itt, mert enelkul a cikkoldalak
+             CSAK JS-bol lennenek elerhetok: JS nelkul arvak, keresonek
+             lathatatlanok. -->
+        <li class="nw-news" data-placeholder>
+          <a href="media/how-to-update-this-page.html">
+            <time datetime="2026-08-10">2026-08-10</time>
+            <h3><span class="nw-ph">Placeholder</span> How to update this page</h3>
+            <p>A short guide for the neuwerk team: how to add, edit and remove news
+               articles and open positions without a CMS.</p>
+          </a>
+        </li>
+        <li class="nw-news" data-placeholder>
+          <a href="media/neuwerk-begins.html">
+            <time datetime="2026-08-01">2026-08-01</time>
+            <h3><span class="nw-ph">Placeholder</span> A new chapter begins</h3>
+            <p>neuwerk starts operating as an independent global company, building on
+               decades of automotive engineering expertise.</p>
+          </a>
+        </li>
+        <li class="nw-news" data-placeholder>
+          <a href="media/thermal-systems-milestone.html">
+            <time datetime="2026-07-15">2026-07-15</time>
+            <h3><span class="nw-ph">Placeholder</span> Thermal systems milestone</h3>
+            <p>A look at how integrated thermal management supports battery performance
+               across demanding applications.</p>
+          </a>
+        </li>
+      </ul>
 
       <p class="nw-note">
         <span class="nw-ph">Placeholder</span>

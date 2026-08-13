@@ -1,40 +1,61 @@
-/* NYITOTT POZÍCIÓK
+/* NYITOTT POZICIOK
    ================================================================
-   Új pozíció hozzáadása: másolj le egy blokkot, és írd át a mezőket.
-   A lista sorrendje a megjelenés sorrendje. Nem kell semmi mást
-   szerkeszteni -- a career.html ebből rendereli a listát.
+   Uj pozicio hozzaadasa: masolj le egy blokkot, es ird at a mezoket.
+   A lista sorrendje nem szamit: a career.html munkacsalad szerint
+   csoportositva jeleniti meg.
 
-   Mezők:
-     title    - a pozíció neve
-     location - város, ország
-     type     - pl. "Full-time", "Part-time", "Internship"
-     area     - szakterület
-     url      - jelentkezési link. Ha nincs, hagyd "" értéken.
+   Mezok:
+     title      - a pozicio neve
+     jobFamily  - munkacsalad. Ez adja a csoportositast az oldalon.
+                  Hasznalt ertekek: Engineering, Manufacturing, Sales,
+                  Quality, Supply Chain, Corporate
+     location   - varos, orszag
+     country    - orszag onmagaban, a szurohoz
+     type       - pl. "Full-time", "Part-time", "Internship"
+     url        - jelentkezesi link. Ha nincs, hagyd "" erteken.
 
-   TODO(client): a valós nyitott pozíciók listája bekérendő -->
+   A jobFamily es a country mezo azert van kulon, mert az ugyfel altal
+   kuldott benchmarkok (Netflix About, Mercedes-Benz Group Careers)
+   pontosan e ket tengely menten szervezik a karrieroldalt. Valos adat
+   nelkul is igy epul a struktura, hogy az adat megerkezesekor csak a
+   lista cserelodjon.
+
+   TODO(client): a valos nyitott poziciok listaja bekerendo -->
 */
 window.NEUWERK_JOBS = [
   {
-    title: "Placeholder — Development Engineer, Thermal Systems",
+    title: "Placeholder - Development Engineer, Thermal Systems",
+    jobFamily: "Engineering",
     location: "Example City, Example Country",
+    country: "Example Country",
     type: "Full-time",
-    area: "Engineering",
     url: "",
     placeholder: true
   },
   {
-    title: "Placeholder — Process Engineer, Multi-Material",
+    title: "Placeholder - Simulation Engineer, Fluid Handling",
+    jobFamily: "Engineering",
     location: "Example City, Example Country",
+    country: "Example Country",
     type: "Full-time",
-    area: "Manufacturing",
     url: "",
     placeholder: true
   },
   {
-    title: "Placeholder — Key Account Manager",
+    title: "Placeholder - Process Engineer, Multi-Material",
+    jobFamily: "Manufacturing",
     location: "Example City, Example Country",
+    country: "Example Country",
     type: "Full-time",
-    area: "Sales",
+    url: "",
+    placeholder: true
+  },
+  {
+    title: "Placeholder - Key Account Manager",
+    jobFamily: "Sales",
+    location: "Example City, Example Country",
+    country: "Example Country",
+    type: "Full-time",
     url: "",
     placeholder: true
   }

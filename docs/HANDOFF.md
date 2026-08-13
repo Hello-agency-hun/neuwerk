@@ -32,18 +32,18 @@ Generálva: `python tools/check_placeholders.py` — **18 tétel**
 | fájl | sor | tétel |
 |---|---|---|
 | `contact.html` | 77 | MINDEN kontaktadat placeholder, valós adatok bekérendők |
-| `feltoltesre/contact.html` | 63 | MINDEN kontaktadat placeholder, valós adatok bekérendők |
-| `feltoltesre/index.html` | 161 | a 16 ország tényleges listája bekérendő |
-| `feltoltesre/media/neuwerk-begins.html` | 71 | valós cikkszöveg bekérendő |
-| `feltoltesre/media/thermal-systems-milestone.html` | 67 | valós cikkszöveg bekérendő |
-| `feltoltesre/responsibility.html` | 66 | az 5 jogi dokumentum valós szövege bekérendő |
-| `feltoltesre/responsibility.html` | 130 | Integrity Line csatorna és adatvédelmi nyilatkozat bekérendő |
-| `index.html` | 167 | a 16 ország tényleges listája bekérendő |
+| `feltoltesre/contact.html` | 77 | MINDEN kontaktadat placeholder, valós adatok bekérendők |
+| `feltoltesre/index.html` | 167 | a 16 ország tényleges listája bekérendő |
+| `feltoltesre/media/neuwerk-begins.html` | 84 | valós cikkszöveg bekérendő |
+| `feltoltesre/media/thermal-systems-milestone.html` | 80 | valós cikkszöveg bekérendő |
+| `feltoltesre/responsibility.html` | 80 | az 5 jogi dokumentum valós szövege bekérendő |
+| `feltoltesre/responsibility.html` | 143 | Integrity Line csatorna és adatvédelmi nyilatkozat bekérendő |
+| `index.html` | 166 | a 16 ország tényleges listája bekérendő |
 | `media/neuwerk-begins.html` | 84 | valós cikkszöveg bekérendő |
 | `media/thermal-systems-milestone.html` | 80 | valós cikkszöveg bekérendő |
-| `responsibility.html` | 80 | az 5 jogi dokumentum valós szövege bekérendő |
-| `responsibility.html` | 143 | Integrity Line csatorna és adatvédelmi nyilatkozat bekérendő |
-| `data/jobs.js` | 14 | a valós nyitott pozíciók listája bekérendő |
+| `responsibility.html` | 84 | az 5 jogi dokumentum valós szövege bekérendő |
+| `responsibility.html` | 147 | Integrity Line csatorna és adatvédelmi nyilatkozat bekérendő |
+| `data/jobs.js` | 23 | a valos nyitott poziciok listaja bekerendo |
 | `data/locations.js` | 10 | a 16 ország tényleges listája bekérendő |
 | `data/news.js` | 10 | a valós hírek és cikkek bekérendők |
 | `feltoltesre/data/jobs.js` | 14 | a valós nyitott pozíciók listája bekérendő |

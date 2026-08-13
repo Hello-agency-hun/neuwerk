@@ -17,18 +17,39 @@
       .replace(/>/g, "&gt;").replace(/"/g, "&quot;");
   }
 
+  /* A poziciok munkacsalad (jobFamily) szerint csoportosulnak.
+
+     Miert: az ugyfel sajat benchmarkjai (Netflix About, Mercedes-Benz
+     Group Careers) pontosan igy szervezik a karrieroldalt, es a
+     benchmark-elemzes ezt Round 1 tetelkent hozta. Sima lapos lista
+     nem mutatja meg, milyen terulete van a cegnek. */
   var jobsHost = document.querySelector("[data-jobs]");
   if (jobsHost && window.NEUWERK_JOBS) {
-    jobsHost.innerHTML = window.NEUWERK_JOBS.map(function (j) {
-      var head = j.url
-        ? '<a href="' + esc(j.url) + '">' + esc(j.title) + "</a>"
-        : esc(j.title);
+    var groups = [];
+    var byFamily = {};
+    window.NEUWERK_JOBS.forEach(function (j) {
+      var fam = j.jobFamily || "Other";
+      if (!byFamily[fam]) { byFamily[fam] = []; groups.push(fam); }
+      byFamily[fam].push(j);
+    });
+
+    jobsHost.innerHTML = groups.map(function (fam) {
+      var rows = byFamily[fam].map(function (j) {
+        var head = j.url
+          ? '<a href="' + esc(j.url) + '">' + esc(j.title) + "</a>"
+          : esc(j.title);
+        var meta = [j.location, j.type].filter(Boolean).map(esc).join(" &middot; ");
+        return (
+          '<li class="nw-job"' + (j.placeholder ? " data-placeholder" : "") + ">" +
+          '<h4 class="nw-job__title">' + badge(j) + head + "</h4>" +
+          '<p class="nw-job__meta">' + meta + "</p></li>"
+        );
+      }).join("");
       return (
-        '<li class="nw-job"' + (j.placeholder ? ' data-placeholder' : "") + ">" +
-        '<h3 class="nw-job__title">' + badge(j) + head + "</h3>" +
-        '<p class="nw-job__meta">' +
-          esc(j.area) + " &middot; " + esc(j.location) + " &middot; " + esc(j.type) +
-        "</p></li>"
+        '<li class="nw-jobgroup">' +
+        '<h3 class="nw-jobgroup__title">' + esc(fam) +
+        '<span class="nw-jobgroup__count">' + byFamily[fam].length + "</span></h3>" +
+        '<ul class="nw-jobgroup__list">' + rows + "</ul></li>"
       );
     }).join("");
   }

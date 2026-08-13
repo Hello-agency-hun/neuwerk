@@ -656,3 +656,67 @@ main > article > header.nw-section {
    eyebrow-cimkek szamat le kellett vinni. Igy a cim melletti jeloles
    ugyanolyan lathato, de nem gyarapitja a cimkeket. */
 .nw-article h1 .nw-ph { vertical-align: middle; margin-inline-end: 0.5rem; }
+
+/* --- Munkacsalad szerinti csoportositas a Career oldalon ----------
+   Az ugyfel benchmarkjai (Netflix About, Mercedes-Benz Group Careers)
+   lokacio es munkacsalad menten szervezik a poziciokat. Lapos lista
+   nem mutatja meg, milyen teruletei vannak a cegnek. */
+.nw-jobgroup + .nw-jobgroup { margin-block-start: var(--nw-space-6); }
+.nw-jobgroup__title {
+  display: flex; align-items: baseline; gap: 0.6rem;
+  padding-block-end: var(--nw-space-1);
+  border-block-end: 2px solid var(--nw-rule);
+  font-size: var(--nw-text-lg);
+  font-weight: var(--nw-fw-semibold);
+}
+.nw-jobgroup__count {
+  font-size: var(--nw-text-sm);
+  font-weight: var(--nw-fw-medium);
+  color: var(--nw-fg-secondary);
+}
+.nw-jobgroup__list { margin-block-start: 0.25rem; }
+.nw-job__title { font-size: var(--nw-text-base); font-weight: var(--nw-fw-semibold); }
+
+/* --- Brand-sav a videó-screenshot helyett -------------------------
+   A screenshotokat a visszajelzés "nagyon rondanak" nevezte, a
+   benchmark-elemzes pedig a TI Fluid-elvet hozta ki gyoztesnek:
+   nincs termekfoto. Helyette a sav a sajat formanyelvbol epul.
+
+   Nem raszter: tiszta CSS, tehat elesen skalazodik, nulla byte, es
+   a szinei a tokenekbol jonnek, tehat egy token-valtas atszinezi.
+   A formak nagyok es kevesen vannak, ahogy a brandbook eloirja. */
+.nw-brandband {
+  position: relative;
+  margin-block-start: var(--nw-space-8);
+  block-size: clamp(180px, 26vw, 320px);
+  background: var(--nw-deep);
+  overflow: clip;
+  isolation: isolate;
+}
+.nw-brandband__shape {
+  position: absolute;
+  border-radius: var(--nw-radius-pill);
+  background: var(--nw-deeper);
+  transform: rotate(-45deg);
+}
+.nw-brandband__shape:nth-child(1) { inset-inline-start: -8%;  inset-block-start: -60%; inline-size: 46%; block-size: 190%; }
+.nw-brandband__shape:nth-child(2) { inset-inline-start: 30%;  inset-block-start: -40%; inline-size: 30%; block-size: 180%;
+                                     background: color-mix(in oklab, var(--nw-blue-2) 60%, var(--nw-deep)); }
+.nw-brandband__shape:nth-child(3) { inset-inline-end: -6%;    inset-block-start: -50%; inline-size: 38%; block-size: 185%; }
+
+.nw-brandband__label {
+  position: absolute; inset-block-end: 0; inset-inline: 0;
+  max-inline-size: var(--nw-max-width);
+  margin-inline: auto;
+  padding: var(--nw-space-3) var(--nw-gutter);
+  display: flex; align-items: center; gap: 0.75rem;
+  font-family: var(--nw-font-display);
+  font-size: var(--nw-text-sm);
+  font-weight: var(--nw-fw-medium);
+  color: var(--nw-blue-4);
+}
+.nw-brandband__mark {
+  flex: none; inline-size: 22px; block-size: 3px;
+  background: var(--nw-sun); border-radius: var(--nw-radius-pill);
+  transform: rotate(-24deg);
+}

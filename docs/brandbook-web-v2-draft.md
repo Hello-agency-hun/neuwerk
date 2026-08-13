@@ -1,7 +1,11 @@
 # neuwerk — web brandbook v2 (VÁZLAT, jóváhagyásra)
 
-**Státusz:** vázlat. Ez a dokumentum a web-alapú arculatot javasolja, nem hagyja jóvá.
-Készült: 2026-08-12.
+**Státusz:** ügynökségi oldalról elfogadva és megépítve (2026-08-12).
+Ügyfél-jóváhagyás: **még nyitva.**
+
+A 2., 3. és 4. fejezet javaslatai a kódban futnak (`2f9192f`, `4ae0764`, és a
+Round 1 commit). A 6. fejezet 2. tétele -- a pattern világos variánsa -- a v1.1
+brandbook módosítását igényli, és ügyfél-döntést vár.
 
 **Miért kell:** két független visszajelzés futott össze.
 
