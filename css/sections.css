@@ -672,6 +672,17 @@ main > article > header.nw-section {
 }
 .nw-subhero--image > .nw-shell { position: relative; z-index: 2; }
 
+/* Pattern-hero: ugyanazok a formak, mint a fooldali brand-savban.
+   Csak a kontenert kell megadni -- a formak stilusat es animaciojat a
+   .nw-brandband__shape szabalyok viszik, a meretuket pedig a --nw-bh,
+   amit itt a hero magassagara allitunk. */
+.nw-subhero__shapes {
+  --nw-bh: 60svh;
+  position: absolute; inset: 0; z-index: 0;
+  overflow: clip;
+  background: var(--nw-deep);
+}
+
 /* Széles kinetikus mondat: aloldalon a vezérmondat egy sor, nem blokk. */
 .nw-kinetic--wide {
   max-width: 22ch;
@@ -725,23 +736,29 @@ main > article > header.nw-section {
      szekcio alsó paddingjet. Enelkul a sotet sav alatt maradt egy szeles
      feher csik, mielott a kovetkezo szekcio elkezdodott volna. */
   margin-block-end: calc(var(--nw-section-y) * -1);
-  block-size: clamp(200px, 26vw, 340px);
+  /* A formak merete EBBOL szarmazik, nem a viewport szelessegebol.
+     Igy az arany minden felbontason ugyanaz marad. */
+  --nw-bh: clamp(200px, 26vw, 340px);
+  block-size: var(--nw-bh);
   background: var(--nw-deep);
   overflow: clip;
   isolation: isolate;
 }
-/* A formak merete ARANYBOL szarmazik, nem a sav szazalekabol.
-   Korabban 15% x 244% volt: 45 fokban elforgatva ez 800 px fole nyult a
-   340 px-es savban, tehat a lekerekitett vegek mindig kilogtak -- a sav
-   parhuzamos csikoknak latszott, nem pilleknek.
-   Most a fuggoleges kiterjedes (hossz + szelesseg) * 0,71, ami a
-   legnagyobb formanal is a sav magassaga ALATT marad: a ket lekerekitett
-   veg latszik. */
+/* A formak merete a sav magassagahoz kepest van megadva (--k), a
+   hosszuk pedig aranybol (--r). A ketto szorzata korlatos: a 45 fokban
+   elforgatott, majd 1,12-re felskalazott forma fuggoleges kiterjedese
+   (k * (r + 1)) * 0,707 * 1,12, aminek a sav magassaga alatt kell
+   maradnia -- kulonben megint kilognak a lekerekitett vegek. Ezert
+   minden formanal k * (r + 1) ~ 1,22.
+
+   Kilenc forma, 11 szazalekonkent: a vizszintes helyfoglalasuk ennel
+   nagyobb, tehat atfedik egymast. Ot forma 20 szazalekonkent tul ritka
+   volt, kulon-kulon uszo pasztillaknak latszottak, nem savnak. */
 .nw-brandband__shape {
   position: absolute;
   inset-block-start: 50%;
-  inline-size: var(--w);
-  aspect-ratio: var(--ar);
+  inline-size: calc(var(--nw-bh) * var(--k));
+  aspect-ratio: 1 / var(--r);
   border-radius: var(--nw-radius-pill);
   background: var(--nw-deeper);
   /* A translateY a rotate ELOTT all, igy a szulo fuggoleges tengelye
@@ -749,13 +766,28 @@ main > article > header.nw-section {
   transform: translateY(-50%) rotate(-45deg);
   will-change: transform, opacity;
 }
-.nw-brandband__shape:nth-child(1) { --w: clamp(46px, 5.4vw, 84px); --ar: 1 / 3.4; inset-inline-start: 7%;  }
-.nw-brandband__shape:nth-child(2) { --w: clamp(38px, 4.2vw, 64px); --ar: 1 / 4.6; inset-inline-start: 24%;
-                                     background: color-mix(in oklab, var(--nw-blue-2) 62%, var(--nw-deep)); }
-.nw-brandband__shape:nth-child(3) { --w: clamp(52px, 6.2vw, 96px); --ar: 1 / 2.7; inset-inline-start: 43%; }
-.nw-brandband__shape:nth-child(4) { --w: clamp(34px, 3.8vw, 58px); --ar: 1 / 5.0; inset-inline-start: 62%;
-                                     background: color-mix(in oklab, var(--nw-blue-2) 48%, var(--nw-deep)); }
-.nw-brandband__shape:nth-child(5) { --w: clamp(44px, 5vw, 78px);   --ar: 1 / 3.8; inset-inline-end: 8%; }
+.nw-brandband__shape:nth-child(1) { --k: 0.42; --r: 1.90; inset-inline-start: -5%; }
+.nw-brandband__shape:nth-child(2) { --k: 0.34; --r: 2.55; inset-inline-start:  6%; }
+.nw-brandband__shape:nth-child(3) { --k: 0.46; --r: 1.65; inset-inline-start: 17%; }
+.nw-brandband__shape:nth-child(4) { --k: 0.30; --r: 3.05; inset-inline-start: 28%; }
+.nw-brandband__shape:nth-child(5) { --k: 0.40; --r: 2.05; inset-inline-start: 39%; }
+.nw-brandband__shape:nth-child(6) { --k: 0.36; --r: 2.35; inset-inline-start: 50%; }
+.nw-brandband__shape:nth-child(7) { --k: 0.44; --r: 1.75; inset-inline-start: 61%; }
+.nw-brandband__shape:nth-child(8) { --k: 0.32; --r: 2.80; inset-inline-start: 72%; }
+.nw-brandband__shape:nth-child(9) { --k: 0.38; --r: 2.20; inset-inline-start: 84%; }
+
+/* Vilagosabb tonusok a melyseghez. */
+.nw-brandband__shape:nth-child(2),
+.nw-brandband__shape:nth-child(6) { background: color-mix(in oklab, var(--nw-blue-2) 62%, var(--nw-deep)); }
+.nw-brandband__shape:nth-child(4),
+.nw-brandband__shape:nth-child(8) { background: color-mix(in oklab, var(--nw-blue-2) 45%, var(--nw-deep)); }
+
+/* Keskeny kepernyon kilenc forma osszemosodna: harom kimarad. */
+@media (max-width: 40rem) {
+  .nw-brandband__shape:nth-child(3),
+  .nw-brandband__shape:nth-child(6),
+  .nw-brandband__shape:nth-child(9) { display: none; }
+}
 
 .nw-brandband__label {
   position: absolute; inset-block-end: 0; inset-inline: 0;
@@ -855,11 +887,19 @@ video.nw-subhero__bg { object-fit: cover; }
    (a translate a rotate UTAN all), ezert a mozgas a logo ferde
    vonasat koveti, nem keresztbe vag rajta. */
 @media (prefers-reduced-motion: no-preference) {
-  .nw-brandband__shape { animation: nw-drift 6.4s ease-in-out infinite alternate; }
-  .nw-brandband__shape:nth-child(2) { animation-duration: 5.2s; animation-delay: -1.7s; }
-  .nw-brandband__shape:nth-child(3) { animation-duration: 8.1s; animation-delay: -3.4s; }
-  .nw-brandband__shape:nth-child(4) { animation-duration: 5.9s; animation-delay: -0.8s; }
-  .nw-brandband__shape:nth-child(5) { animation-duration: 7.3s; animation-delay: -2.6s; }
+  .nw-brandband__shape { animation: nw-drift 6s ease-in-out infinite alternate; }
+  .nw-brandband__shape:nth-child(2) { animation-duration: 4.6s; animation-delay: -1.4s; }
+  .nw-brandband__shape:nth-child(3) { animation-duration: 7.1s; animation-delay: -2.9s; }
+  .nw-brandband__shape:nth-child(4) { animation-duration: 5.3s; animation-delay: -0.7s; }
+  .nw-brandband__shape:nth-child(5) { animation-duration: 6.6s; animation-delay: -3.8s; }
+  .nw-brandband__shape:nth-child(6) { animation-duration: 4.9s; animation-delay: -2.1s; }
+  .nw-brandband__shape:nth-child(7) { animation-duration: 7.4s; animation-delay: -5.2s; }
+  .nw-brandband__shape:nth-child(8) { animation-duration: 5.7s; animation-delay: -1.9s; }
+  .nw-brandband__shape:nth-child(9) { animation-duration: 6.3s; animation-delay: -4.4s; }
+}
+@keyframes nw-drift {
+  from { transform: translateY(-50%) rotate(-45deg) translate3d(-11%, 0, 0) scale(0.9); opacity: 0.55; }
+  to   { transform: translateY(-50%) rotate(-45deg) translate3d(9%, 0, 0)   scale(1.12); opacity: 1; }
 }
 @keyframes nw-drift {
   from { transform: translateY(-50%) rotate(-45deg) translate3d(-9%, 0, 0) scale(0.88); opacity: 0.5; }

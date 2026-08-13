@@ -31,16 +31,16 @@ Generálva: `python tools/check_placeholders.py` — **18 tétel**
 
 | fájl | sor | tétel |
 |---|---|---|
-| `contact.html` | 77 | MINDEN kontaktadat placeholder, valós adatok bekérendők |
+| `contact.html` | 92 | MINDEN kontaktadat placeholder, valós adatok bekérendők |
 | `feltoltesre/contact.html` | 77 | MINDEN kontaktadat placeholder, valós adatok bekérendők |
 | `feltoltesre/index.html` | 171 | a 16 ország tényleges listája bekérendő |
 | `feltoltesre/media/neuwerk-begins.html` | 84 | valós cikkszöveg bekérendő |
 | `feltoltesre/media/thermal-systems-milestone.html` | 80 | valós cikkszöveg bekérendő |
 | `feltoltesre/responsibility.html` | 84 | az 5 jogi dokumentum valós szövege bekérendő |
 | `feltoltesre/responsibility.html` | 147 | Integrity Line csatorna és adatvédelmi nyilatkozat bekérendő |
-| `index.html` | 173 | a 16 ország tényleges listája bekérendő |
-| `legal-compliance.html` | 97 | az 5 jogi dokumentum valós szövege bekérendő |
-| `legal-compliance.html` | 169 | Integrity Line csatorna és adatvédelmi nyilatkozat bekérendő |
+| `index.html` | 177 | a 16 ország tényleges listája bekérendő |
+| `legal-compliance.html` | 111 | az 5 jogi dokumentum valós szövege bekérendő |
+| `legal-compliance.html` | 183 | Integrity Line csatorna és adatvédelmi nyilatkozat bekérendő |
 | `media/neuwerk-begins.html` | 90 | valós cikkszöveg bekérendő |
 | `media/thermal-systems-milestone.html` | 86 | valós cikkszöveg bekérendő |
 | `data/jobs.js` | 23 | a valos nyitott poziciok listaja bekerendo |

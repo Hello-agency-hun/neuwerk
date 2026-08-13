@@ -58,8 +58,23 @@
 
 <main id="main">
   <section class="nw-section nw-theme-dark nw-subhero nw-subhero--image">
-    <img class="nw-subhero__bg" src="assets/img/subhero/contact.jpg" alt=""
-         width="2400" height="1018" decoding="async">
+    <!-- Nem generalt klip, hanem ugyanaz a CSS-pattern, ami a fooldali
+         brand-savban fut. Ket kor generalas utan a modell konzekvensen
+         cian-kekre es rossz formakra ment (gomb, gyogyszerkapszula), a
+         markaszinek pedig sosem stimmeltek. A CSS-valtozat viszont a
+         tokenekbol veszi a szint, tehat definicio szerint pontos, nulla
+         byte, es a prefers-reduced-motion mar kezelve van rajta. -->
+    <div class="nw-subhero__shapes" aria-hidden="true">
+      <span class="nw-brandband__shape"></span>
+      <span class="nw-brandband__shape"></span>
+      <span class="nw-brandband__shape"></span>
+      <span class="nw-brandband__shape"></span>
+      <span class="nw-brandband__shape"></span>
+      <span class="nw-brandband__shape"></span>
+      <span class="nw-brandband__shape"></span>
+      <span class="nw-brandband__shape"></span>
+      <span class="nw-brandband__shape"></span>
+    </div>
     <div class="nw-subhero__scrim" aria-hidden="true"></div>
     <div class="nw-shell">
       <p class="nw-eyebrow">Contact</p>

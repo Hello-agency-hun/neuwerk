@@ -58,8 +58,15 @@
 
 <main id="main">
   <section class="nw-section nw-theme-dark nw-subhero nw-subhero--image">
-    <img class="nw-subhero__bg" src="assets/img/subhero/career.jpg" alt=""
-         width="2400" height="1018" decoding="async">
+    <!-- Rovid, nema, loopolo klip a statikus kep helyett (Rivian-minta a
+         benchmarkbol). A klip mar feliratmentes, tehat nem kellett hozza
+         uj render. A poszter a klip elso kepkockaja, igy reduced motion
+         es autoplay-tiltas eseten is ugyanaz latszik. -->
+    <video class="nw-subhero__bg" data-subhero-video
+           muted playsinline autoplay loop preload="metadata"
+           poster="assets/video/solution-fluid.jpg" aria-hidden="true">
+      <source src="assets/video/solution-fluid.mp4" type="video/mp4">
+    </video>
     <div class="nw-subhero__scrim" aria-hidden="true"></div>
     <div class="nw-shell">
       <p class="nw-eyebrow">Career</p>
