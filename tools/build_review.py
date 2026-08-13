@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Review-build: a `feltoltesre/` mappa összeállítása.
+"""Review-build: a feltölthető bemutató-mappa összeállítása.
 
 Ez NEM a végleges csomag. Ez a bemutató-változat, amit shared hostingra
 lehet másolni, hogy a döntéshozók végigkattintsák és megjegyzést hagyjanak.
@@ -14,7 +14,12 @@ Az éles csomagban (tools/make_zip.py) EGYIK SINCS benne -- ott a site
 tiszta statikus HTML/CSS/JS, szerveroldal nélkül.
 
 Futtatás:
-    python tools/build_review.py
+    python tools/build_review.py                # -> uj-neuwerk/
+    python tools/build_review.py masik-mappa    # -> masik-mappa/
+
+A kimeneti mappa neve egyben a bemutató-kör azonosítója is: minden
+megjegyzés megkapja `round` mezőként, tehát ha két kör anyaga ugyanarra
+a tárhelyre kerül, a visszaérkező JSON-okból látszik, melyik melyik.
 """
 import shutil
 import sys
@@ -24,12 +29,12 @@ if hasattr(sys.stdout, "reconfigure"):
     sys.stdout.reconfigure(encoding="utf-8")
 
 ROOT = Path(__file__).resolve().parent.parent
-OUT = ROOT / "feltoltesre"
+OUT = ROOT / (sys.argv[1] if len(sys.argv) > 1 else "uj-neuwerk")
 
 INCLUDE_DIRS = ["assets", "css", "js", "data", "media"]
 INCLUDE_FILES = [
     "index.html", "identity.html", "career.html", "media.html",
-    "responsibility.html", "contact.html", "404.html",
+    "responsibility.html", "legal-compliance.html", "contact.html", "404.html",
 ]
 
 MEDIA_PAGES = ["how-to-update-this-page", "neuwerk-begins", "thermal-systems-milestone"]
@@ -38,6 +43,7 @@ MEDIA_PAGES = ["how-to-update-this-page", "neuwerk-begins", "thermal-systems-mil
 INJECT = (
     '<!-- review widget: CSAK a bemutató-változatban. Az éles csomagban nincs. -->\n'
     '<link rel="stylesheet" href="{r}review.css">\n'
+    '<script>window.NWR_ROUND = "{round}";</script>\n'
     '<script src="{r}review.js"></script>\n'
 )
 
@@ -49,13 +55,23 @@ Mi ez
 A neuwerk weboldal jelenlegi állapota, végigkattintható formában, plusz egy
 megjegyzés-gyűjtő. Nem a végleges csomag: abban nincs PHP és nincs widget.
 
+11 oldal van benne, köztük az új Legal & Compliance aloldal. A főoldalon a
+brand-sáv formái mozognak, az aloldalak fejlécében rövid klip vagy animált
+minta fut — ha valakinél ezek állnak, az a gép „csökkentett mozgás"
+beállítása, nem hiba.
+
+Fontos: ez KÜLÖN mappa az előző körtől. Ha a régi is fent van a tárhelyen,
+töltsd EZT egy másik almappába, különben a két kör megjegyzései egy
+könyvtárba keverednek. (Minden megjegyzés kap egy `round` mezőt is, tehát
+utólag akkor is szét lehet válogatni őket.)
+
 Feltöltés
 ---------
 1. Másold fel a mappa TELJES tartalmát a webtárhelyre, egy almappába
-   (pl. /neuwerk-preview/). A mappaszerkezetet tartsd meg.
+   (pl. /neuwerk-uj/). A mappaszerkezetet tartsd meg.
 2. A `feedback` mappára adj ÍRÁSI jogot (755 vagy 775; ha nem megy, 777).
    Ha nem létezik, a PHP megpróbálja létrehozni.
-3. Nyisd meg a böngészőben: https://a-domained.hu/neuwerk-preview/
+3. Nyisd meg a böngészőben: https://a-domained.hu/neuwerk-uj/
 
 Hogyan használják a véleményezők
 --------------------------------
@@ -95,7 +111,8 @@ def inject(path: Path, prefix: str) -> None:
     html = path.read_text(encoding="utf-8")
     if "review.js" in html:
         return
-    html = html.replace("</body>", INJECT.format(r=prefix) + "</body>", 1)
+    html = html.replace("</body>",
+                        INJECT.format(r=prefix, round=OUT.name) + "</body>", 1)
     path.write_text(html, encoding="utf-8")
 
 

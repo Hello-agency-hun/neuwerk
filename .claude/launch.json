@@ -7,6 +7,12 @@
       "runtimeExecutable": "python",
       "runtimeArgs": ["tools/serve.py"],
       "port": 8000
+    },
+    {
+      "name": "neuwerk-review",
+      "runtimeExecutable": "php",
+      "runtimeArgs": ["-S", "127.0.0.1:8123", "-t", "uj-neuwerk"],
+      "port": 8123
     }
   ]
 }

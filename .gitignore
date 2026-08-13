@@ -23,5 +23,7 @@ Desktop.ini
 __pycache__/
 *.pyc
 
-# A review-build generalt kimenete (tools/build_review.py allitja elo)
+# A review-build generalt kimenete (tools/build_review.py allitja elo).
+# Nem verziozzuk: barmikor ujraepitheto, es 12 MB videot vinne magaval.
+/uj-neuwerk/
 /feltoltesre/

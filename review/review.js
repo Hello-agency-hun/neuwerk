@@ -98,7 +98,10 @@
     );
     if (!best) return "";
     var h = best.querySelector("h1, h2");
-    return (h ? h.textContent : best.id || "").trim().replace(/\s+/g, " ").slice(0, 80);
+    // innerText es nem textContent: a cimekben <br> van, amit a
+    // textContent szo nelkul olvas ossze ("Expertiseinto Impact").
+    var txt = h ? (h.innerText || h.textContent) : (best.id || "");
+    return txt.trim().replace(/\s+/g, " ").slice(0, 80);
   }
 
   function refreshWhere() {
@@ -143,7 +146,11 @@
       category: catSel.value,
       author: authorEl.value.trim(),
       comment: comment,
-      viewport: window.innerWidth + "x" + window.innerHeight
+      viewport: window.innerWidth + "x" + window.innerHeight,
+      // Melyik bemutato-kor ez. A build irja be (tools/build_review.py),
+      // igy egy kesobbi korbol szarmazo megjegyzes nem keveredik ossze
+      // egy korabbival, ha ugyanarra a tarhelyre kerulnek.
+      round: window.NWR_ROUND || ""
     };
 
     try { window.localStorage.setItem(STORE_AUTHOR, payload.author); } catch (err) { /* privát mód */ }

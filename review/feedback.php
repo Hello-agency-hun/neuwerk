@@ -207,6 +207,10 @@ $entry = [
     'author'   => $clean($in['author'] ?? '', 120),
     'comment'  => $comment,
     'viewport' => $clean($in['viewport'] ?? '', 40),
+    // Melyik bemutato-kor. A build irja a lapba (window.NWR_ROUND), igy
+    // ket kor megjegyzesei akkor is szetvalogathatok, ha valaki ugyanabba
+    // a konyvtarba tolti fel oket.
+    'round'    => $clean($in['round'] ?? '', 60),
 ];
 
 // A fájlnév rendezhető és beszédes: időbélyeg + oldal + azonosító.
