@@ -1,5 +1,10 @@
 /* Solutions: kattintásra a kiválasztott pillér saját klipje úszik be és
-   játszik le egyszer, majd megáll az utolsó képkockán.
+   FOLYAMATOSAN loopol, amíg másik pillérre nem váltunk.
+
+   Korábban egyszer futott le, majd megállt az utolsó képkockán. A
+   visszajelzés szerint ez "megakadásnak" hatott: a látogató azt látta,
+   hogy a videó lefagyott. A loop folyamatos mozgást ad, és mivel a
+   klipek rövidek és a kameramozgás körbeér, nem tolakodó.
 
    Miért négy külön fájl és nem egy scrubbolt: a közös fájl a hero volt, amibe
    bele van égetve a padlóra vetített SAFETY / PERFORMANCE / EFFICIENCY /
@@ -48,11 +53,8 @@
     rafId = window.requestAnimationFrame(watch);
     var d = active.duration;
     if (!d || !isFinite(d)) return;
+    // A jelzosav a loopon belul mutatja a poziciot, nem all meg 100%-on.
     setProgress(active.currentTime / d);
-    if (active.ended || active.currentTime >= d - 0.02) {
-      stop();
-      setProgress(1);
-    }
   }
 
   function mark(item) {
@@ -78,6 +80,7 @@
     var hold = reduced ? 0 : 700;
     prevTimer = window.setTimeout(function () {
       prev.classList.remove("is-prev");
+      prev.loop = false;            // a hatterben ne loopoljon tovabb
       prev.pause();
       try { prev.currentTime = 0; } catch (e) { /* metaadat még nincs */ }
     }, hold);
@@ -101,12 +104,14 @@
 
     if (!play || reduced) {
       // Reduced motion: nincs lejátszás, a klip első képkockája marad állva.
+      video.loop = false;
       video.pause();
       setProgress(1);
       return;
     }
 
     root.setAttribute("data-playing", "");
+    video.loop = true;              // folyamatos, amig masik pillerre nem valtunk
     var p = video.play();
     if (p && typeof p.catch === "function") {
       // Autoplay-tiltás esetén a poszter marad. Nem hiba, nem kell UI.

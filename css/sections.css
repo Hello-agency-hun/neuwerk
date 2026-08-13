@@ -273,10 +273,8 @@ main > article > header.nw-section {
 
 .nw-solutions__item {
   inline-size: 100%;
-  display: grid;
-  grid-template-columns: auto 1fr;
-  gap: var(--nw-space-2);
-  align-items: start;
+  display: block;                 /* a sorszam-oszlop megszunt */
+  text-align: left;
   text-align: left;
   cursor: pointer;
   padding: var(--nw-space-3) var(--nw-space-2) var(--nw-space-3) 0;
@@ -300,16 +298,7 @@ main > article > header.nw-section {
 .nw-solutions__item[aria-pressed="true"] { padding-inline-start: var(--nw-space-2); }
 .nw-solutions__item[aria-pressed="true"]::before { transform: scaleY(1); }
 
-.nw-solutions__num {
-  font-family: var(--nw-font-display);
-  font-size: var(--nw-text-sm);
-  font-weight: var(--nw-fw-semibold);
-  letter-spacing: var(--nw-tracking-wide);
-  color: var(--nw-fg-secondary);
-  padding-block-start: 0.25rem;
-  transition: color var(--nw-dur-base) var(--nw-ease);
-}
-.nw-solutions__item[aria-pressed="true"] .nw-solutions__num { color: var(--nw-sun); }
+
 
 .nw-solutions__body { display: block; }
 .nw-solutions__title {
@@ -389,7 +378,13 @@ main > article > header.nw-section {
   color: var(--nw-fg-muted);
   max-width: 62ch;
 }
-.nw-lifecycle__label { margin-top: var(--nw-space-6); }
+/* Mostantol valodi cim, nem eyebrow-cimke. */
+.nw-lifecycle__label {
+  margin-block: var(--nw-space-6) var(--nw-space-3);
+  font-size: var(--nw-text-lg);
+  font-weight: var(--nw-fw-semibold);
+  max-inline-size: 34ch;
+}
 
 .nw-lifecycle__steps {
   display: grid;
@@ -450,17 +445,17 @@ main > article > header.nw-section {
    A panasz az volt, hogy "túl kék és semmitmondó". Ezért a 4 elv
    lett a szekció főszereplője: nagy sorok, hover-interakcióval --
    és nem ismétli a Who we are szerkezetét. */
-.nw-ambition__head {
-  display: grid;
-  gap: var(--nw-space-4);
-  grid-template-columns: minmax(0, 6fr) minmax(0, 6fr);
-  align-items: start;
+/* Fuggoleges stack a korabbi split-header helyett.
+   A "bal nagy cim + jobb kis magyarazo bekezdes" minta az egyik
+   leggyakoribb AI-alairas: a bekezdes ott lebeg a jobb felso sarokban,
+   nem igazodik semmihez. Cim es szoveg egymas alatt, kotott sorhosszal. */
+.nw-stack { display: block; }
+.nw-stack__body {
+  margin-block-start: var(--nw-space-4);
+  max-inline-size: 62ch;
 }
-@media (max-width: 900px) {
-  .nw-ambition__head { grid-template-columns: minmax(0, 1fr); }
-}
-.nw-ambition__intro > * + * { margin-top: var(--nw-space-2); }
-.nw-ambition__intro p { color: var(--nw-fg-muted); }
+.nw-stack__body > * + * { margin-top: var(--nw-space-2); }
+.nw-stack__body p { color: var(--nw-fg-secondary); }
 
 .nw-principles {
   margin-top: var(--nw-space-8);
@@ -468,10 +463,7 @@ main > article > header.nw-section {
 }
 .nw-principles li {
   position: relative;
-  display: grid;
-  grid-template-columns: 4.5rem minmax(0, 1fr);
-  align-items: baseline;
-  gap: var(--nw-space-2);
+  display: block;                 /* a sorszam-oszlop megszunt */
   padding-block: var(--nw-space-3);
   border-block-end: 1px solid var(--nw-rule);
   transition: padding-inline-start var(--nw-dur-base) var(--nw-ease);
@@ -489,13 +481,6 @@ main > article > header.nw-section {
 .nw-principles li:hover { padding-inline-start: var(--nw-space-2); }
 .nw-principles li:hover::before { transform: scaleY(1); }
 
-.nw-principles__num {
-  font-family: var(--nw-font-display);
-  font-size: var(--nw-text-sm);
-  font-weight: var(--nw-fw-semibold);
-  letter-spacing: var(--nw-tracking-wide);
-  color: var(--nw-accent-text);
-}
 .nw-principles__text {
   font-family: var(--nw-font-display);
   font-size: var(--nw-text-2xl);
@@ -665,3 +650,9 @@ main > article > header.nw-section {
 /* A harmadik névbontás-elem az összegzés, ezért kiemelve. */
 .nw-namesplit--sum { border-block-start-width: 3px; }
 .nw-namesplit--sum strong { color: var(--nw-fg); }
+
+
+/* A cikkoldalakon a placeholder-badge a cim melle kerult, mert az
+   eyebrow-cimkek szamat le kellett vinni. Igy a cim melletti jeloles
+   ugyanolyan lathato, de nem gyarapitja a cimkeket. */
+.nw-article h1 .nw-ph { vertical-align: middle; margin-inline-end: 0.5rem; }
