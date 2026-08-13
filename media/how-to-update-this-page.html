@@ -58,7 +58,13 @@
 
 <main id="main">
   <article class="nw-article">
-    <header class="nw-section nw-theme-dark nw-subhero">
+    <!-- A fejkep ugyanaz, mint a Media-kartyan: a kettot a data/news.js
+         "image" mezoje kapcsolja ossze. Ha ott mas kepre cserelsz, ezt a
+         ket sort is at kell irni. -->
+    <header class="nw-section nw-theme-dark nw-subhero nw-subhero--image">
+      <img class="nw-subhero__bg" src="../assets/img/news/how-to-update-this-page.jpg" alt=""
+           width="1200" height="670">
+      <span class="nw-subhero__scrim" aria-hidden="true"></span>
       <div class="nw-shell">
         <h1 data-reveal><span class="nw-ph">Placeholder</span> How to update this page</h1>
         <p class="nw-article__date"><time datetime="2026-08-10">10 August 2026</time></p>
@@ -85,10 +91,21 @@
           is real. that line is what shows the orange badge.
         </p>
         <p>
+          The <code>image</code> field is the picture that appears on the card in the
+          Media list <em>and</em> as the header image at the top of the article. It is
+          one setting, not two, so the two can never drift apart. Put your file in
+          <code>assets/img/news/</code> and name it after the slug, then write the path
+          exactly as the other entries do:
+          <code>image: "assets/img/news/my-story.jpg"</code>. Leave the field out
+          entirely and the card simply shows no picture. nothing breaks.
+        </p>
+        <p>
           <strong>Second</strong>, go to the <code>media/</code> folder, duplicate any
           existing article file, and rename it to match your slug. For a slug of
           <code>my-story</code>, the file must be <code>media/my-story.html</code>.
-          Open it and replace the heading, the date and the body text.
+          Open it and replace the heading, the date and the body text. Near the top
+          you will find two lines that point at the header image. Change the file name
+          in both to match the one you set in <code>data/news.js</code>.
         </p>
 
         <h2>Removing an article</h2>
@@ -116,9 +133,17 @@
 
         <h2>Images</h2>
         <p>
-          Put images in <code>assets/img/</code>. Save them at no more than 1600 pixels
-          wide and compress them before upload. a news thumbnail should be well
-          under 300 KB. Large images are the fastest way to make a page feel slow.
+          News pictures go in <code>assets/img/news/</code>, everything else in
+          <code>assets/img/</code>. Save them 1200 to 1600 pixels wide and compress
+          them before upload. a news picture should be well under 300 KB. Large
+          images are the fastest way to make a page feel slow.
+        </p>
+        <p>
+          Crop news pictures to 16:9, roughly 1200&nbsp;&times;&nbsp;675. The card
+          crops to that ratio anyway, and the article header crops from the centre,
+          so anything important near an edge can be cut off. Avoid pictures with
+          text burnt into them. the header lays a dark wash over the image, and
+          burnt-in text is unreadable through it.
         </p>
 
         <h2>Checking your work</h2>

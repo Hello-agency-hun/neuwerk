@@ -60,6 +60,12 @@
       return (
         '<li class="nw-news"' + (n.placeholder ? ' data-placeholder' : "") + ">" +
         '<a href="media/' + esc(n.slug) + '.html">' +
+        // A kep dekorativ: absztrakt markvizual, nem hordoz informaciot,
+        // ezert alt="" -- a kepernyoolvaso atugorja, a cim viszi a jelentest.
+        (n.image
+          ? '<span class="nw-news__media"><img src="' + esc(n.image) +
+            '" alt="" loading="lazy" width="1200" height="670"></span>'
+          : "") +
         '<time datetime="' + esc(n.date) + '">' + esc(n.date) + "</time>" +
         "<h3>" + badge(n) + esc(n.title) + "</h3>" +
         "<p>" + esc(n.excerpt) + "</p>" +

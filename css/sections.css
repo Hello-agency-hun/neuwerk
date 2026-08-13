@@ -437,8 +437,34 @@ main > article > header.nw-section {
 .nw-stack__body > * + * { margin-top: var(--nw-space-2); }
 .nw-stack__body p { color: var(--nw-fg-secondary); }
 
+/* Ketoszlopos editorial. Korabban a cim teljes szelessegben allt, alatta
+   62ch-re fogott szoveg, a jobb fel meg ures maradt -- es a negy elv
+   kulon, a bekezdesek alatt logott. Igy a szoveg es az elvek egymas
+   mellett allnak: az ures fel megszunik, a szekcio rovidebb lesz, es a
+   kettonek vegre koze van egymashoz.
+   Ez NEM a "nagy cim balra + kis magyarazo bekezdes jobbra" AI-minta:
+   ott a jobb oszlop masodlagos fuggelek, itt mindketto elsodleges
+   tartalom, es a cim mindketto folott all. */
+.nw-ambition__grid {
+  margin-block-start: var(--nw-space-4);
+  display: grid;
+  gap: var(--nw-space-5);
+}
+@media (min-width: 60rem) {
+  .nw-ambition__grid {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 0.8fr);
+    gap: var(--nw-space-6);
+    align-items: start;
+  }
+  /* Az elv-index kitart, amig a bekezdeseket olvasod. */
+  .nw-ambition__grid .nw-principles {
+    position: sticky;
+    inset-block-start: calc(var(--nw-nav-h) + var(--nw-nav-inset) + var(--nw-space-4));
+  }
+}
+.nw-ambition__grid .nw-stack__body { margin-block-start: 0; }
+
 .nw-principles {
-  margin-top: var(--nw-space-8);
   border-block-start: 1px solid var(--nw-rule);
 }
 .nw-principles li {
@@ -458,19 +484,22 @@ main > article > header.nw-section {
   transform: scaleY(0); transform-origin: center;
   transition: transform var(--nw-dur-base) var(--nw-ease);
 }
-.nw-principles li:hover { padding-inline-start: var(--nw-space-2); }
-.nw-principles li:hover::before { transform: scaleY(1); }
+.nw-principles li:hover,
+.nw-principles li[data-active] { padding-inline-start: var(--nw-space-2); }
+.nw-principles li:hover::before,
+.nw-principles li[data-active]::before { transform: scaleY(1); }
 
 .nw-principles__text {
   font-family: var(--nw-font-display);
-  font-size: var(--nw-text-2xl);
+  font-size: var(--nw-text-xl);
   font-weight: var(--nw-fw-medium);
   line-height: var(--nw-leading-snug);
   letter-spacing: var(--nw-tracking-tight);
   color: var(--nw-fg-secondary);
   transition: color var(--nw-dur-base) var(--nw-ease);
 }
-.nw-principles li:hover .nw-principles__text { color: var(--nw-fg); }
+.nw-principles li:hover .nw-principles__text,
+.nw-principles li[data-active] .nw-principles__text { color: var(--nw-fg); }
 
 /* A nem-hoverelt sorok NEM halványodnak tovább. Kipróbáltam a
    --nw-blue-2-re halványítást, de az 2,84:1 navy-n -- bukott kontraszt
@@ -541,6 +570,30 @@ main > article > header.nw-section {
               border-color var(--nw-dur-base) var(--nw-ease);
 }
 .nw-news a:hover { transform: translateY(-4px); border-color: var(--nw-blue-1); }
+/* A kep a kartya teljes szelesseget elfoglalja, a padding ala nyulva.
+   Fix 16:9 arany, hogy a harom kartya egy vonalban alljon meg akkor is,
+   ha kesobb mas meretu kepet toltenek fel. */
+.nw-news__media {
+  display: block;
+  margin: calc(var(--nw-space-3) * -1) calc(var(--nw-space-3) * -1) var(--nw-space-3);
+  border-start-start-radius: calc(var(--nw-radius-card) - 1px);
+  border-start-end-radius: calc(var(--nw-radius-card) - 1px);
+  overflow: hidden;
+  background: var(--nw-sunk);
+}
+.nw-news__media img {
+  display: block;
+  inline-size: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  transition: transform var(--nw-dur-slow, 600ms) var(--nw-ease);
+}
+.nw-news a:hover .nw-news__media img { transform: scale(1.04); }
+@media (prefers-reduced-motion: reduce) {
+  .nw-news__media img { transition: none; }
+  .nw-news a:hover .nw-news__media img { transform: none; }
+}
+
 .nw-news time {
   display: block; margin-bottom: 0.5rem;
   font-size: var(--nw-text-xs);
@@ -668,21 +721,41 @@ main > article > header.nw-section {
 .nw-brandband {
   position: relative;
   margin-block-start: var(--nw-space-8);
-  block-size: clamp(180px, 26vw, 320px);
+  /* A sav a szekcio also elehez tapad: a negativ also margo felszivja a
+     szekcio alsó paddingjet. Enelkul a sotet sav alatt maradt egy szeles
+     feher csik, mielott a kovetkezo szekcio elkezdodott volna. */
+  margin-block-end: calc(var(--nw-section-y) * -1);
+  block-size: clamp(200px, 26vw, 340px);
   background: var(--nw-deep);
   overflow: clip;
   isolation: isolate;
 }
+/* A formak merete ARANYBOL szarmazik, nem a sav szazalekabol.
+   Korabban 15% x 244% volt: 45 fokban elforgatva ez 800 px fole nyult a
+   340 px-es savban, tehat a lekerekitett vegek mindig kilogtak -- a sav
+   parhuzamos csikoknak latszott, nem pilleknek.
+   Most a fuggoleges kiterjedes (hossz + szelesseg) * 0,71, ami a
+   legnagyobb formanal is a sav magassaga ALATT marad: a ket lekerekitett
+   veg latszik. */
 .nw-brandband__shape {
   position: absolute;
+  inset-block-start: 50%;
+  inline-size: var(--w);
+  aspect-ratio: var(--ar);
   border-radius: var(--nw-radius-pill);
   background: var(--nw-deeper);
-  transform: rotate(-45deg);
+  /* A translateY a rotate ELOTT all, igy a szulo fuggoleges tengelye
+     menten kozepez -- a forgatas mar a kozepre huzott formara hat. */
+  transform: translateY(-50%) rotate(-45deg);
+  will-change: transform, opacity;
 }
-.nw-brandband__shape:nth-child(1) { inset-inline-start: -8%;  inset-block-start: -60%; inline-size: 46%; block-size: 190%; }
-.nw-brandband__shape:nth-child(2) { inset-inline-start: 30%;  inset-block-start: -40%; inline-size: 30%; block-size: 180%;
-                                     background: color-mix(in oklab, var(--nw-blue-2) 60%, var(--nw-deep)); }
-.nw-brandband__shape:nth-child(3) { inset-inline-end: -6%;    inset-block-start: -50%; inline-size: 38%; block-size: 185%; }
+.nw-brandband__shape:nth-child(1) { --w: clamp(46px, 5.4vw, 84px); --ar: 1 / 3.4; inset-inline-start: 7%;  }
+.nw-brandband__shape:nth-child(2) { --w: clamp(38px, 4.2vw, 64px); --ar: 1 / 4.6; inset-inline-start: 24%;
+                                     background: color-mix(in oklab, var(--nw-blue-2) 62%, var(--nw-deep)); }
+.nw-brandband__shape:nth-child(3) { --w: clamp(52px, 6.2vw, 96px); --ar: 1 / 2.7; inset-inline-start: 43%; }
+.nw-brandband__shape:nth-child(4) { --w: clamp(34px, 3.8vw, 58px); --ar: 1 / 5.0; inset-inline-start: 62%;
+                                     background: color-mix(in oklab, var(--nw-blue-2) 48%, var(--nw-deep)); }
+.nw-brandband__shape:nth-child(5) { --w: clamp(44px, 5vw, 78px);   --ar: 1 / 3.8; inset-inline-end: 8%; }
 
 .nw-brandband__label {
   position: absolute; inset-block-end: 0; inset-inline: 0;
@@ -776,12 +849,19 @@ video.nw-subhero__bg { object-fit: cover; }
 /* --- Lebego brand-sav ---------------------------------------------
    A formak lassan usznak. Nem particle-rendszer: harom nagy alakzat,
    ahogy a brandbook eloirja, csak epp nem allnak. */
+/* Gyors, pulzalo lebeges. A 13-19 mp meg mindig alig latszott, ezert
+   5,5-9 mp, es a formak nem csak csusznak: NONEK-ZSUGORODNAK es
+   halvanyodnak is. A csuszas a sajat hossztengelyuk menten tortenik
+   (a translate a rotate UTAN all), ezert a mozgas a logo ferde
+   vonasat koveti, nem keresztbe vag rajta. */
 @media (prefers-reduced-motion: no-preference) {
-  .nw-brandband__shape { animation: nw-drift 26s ease-in-out infinite alternate; }
-  .nw-brandband__shape:nth-child(2) { animation-duration: 34s; animation-delay: -6s; }
-  .nw-brandband__shape:nth-child(3) { animation-duration: 30s; animation-delay: -13s; }
+  .nw-brandband__shape { animation: nw-drift 6.4s ease-in-out infinite alternate; }
+  .nw-brandband__shape:nth-child(2) { animation-duration: 5.2s; animation-delay: -1.7s; }
+  .nw-brandband__shape:nth-child(3) { animation-duration: 8.1s; animation-delay: -3.4s; }
+  .nw-brandband__shape:nth-child(4) { animation-duration: 5.9s; animation-delay: -0.8s; }
+  .nw-brandband__shape:nth-child(5) { animation-duration: 7.3s; animation-delay: -2.6s; }
 }
 @keyframes nw-drift {
-  from { transform: rotate(-45deg) translate3d(0, 0, 0); }
-  to   { transform: rotate(-45deg) translate3d(6%, -4%, 0); }
+  from { transform: translateY(-50%) rotate(-45deg) translate3d(-9%, 0, 0) scale(0.88); opacity: 0.5; }
+  to   { transform: translateY(-50%) rotate(-45deg) translate3d(7%, 0, 0)  scale(1.12); opacity: 1; }
 }

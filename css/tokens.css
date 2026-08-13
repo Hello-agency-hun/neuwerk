@@ -92,7 +92,10 @@
   --nw-space-24: 12rem;
 
   /* Szekció-belmagasság, viewporttal skálázva */
-  --nw-section-y: clamp(4rem, 3rem + 8vw, 10rem);
+  /* 1440 px-en korabban 160 px volt oldalankent, tehat ket szekcio kozott
+     320 px ures sav. Most 88 px oldalankent (176 px kozottuk) -- ez meg
+     mindig premium levego, de nem szakitja szet az oldalt. */
+  --nw-section-y: clamp(2.75rem, 2rem + 4.5vw, 5.5rem);
 
   /* --- Layout ----------------------------------------------- */
   --nw-max-width:    1440px;

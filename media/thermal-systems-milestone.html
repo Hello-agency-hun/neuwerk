@@ -58,7 +58,13 @@
 
 <main id="main">
   <article class="nw-article">
-    <header class="nw-section nw-theme-dark nw-subhero">
+    <!-- A fejkep ugyanaz, mint a Media-kartyan: a kettot a data/news.js
+         "image" mezoje kapcsolja ossze. Ha ott mas kepre cserelsz, ezt a
+         ket sort is at kell irni. -->
+    <header class="nw-section nw-theme-dark nw-subhero nw-subhero--image">
+      <img class="nw-subhero__bg" src="../assets/img/news/thermal-systems-milestone.jpg" alt=""
+           width="1200" height="670">
+      <span class="nw-subhero__scrim" aria-hidden="true"></span>
       <div class="nw-shell">
         <h1 data-reveal><span class="nw-ph">Placeholder</span> Thermal systems milestone</h1>
         <p class="nw-article__date"><time datetime="2026-07-15">15 July 2026</time></p>
