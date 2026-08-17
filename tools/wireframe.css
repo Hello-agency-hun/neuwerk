@@ -144,6 +144,12 @@
 }
 .nw-header__inline { display: flex !important; }
 .nw-header__toggle { display: none !important; }
+/* A fejlec 794 px-en szuk: logo + ot menupont + Contact gomb. Enelkul a
+   "Who we are" ket sorba tordelt, ami azt a hamis latszatot adta, hogy a
+   menupont ket soros lesz. */
+.nw-header__inline { gap: var(--nw-space-2) !important; }
+.nw-header__inline a { font-size: 9.5pt !important; white-space: nowrap; }
+.nw-header__bar { gap: var(--nw-space-1) !important; }
 /* A Contact GOMB a header elsodleges CTA-ja, es a components.css 900 px
    alatt elrejti. Allo A4 794 px, tehat kiesett -- vagyis az ugyfel olyan
    headert hagyott volna jova, amiben nincs Contact. */

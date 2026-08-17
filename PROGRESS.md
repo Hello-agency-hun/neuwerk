@@ -44,6 +44,30 @@ szkript újrafuttatva mindig a friss állapotot adja.
 Ellenőrizve: 149 belső link átírva, mind a 9 hivatkozott oldal a saját
 kezdőlapjára ugrik, halott vagy feloldatlan link nincs.
 
+**Ötödik kör — a Media-cikkek semlegesítve (2026-08-17):**
+
+A három Media-cikk címe **„Example article"**, törzse **lorem ipsum**.
+Indok: a korábbi szövegek (egy új fejezet, egy hőszabályzási mérföldkő és
+egy belső „hogyan frissítsd az oldalt" leírás) elég konkrétak voltak ahhoz,
+hogy az ügyfél valódi, publikálásra szánt cikkeknek higgye őket, és azok
+TARTALMÁRÓL kezdjen visszajelzést adni — pedig itt csak a cikk-SABLONT kell
+jóváhagyni.
+
+**A Media-LISTÁN is „Example article" áll**, nem csak a cikkoldalakon. Ha a
+lista valódi címeket mutatna, a megnyitott cikk viszont „Example article"-t,
+az ügyfél joggal nem értené, melyik az igazi. Így a lista azt mondja, amit
+kell: három cikk-hely, tartalom később.
+
+Ellenőrizve, hogy egyetlen régi cikkszöveg sem szivárog át (a címek, a
+bekezdések és az `assets/docs/` hivatkozás sem szerepel sehol).
+
+Továbbá: a „Decorative brand band — animated geometric pattern" felirat
+**„Brand pattern"** lett; a fejléc menüje pedig egy sorba szorítva (794 px-en
+a Contact gomb megjelenésével a „Who we are" két sorba tördelt, ami azt a
+hamis látszatot adta, hogy a menüpont kétsoros lesz).
+
+**Ez mind WIREFRAME-ONLY — az éles oldalak szövege változatlan.**
+
 **Negyedik kör — VÉGE A LAPOKRA TÖRDELÉSNEK (2026-08-17):**
 
 A grafikus négy panasza (a jegyzet a jobb oldalon, a „Learn more" alatti

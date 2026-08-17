@@ -161,6 +161,75 @@ def replace_media(soup, page):
         img.replace_with(box(soup, kind, label, inline))
 
 
+LOREM = [
+    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod "
+    "tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim "
+    "veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea "
+    "commodo consequat.",
+    "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum "
+    "dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non "
+    "proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+    "Sed ut perspiciatis unde omnis iste natus error sit voluptatem "
+    "accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab "
+    "illo inventore veritatis et quasi architecto beatae vitae dicta sunt "
+    "explicabo.",
+    "Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut "
+    "fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem "
+    "sequi nesciunt.",
+]
+
+
+def neutralise_articles(soup, rel):
+    """A harom Media-cikk cime "Example article", torzse lorem ipsum.
+
+    Miert: a mostani cikkszovegek (egy uj fejezet, egy hoszabalyzasi
+    mérfoldko, es egy belso "hogyan frissitsd az oldalt" leiras) eleg
+    konkretak ahhoz, hogy az ugyfel valodi, publikalasra szant cikkeknek
+    higgye oket, es azok TARTALMAROL kezdjen visszajelzest adni. Pedig itt
+    csak a cikk-SABLONT kell jovahagyni: fejkep, datum, cim, torzsszoveg,
+    visszalink.
+
+    A lorem ipsum ezt egyertelmuve teszi: nincs mit tartalmilag megvitatni,
+    a szerkezet viszont pontosan latszik.
+
+    Csak a wireframe-ben tortenik -- az eles oldalak szovege valtozatlan.
+    """
+    def relabel(el, text):
+        badge = el.select_one(".nw-ph")
+        el.clear()
+        if badge:
+            el.append(badge)
+            el.append(" " + text)
+        else:
+            el.string = text
+
+    if rel.startswith("media/"):
+        h1 = soup.select_one("h1")
+        if h1:
+            relabel(h1, "Example article")
+
+        body = soup.select_one(".nw-article__body")
+        if body:
+            # A "Back to Media" gomb a sablon resze, ezert megmarad.
+            back = body.select_one("a.nw-btn")
+            back_p = back.parent if back else None
+            body.clear()
+            for text in LOREM:
+                p = soup.new_tag("p")
+                p.string = text
+                body.append(p)
+            if back_p:
+                body.append(back_p)
+
+    # A Media-LISTAN is "Example article" all. Kulonben a lista valodi
+    # cimeket mutatna, a megnyitott cikk viszont "Example article"-t, es az
+    # ugyfel joggal nem ertene, melyik az igazi.
+    for h3 in soup.select(".nw-news h3"):
+        relabel(h3, "Example article")
+    for p in soup.select(".nw-news p"):
+        p.string = "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+
+
 def fix_self_anchors(soup, rel):
     """Az AZONOS oldalra mutato horgonyokat horgony nelkuli linkke teszi.
 
@@ -208,77 +277,6 @@ def sticky_note(soup):
         aside.append(note)
 
 
-def fix_self_anchors(soup, rel):
-    """Az AZONOS oldalra mutato horgonyokat horgony nelkuli linkke teszi.
-
-    Miert: a Chrome a "masik fajl + horgony" hivatkozast LINK_LAUNCH-kent
-    adja (azt a merge atirja), a "sajat fajl + horgony" valtozatot viszont
-    nevesitett celkent -- ami az osszefuzeskor egyszeruen ELTUNIK. Emiatt a
-    fooldalon a "Who we are" es a "Solutions" menupont holt volt, holott a
-    borito azt igeri, hogy a menu kattinthato.
-
-    A horgony nelkuli onhivatkozas (mint a logo href="index.html") viszont
-    rendes GOTO-t ad, amit az osszefuzes helyesen atszamoz. Ezert a
-    fragmentumot levagjuk: az ugras az oldal elejere visz, ami tobb lapos
-    szekcional nem tokeletes, de mukodik -- szemben azzal, hogy semmi.
-    """
-    own = rel.split("/")[-1]
-    for a in soup.find_all("a", href=True):
-        href = a["href"]
-        if "#" not in href:
-            continue
-        base, _, _frag = href.partition("#")
-        # "#valami" (tiszta fragmentum) vagy "sajatfajl.html#valami"
-        if base == "" or base.split("/")[-1] == own:
-            a["href"] = own
-
-
-def unstack_who(soup):
-    """A hosszu torzsszoveget kiemeli a ket-hasabos racsbol.
-
-    Miert: a .nw-who racs bal hasabjaban a cim all, a jobb hasabban a
-    szoveg. A szoveg viszont harom hosszu blokk, tehat tobb lapra fut --
-    es a folytatolapokon a bal hasab URESEN marad, mintha hianyozna
-    valami.
-
-    Ezert a racsban csak a cim es a bevezeto marad (ott latszik a valodi,
-    ket-hasabos elrendezes), a harom blokk pedig TELJES SZELESSEGBEN
-    folytatodik alatta. Ala kerul egy jegyzet, ami elmondja, hogy elesben
-    ez a szoveg a cim melletti hasabban all, es a cim helyben marad,
-    amig a szoveg elgordul mellette (position: sticky).
-    """
-    for who in soup.select(".nw-who"):
-        blocks = who.select_one(".nw-who__blocks")
-        if not blocks:
-            continue
-
-        who.insert_after(blocks.extract())
-
-        # Ha a racsban semmi tartalom nem maradt (az Identity oldalon az
-        # oldalso hasab eleve ures), akkor az ures racs csak hezagot adna.
-        # A jegyzet szovege ilyenkor MAS: nincs "a fenti cim", amire
-        # hivatkozhatna -- azzal a valtozattal az ugyfel egy nem letezo
-        # cimet keresne.
-        has_heading = bool(who.get_text(strip=True))
-        if not has_heading:
-            who.decompose()
-
-        note = soup.new_tag("p")
-        note["class"] = "wf-box wf-box--strip wf-box--note"
-        note["data-kind"] = "motion"
-        note.string = (
-            "In the live page this text sits in the right-hand column, beside "
-            "the heading above: the heading stays in place while this text "
-            "scrolls past it. It runs full width here so that the wireframe "
-            "does not leave an empty column."
-        ) if has_heading else (
-            "In the live page this text sits in a narrower column, not full "
-            "width. It runs full width here so that the wireframe does not "
-            "leave an empty column."
-        )
-        blocks.insert_after(note)
-
-
 def annotate(soup, page):
     """Az interaktiv elemek helyere feliratozott doboz kerul.
 
@@ -300,7 +298,7 @@ def annotate(soup, page):
     for band in soup.select(".nw-brandband"):
         band.replace_with(box(
             soup, "motion",
-            "Decorative brand band — animated geometric pattern.",
+            "Brand pattern.",
             "wf-box--strip"))
 
     # A contact/legal hero mintaja.
@@ -444,6 +442,7 @@ def prepare(fmt, toc=""):
         soup = BeautifulSoup(src.read_text(encoding="utf-8"), "lxml")
 
         strip_scripts(soup)
+        neutralise_articles(soup, rel)
         fix_self_anchors(soup, rel)
         sticky_note(soup)
         annotate(soup, rel)
