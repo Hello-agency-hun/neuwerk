@@ -59,6 +59,25 @@ h4 { font-size: var(--nw-text-lg); font-weight: var(--nw-fw-semibold); }
 p  { margin: 0 0 var(--nw-space-2); max-width: var(--nw-measure); text-wrap: pretty; }
 p:last-child { margin-bottom: 0; }
 
+/* A cimek margoja 0, tehat a cim ala kerulo szovegtorzsnek nincs sajat felso
+   terkoze. Nagy kepernyon ez meg elmegy, mobilon viszont -- ahol a cim 4-5
+   sorra torik -- a ketto osszetapad. Ezert a cim UTANI elso blokk kap egy
+   explicit felso terkozt. Sibling-szelektor, tehat csak ott hat, ahol tenyleg
+   egymas mellett allnak.
+
+   Csak h1/h2 utan hat: a h3 a kartyakban all, ahol a sajat 0,5rem-es
+   also margoja mar helyes, es a ketto osszeadodna.
+
+   A cimresz :is(), nem :where(): a :where() nulla specifikussagu, ezert a
+   fenti `p { margin: 0 0 ... }` legyozne. Az :is() a legspecifikusabb
+   argumentumat veszi fel (h1 -> 0,0,1), tehat holtverseny a p-szaballyal, es
+   a kesobbi -- vagyis ez -- nyer. A masodik fele viszont marad :where(),
+   hogy a komponens-szintu, osztalyalapu margok (pl. .nw-lifecycle__label)
+   tovabbra is felulirjak. */
+:is(h1, h2) + :where(p, .nw-lead, .nw-prose, .nw-stack__body, ul, ol, dl) {
+  margin-block-start: var(--nw-flow);
+}
+
 img, svg, video { display: block; max-width: 100%; height: auto; }
 
 a { color: inherit; text-decoration-thickness: 1px; text-underline-offset: 0.2em; }

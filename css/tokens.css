@@ -92,10 +92,15 @@
   --nw-space-24: 12rem;
 
   /* Szekció-belmagasság, viewporttal skálázva */
-  /* 1440 px-en korabban 160 px volt oldalankent, tehat ket szekcio kozott
-     320 px ures sav. Most 88 px oldalankent (176 px kozottuk) -- ez meg
-     mindig premium levego, de nem szakitja szet az oldalt. */
-  --nw-section-y: clamp(2.75rem, 2rem + 4.5vw, 5.5rem);
+  /* Harmadik beallitas. 160 px oldalankent (320 px ket szekcio kozott) szet-
+     szakitotta az oldalt; a valaszul beallitott 88 px viszont mar tomornek
+     bizonyult -- a grafikusok visszajelzese szerint "nem eleg airy". A mostani
+     120 px oldalankent (240 px kozottuk) a ketto kozott van. */
+  --nw-section-y: clamp(3.5rem, 2.4rem + 6vw, 7.5rem);
+
+  /* A szekcion BELULI ritmus is ehhez tartozik: hiaba no a kulso terkoz, ha
+     a cim es a szovegtorzs osszetapad. Ezt a base.css hasznalja. */
+  --nw-flow: clamp(1.25rem, 1rem + 1.6vw, 2rem);
 
   /* --- Layout ----------------------------------------------- */
   --nw-max-width:    1440px;

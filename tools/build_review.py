@@ -34,7 +34,7 @@ OUT = ROOT / (sys.argv[1] if len(sys.argv) > 1 else "uj-neuwerk")
 INCLUDE_DIRS = ["assets", "css", "js", "data", "media"]
 INCLUDE_FILES = [
     "index.html", "identity.html", "career.html", "media.html",
-    "responsibility.html", "legal-compliance.html", "contact.html", "404.html",
+    "legal-compliance.html", "contact.html", "404.html",
 ]
 
 MEDIA_PAGES = ["how-to-update-this-page", "neuwerk-begins", "thermal-systems-milestone"]
@@ -55,10 +55,11 @@ Mi ez
 A neuwerk weboldal jelenlegi állapota, végigkattintható formában, plusz egy
 megjegyzés-gyűjtő. Nem a végleges csomag: abban nincs PHP és nincs widget.
 
-11 oldal van benne, köztük az új Legal & Compliance aloldal. A főoldalon a
-brand-sáv formái mozognak, az aloldalak fejlécében rövid klip vagy animált
-minta fut — ha valakinél ezek állnak, az a gép „csökkentett mozgás"
-beállítása, nem hiba.
+10 oldal van benne. A korábbi „Acting responsibly" aloldal megszűnt: a szövege
+a Legal & Compliance oldal élére került. A főoldali és az Identity-oldali
+brand-sáv már NEM magától mozog, hanem görgetésre csúszik; az aloldalak
+fejlécében rövid klip vagy animált minta fut — ha valakinél ezek állnak, az a
+gép „csökkentett mozgás" beállítása, nem hiba.
 
 Fontos: ez KÜLÖN mappa az előző körtől. Ha a régi is fent van a tárhelyen,
 töltsd EZT egy másik almappába, különben a két kör megjegyzései egy

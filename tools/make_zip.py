@@ -26,7 +26,7 @@ OUT = ROOT / "work" / "neuwerk-website-build1.zip"
 INCLUDE_DIRS = ["assets", "css", "js", "data", "media"]
 INCLUDE_FILES = [
     "index.html", "identity.html", "career.html", "media.html",
-    "responsibility.html", "legal-compliance.html", "contact.html", "404.html",
+    "legal-compliance.html", "contact.html", "404.html",
     "README.md", "CLAUDE.md",
 ]
 

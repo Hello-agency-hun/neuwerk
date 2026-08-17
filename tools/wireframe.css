@@ -1,0 +1,387 @@
+/* =============================================================
+   WIREFRAME-RETEG a tartalmi jovahagyashoz.
+
+   Ez NEM az oldal resze -- a tools/build_wireframe.py masolja a
+   work/wireframe/ ala, es csak ott van betoltve.
+
+   Miert letezik: az ugyfelnek nem a kesz designt kell jovahagynia,
+   hanem a TARTALMAT. Mi van a headerben, mi van a footerben, mi lesz
+   a Mediaban, milyen sorrendben jonnek a szekciok. A szinvilag, a
+   gorgeteses interakciok es a pasztilla-minta ilyenkor nem segit,
+   hanem elviszi a beszelgetest.
+
+   Ezert itt minden marka-jelzes leall: szurkearnyalat, semleges
+   betu, kep es video helyett feliratozott doboz.
+   ============================================================= */
+
+/* --- Nyomtatasi lap --------------------------------------------
+   A @page szabaly NEM itt van: a tools/build_wireframe.py irja a
+   work/wireframe/page.css-be, mert ket formatumot allitunk elo
+   ugyanebbol a forrasbol (allo es fekvo), es osszehasonlitjuk oket.
+
+   A lenti "Desktop elrendezes kikenyszeritese" blokk mindket
+   formatumban fut. Allo A4-en kotelezo (794 px, a mobil breakpointok
+   alatt), fekvon pedig ugyanazt az eredmenyt adja, mint a termeszetes
+   desktop szabalyok -- tehat nem ront el semmit. */
+
+/* --- Paletta: minden szurke ------------------------------------
+   A tokenek felulirasa eleg: az egesz oldal ezekbol epul, tehat egy
+   helyen at lehet szinezni. Nincs kivetel-vadaszat komponensenkent. */
+:root {
+  --nw-navy:   #333333;
+  --nw-blue-1: #555555;
+  --nw-blue-2: #777777;
+  /* A tint 3-4 az eles oldalon SZOVEGSZIN sotet alapon. Mivel a sotet
+     felulet itt vilagosszurke lett, ezeknek is sotetedniuk kell, kulonben
+     a masodlagos szoveg olvashatatlan. */
+  --nw-blue-3: #767676;
+  --nw-blue-4: #5e5e5e;
+  --nw-sun:    #888888;
+
+  --nw-canvas:  #ffffff;
+  --nw-surface: #ffffff;
+  --nw-sunk:    #f5f5f5;
+  /* A sotet szekciok NEM sotetek lesznek, hanem kozepszurkek: a szekcio-
+     ritmus igy is olvashato marad, de nyomtatasban nem eszik tonert, es
+     a szoveg vegig sotet alapon marad. */
+  --nw-deep:    #ededed;
+  --nw-deeper:  #e4e4e4;
+
+  --nw-ink:   #1a1a1a;
+  --nw-ink-2: #666666;
+
+  --nw-line:        rgb(0 0 0 / 0.16);
+  --nw-line-strong: rgb(0 0 0 / 0.26);
+  --nw-line-dark:   rgb(0 0 0 / 0.20);
+
+  --nw-wash-1: #f0f0f0;
+  --nw-wash-2: #ebebeb;
+  --nw-wash-3: #f2f2f2;
+
+  --nw-on-sun: #1a1a1a;
+
+  /* Semleges betu. A Poppins maga is marka-jelzes. */
+  --nw-font-display:   Arial, Helvetica, sans-serif;
+  --nw-font-body:      Arial, Helvetica, sans-serif;
+  --nw-font-editorial: Arial, Helvetica, sans-serif;
+
+  --nw-shadow-nav:  none;
+  --nw-shadow-lift: none;
+}
+
+/* A sotet tema is szurke: a szoveg sotet marad rajta. */
+.nw-theme-dark {
+  --nw-bg: #ededed;
+  --nw-fg: #1a1a1a;
+  --nw-fg-secondary: #666666;
+  --nw-fg-muted: #666666;
+  --nw-accent-text: #555555;
+  --nw-rule: rgb(0 0 0 / 0.20);
+}
+
+/* --- Minden megjelenik ----------------------------------------
+   A build kiszedi a scripteket, tehat a reveal.js nem tudna feloldani
+   az opacity: 0-t. Enelkul a lap nagy resze uresen nyomtatodna ki. */
+[data-reveal],
+[data-revealed],
+.nw-kinetic__w,
+.nw-statement__line .nw-kw > span {
+  opacity: 1 !important;
+  transform: none !important;
+  animation: none !important;
+  transition: none !important;
+  color: var(--nw-fg) !important;
+}
+
+/* Harom helyen a CSS FIXEN a --nw-white-ot hasznalja szovegszinkent, mert
+   ott az eles oldalon sotet felulet van alatta (hero, lifecycle-cim,
+   terkep-tooltip). Itt a felulet vilagosszurke, tehat a feher szoveg
+   lathatatlan lenne. A tokent nem irjuk at -- az felulet-szinkent is
+   szerepel --, hanem ezt a harom helyet cimezzuk. */
+.nw-hero,
+.nw-lifecycle__label,
+.nw-map__tip {
+  color: #1a1a1a !important;
+}
+.nw-hero__lead { color: #555555 !important; }
+
+/* A hero ne toresen kezdodjon: egyben olvashato legyen a cim es a ket gomb. */
+.nw-hero { break-inside: avoid; }
+
+/* --- Ami ebbol a valtozatbol kimarad --------------------------
+   A pasztilla-minta, a brand-sav es a dekorativ formak: ezekrol most
+   NEM kerdezunk, es csak elvinnek a figyelmet. */
+.nw-pattern,
+.nw-subhero__shapes,
+.nw-brandband__shape,
+.nw-hero__scrim,
+.nw-subhero__scrim,
+.nw-solutions__progress {
+  display: none !important;
+}
+
+/* --- A lebego fejlec statikus lesz -----------------------------
+   Nyomtatasban a fixed pozicio vagy minden lapra raragadna, vagy
+   eltunne. Itt a header az elso dolog a lapon.
+
+   A keret CSAK a shellen van: ha mindketto kap egyet, ket egymasba
+   agyazott keret latszik, kozottuk egy ures csikkal -- ami ugy nezett
+   ki, mintha lenne ott meg egy ures sav. */
+.nw-header,
+.nw-header__shell {
+  position: static !important;
+  inset: auto !important;
+  transform: none !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  max-inline-size: none !important;
+}
+.nw-header { background: none !important; margin: 0 0 6mm !important; padding: 0 !important; }
+.nw-header__shell {
+  background: #fafafa !important;
+  border: 1px solid var(--nw-line-strong);
+  margin: 0 !important;
+}
+.nw-header__inline { display: flex !important; }
+.nw-header__toggle { display: none !important; }
+/* A Contact GOMB a header elsodleges CTA-ja, es a components.css 900 px
+   alatt elrejti. Allo A4 794 px, tehat kiesett -- vagyis az ugyfel olyan
+   headert hagyott volna jova, amiben nincs Contact. */
+.nw-header__actions .nw-btn { display: inline-flex !important; }
+
+/* A kinyilo hamburger-panel NEM latszik.
+
+   Az elso valtozatban kibontva mutattuk, "hadd lassak, mi van a menuben"
+   alapon -- de ez duplikacio volt: desktopon nincs hamburger (a fomenu
+   mellett puszta ismetles lenne, ezert vettuk ki), a panel tartalma pedig
+   pont a fomenu + a Contact, ami gombkent amugy is ott all. Az ugyfel
+   joggal kerdezte, miert szerepel ketszer ugyanaz. */
+.nw-header__panel { display: none !important; }
+
+/* --- Desktop elrendezes kikenyszeritese -----------------------
+   A Chrome nyomtatasi layoutja fixen ~794 px szeles, barmit is ir elo a
+   @page (megmerve). Ezen a szelessegen a 900 px-es mobil breakpointok
+   tuzelnenek, es minden egy hasabba esne ossze -- pedig az elrendezes is
+   jovahagyando tartalom: az ugyfelnek latnia kell, mi all egymas mellett.
+
+   Ezert a racsokat ITT allitjuk vissza arra, amit a kesz oldal mutat. */
+.nw-who,
+.nw-solutions {
+  grid-template-columns: minmax(0, 5fr) minmax(0, 7fr) !important;
+}
+.nw-ambition__grid {
+  grid-template-columns: minmax(0, 1fr) minmax(0, 0.8fr) !important;
+  align-items: start;
+}
+.nw-cards,
+.nw-newslist,
+.nw-doclist { grid-template-columns: repeat(3, minmax(0, 1fr)) !important; }
+.nw-stats { grid-template-columns: repeat(3, minmax(0, 1fr)) !important; }
+
+/* A NEU / WERK / neuwerk harmas EGY sorban: harom utem egy gondolatmenetben.
+   2+1-re tordelve a "neuwerk" kulon allitasnak latszik. */
+.nw-namesplit { grid-template-columns: repeat(3, minmax(0, 1fr)) !important; }
+
+/* Az ot eletciklus-lepes is EGY sorban. Ket sorba tordelve ugy nez ki,
+   mintha ket kulonbozo csoport lenne. */
+.nw-lifecycle__steps { grid-template-columns: repeat(5, minmax(0, 1fr)) !important; }
+.nw-lifecycle__steps span { font-size: 8.5pt !important; }
+
+/* A sticky pozicio egy 4 meteres lapon a tetejere ragadna. */
+.nw-who__aside,
+.nw-ambition__grid .nw-principles { position: static !important; }
+
+/* A vizualt a build mar dobozra cserelte, tehat a .nw-solutions__stage
+   mobil "order: -1" szabalya nem talal semmit. Az order a dobozon: a
+   valos sorrend a szoveg BAL, a vizual JOBB oldalon. */
+.nw-solutions > .wf-box { order: 1; }
+
+/* --- Gombok: korvonal, nem kitoltes --------------------------- */
+.nw-btn,
+.nw-btn--sun {
+  background: #f0f0f0 !important;
+  color: #1a1a1a !important;
+  border: 1px solid #888 !important;
+}
+
+/* --- A feliratozott doboz -------------------------------------
+   Ez helyettesit minden kepet, videot es interaktiv elemet. A
+   szoveg benne mondja meg, mi kerul oda -- ez a lenyeg, nem a
+   latvany. */
+.wf-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2mm;
+  min-block-size: 22mm;
+  padding: 5mm 6mm;
+  border: 1.5px dashed #8a8a8a;
+  background: repeating-linear-gradient(
+    45deg, #f7f7f7, #f7f7f7 6px, #f1f1f1 6px, #f1f1f1 12px);
+  color: #3a3a3a;
+  font-family: Arial, Helvetica, sans-serif;
+  text-align: center;
+  break-inside: avoid;
+  margin-block: 4mm;
+}
+.wf-box__kind {
+  font-size: 8pt;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #7a7a7a;
+}
+.wf-box__label {
+  font-size: 10.5pt;
+  line-height: 1.4;
+  max-inline-size: 100ch;
+}
+/* A piktogram a doboz tipusat jelzi, hogy egy pillantasra latszodjon,
+   kep-e vagy interakcio. */
+.wf-box__kind::before { margin-inline-end: 1.5mm; }
+.wf-box[data-kind="image"]  .wf-box__kind::before { content: "\25A6"; }
+.wf-box[data-kind="video"]  .wf-box__kind::before { content: "\25B6"; }
+.wf-box[data-kind="motion"] .wf-box__kind::before { content: "\21BB"; }
+.wf-box[data-kind="interactive"] .wf-box__kind::before { content: "\261E"; }
+.wf-box[data-kind="map"] .wf-box__kind::before { content: "\2295"; }
+
+/* Soron beluli, KIS doboz: logo es hasonlo apro kep. A valodi neuwerk
+   logo 132x20 px, a Regent 112x32 -- egy 22 mm magas doboz otszorosere
+   duzzasztana a headert, es pont az aranyokat torzitana el, amiket
+   jovahagyatni akarunk. */
+.wf-box--inline {
+  display: inline-flex;
+  flex-direction: row;
+  align-items: baseline;
+  gap: 2mm;
+  min-block-size: 0;
+  padding: 1.5mm 3mm;
+}
+.wf-box--inline .wf-box__label { font-size: 9pt; }
+.wf-box--inline .wf-box__kind { font-size: 7pt; }
+
+/* Magyarazo jegyzet: visszafogottabb, mint a helyorzo dobozok. Nem azt
+   mondja, hogy "ide valami jon", hanem hogy a fenti elrendezes elesben
+   mashogy viselkedik. */
+.wf-box--note {
+  background: none;
+  border-style: dotted;
+  border-width: 1px;
+  color: #6a6a6a;
+  min-block-size: 0;
+  padding: 3mm 5mm;
+}
+.wf-box--note .wf-box__label { font-size: 9pt; }
+/* A jegyzet ne szakadjon el attol, amire vonatkozik. */
+.wf-box--note { break-before: avoid; }
+
+/* Magas doboz a heroknak, alacsony a savoknak. */
+.wf-box--hero { min-block-size: 42mm; }
+.wf-box--strip { min-block-size: 16mm; }
+
+/* Az oldal tetejere kerulo azonosito sav. */
+.wf-pagehead {
+  border-block-end: 2px solid #1a1a1a;
+  margin-block-end: 5mm;
+  padding-block-end: 2mm;
+  font-family: Arial, Helvetica, sans-serif;
+}
+.wf-pagehead__file {
+  font-size: 9pt; letter-spacing: 0.1em; text-transform: uppercase; color: #777;
+}
+.wf-pagehead__name { font-size: 16pt; font-weight: bold; color: #1a1a1a; }
+
+/* Szekcio-jelolo: hol kezdodik egy uj szekcio. Tartalmi atbeszelesnel
+   ez adja a kapaszkodot ("a harmadik blokkban legyen...").
+
+   A fuggoleges terkozt NEM irjuk felul: maradjon a valodi --nw-section-y,
+   kulonben a wireframe mas ritmust mutat, mint a kesz oldal. Amikor meg
+   A4-re tordeltunk, egy kitalalt 8 mm allt itt, es a lapvegekkel egyutt
+   ez adta az "osszevissza padding" benyomast. */
+.nw-section, .nw-statement, .nw-hero {
+  border-block-start: 1px dashed var(--nw-line-strong);
+  overflow: visible !important;
+  min-block-size: 0 !important;
+}
+.nw-hero { border-block-start: 0; }
+
+/* Tomorebb tipografia: ez dokumentum, nem landing page. */
+h1 { font-size: 22pt !important; }
+h2 { font-size: 17pt !important; }
+h3 { font-size: 12pt !important; }
+body { font-size: 10.5pt !important; line-height: 1.5 !important; }
+.nw-hero__title { font-size: 24pt !important; }
+.nw-statement__line { font-size: 18pt !important; }
+.nw-kinetic { font-size: 13pt !important; }
+
+/* A placeholder-jelolo NARANCS korvonala az egyetlen szin egy dokumentumban,
+   aminek a boritoja azt igeri, hogy fekete-feher. A .nw-ph mar semleges volt,
+   ez a szabaly kimaradt. */
+.is-wireframe [data-placeholder] { outline-color: #999 !important; }
+
+/* A badge a kartya-cimekben sorba tordelte a szoveget ("PLACEHOLDER How /
+   to update this page"). Sajat sorba teve a cim egyben marad. */
+.nw-news h3 .nw-ph,
+.nw-doclist h3 .nw-ph,
+.nw-cards h3 .nw-ph { display: block; margin-block-end: 1mm; }
+
+/* A placeholder-badge marad: az ugyfelnek latnia kell, mi nem vegleges. */
+.nw-ph {
+  border: 1px solid #888 !important;
+  color: #444 !important;
+  background: #fff !important;
+}
+
+/* A footer 6rem-es felso paddingja elesben levego; itt csak ures folt
+   a lap tetejen. */
+.nw-footer { padding-block: 6mm 4mm !important; }
+
+/* --- Borito ---------------------------------------------------
+   Enelkul az ugyfel elso reakcioja az lenne, hogy "ez nagyon nyers".
+   A lap megmondja, hogy szandekosan az, es hogy mit kerdezunk tole. */
+.wf-cover {
+  font-family: Arial, Helvetica, sans-serif;
+  color: #1a1a1a;
+  max-inline-size: 165mm;
+  padding: 0;
+}
+.wf-cover h1 {
+  font-size: 24pt !important;
+  margin: 0 0 2mm;
+  padding-block-end: 3mm;
+  border-block-end: 2px solid #1a1a1a;
+}
+.wf-cover__sub {
+  font-size: 10pt; color: #777; letter-spacing: 0.06em;
+  text-transform: uppercase; margin: 0 0 6mm;
+}
+.wf-cover h2 {
+  font-size: 12pt !important;
+  margin: 5mm 0 2mm;
+  color: #1a1a1a;
+}
+.wf-toc {
+  margin: 0 0 3mm;
+  padding: 0;
+  list-style: none;
+  max-inline-size: 110mm;
+}
+.wf-toc li {
+  display: flex;
+  justify-content: space-between;
+  gap: 4mm;
+  padding-block: 1mm;
+  border-block-end: 1px dotted #bbb;
+  font-size: 10pt;
+}
+.wf-toc li span:last-child { color: #777; font-variant-numeric: tabular-nums; }
+
+.wf-cover p {
+  font-size: 10.5pt; line-height: 1.55; margin: 0 0 3mm;
+  max-inline-size: none;
+}
+
+/* Nyomtatasi higiene */
+* { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+a { color: inherit; }
+.nw-skip-link { display: none !important; }

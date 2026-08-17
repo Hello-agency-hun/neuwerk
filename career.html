@@ -47,7 +47,6 @@
         <a href="identity.html"><span>Identity</span></a>
         <a href="career.html"><span>Career</span></a>
         <a href="media.html"><span>Media</span></a>
-        <a href="responsibility.html"><span>Responsibility</span></a>
         <a href="contact.html"><span>Contact</span></a>
       </nav>
     </div>
@@ -105,13 +104,33 @@
         </div>
       </div>
 
-      <h2 class="nw-section__sub">Open positions</h2>
-      <ul class="nw-joblist" data-jobs></ul>
+    </div>
+  </section>
 
-      <p class="nw-note">
-        <span class="nw-ph">Placeholder</span>
-        Positions shown are examples. See
-        <a href="media/how-to-update-this-page.html">how to update this list</a>.
+  <!-- A poziciolista NEM ezen az oldalon el. A neuwerk a Regent-csoport
+       Oracle HCM-alapu jelolti feluletet hasznalja, ami sajat kereso-,
+       szuro- es palyazati logikaval mukodik, es folyamatosan valtozik. Egy
+       statikus oldalon ezt vagy kezzel kellene karbantartani (azonnal
+       elavul), vagy futasidoben lekerni (fetch -- a CLAUDE.md tiltja, mert
+       a csomagnak file:// alol is mukodnie kell).
+
+       Ezert az oldal nem utanozza a karrierportalt, hanem atvezet ra. -->
+  <section class="nw-section nw-theme-dark nw-cta">
+    <div class="nw-shell">
+      <p class="nw-eyebrow">Open positions</p>
+      <h2 data-reveal>Every open role, in one place</h2>
+      <p class="nw-lead" data-reveal data-reveal-delay="80">
+        Our vacancies are published and kept up to date on the Regent careers portal.
+        Search by location, function or keyword, and apply directly.
+      </p>
+      <p class="nw-cta__action" data-reveal data-reveal-delay="140">
+        <a class="nw-btn nw-btn--sun nw-btn--lg"
+           href="https://iamjgs.fa.ocs.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_2/jobs?mode=location"
+           target="_blank" rel="noopener">
+          View open positions
+          <span class="nw-btn__ext" aria-hidden="true">&#8599;</span>
+          <span class="nw-sr-only">(opens the Regent careers portal in a new tab)</span>
+        </a>
       </p>
     </div>
   </section>
@@ -139,12 +158,6 @@
           <li><a href="contact.html">Contact</a></li>
         </ul>
       </nav>
-      <nav aria-label="Responsibility">
-        <h4>Responsibility</h4>
-        <ul>
-          <li><a href="responsibility.html">Acting responsibly</a></li>
-        </ul>
-      </nav>
       <nav aria-label="Legal">
         <h4>Legal</h4>
         <ul>
@@ -155,9 +168,8 @@
 
     <div class="nw-footer__base">
       <p class="nw-footer__owner">
-        <span>A</span>
-        <span class="nw-footer__regent"><img src="assets/brand/regent-white.png" alt="Regent" width="96" height="26"></span>
-        <span>company</span>
+        <span class="nw-footer__owner-label">Part of</span>
+        <img src="assets/brand/regent-white.png" alt="Regent" width="112" height="32">
       </p>
       <p class="nw-footer__copy">&copy; 2026 neuwerk. All rights reserved.</p>
     </div>
@@ -166,7 +178,6 @@
 <!-- /@partial:footer -->
 
 
-<script src="data/jobs.js"></script>
 <script src="js/nav.js"></script>
 <script src="js/pattern.js"></script>
 <script src="js/reveal.js"></script>

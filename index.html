@@ -47,7 +47,6 @@
         <a href="identity.html"><span>Identity</span></a>
         <a href="career.html"><span>Career</span></a>
         <a href="media.html"><span>Media</span></a>
-        <a href="responsibility.html"><span>Responsibility</span></a>
         <a href="contact.html"><span>Contact</span></a>
       </nav>
     </div>
@@ -135,20 +134,18 @@
     </div>
 
 
-    <div class="nw-brandband" aria-hidden="true">
-      <span class="nw-brandband__shape"></span>
-      <span class="nw-brandband__shape"></span>
-      <span class="nw-brandband__shape"></span>
-      <span class="nw-brandband__shape"></span>
-      <span class="nw-brandband__shape"></span>
-      <span class="nw-brandband__shape"></span>
-      <span class="nw-brandband__shape"></span>
-      <span class="nw-brandband__shape"></span>
-      <span class="nw-brandband__shape"></span>
-      <p class="nw-brandband__label">
-        <span class="nw-brandband__mark"></span>
-        Fluid handling, thermal management, sealing and damping, multi-material
-      </p>
+    <!-- Het nagy forma, gorgetesre csusznak (js/pattern.js irja a --shift-et).
+         A data-depth az egyetlen kulonbseg kozottuk: ezert nyilik szet es
+         zarodik ossze a sav lapozas kozben. Felirat nincs -- a szekcio cime
+         mar elmondta, amit a korabbi cimke ismetelt. -->
+    <div class="nw-brandband" data-pattern aria-hidden="true">
+      <span class="nw-brandband__shape" data-depth="0.30"></span>
+      <span class="nw-brandband__shape" data-depth="0.55"></span>
+      <span class="nw-brandband__shape" data-depth="0.38"></span>
+      <span class="nw-brandband__shape" data-depth="0.62"></span>
+      <span class="nw-brandband__shape" data-depth="0.34"></span>
+      <span class="nw-brandband__shape" data-depth="0.50"></span>
+      <span class="nw-brandband__shape" data-depth="0.42"></span>
     </div>
   </section>
 
@@ -167,20 +164,18 @@
       </p>
 
       <div class="nw-map" data-reveal data-reveal-delay="160">
-        <div class="nw-map__canvas" data-map data-placeholder>
+        <div class="nw-map__canvas" data-map>
           <img class="nw-map__base" src="assets/img/world.svg" alt="" aria-hidden="true"
                width="150" height="60">
         </div>
         <p class="nw-map__note">
-          <span class="nw-ph">Placeholder</span>
-          Location markers are indicative.
-          <!-- TODO(client): a 16 ország tényleges listája bekérendő -->
+          Each marker is a country where neuwerk operates.
         </p>
       </div>
 
       <dl class="nw-stats">
         <div><dt><span data-count="14000" data-count-sep=",">14,000</span></dt><dd>people</dd></div>
-        <div><dt><span data-count="16">16</span></dt><dd>countries</dd></div>
+        <div><dt><span data-count="18">18</span></dt><dd>countries</dd></div>
         <div><dt><span>1</span></dt><dd>company</dd></div>
       </dl>
     </div>
@@ -345,13 +340,16 @@
 
   <section class="nw-section nw-theme-light">
     <div class="nw-shell">
+      <!-- A harom kartya korabban cim nelkul lebegett a lap aljan: nem volt
+           semmi, ami megmondta volna, mire valo a blokk. -->
+      <h2 data-reveal>Learn more about neuwerk</h2>
       <ul class="nw-cards">
-        <li data-reveal><a href="identity.html">
+        <li data-reveal data-reveal-delay="80"><a href="identity.html">
           <h3>A new identity</h3>
           <p>Proud of where we came from. Confident in what we can do.</p>
           <span class="nw-cards__go" aria-hidden="true">&rarr;</span>
         </a></li>
-        <li data-reveal data-reveal-delay="80"><a href="career.html">
+        <li data-reveal data-reveal-delay="140"><a href="career.html">
           <h3>Career</h3>
           <p>Shape what&rsquo;s next. Expertise meets opportunity.</p>
           <span class="nw-cards__go" aria-hidden="true">&rarr;</span>
@@ -389,12 +387,6 @@
           <li><a href="contact.html">Contact</a></li>
         </ul>
       </nav>
-      <nav aria-label="Responsibility">
-        <h4>Responsibility</h4>
-        <ul>
-          <li><a href="responsibility.html">Acting responsibly</a></li>
-        </ul>
-      </nav>
       <nav aria-label="Legal">
         <h4>Legal</h4>
         <ul>
@@ -405,9 +397,8 @@
 
     <div class="nw-footer__base">
       <p class="nw-footer__owner">
-        <span>A</span>
-        <span class="nw-footer__regent"><img src="assets/brand/regent-white.png" alt="Regent" width="96" height="26"></span>
-        <span>company</span>
+        <span class="nw-footer__owner-label">Part of</span>
+        <img src="assets/brand/regent-white.png" alt="Regent" width="112" height="32">
       </p>
       <p class="nw-footer__copy">&copy; 2026 neuwerk. All rights reserved.</p>
     </div>

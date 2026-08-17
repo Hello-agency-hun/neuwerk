@@ -34,7 +34,7 @@ OUT = ROOT / "assets" / "img" / "subhero"
 WIDTH = 2400
 MAX_KB = 290
 
-NAMES = ["identity", "career", "media", "responsibility", "contact"]
+NAMES = ["identity", "career", "media", "contact"]
 
 
 def build(name):

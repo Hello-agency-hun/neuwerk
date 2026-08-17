@@ -9,6 +9,12 @@
      <span class="nw-pattern__shape" data-depth="0.12"
            style="left:-10%;top:8%;width:64vmin;height:30vmin"></span>
    </div>
+
+   A szelektor szandekosan [data-depth], nem .nw-pattern__shape: a brand-sav
+   (.nw-brandband) sajat osztalyu formakat hasznal, de ugyanezt a
+   scroll-vezerlest kapja. Az egyetlen szerzodes az, hogy a [data-pattern]
+   kontenerben a mozgatando elemeken legyen data-depth, es a CSS-uk hasznalja
+   a --shift valtozot.
 */
 (function () {
   "use strict";
@@ -20,7 +26,7 @@
     function (el) {
       return {
         el: el,
-        shapes: Array.prototype.slice.call(el.querySelectorAll(".nw-pattern__shape")),
+        shapes: Array.prototype.slice.call(el.querySelectorAll("[data-depth]")),
       };
     }
   );
