@@ -1,0 +1,14 @@
+# Python-fuggosegek a tools/ alatti szkriptekhez.
+#
+# A WEBOLDALHOZ EZEK NEM KELLENEK. A site sima HTML/CSS/JS: bongeszoben
+# megnyitva mukodik, telepites nelkul. Ezek csak az asset-eloallito es
+# ellenorzo szkriptekhez kellenek.
+#
+# Telepites:  pip install -r requirements.txt
+
+Pillow>=10.0          # kep-feldolgozas (terkep, szemcse, hero-kepek)
+numpy>=1.26           # video-grade szamitas (build_video, build_solutions)
+beautifulsoup4>=4.12  # HTML-parse a wireframe-buildhez
+lxml>=5.0             # a BeautifulSoup parsere
+PyMuPDF>=1.24         # PDF-osszefuzes es linkatiras (build_wireframe)
+fonttools>=4.50       # TTF -> woff2 konverzio (build_fonts)
