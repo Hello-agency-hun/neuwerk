@@ -207,16 +207,147 @@ claude
 
 Jó első kérdés: „Olvasd el a PROGRESS.md-t és mondd el, hol tartunk."
 
-### claude.ai
+### Áttétel Claude designba, lépésről lépésre
 
-Ha designon dolgoznál, nyiss egy Projectet a claude.ai-on, és told fel a
-`css/tokens.css`-t meg azt az egy-két oldalt, amin épp dolgozol. Az egész
-repót ne töltsd fel: a videók és a brandbook elviszik a helyet, és a
-designhoz nem kellenek.
+Innen indulsz: leklónoztad a repót, és megnyitottad a mappát.
 
-Ha egy szekciót terveznél újra, a legjobb input a `tokens.css`, az adott
-szekció HTML-je és a `design-system.html`. Így a javaslat a meglévő
-rendszerben marad, és nem talál ki új színeket.
+1. Menj a claude.ai-ra és hozz létre egy új Projectet. Adj neki nevet,
+   például „neuwerk website".
+
+2. Told fel a Project tudásbázisába pontosan ezt a négy dolgot:
+
+   - `css/tokens.css`, mert ebben van minden szín, betűméret és térköz
+   - `design-system.html`, mert ez mutatja meg, hogyan néznek ki a
+     komponensek együtt
+   - `docs/neuwerk-wireframe.pdf`, mert ezen látszik a szekciók sorrendje
+     és a teljes oldalszerkezet
+   - azt az egy oldalt, amin dolgozni fogsz, például `index.html`
+
+3. Az egész repót ne töltsd fel. A videók és a brandbook elviszik a helyet,
+   és a designhoz nem adnak hozzá semmit. Ha a brandbookra is szükség van,
+   told fel külön az `Arculat/01_neuwerk_brandbook/neuwerk_brandbook_FINAL.pdf`-et.
+
+4. Az első üzenetben mondd meg, mi a keret. Valami ilyesmi működik:
+
+   > Ez egy statikus HTML weboldal. A `tokens.css` tartalmazza az összes
+   > design tokent, ezekből dolgozz, és ne találj ki új színt vagy
+   > betűméretet. A Sun (#ffa500) legfeljebb a felület 10 vagy 15 százaléka
+   > lehet, és fehér háttéren tilos szövegszínként. Ne használj CDN-t és
+   > `fetch()`-et.
+
+5. Ha egy szekciót terveznél újra, add meg az adott szekció HTML-jét, és
+   kérj több változatot. A visszakapott kódot a `tokens.css` változóival
+   ellenőrizd: ha hardcode hex érték van benne, az hibás.
+
+Amit érdemes előre tudni: az artifact-előnézet nem fog pontosan úgy kinézni,
+mint a valódi oldal. A betűtípusok lokálisan vannak beágyazva, a videók pedig
+nincsenek feltöltve, ezért az előnézet ezek nélkül renderel. A szerkezet és a
+színek viszont helyesek lesznek.
+
+A claude.ai felülete változik, úgyhogy a gombok neve lehet más, mint itt. A
+lényeg minden verzióban ugyanaz: egy Project, benne a fenti négy fájl.
+
+### Áttétel Figmába, lépésről lépésre
+
+A Figma natívan nem tud HTML-t importálni, ehhez plugin kell. Az alábbi
+lépések után lesz egy réteges, szerkeszthető Figma-fájlod.
+
+1. Indítsd el a helyi szervert, hogy a plugin lássa az oldalt:
+
+   ```bash
+   python tools/serve.py
+   ```
+
+   Ez a `http://localhost:8000` címen szolgálja ki a projektet.
+
+2. Figmában nyiss egy új fájlt, és telepíts egy HTML-importáló plugint. A
+   legelterjedtebb a html.to.design, de több hasonló is van. Keress a
+   Figma Community-ben a „html to design" kifejezésre.
+
+3. Importálj oldalanként, ne egyben. Az importálók általában kétféle
+   bemenetet fogadnak:
+
+   - URL, például `http://localhost:8000/index.html`
+   - beillesztett HTML forrás
+
+   Ha az URL-es mód nem éri el a localhostot (a plugin a Figma felhőjéből
+   fut, tehát ez előfordulhat), akkor vagy a beillesztős módot használd,
+   vagy tedd ki ideiglenesen az oldalt egy publikus címre.
+
+4. Ezt a tíz oldalt érdemes behozni:
+
+   ```
+   index.html              identity.html           career.html
+   media.html              legal-compliance.html   contact.html
+   404.html                media/neuwerk-begins.html
+   media/thermal-systems-milestone.html
+   media/how-to-update-this-page.html
+   ```
+
+5. Az importált frame szélességét állítsd 1440 pixelre. Az oldal erre a
+   szélességre van tervezve, ez a `--nw-max-width` értéke.
+
+### A Figma-fájl beállítása a tokenekből
+
+Az import layereket ad, de nem ad se változókat, se komponenskönyvtárat.
+Ezeket kézzel érdemes felvenni, mert így marad a Figma-fájl és a kód
+szinkronban. Minden érték a `css/tokens.css`-ből jön.
+
+Színek:
+
+| Figma-változó | Érték | Mire való |
+|---|---|---|
+| navy | `#1b1e52` | a fő szövegszín |
+| blue-1 | `#273993` | a sötét felületek háttere |
+| blue-2 | `#4e66af` | másodlagos szöveg |
+| blue-3 | `#8895cb` | forma és felület, szövegnek világoson nem jó |
+| blue-4 | `#afc6e7` | forma és felület, szövegnek világoson nem jó |
+| sun | `#ffa500` | akcent, legfeljebb a felület 10 vagy 15 százaléka |
+| canvas | `#fbfcfe` | az oldal alapja |
+| surface | `#ffffff` | kártyák, kiemelt lapok |
+| sunk | `#eef2fb` | süllyesztett sáv |
+| deeper | `#1e2c72` | a mély felület sötétebb vége |
+
+Betűtípusok. Mindkettő elérhető a Figmában, mert Google Fontok:
+
+- Poppins, súlyok: 400, 500, 600, 700. Ez megy a címekre, a UI-ra és a
+  törzsszövegre.
+- Lora, variable, 400-től 700-ig, dőlttel együtt. Ez csak hosszú
+  szövegre és idézetre való.
+
+Betűméretek. A kódban ezek `clamp()` értékek, tehát a képernyő szélességével
+változnak. Figmában a desktop, vagyis a legnagyobb értéket vedd fel:
+
+| Stílus | Desktop méret |
+|---|---|
+| text-xs | 13 px |
+| text-sm | 15 px |
+| text-base | 17 px |
+| text-lg | 22 px |
+| text-xl | 28 px |
+| text-2xl | 44 px |
+| text-3xl | 64 px |
+| text-4xl | 96 px |
+
+Sarokkerekítés: 8, 14, 22 és 32 pixel, plusz a pill alakú elemekhez teljes
+kerekítés.
+
+### Amire figyelj a Figma-áttétellel
+
+Az importált fájl kiindulópont, nem design system. Rétegeket kapsz, nem
+komponenseket, és a plugin gyakran túl sok egymásba ágyazott framet gyárt.
+Számíts arra, hogy takarítani kell utána.
+
+Ami a legfontosabb: ettől kezdve két helyen lesz meg ugyanaz a design, a
+kódban és a Figmában. Ezek elcsúsznak egymástól, ha nem döntitek el előre,
+melyik az igazi. Ebben a projektben a repo az igazság, mert az megy ki az
+ügyfélhez. A Figma-fájl jó vázlatozásra, prezentációra és arra, hogy
+megmutassátok, mi hogyan nézne ki, de ha ott átírtok egy színt, az a
+weboldalon önmagától nem változik meg. A `tokens.css` az egyetlen hely, ahol
+a szín tényleg megváltozik.
+
+Ha csak a szerkezetet akarod megmutatni valakinek, a
+`docs/neuwerk-wireframe.pdf` gyorsabb, mint egy Figma-import.
 
 ### Lovable
 
