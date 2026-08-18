@@ -1,142 +1,145 @@
-# NEUWERK — weboldal, Build 1
+# NEUWERK weboldal, Build 1
 
-Statikus HTML/CSS/JS weboldal a neuwerk (korábban Continental OESL) számára,
-plusz a hozzá tartozó arculati anyagok és az asset-előállító eszközök.
+Statikus HTML/CSS/JS weboldal a neuwerk (korábban Continental OESL) számára.
+A repóban van az arculati anyag és az asset-előállító szkriptek is.
 
-**Ha most veszed át a projektet, ezt a fájlt olvasd végig.** A fejlesztői
-belépési pont a [`CLAUDE.md`](CLAUDE.md), az aktuális állapot és a nyitott
-kérdések a [`PROGRESS.md`](PROGRESS.md)-ben vannak.
+Ha most veszed át a projektet, ezt a fájlt olvasd végig. Utána a
+[`PROGRESS.md`](PROGRESS.md) jön: abban van, hol tartunk, mit döntöttünk el,
+és mi az, amit már kipróbáltunk és nem működött.
 
 ---
 
 ## 1. Telepítés
 
-### Fontos: a `main` ág üres
-
-A munka a **`build/1-clickable-prototype`** ágon van. A `main` csak a kezdeti
-tervet tartalmazza, weboldal nincs rajta. Ezért klónozáskor add meg az ágat:
-
 ```bash
-git clone -b build/1-clickable-prototype https://github.com/Hello-agency-hun/neuwerk.git
+git clone https://github.com/Hello-agency-hun/neuwerk.git
+cd neuwerk
 ```
 
-Ha már klónoztad és üresnek tűnik:
+Ennyi. A `main` ágon minden rajta van.
 
-```bash
-git checkout build/1-clickable-prototype
-```
+(Van egy `build/1-clickable-prototype` ág is. Ugyanaz a tartalom, ugyanaz a
+commit. Korábban ott folyt a munka, aztán átvezettük a `main`-re. Nem kell
+vele foglalkoznod.)
 
-A repo ~75 MB (benne a brandbook, a logók és a videók), a klónozás eltarthat
-pár percig.
+A repo körülbelül 82 MB, a git-előzményekkel együtt 155 MB a lemezen. A
+klónozás pár percig tart, mert benne van a brandbook és az animatik videó is.
 
-### Mit kapsz a klónnal, és mit nem
+### Mit tartalmaz a klón
 
-| Benne van | Nincs benne (helyileg előállítható) |
-|---|---|
-| a teljes weboldal (HTML/CSS/JS) | `work/` — köztes renderek, PDF-ek, zipek (~200 MB) |
-| `assets/` — a kész, optimalizált assetek | `uj-neuwerk/` — a review-mappa (12 MB) |
-| `Arculat/` — brandbook, logók | |
-| `useful visual assets/` — animatik, sablonok | |
-| `tools/` — az előállító szkriptek | |
+| Mappa | Fájl | Méret | Mi ez |
+|---|---|---|---|
+| `useful visual assets/` | 5 | 42,1 MB | az ügyfél animatikja, PPT-sablonok, bannerek |
+| `Arculat/` | 36 | 23,5 MB | brandbook, neuwerk/OESL/Regent logók |
+| `assets/` | 48 | 12,3 MB | a kész assetek, ezek mennek ki az ügyfélhez |
+| `assets-src/` | 4 | 3,2 MB | a generált képek nagy felbontású eredetije |
+| gyökér | 14 | 0,3 MB | a 7 oldal és a dokumentáció |
+| a többi | 61 | 0,5 MB | forráskód, szkriptek, spec |
 
-A hiányzó kettőt egy-egy paranccsal újra tudod gyártani, lásd a 3. pontnál.
+### Mi nincs benne
+
+Két mappa kimarad, mert mindkettő származtatott: `work/` (körülbelül 200 MB
+köztes render) és `uj-neuwerk/` (13 MB review-mappa). Egy-egy paranccsal
+újraépülnek, lásd a 3. pontot.
+
+Ebben a két mappában van a három ügyfél-kimenet is: a wireframe-PDF, a
+review-zip és a leszállítható zip. Ha valamelyikre azonnal szükséged van,
+gyorsabb, ha elkéred, mint ha legenerálod.
 
 ---
 
 ## 2. Futtatás
 
-**A weboldalhoz semmit nem kell telepíteni.** Nincs npm, nincs build lépés,
+A weboldalhoz nem kell telepíteni semmit. Nincs npm, nincs build lépés,
 nincs függőség.
 
 ```bash
 python tools/serve.py
 ```
 
-Vagy egyszerűen nyisd meg duplakattintással az `index.html`-t. A szerveres
-verzió azért jobb, mert a videók és néhány böngésző-funkció `file://` alól
-máshogy viselkedik.
+Vagy nyisd meg duplakattintással az `index.html`-t. A szerveres verzió azért
+jobb, mert a videók `file://` alól máshogy viselkednek.
 
 ---
 
-## 3. Ha az eszközöket is használni akarod
+## 3. Az eszközök
 
-Csak akkor kell, ha assetet állítasz elő vagy PDF-et generálsz. **A weboldal
-szerkesztéséhez nem kell.**
+Ezekre csak akkor van szükség, ha assetet állítasz elő vagy PDF-et
+generálsz. A weboldal szerkesztéséhez nem kellenek.
 
 ```bash
 pip install -r requirements.txt
 ```
 
-Külső programok, amik néhány szkripthez kellenek:
+Néhány szkript külső programot is használ:
 
-| Program | Mihez | Ha nincs meg |
+| Program | Mihez kell | Ha nincs meg |
 |---|---|---|
-| **ffmpeg** | `build_video.py`, `build_solutions.py` (videóvágás, grade) | [ffmpeg.org](https://ffmpeg.org/download.html) |
-| **Google Chrome** | `build_wireframe.py` (PDF-nyomtatás) | valószínűleg már fent van |
-| **PHP** | csak a review-mappa megjegyzés-gyűjtője | csak ha helyben teszteled |
+| ffmpeg | videóvágás és színkorrekció | [ffmpeg.org](https://ffmpeg.org/download.html) |
+| Google Chrome | a wireframe-PDF nyomtatása | valószínűleg már fent van |
+| PHP | a review-mappa megjegyzés-gyűjtője | csak helyi teszthez |
 
-A Chrome útvonala a `tools/build_wireframe.py` tetején van beégetve — ha
+A Chrome útvonala be van égetve a `tools/build_wireframe.py` tetejére. Ha
 nálad máshol van, ott írd át.
 
 ### A leggyakoribb parancsok
 
 ```bash
-python tools/check_links.py
-python tools/check_placeholders.py
-python tools/build_wireframe.py
-python tools/build_review.py
-python tools/make_zip.py
+python tools/check_links.py          # halott linkek mind a 10 oldalon
+python tools/check_placeholders.py   # placeholder-leltár, frissíti a HANDOFF.md-t
+python tools/build_wireframe.py      # kattintható wireframe-PDF
+python tools/build_review.py         # uj-neuwerk/, a feltölthető review-mappa
+python tools/make_zip.py             # a leszállítható zip
 ```
 
-Sorrendben: halott linkek keresése mind a 10 oldalon · placeholder-leltár és a
-`HANDOFF.md` frissítése · kattintható wireframe-PDF az ügyfélnek · az
-`uj-neuwerk/` review-mappa · a leszállítható zip.
-
-**Minden változtatás után futtasd az első kettőt.** Ez a projekt szabálya.
+Az első kettőt futtasd le minden változtatás után. Ez a projekt szabálya.
 
 ---
 
 ## 4. Mit jelent az, hogy „design HTML"
 
-Ebben a projektben **nincs Figma-fájl, amiből aztán valaki lekódolja az
-oldalt. A HTML/CSS maga a design.** Ez a szokásosnál fontosabb különbség,
-ezért érdemes átgondolni, mielőtt hozzányúlsz:
+Ebben a projektben nincs Figma-fájl, amiből valaki utána lekódolja az oldalt.
+A HTML és a CSS maga a design. Ebből három dolog következik.
 
-- **A tervezés forrása a `css/tokens.css`.** Minden szín, betűméret, térköz és
-  sarokkerekítés ott van definiálva, a brandbook v1.1-ből levezetve. Ha színt
-  akarsz állítani, ott állítod — és az egész oldalon átmegy.
-  **Hardcode hex értéket ne írj sehova máshova.**
-- **A `design-system.html` az élő stíluskatalógus.** Nyisd meg böngészőben:
-  ott van egy helyen az összes token, gomb, kártya és tipográfia, ahogy
-  tényleg kinéznek. Ez a projekt „stílusoldala".
-- **A CSS kommentelve van, és a kommentek indokolnak.** Nem azt írják le, mit
-  csinál a kód, hanem hogy miért úgy. Sok döntés mögött mérés vagy
-  ügyfél-visszajelzés van — érdemes elolvasni, mielőtt átírsz valamit.
+A tervezés forrása a `css/tokens.css`. Minden szín, betűméret, térköz és
+sarokkerekítés ott van definiálva, a brandbook v1.1-ből levezetve. Ha színt
+akarsz állítani, ott állítod, és az egész oldalon átmegy. Máshova ne írj
+hardcode hex értéket.
 
-### Három szabály, amit a brandbook kikényszerít
+A `design-system.html` az élő stíluskatalógus. Nyisd meg böngészőben: egy
+helyen ott van az összes token, gomb, kártya és tipográfia, ahogy tényleg
+kinéznek.
 
-Ezeket a tokenek védik, de kézzel könnyű megsérteni:
+A CSS-kommentek indokolnak, nem leírnak. Nem azt mondják el, mit csinál a
+kód, hanem hogy miért úgy. Sok döntés mögött mérés vagy ügyfél-visszajelzés
+van, úgyhogy érdemes elolvasni őket, mielőtt átírsz valamit.
 
-1. **A Sun (`#ffa500`) maximum a látható felület 10–15%-a.** Soha nem háttér.
-2. **Sun szöveg fehér háttéren tilos** — a kontraszt 1,97:1, bukott. A
-   Sun-kitöltésű gomb felirata **navy**. Erre van szemantikus token:
+### Amit a brandbook kikényszerít
+
+A tokenek védik ezeket, de kézzel könnyű megsérteni:
+
+1. A Sun (`#ffa500`) legfeljebb a látható felület 10 vagy 15 százaléka
+   lehet. Háttérnek soha.
+2. Sun szöveg fehér háttéren tilos, mert a kontraszt 1,97:1, ami bukott
+   érték. A Sun-kitöltésű gomb felirata navy. Erre van szemantikus token:
    `--nw-on-sun`.
-3. **A neuwerk pattern csak Blue tint 1 navy háttéren**, nagy léptékben.
-   Kisméretű, sűrű vagy pusztán dekoratív használat tilos.
+3. A neuwerk pattern csak Blue tint 1 navy háttéren jelenhet meg, nagy
+   léptékben. Kisméretű, sűrű vagy pusztán dekoratív használat tilos.
 
-### Négy szabály, ami a projekt működéséből jön
+### Amit a leszállítás kikényszerít
 
-A [`CLAUDE.md`](CLAUDE.md) részletezi, de a lényeg:
+Ez a négy nem stíluskérdés, hanem az ügyfél-átadás feltétele. A
+[`CLAUDE.md`](CLAUDE.md) részletezi őket.
 
-1. **Nincs build lépés.** Nincs npm, nincs bundler, nincs PHP a végleges
-   csomagban.
-2. **A zip `file://`-ből is működik**, ezért **nincs `fetch()`**. A változó
-   tartalom `window.NEUWERK_*` értékadás a `data/*.js`-ben.
-3. **Nincs külső hálózati kérés.** Font, ikon, szkript mind lokális. Német
-   ipari ügyfél, GDPR. **Ne rakj be CDN-t.**
-4. **A header/footer mind a 10 oldalon duplikálva van**, `<!-- @partial:header -->`
-   jelölők között. Ha módosítod, mind a 10 oldalon módosítsd. A `partials/`
-   alatti fájlok referencia-másolatok.
+1. Nincs build lépés. Nincs npm, nincs bundler, és a végleges csomagban
+   nincs PHP.
+2. A zipnek `file://`-ből is működnie kell, ezért nincs `fetch()`. A
+   változó tartalom `window.NEUWERK_*` értékadás a `data/*.js`-ben.
+3. Nincs külső hálózati kérés. Font, ikon, szkript mind lokális. Német ipari
+   ügyfél, GDPR, ezért CDN-t ne rakj be.
+4. A header és a footer mind a 10 oldalon duplikálva van, a
+   `<!-- @partial:header -->` jelölők között. Ha módosítod, mind a 10 oldalon
+   módosítsd. A `partials/` alatti fájlok referencia-másolatok.
 
 ---
 
@@ -146,22 +149,22 @@ A [`CLAUDE.md`](CLAUDE.md) részletezi, de a lényeg:
 index.html, identity.html, career.html, media.html,
 legal-compliance.html, contact.html, 404.html    a 7 fő oldal
 media/*.html                                     3 cikkoldal
-design-system.html                               élő stíluskatalógus (nem publikus)
+design-system.html                               stíluskatalógus, nem publikus
 
-css/tokens.css      MINDEN szín, méret, betű — az egyetlen hely, ahol hex lehet
+css/tokens.css      minden szín, méret, betű. Az egyetlen hely, ahol hex lehet
 css/base.css        reset, tipográfia, layout-primitívek
 css/components.css  header, footer, gomb, kártya, badge
-css/sections.css    a szekciók (hero, térkép, solutions, brand-sáv…)
+css/sections.css    a szekciók (hero, térkép, solutions, brand-sáv)
 
-js/                 kis, önálló szkriptek — nincs framework
-data/               a változó tartalom (hírek, telephelyek, pozíciók)
-partials/           a header/footer referencia-másolata
-assets/             a KÉSZ, optimalizált assetek (ezek mennek ki)
-assets-src/         a generált képek eredetije (nem megy ki az ügyfélnek)
+js/                 kis, önálló szkriptek. Nincs framework
+data/               a változó tartalom: hírek, telephelyek, pozíciók
+partials/           a header és a footer referencia-másolata
+assets/             a kész assetek, ezek mennek ki
+assets-src/         a generált képek eredetije, ez nem megy ki
 
-Arculat/               brandbook, neuwerk/OESL/Regent logók, logó-animáció
+Arculat/               brandbook, logók, logó-animáció
 useful visual assets/  animatik videó, PPT-sablonok, bannerek
-vendor/                Natural Earth térkép-adat (public domain)
+vendor/                Natural Earth térkép-adat, public domain
 
 tools/              az előállító és ellenőrző szkriptek
 docs/               spec, changelog, handoff, benchmark-elemzés
@@ -170,89 +173,90 @@ review/             a megjegyzés-gyűjtő widget forrása
 
 ### Az assetekről
 
-- **`assets/`** — ez megy ki az ügyfélnek. Optimalizált, méretre vágott.
-  Kézzel ne szerkeszd: a legtöbbjét szkript állítja elő.
-- **`assets-src/`** — a generált képek nagy felbontású eredetije. Szándékosan
-  a gyökérben van, **nem** az `assets/` alatt: különben bekerülne az
-  ügyfélcsomagba.
-- **`Arculat/`** — a hivatalos arculati anyag. A `01_neuwerk_brandbook/` alatti
-  PDF az igazság forrása minden szín- és tipográfia-kérdésben.
-- **`useful visual assets/OESL_animatikv_v29.mp4`** — az ügyfél saját
-  animatikja. **Minden videó ebből készül** (`tools/build_video.py`,
-  `tools/build_solutions.py`), split-tone grade-del. Az áttetsző autós x-ray
-  hatás ebbe bele van renderelve, nem mi csináltuk.
+Négy mappa van, és könnyű összekeverni őket.
+
+Az `assets/` az, ami kimegy az ügyfélhez. Optimalizált és méretre vágott.
+Kézzel ne szerkeszd, mert a legtöbbjét szkript állítja elő.
+
+Az `assets-src/` a generált képek nagy felbontású eredetije. Szándékosan a
+gyökérben van és nem az `assets/` alatt, mert különben bekerülne az
+ügyfélcsomagba.
+
+Az `Arculat/` a hivatalos arculati anyag. A `01_neuwerk_brandbook/` alatti
+PDF az igazság forrása minden szín- és tipográfia-kérdésben.
+
+A `useful visual assets/OESL_animatikv_v29.mp4` az ügyfél saját animatikja.
+Minden videó ebből készül, split-tone színkorrekcióval (`tools/build_video.py`
+és `tools/build_solutions.py`). Az áttetsző autós x-ray hatás ebbe bele van
+renderelve, azt nem mi csináltuk.
 
 ---
 
 ## 6. Ha AI-eszközzel dolgoznál tovább
 
-### Claude Code — ez a projekt natív környezete
+### Claude Code
 
-A repóban van egy [`CLAUDE.md`](CLAUDE.md), amit a Claude Code automatikusan
-beolvas, és egy `.claude/launch.json`, amiből a helyi szerver egy paranccsal
-indul.
+Ez a projekt natív környezete. A repóban van egy [`CLAUDE.md`](CLAUDE.md),
+amit a Claude Code magától beolvas, és egy `.claude/launch.json`, amiből a
+helyi szerver egy paranccsal indul.
 
 ```bash
 cd neuwerk
 claude
 ```
 
-Jó első kérdés: *„Olvasd el a PROGRESS.md-t és mondd el, hol tartunk."*
+Jó első kérdés: „Olvasd el a PROGRESS.md-t és mondd el, hol tartunk."
 
-### Claude.ai — designra, artifactra
+### claude.ai
 
-A statikus HTML jól átvihető: nyiss egy **Project**-et a claude.ai-on, és told
-fel a `css/tokens.css`-t plusz azt az egy-két oldalt, amin dolgozol. Az egész
-repót ne töltsd fel — a videók és a brandbook elviszik a helyet, és a
-designhoz nem is kellenek.
+Ha designon dolgoznál, nyiss egy Projectet a claude.ai-on, és told fel a
+`css/tokens.css`-t meg azt az egy-két oldalt, amin épp dolgozol. Az egész
+repót ne töltsd fel: a videók és a brandbook elviszik a helyet, és a
+designhoz nem kellenek.
 
-Ha egy szekciót akarsz újratervezni, a legjobb input a **`tokens.css` + az
-adott szekció HTML-je + a `design-system.html`**. Így a javaslat a meglévő
-rendszerben marad, nem talál ki új színeket.
+Ha egy szekciót terveznél újra, a legjobb input a `tokens.css`, az adott
+szekció HTML-je és a `design-system.html`. Így a javaslat a meglévő
+rendszerben marad, és nem talál ki új színeket.
 
 ### Lovable
 
-**Ez nem egy sima import.** A Lovable React/Vite/Tailwind projekteket generál,
-és azt szinkronizálja GitHubra. Ez a repo viszont szándékosan sima statikus
-HTML, build lépés nélkül — a kettő nem ugyanaz a formátum, tehát **a repót nem
-lehet úgy „megnyitni" a Lovable-ben, hogy onnantól ugyanez a projekt legyen.**
+Ez nem sima import, és érdemes tudni, miért. A Lovable React/Vite/Tailwind
+projekteket generál, és azt szinkronizálja GitHubra. Ez a repo viszont
+szándékosan statikus HTML, build lépés nélkül. A kettő nem ugyanaz a
+formátum, tehát a repót nem tudod úgy megnyitni a Lovable-ben, hogy onnantól
+ugyanez a projekt legyen.
 
-Két reális út:
+Két reális út van. Az egyik, hogy referenciaként használod: létrehozol egy új
+Lovable-projektet, és megadod neki a `tokens.css` értékeit meg
+képernyőképeket. Ebből épít egy React-változatot. Ilyenkor két külön kódbázis
+lesz, és el kell dönteni, melyik az igazi. A másik, hogy nem viszed át. Ha a
+cél a Build 1 ügyfél-jóváhagyás, arra a statikus verzió alkalmasabb: nincs
+build, nincs függőség, `file://`-ből is megy, és a leszállítás egy zip.
 
-1. **Referenciaként használod.** Létrehozol egy új Lovable-projektet, és
-   inputként megadod a `tokens.css` értékeit (színek, betűk, térközök) meg
-   képernyőképeket. A Lovable ebből épít egy React-változatot. Ilyenkor **két
-   külön kódbázis lesz** — el kell dönteni, melyik az igazi.
-2. **Nem viszed át.** Ha a cél a Build 1 ügyfél-jóváhagyás, a statikus verzió
-   erre alkalmasabb: nincs build, nincs függőség, `file://`-ből is megy, és a
-   leszállítás egy zip.
+Ezek az eszközök gyorsan változnak, úgyhogy mielőtt belevágsz, nézd meg az
+aktuális dokumentációjukat.
 
-A Lovable és a hasonló eszközök gyorsan változnak — mielőtt belevágsz, nézd
-meg az aktuális dokumentációjukat, hogy a GitHub-import éppen mit tud.
-
-**Amire bármelyik eszközzel figyelj:** a fenti négy projekt-szabály (nincs
-build, nincs `fetch()`, nincs CDN, `file://`-nek működnie kell) nem stílus
-kérdése — ezek az ügyfél-leszállítás feltételei. Egy generált React-app
-egyiket sem teljesíti alapból.
+Bármelyiket is választod, a 4. pont végén felsorolt négy szabály nem
+alkuképes. Egy generált React-app egyiket sem teljesíti alapból.
 
 ---
 
-## 7. Az ügyfélnek szóló három kimenet
+## 7. A három ügyfél-kimenet
 
-| | Mire való | Hogyan készül |
+| Kimenet | Mire való | Parancs |
 |---|---|---|
-| **wireframe-PDF** | tartalmi jóváhagyás — szürke, kép nélküli, kattintható | `python tools/build_wireframe.py` |
-| **review-mappa** | a kész oldal végigkattintása + megjegyzés-gyűjtő | `python tools/build_review.py` |
-| **leszállítható zip** | a végleges csomag a szerverükre | `python tools/make_zip.py` |
+| wireframe-PDF | tartalmi jóváhagyás | `python tools/build_wireframe.py` |
+| review-mappa | a kész oldal végigkattintása, megjegyzésekkel | `python tools/build_review.py` |
+| leszállítható zip | a végleges csomag a szerverükre | `python tools/make_zip.py` |
 
-A **wireframe-PDF** azért létezik, mert a kész, színes verziót nézve az ügyfél
-a színekről és az animációkról kezdett visszajelzést adni, nem a szövegről. A
+A wireframe-PDF azért készült, mert a kész, színes verziót nézve az ügyfél a
+színekről és az animációkról kezdett visszajelzést adni, nem a szövegről. A
 szürke, képek helyett feliratozott dobozokat mutató változat visszatereli a
-beszélgetést a tartalomra. Minden a valódi oldalakból generálódik, tehát nem
-tud elcsúszni attól, ami végül kimegy.
+beszélgetést a tartalomra. A valódi oldalakból generálódik, tehát nem tud
+elcsúszni attól, ami végül kimegy.
 
-A **review-mappa** PHP-t igényel (a megjegyzés-gyűjtő miatt), és egy
-webtárhelyre kell feltölteni. A `README-FELTOLTES.txt` benne van a mappában.
+A review-mappához PHP kell a megjegyzés-gyűjtő miatt, és webtárhelyre kell
+feltölteni. A `README-FELTOLTES.txt` benne van a mappában.
 
 ---
 
@@ -260,13 +264,13 @@ webtárhelyre kell feltölteni. A `README-FELTOLTES.txt` benne van a mappában.
 
 | Fájl | Mi van benne |
 |---|---|
+| [`PROGRESS.md`](PROGRESS.md) | az aktuális állapot, a döntések, a zsákutcák és a nyitott kérdések |
 | [`CLAUDE.md`](CLAUDE.md) | fejlesztői belépési pont, alapszabályok, mi placeholder |
-| [`PROGRESS.md`](PROGRESS.md) | **az aktuális állapot, minden döntés, zsákutca és nyitott kérdés** |
-| `docs/HANDOFF.md` | nyitott tételek, placeholder-lista (szkript frissíti) |
+| `docs/HANDOFF.md` | nyitott tételek és placeholder-lista, szkript frissíti |
 | `docs/CHANGELOG.md` | változásnapló |
 | `docs/superpowers/specs/` | a design spec és a három amendment |
 | `docs/benchmark-analysis.md` | a versenytárs-elemzés, amiből a layout-döntések jöttek |
 
-**A `PROGRESS.md`-t olvasd el elsőként.** Abban van a „zsákutcák" szakasz is:
-olyan dolgok, amiket már kipróbáltunk és nem működtek — hogy ne menjen rá még
-egyszer valakinek egy napja.
+A `PROGRESS.md`-vel kezdd. Van benne egy „zsákutcák" szakasz: olyan dolgok,
+amiket már kipróbáltunk és nem működtek. Azért írtuk le, hogy ne menjen rá
+még egyszer valakinek egy napja.
