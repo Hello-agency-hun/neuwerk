@@ -236,6 +236,22 @@ build, nincs függőség, `file://`-ből is megy, és a leszállítás egy zip.
 Ezek az eszközök gyorsan változnak, úgyhogy mielőtt belevágsz, nézd meg az
 aktuális dokumentációjukat.
 
+### A wireframe-PDF mint ellenőrzőpont
+
+A `docs/neuwerk-wireframe.pdf` a teljes oldal szürke, kép nélküli vázlata,
+11 lapon. Jól használható referenciának, ha bármelyik AI-eszközbe beviszed a
+projektet. Egy helyen látod rajta, milyen szekciók vannak, milyen sorrendben,
+mi van a headerben és a footerben, és hol lesz kép, videó vagy interakció.
+Ha a generált változatból kimarad egy szekció vagy felcserélődik a sorrend,
+ezen azonnal feltűnik.
+
+A PDF pillanatkép, a dátuma rajta van a borítóján. Ha közben változott az
+oldal, építsd újra:
+
+```bash
+python tools/build_wireframe.py
+```
+
 Bármelyiket is választod, a 4. pont végén felsorolt négy szabály nem
 alkuképes. Egy generált React-app egyiket sem teljesíti alapból.
 
@@ -255,6 +271,10 @@ szürke, képek helyett feliratozott dobozokat mutató változat visszatereli a
 beszélgetést a tartalomra. A valódi oldalakból generálódik, tehát nem tud
 elcsúszni attól, ami végül kimegy.
 
+A wireframe-PDF-ből egy legenerált példány be van commitolva ide:
+`docs/neuwerk-wireframe.pdf`. Ez az egyetlen kimenet, ami a klónnal együtt
+érkezik. A másik kettőt neked kell legenerálnod.
+
 A review-mappához PHP kell a megjegyzés-gyűjtő miatt, és webtárhelyre kell
 feltölteni. A `README-FELTOLTES.txt` benne van a mappában.
 
@@ -270,6 +290,7 @@ feltölteni. A `README-FELTOLTES.txt` benne van a mappában.
 | `docs/CHANGELOG.md` | változásnapló |
 | `docs/superpowers/specs/` | a design spec és a három amendment |
 | `docs/benchmark-analysis.md` | a versenytárs-elemzés, amiből a layout-döntések jöttek |
+| `docs/neuwerk-wireframe.pdf` | a teljes oldal szürke vázlata, 11 lapon. Pillanatkép |
 
 A `PROGRESS.md`-vel kezdd. Van benne egy „zsákutcák" szakasz: olyan dolgok,
 amiket már kipróbáltunk és nem működtek. Azért írtuk le, hogy ne menjen rá
