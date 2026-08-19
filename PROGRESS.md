@@ -1,5 +1,28 @@
 # PROGRESS
 
+## 2026-08-20 — Teo masodik korenek behuzasa
+
+**Kész:**
+- `8579db9` behuzva (fast-forward): szelesebb brand-sav minta
+  (`assets/img/brandband-wide.svg`) az index es az identity savjaban, a tobbi
+  oldal hero-mintaja valtozatlanul a regi `brandband.svg`.
+- A `teo-deploy/` mappa es a wireframe-PDF ujraepitve az uj allapotra;
+  zip: `work/teo-deploy-2026-08-20.zip` (79 fajl).
+- Ellenorizve: check_links + check_placeholders PASS, 169 belso link a PDF-ben,
+  a wireframe-reteg szelektorai (`.nw-brandband__img`) tovabbra is talalnak.
+
+**Következő lépés:**
+- nincs nyitott epitesi feladat. A `teo-deploy/` feltoltesre kesz.
+
+**Döntések, amiket ne kérdezzünk újra:**
+- A brand-sav kepe 100 px-szel tullog a dobozon mindket oldalon, mert a
+  gorgetes max. ~91 px-et mozdit (`data-depth 0.35` * 260). Merve: ±91 px-nel
+  meg 9 px a rahagyas. **Ha valaki a data-depth-et 0,38 fole viszi, vagy a
+  pattern.js 260-as konstansat noveli, a szel-hiba visszajon.**
+- A `--shift` ures marad, ha a bongeszo-panel nincs megjelenitve: a
+  `pattern.js` rAF-fel utemez, az pedig `visibilityState: hidden` mellett nem
+  fut. Ez meresi mutermek, NEM hiba -- ne induljunk el megint a nyomon.
+
 ## 2026-08-19 — Repo-atadas Teonak, Teo verzioja behuzva, teo-deploy mappa
 
 **Kész:**

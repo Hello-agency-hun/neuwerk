@@ -27,7 +27,7 @@ Ezek egyike sem zárható le fejlesztői oldalról.
 Ezt a szakaszt a `python tools/check_placeholders.py` generálja. Ne szerkeszd kézzel.
 
 <!-- PLACEHOLDER-INVENTORY-START -->
-Generálva: `python tools/check_placeholders.py` — **14 tétel**
+Generálva: `python tools/check_placeholders.py` — **21 tétel**
 
 | fájl | sor | tétel |
 |---|---|---|
@@ -36,6 +36,11 @@ Generálva: `python tools/check_placeholders.py` — **14 tétel**
 | `legal-compliance.html` | 182 | Integrity Line csatorna és adatvédelmi nyilatkozat bekérendő |
 | `media/neuwerk-begins.html` | 89 | valós cikkszöveg bekérendő |
 | `media/thermal-systems-milestone.html` | 85 | valós cikkszöveg bekérendő |
+| `teo-deploy/contact.html` | 80 | MINDEN kontaktadat placeholder, valós adatok bekérendők |
+| `teo-deploy/legal-compliance.html` | 110 | az 5 jogi dokumentum valós szövege bekérendő |
+| `teo-deploy/legal-compliance.html` | 182 | Integrity Line csatorna és adatvédelmi nyilatkozat bekérendő |
+| `teo-deploy/media/neuwerk-begins.html` | 89 | valós cikkszöveg bekérendő |
+| `teo-deploy/media/thermal-systems-milestone.html` | 85 | valós cikkszöveg bekérendő |
 | `uj-neuwerk/contact.html` | 91 | MINDEN kontaktadat placeholder, valós adatok bekérendők |
 | `uj-neuwerk/legal-compliance.html` | 120 | az 5 jogi dokumentum valós szövege bekérendő |
 | `uj-neuwerk/legal-compliance.html` | 192 | Integrity Line csatorna és adatvédelmi nyilatkozat bekérendő |
@@ -43,6 +48,8 @@ Generálva: `python tools/check_placeholders.py` — **14 tétel**
 | `uj-neuwerk/media/thermal-systems-milestone.html` | 85 | valós cikkszöveg bekérendő |
 | `data/jobs.js` | 23 | a valos nyitott poziciok listaja bekerendo |
 | `data/news.js` | 16 | a valós hírek és cikkek bekérendők |
+| `teo-deploy/data/jobs.js` | 23 | a valos nyitott poziciok listaja bekerendo |
+| `teo-deploy/data/news.js` | 16 | a valós hírek és cikkek bekérendők |
 | `uj-neuwerk/data/jobs.js` | 23 | a valos nyitott poziciok listaja bekerendo |
 | `uj-neuwerk/data/news.js` | 16 | a valós hírek és cikkek bekérendők |
 <!-- PLACEHOLDER-INVENTORY-END -->
