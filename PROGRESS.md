@@ -1,5 +1,52 @@
 # PROGRESS
 
+## 2026-08-19 — Repo-atadas Teonak, Teo verzioja behuzva, teo-deploy mappa
+
+**Kész:**
+- `main` fast-forwarddal felzarkoztatva (57 commit volt lemaradva), a ket ag
+  azota vegig szinkronban. A sima `git clone` mukodik.
+- README ujrairva atadasra + `requirements.txt`; a humanizer skill lefuttatva
+  rajta (0 gondolatjel, 0 felkover). Lepesrol lepesre leiras a Claude- es a
+  Figma-attetelhez, ellenorzott token-ertekekkel.
+- `docs/neuwerk-wireframe.pdf` bekerult a repoba referenciakent.
+- Teo `3123c20` commitja behuzva: uj fejlec-szerkezet (`.nw-header__group` +
+  kulon lebego `.nw-header__contact`), brand-sav SVG-re csere
+  (`assets/img/brandband.svg`), terkep-klaszter, holt CSS/JS takaritas.
+- `tools/wireframe.css` hozzaigazitva Teo szerkezetehez (a Contact gomb
+  eltunt volt a PDF-bol, 169 -> 159 link; javitva, 169 vissza).
+- `teo-deploy/` bemutato-mappa elkeszult es helyi PHP-n tesztelve;
+  zip: `work/teo-deploy-2026-08-19.zip`.
+
+**Következő lépés:**
+- nincs nyitott epitesi feladat. Varunk arra, hogy Peter feltoltse a
+  `teo-deploy/`-t es visszajojjenek a megjegyzesek (`round: "teo-deploy"`).
+
+**Érintett fájlok:**
+- `README.md` — Teo belepesi pontja, 8 szakasz
+- `tools/wireframe.css` — a header/brand-sav szelektorok Teo osztalyaihoz
+- `tools/build_review.py` — a README-FELTOLTES.txt szovege frissitve
+- `.claude/launch.json` — `teo-deploy` bejegyzes (php -S, 8124)
+- `.gitignore` — `/teo-deploy/` hozzaadva
+
+**Döntések, amiket ne kérdezzünk újra:**
+- **Teo stilusvaltoztatasai az iranyadok** — ha az eszkozeink regi osztalyra
+  hivatkoznak, az ESZKOZT igazitjuk hozza, nem forditva.
+- A terkep 8 jelolot mutat 18 helyett (7 orszag + 1 kozep-europai klaszter),
+  es a 7 onallo orszag neve csak hoveren latszik — Peter megerositette, hogy
+  Teo pont igy akarta.
+- A generalt bemutato-mappak (`uj-neuwerk/`, `teo-deploy/`) es a `work/`
+  gitignore-ban vannak; a mappanev egyben a megjegyzesek `round` mezoje.
+- A wireframe-PDF egy site-oldal = egy folytonos lap (nincs A4-tordeles), es
+  210 mm szeles, mert a Chrome nyomtatasi layoutja fixen ~794 px.
+
+**Zsákutcák:**
+- Higgsfield img2video a brand-savhoz: 2 kor, mindketto bukott (tapetazott,
+  es gyakorlatilag nem mozgott, 0,31/255 kockakulonbseg). Lezarva; Teo azota
+  statikus SVG-vel oldotta meg.
+- Three.js x-ray auto: elengedve, mert a `file://`-kovetelmennyel utkozik.
+- Szelesebb `@page` a wireframe-hez nem ad desktop elrendezest: a Chrome
+  fixen ~794 px-en tordel, es csak felnagyitja az eredmenyt (megmerve).
+
 ## 2026-08-17 — IRÁNYVÁLTÁS: az ügyfélnek wireframe-PDF megy, nem a kész oldal
 
 **Döntés:** az ügyfél nem a kész, színes, animált oldalt kapja, mert akkor a
