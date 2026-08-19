@@ -16,40 +16,42 @@
 <!-- @partial:header -->
 <a class="nw-skip-link" href="#main">Skip to content</a>
 <header class="nw-header" data-nav>
-  <div class="nw-header__shell">
-    <div class="nw-header__bar">
-      <a class="nw-header__logo" href="index.html" aria-label="neuwerk, home">
-        <img src="assets/brand/neuwerk-navy.svg" alt="neuwerk" width="132" height="20">
-      </a>
+  <div class="nw-header__group">
+    <div class="nw-header__shell">
+      <div class="nw-header__bar">
+        <a class="nw-header__logo" href="index.html" aria-label="neuwerk, home">
+          <img src="assets/brand/neuwerk-navy.svg" alt="neuwerk" width="132" height="20">
+        </a>
 
-      <nav class="nw-header__inline" aria-label="Main">
-        <a href="index.html#who-we-are">Who we are</a>
-        <a href="index.html#solutions">Solutions</a>
-        <a href="identity.html">Identity</a>
-        <a href="career.html">Career</a>
-        <a href="media.html">Media</a>
-      </nav>
+        <nav class="nw-header__inline" aria-label="Main">
+          <a href="index.html#who-we-are">Who we are</a>
+          <a href="index.html#solutions">Solutions</a>
+          <a href="identity.html">Identity</a>
+          <a href="career.html">Career</a>
+          <a href="media.html">Media</a>
+        </nav>
 
-      <div class="nw-header__actions">
-        <a class="nw-btn nw-btn--sun nw-btn--sm" href="contact.html">Contact</a>
-        <button class="nw-header__toggle" type="button"
-                aria-expanded="false" aria-controls="nw-menu" data-nav-toggle>
-          <span class="nw-sr-only">Menu</span>
-          <span class="nw-header__bars" aria-hidden="true"></span>
-        </button>
+        <div class="nw-header__actions">
+          <button class="nw-header__toggle" type="button"
+                  aria-expanded="false" aria-controls="nw-menu" data-nav-toggle>
+            <span class="nw-sr-only">Menu</span>
+            <span class="nw-header__bars" aria-hidden="true"></span>
+          </button>
+        </div>
+      </div>
+
+      <div class="nw-header__panel" id="nw-menu" hidden>
+        <nav class="nw-header__big" aria-label="All pages">
+          <a href="index.html#who-we-are"><span>Who we are</span></a>
+          <a href="index.html#solutions"><span>Solutions</span></a>
+          <a href="identity.html"><span>Identity</span></a>
+          <a href="career.html"><span>Career</span></a>
+          <a href="media.html"><span>Media</span></a>
+          <a href="contact.html"><span>Contact</span></a>
+        </nav>
       </div>
     </div>
-
-    <div class="nw-header__panel" id="nw-menu" hidden>
-      <nav class="nw-header__big" aria-label="All pages">
-        <a href="index.html#who-we-are"><span>Who we are</span></a>
-        <a href="index.html#solutions"><span>Solutions</span></a>
-        <a href="identity.html"><span>Identity</span></a>
-        <a href="career.html"><span>Career</span></a>
-        <a href="media.html"><span>Media</span></a>
-        <a href="contact.html"><span>Contact</span></a>
-      </nav>
-    </div>
+    <a class="nw-btn nw-btn--sun nw-btn--sm nw-header__contact" href="contact.html">Contact</a>
   </div>
 </header>
 <!-- /@partial:header -->
@@ -57,17 +59,11 @@
 
 <main id="main">
   <section class="nw-section nw-theme-dark nw-subhero nw-subhero--image">
-    <!-- Rovid, nema, loopolo klip a statikus kep helyett. A Rivian-minta
-         a benchmarkbol: "short videos, feels fresh". Ez a klip mar
-         feliratmentes (tools/build_solutions.py), tehat nem kellett hozza
-         uj render az ugyfeltol. A poszter a klip elso kepkockaja, tehat
-         reduced motion es autoplay-tiltas eseten is ugyanaz latszik. -->
-    <video class="nw-subhero__bg" data-subhero-video
-           muted playsinline autoplay loop preload="metadata"
-           poster="assets/video/solution-multi.jpg" aria-hidden="true">
-      <source src="assets/video/solution-multi.mp4" type="video/mp4">
-    </video>
-    <div class="nw-subhero__scrim" aria-hidden="true"></div>
+    <!-- Ugyanaz a kepasset, mint a brand-savban -- kozepre igazitva toltunk
+         ki vele egy joval magasabb feluletet, minimalis pozicionalassal. -->
+    <div class="nw-subhero__shapes" aria-hidden="true">
+      <img class="nw-subhero__pattern-img" src="assets/img/brandband.svg" alt="">
+    </div>
     <div class="nw-shell">
       <p class="nw-eyebrow">A new identity</p>
       <h1 data-reveal>Proud of where we came from.<br>
@@ -78,12 +74,11 @@
 
   <section class="nw-section nw-theme-light">
     <div class="nw-shell">
-      <p class="nw-kinetic nw-kinetic--wide" data-kinetic>
-        neuwerk marks the beginning of a new chapter.
-      </p>
-
       <div class="nw-who">
         <div class="nw-who__aside">
+          <p class="nw-kinetic nw-kinetic--wide" data-kinetic>
+            neuwerk marks the beginning of a new chapter.
+          </p>
         </div>
         <div class="nw-who__body">
           <div class="nw-who__blocks">
@@ -116,13 +111,15 @@
         <li class="nw-namesplit--sum"><strong>neuwerk</strong><span>A design built to move forward.</span></li>
       </ul>
     </div>
+
+    <!-- Ugyanaz a gorgetesvezerelt sav, mint a fooldalon, a "neuwerk marks
+         the beginning..." blokk es a "Purposeful, distinctive..." kozott. -->
+    <div class="nw-brandband" data-pattern aria-hidden="true">
+      <img class="nw-brandband__img" src="assets/img/brandband.svg" alt="" data-depth="0.35">
+    </div>
   </section>
 
   <section class="nw-section nw-theme-sunk">
-    <div class="nw-pattern" data-pattern aria-hidden="true">
-      <span class="nw-pattern__shape" data-depth="0.14"
-            style="right:-26%;top:-16%;width:98vmin;height:42vmin"></span>
-    </div>
     <div class="nw-shell">
       <div class="nw-stack">
         <div>
@@ -146,19 +143,6 @@
           </p>
         </div>
       </div>
-    </div>
-
-
-    <!-- Ugyanaz a gorgetesvezerelt sav, mint a fooldalon. A korabbi felirat
-         szo szerint megismetelte a felette allo NEU/WERK bontast. -->
-    <div class="nw-brandband" data-pattern aria-hidden="true">
-      <span class="nw-brandband__shape" data-depth="0.30"></span>
-      <span class="nw-brandband__shape" data-depth="0.55"></span>
-      <span class="nw-brandband__shape" data-depth="0.38"></span>
-      <span class="nw-brandband__shape" data-depth="0.62"></span>
-      <span class="nw-brandband__shape" data-depth="0.34"></span>
-      <span class="nw-brandband__shape" data-depth="0.50"></span>
-      <span class="nw-brandband__shape" data-depth="0.42"></span>
     </div>
   </section>
 </main>
@@ -208,7 +192,6 @@
 <script src="js/nav.js"></script>
 <script src="js/pattern.js"></script>
 <script src="js/reveal.js"></script>
-<script src="js/hero.js"></script>
 <script src="js/kinetic.js"></script>
 </body>
 </html>

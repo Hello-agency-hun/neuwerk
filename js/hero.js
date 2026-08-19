@@ -24,13 +24,22 @@
     return;   // a poster attribútum állóképként marad
   }
 
-  video.addEventListener("loadeddata", function () {
+  function tryPlay() {
     var p = video.play();
     if (p && typeof p.catch === "function") {
       // Autoplay-tiltás esetén a poszter marad. Nem hiba, nem kell UI.
       p.catch(function () {});
     }
-  });
+  }
+
+  // A script a body vegen fut, a video pedig -- gyors (pl. helyi) szerveren --
+  // addigra mar tuljutott a loadeddata-n, tehat readyState >= 2. Ilyenkor az
+  // esemenyre varakozas soha nem sul el, a video allokepen ragad.
+  if (video.readyState >= 2) {
+    tryPlay();
+  } else {
+    video.addEventListener("loadeddata", tryPlay);
+  }
 
   video.addEventListener("timeupdate", function () {
     if (video.currentTime < LOOP_END) return;
@@ -39,18 +48,5 @@
       video.currentTime = 0;
       video.style.opacity = "1";
     }, FADE_MS);
-  });
-})();
-
-/* A subhero hatterklipek ugyanazt a szabalyt kovetik, mint a hero:
-   reduced motion mellett allnak, es a poszterkep marad. */
-(function () {
-  "use strict";
-  var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  if (!reduced) return;
-  Array.prototype.forEach.call(document.querySelectorAll("[data-subhero-video]"), function (v) {
-    v.removeAttribute("autoplay");
-    v.loop = false;
-    v.pause();
   });
 })();

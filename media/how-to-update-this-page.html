@@ -16,40 +16,42 @@
 <!-- @partial:header -->
 <a class="nw-skip-link" href="#main">Skip to content</a>
 <header class="nw-header" data-nav>
-  <div class="nw-header__shell">
-    <div class="nw-header__bar">
-      <a class="nw-header__logo" href="../index.html" aria-label="neuwerk, home">
-        <img src="../assets/brand/neuwerk-navy.svg" alt="neuwerk" width="132" height="20">
-      </a>
+  <div class="nw-header__group">
+    <div class="nw-header__shell">
+      <div class="nw-header__bar">
+        <a class="nw-header__logo" href="../index.html" aria-label="neuwerk, home">
+          <img src="../assets/brand/neuwerk-navy.svg" alt="neuwerk" width="132" height="20">
+        </a>
 
-      <nav class="nw-header__inline" aria-label="Main">
-        <a href="../index.html#who-we-are">Who we are</a>
-        <a href="../index.html#solutions">Solutions</a>
-        <a href="../identity.html">Identity</a>
-        <a href="../career.html">Career</a>
-        <a href="../media.html">Media</a>
-      </nav>
+        <nav class="nw-header__inline" aria-label="Main">
+          <a href="../index.html#who-we-are">Who we are</a>
+          <a href="../index.html#solutions">Solutions</a>
+          <a href="../identity.html">Identity</a>
+          <a href="../career.html">Career</a>
+          <a href="../media.html">Media</a>
+        </nav>
 
-      <div class="nw-header__actions">
-        <a class="nw-btn nw-btn--sun nw-btn--sm" href="../contact.html">Contact</a>
-        <button class="nw-header__toggle" type="button"
-                aria-expanded="false" aria-controls="nw-menu" data-nav-toggle>
-          <span class="nw-sr-only">Menu</span>
-          <span class="nw-header__bars" aria-hidden="true"></span>
-        </button>
+        <div class="nw-header__actions">
+          <button class="nw-header__toggle" type="button"
+                  aria-expanded="false" aria-controls="nw-menu" data-nav-toggle>
+            <span class="nw-sr-only">Menu</span>
+            <span class="nw-header__bars" aria-hidden="true"></span>
+          </button>
+        </div>
+      </div>
+
+      <div class="nw-header__panel" id="nw-menu" hidden>
+        <nav class="nw-header__big" aria-label="All pages">
+          <a href="../index.html#who-we-are"><span>Who we are</span></a>
+          <a href="../index.html#solutions"><span>Solutions</span></a>
+          <a href="../identity.html"><span>Identity</span></a>
+          <a href="../career.html"><span>Career</span></a>
+          <a href="../media.html"><span>Media</span></a>
+          <a href="../contact.html"><span>Contact</span></a>
+        </nav>
       </div>
     </div>
-
-    <div class="nw-header__panel" id="nw-menu" hidden>
-      <nav class="nw-header__big" aria-label="All pages">
-        <a href="../index.html#who-we-are"><span>Who we are</span></a>
-        <a href="../index.html#solutions"><span>Solutions</span></a>
-        <a href="../identity.html"><span>Identity</span></a>
-        <a href="../career.html"><span>Career</span></a>
-        <a href="../media.html"><span>Media</span></a>
-        <a href="../contact.html"><span>Contact</span></a>
-      </nav>
-    </div>
+    <a class="nw-btn nw-btn--sun nw-btn--sm nw-header__contact" href="../contact.html">Contact</a>
   </div>
 </header>
 <!-- /@partial:header -->
@@ -57,12 +59,10 @@
 
 <main id="main">
   <article class="nw-article">
-    <!-- A fejkep ugyanaz, mint a Media-kartyan: a kettot a data/news.js
-         "image" mezoje kapcsolja ossze. Ha ott mas kepre cserelsz, ezt a
-         ket sort is at kell irni. -->
+    <!-- Meg nincs valodi cikkkep -- a fejlec ezert a sotet szekciohatteret
+         mutatja kep helyett. A .nw-subhero__bg img-et ide kell visszatenni,
+         ha van valodi kep (ugyanaz a fajl, mint a Media-kartyan). -->
     <header class="nw-section nw-theme-dark nw-subhero nw-subhero--image">
-      <img class="nw-subhero__bg" src="../assets/img/news/how-to-update-this-page.jpg" alt=""
-           width="1200" height="670">
       <span class="nw-subhero__scrim" aria-hidden="true"></span>
       <div class="nw-shell">
         <h1 data-reveal><span class="nw-ph">Placeholder</span> How to update this page</h1>

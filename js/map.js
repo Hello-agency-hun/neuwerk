@@ -120,20 +120,74 @@
     dot.removeAttribute("data-active");
   }
 
-  groups.forEach(function (g, i) {
+  /* Kozep-Europaban 11 orszag zsufolodik ~13x8 szazalekponton -- ennyi
+     pont a 150x60-as vasznon egymast fedne. A doboz-hatarok a tenyleges
+     adatbol vannak kimerve (Nemetorszagtol Romaniaig, Portugaliatol a
+     legkeletibb pontig), Marokko (y~34) mar kivul esik, tehat marad
+     onallo pontkent a fo terkepen.
+
+     Megoldas: a klaszteren beluli orszagok EGY jelolot kapnak a fo
+     terkepen ("Europe, 11 countries"), a tenyleges 11 pont pedig egy
+     kulon, mindig lathato listaban jelenik meg alatta -- nem hover-fuggo
+     tooltipben, mert pont a zsufoltsag miatt nincs ott hely a neveknek. */
+  var EU_BBOX = { x0: 46, x1: 59, y0: 20, y1: 32 };
+  function inEuropeCluster(g) {
+    return g.x >= EU_BBOX.x0 && g.x <= EU_BBOX.x1 && g.y >= EU_BBOX.y0 && g.y <= EU_BBOX.y1;
+  }
+
+  var euGroups = groups.filter(inEuropeCluster);
+  var restGroups = groups.filter(function (g) { return !inEuropeCluster(g); });
+
+  function makeDot(g, i, extraLabel) {
     var dot = document.createElement("button");
     dot.type = "button";
     dot.className = "nw-map__dot";
     dot.style.left = g.x + "%";
     dot.style.top = g.y + "%";
     if (!reduced) dot.style.animationDelay = (i * 180) + "ms";
-    dot.setAttribute("aria-label", g.country);
+    dot.setAttribute("aria-label", extraLabel || g.country);
 
-    dot.addEventListener("pointerenter", function () { show(dot, g); });
+    dot.addEventListener("pointerenter", function () { show(dot, { country: extraLabel || g.country }); });
     dot.addEventListener("pointerleave", function () { hide(dot); });
-    dot.addEventListener("focus", function () { show(dot, g); });
+    dot.addEventListener("focus", function () { show(dot, { country: extraLabel || g.country }); });
     dot.addEventListener("blur", function () { hide(dot); });
 
     host.appendChild(dot);
-  });
+    return dot;
+  }
+
+  restGroups.forEach(function (g, i) { makeDot(g, i); });
+
+  if (euGroups.length) {
+    /* A klaszter-jelolo a csoport sulypontjan all -- nem egy tenyleges
+       orszagot jelol, csak azt mutatja meg, HOL van a zsufolt terulet. */
+    var cx = 0, cy = 0;
+    euGroups.forEach(function (g) { cx += g.x; cy += g.y; });
+    cx /= euGroups.length; cy /= euGroups.length;
+
+    var clusterDot = makeDot(
+      { x: cx, y: cy },
+      restGroups.length,
+      "Europe, " + euGroups.length + " countries — see list below"
+    );
+    clusterDot.classList.add("nw-map__dot--cluster");
+
+    var detail = document.querySelector("[data-map-detail]");
+    var list = document.querySelector("[data-map-detail-list]");
+    if (detail && list) {
+      document.querySelector(".nw-map__detail-label").textContent =
+        "Europe, " + euGroups.length + " countries";
+      euGroups.forEach(function (g) {
+        var li = document.createElement("li");
+        li.className = "nw-map__detail-item";
+        var dot = document.createElement("span");
+        dot.className = "nw-map__detail-dot";
+        dot.setAttribute("aria-hidden", "true");
+        li.appendChild(dot);
+        li.appendChild(document.createTextNode(g.country));
+        list.appendChild(li);
+      });
+      detail.hidden = false;
+    }
+  }
 })();

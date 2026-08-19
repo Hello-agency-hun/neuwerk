@@ -11,45 +11,47 @@
 <link rel="stylesheet" href="css/components.css">
 <link rel="stylesheet" href="css/sections.css">
 </head>
-<body class="is-wireframe">
+<body>
 
 <!-- @partial:header -->
 <a class="nw-skip-link" href="#main">Skip to content</a>
 <header class="nw-header" data-nav>
-  <div class="nw-header__shell">
-    <div class="nw-header__bar">
-      <a class="nw-header__logo" href="index.html" aria-label="neuwerk, home">
-        <img src="assets/brand/neuwerk-navy.svg" alt="neuwerk" width="132" height="20">
-      </a>
+  <div class="nw-header__group">
+    <div class="nw-header__shell">
+      <div class="nw-header__bar">
+        <a class="nw-header__logo" href="index.html" aria-label="neuwerk, home">
+          <img src="assets/brand/neuwerk-navy.svg" alt="neuwerk" width="132" height="20">
+        </a>
 
-      <nav class="nw-header__inline" aria-label="Main">
-        <a href="index.html#who-we-are">Who we are</a>
-        <a href="index.html#solutions">Solutions</a>
-        <a href="identity.html">Identity</a>
-        <a href="career.html">Career</a>
-        <a href="media.html">Media</a>
-      </nav>
+        <nav class="nw-header__inline" aria-label="Main">
+          <a href="index.html#who-we-are">Who we are</a>
+          <a href="index.html#solutions">Solutions</a>
+          <a href="identity.html">Identity</a>
+          <a href="career.html">Career</a>
+          <a href="media.html">Media</a>
+        </nav>
 
-      <div class="nw-header__actions">
-        <a class="nw-btn nw-btn--sun nw-btn--sm" href="contact.html">Contact</a>
-        <button class="nw-header__toggle" type="button"
-                aria-expanded="false" aria-controls="nw-menu" data-nav-toggle>
-          <span class="nw-sr-only">Menu</span>
-          <span class="nw-header__bars" aria-hidden="true"></span>
-        </button>
+        <div class="nw-header__actions">
+          <button class="nw-header__toggle" type="button"
+                  aria-expanded="false" aria-controls="nw-menu" data-nav-toggle>
+            <span class="nw-sr-only">Menu</span>
+            <span class="nw-header__bars" aria-hidden="true"></span>
+          </button>
+        </div>
+      </div>
+
+      <div class="nw-header__panel" id="nw-menu" hidden>
+        <nav class="nw-header__big" aria-label="All pages">
+          <a href="index.html#who-we-are"><span>Who we are</span></a>
+          <a href="index.html#solutions"><span>Solutions</span></a>
+          <a href="identity.html"><span>Identity</span></a>
+          <a href="career.html"><span>Career</span></a>
+          <a href="media.html"><span>Media</span></a>
+          <a href="contact.html"><span>Contact</span></a>
+        </nav>
       </div>
     </div>
-
-    <div class="nw-header__panel" id="nw-menu" hidden>
-      <nav class="nw-header__big" aria-label="All pages">
-        <a href="index.html#who-we-are"><span>Who we are</span></a>
-        <a href="index.html#solutions"><span>Solutions</span></a>
-        <a href="identity.html"><span>Identity</span></a>
-        <a href="career.html"><span>Career</span></a>
-        <a href="media.html"><span>Media</span></a>
-        <a href="contact.html"><span>Contact</span></a>
-      </nav>
-    </div>
+    <a class="nw-btn nw-btn--sun nw-btn--sm nw-header__contact" href="contact.html">Contact</a>
   </div>
 </header>
 <!-- /@partial:header -->
@@ -57,24 +59,11 @@
 
 <main id="main">
   <section class="nw-section nw-theme-dark nw-subhero nw-subhero--image">
-    <!-- Nem generalt klip, hanem ugyanaz a CSS-pattern, ami a fooldali
-         brand-savban fut. Ket kor generalas utan a modell konzekvensen
-         cian-kekre es rossz formakra ment (gomb, gyogyszerkapszula), a
-         markaszinek pedig sosem stimmeltek. A CSS-valtozat viszont a
-         tokenekbol veszi a szint, tehat definicio szerint pontos, nulla
-         byte, es a prefers-reduced-motion mar kezelve van rajta. -->
+    <!-- Ugyanaz a kepasset, mint a brand-savban -- kozepre igazitva toltunk
+         ki vele egy jóval magasabb felulet, minimalis pozicionalassal. -->
     <div class="nw-subhero__shapes" aria-hidden="true">
-      <span class="nw-pill"></span>
-      <span class="nw-pill"></span>
-      <span class="nw-pill"></span>
-      <span class="nw-pill"></span>
-      <span class="nw-pill"></span>
-      <span class="nw-pill"></span>
-      <span class="nw-pill"></span>
-      <span class="nw-pill"></span>
-      <span class="nw-pill"></span>
+      <img class="nw-subhero__pattern-img" src="assets/img/brandband.svg" alt="">
     </div>
-    <div class="nw-subhero__scrim" aria-hidden="true"></div>
     <div class="nw-shell">
       <p class="nw-eyebrow">Contact</p>
       <h1 data-reveal>We&rsquo;re Here to Connect</h1>
@@ -97,22 +86,22 @@
             00000 Example City<br>
             Example Country
           </p>
-          <p><a href="tel:+000000000000">+00 000 000 0000</a></p>
-          <p><a href="mailto:info@example.com">info@example.com</a></p>
+          <p><a class="nw-link" href="tel:+000000000000">+00 000 000 0000</a></p>
+          <p><a class="nw-link" href="mailto:info@example.com">info@example.com</a></p>
         </li>
         <li data-placeholder>
           <h3><span class="nw-ph">Placeholder</span> Media enquiries</h3>
-          <p><a href="mailto:press@example.com">press@example.com</a></p>
+          <p><a class="nw-link" href="mailto:press@example.com">press@example.com</a></p>
         </li>
         <li data-placeholder>
           <h3><span class="nw-ph">Placeholder</span> Careers</h3>
-          <p><a href="mailto:careers@example.com">careers@example.com</a></p>
-          <p><a href="career.html">See open positions</a></p>
+          <p><a class="nw-link" href="mailto:careers@example.com">careers@example.com</a></p>
+          <p><a class="nw-link" href="career.html">See open positions</a></p>
         </li>
         <li data-placeholder>
           <h3><span class="nw-ph">Placeholder</span> Suppliers</h3>
-          <p><a href="mailto:suppliers@example.com">suppliers@example.com</a></p>
-          <p><a href="legal-compliance.html#supplier-information">Supplier Requirements</a></p>
+          <p><a class="nw-link" href="mailto:suppliers@example.com">suppliers@example.com</a></p>
+          <p><a class="nw-link" href="legal-compliance.html#supplier-information">Supplier Requirements</a></p>
         </li>
       </ul>
     </div>

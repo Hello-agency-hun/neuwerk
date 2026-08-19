@@ -110,7 +110,7 @@
 
   /* --- Forma ------------------------------------------------ */
   --nw-radius-pill:  9999px;
-  --nw-radius-card:  4px;
+  --nw-radius-card:  18px;
   --nw-pattern-tilt: -45deg;   /* a neuwerk pattern dőlése */
 
   /* --- Mozgás ----------------------------------------------- */
@@ -183,7 +183,7 @@
   /* --- Lebegő nav ------------------------------------------- */
   --nw-nav-h:      56px;
   --nw-nav-inset:  14px;    /* mennyivel lóg be a viewport szélétől */
-  --nw-nav-radius: 18px;
+  --nw-nav-radius: 9999px;
   --nw-nav-radius-open: 26px;
   --nw-shadow-nav: 0 1px 2px rgb(27 30 82 / 0.06),
                    0 8px 28px rgb(27 30 82 / 0.10);

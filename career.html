@@ -16,40 +16,42 @@
 <!-- @partial:header -->
 <a class="nw-skip-link" href="#main">Skip to content</a>
 <header class="nw-header" data-nav>
-  <div class="nw-header__shell">
-    <div class="nw-header__bar">
-      <a class="nw-header__logo" href="index.html" aria-label="neuwerk, home">
-        <img src="assets/brand/neuwerk-navy.svg" alt="neuwerk" width="132" height="20">
-      </a>
+  <div class="nw-header__group">
+    <div class="nw-header__shell">
+      <div class="nw-header__bar">
+        <a class="nw-header__logo" href="index.html" aria-label="neuwerk, home">
+          <img src="assets/brand/neuwerk-navy.svg" alt="neuwerk" width="132" height="20">
+        </a>
 
-      <nav class="nw-header__inline" aria-label="Main">
-        <a href="index.html#who-we-are">Who we are</a>
-        <a href="index.html#solutions">Solutions</a>
-        <a href="identity.html">Identity</a>
-        <a href="career.html">Career</a>
-        <a href="media.html">Media</a>
-      </nav>
+        <nav class="nw-header__inline" aria-label="Main">
+          <a href="index.html#who-we-are">Who we are</a>
+          <a href="index.html#solutions">Solutions</a>
+          <a href="identity.html">Identity</a>
+          <a href="career.html">Career</a>
+          <a href="media.html">Media</a>
+        </nav>
 
-      <div class="nw-header__actions">
-        <a class="nw-btn nw-btn--sun nw-btn--sm" href="contact.html">Contact</a>
-        <button class="nw-header__toggle" type="button"
-                aria-expanded="false" aria-controls="nw-menu" data-nav-toggle>
-          <span class="nw-sr-only">Menu</span>
-          <span class="nw-header__bars" aria-hidden="true"></span>
-        </button>
+        <div class="nw-header__actions">
+          <button class="nw-header__toggle" type="button"
+                  aria-expanded="false" aria-controls="nw-menu" data-nav-toggle>
+            <span class="nw-sr-only">Menu</span>
+            <span class="nw-header__bars" aria-hidden="true"></span>
+          </button>
+        </div>
+      </div>
+
+      <div class="nw-header__panel" id="nw-menu" hidden>
+        <nav class="nw-header__big" aria-label="All pages">
+          <a href="index.html#who-we-are"><span>Who we are</span></a>
+          <a href="index.html#solutions"><span>Solutions</span></a>
+          <a href="identity.html"><span>Identity</span></a>
+          <a href="career.html"><span>Career</span></a>
+          <a href="media.html"><span>Media</span></a>
+          <a href="contact.html"><span>Contact</span></a>
+        </nav>
       </div>
     </div>
-
-    <div class="nw-header__panel" id="nw-menu" hidden>
-      <nav class="nw-header__big" aria-label="All pages">
-        <a href="index.html#who-we-are"><span>Who we are</span></a>
-        <a href="index.html#solutions"><span>Solutions</span></a>
-        <a href="identity.html"><span>Identity</span></a>
-        <a href="career.html"><span>Career</span></a>
-        <a href="media.html"><span>Media</span></a>
-        <a href="contact.html"><span>Contact</span></a>
-      </nav>
-    </div>
+    <a class="nw-btn nw-btn--sun nw-btn--sm nw-header__contact" href="contact.html">Contact</a>
   </div>
 </header>
 <!-- /@partial:header -->
@@ -57,16 +59,11 @@
 
 <main id="main">
   <section class="nw-section nw-theme-dark nw-subhero nw-subhero--image">
-    <!-- Rovid, nema, loopolo klip a statikus kep helyett (Rivian-minta a
-         benchmarkbol). A klip mar feliratmentes, tehat nem kellett hozza
-         uj render. A poszter a klip elso kepkockaja, igy reduced motion
-         es autoplay-tiltas eseten is ugyanaz latszik. -->
-    <video class="nw-subhero__bg" data-subhero-video
-           muted playsinline autoplay loop preload="metadata"
-           poster="assets/video/solution-fluid.jpg" aria-hidden="true">
-      <source src="assets/video/solution-fluid.mp4" type="video/mp4">
-    </video>
-    <div class="nw-subhero__scrim" aria-hidden="true"></div>
+    <!-- Ugyanaz a kepasset, mint a brand-savban -- kozepre igazitva toltunk
+         ki vele egy joval magasabb feluletet, minimalis pozicionalassal. -->
+    <div class="nw-subhero__shapes" aria-hidden="true">
+      <img class="nw-subhero__pattern-img" src="assets/img/brandband.svg" alt="">
+    </div>
     <div class="nw-shell">
       <p class="nw-eyebrow">Career</p>
       <h1 data-reveal>Shape What&rsquo;s Next</h1>
@@ -79,24 +76,24 @@
         At neuwerk, expertise meets opportunity.
       </p>
 
-      <div class="nw-who__blocks" data-reveal data-reveal-delay="80">
-        <div class="nw-who__block">
-          <p class="nw-who__label">What we do</p>
+      <div class="nw-career__blocks" data-reveal data-reveal-delay="80">
+        <div class="nw-career__block">
+          <p class="nw-career__label">What we do</p>
           <p>
             We empower people to challenge conventions, develop new ideas and create
             meaningful impact through engineering, manufacturing and collaboration.
           </p>
         </div>
-        <div class="nw-who__block">
-          <p class="nw-who__label">Our people</p>
+        <div class="nw-career__block">
+          <p class="nw-career__label">Our people</p>
           <p>
             Our success is built on the expertise, commitment and entrepreneurial spirit
             of our people. Together, we combine global capabilities with local customer
             proximity to solve complex challenges and drive innovation forward.
           </p>
         </div>
-        <div class="nw-who__block">
-          <p class="nw-who__label">The invitation</p>
+        <div class="nw-career__block">
+          <p class="nw-career__label">The invitation</p>
           <p>
             Join a team that combines the courage to change with the capability to make
             change happen.
@@ -115,7 +112,7 @@
        a csomagnak file:// alol is mukodnie kell).
 
        Ezert az oldal nem utanozza a karrierportalt, hanem atvezet ra. -->
-  <section class="nw-section nw-theme-dark nw-cta">
+  <section class="nw-section nw-theme-sunk nw-cta">
     <div class="nw-shell">
       <p class="nw-eyebrow">Open positions</p>
       <h2 data-reveal>Every open role, in one place</h2>

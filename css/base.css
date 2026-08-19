@@ -82,6 +82,20 @@ img, svg, video { display: block; max-width: 100%; height: auto; }
 
 a { color: inherit; text-decoration-thickness: 1px; text-underline-offset: 0.2em; }
 
+/* Szovegen beluli link -- olyan helyeken, ahol a link egy mondat resze,
+   nem onallo nav/kartya/gomb (pl. kontaktadatok, jegyzetek). Nyugalmi
+   allapotban is latszik, hogy kattinthato: szin + tompitott alahuzas,
+   ami hoverre teljesen kirajzolodik. A --nw-accent-text szekciotema
+   szerint valt (kek vilagoson, halvanyabb kek sotet szekcioban),
+   tehat automatikusan helyes marad barhol hasznaljak. */
+.nw-link {
+  color: var(--nw-accent-text);
+  text-decoration: underline;
+  text-decoration-color: color-mix(in oklab, var(--nw-accent-text) 35%, transparent);
+  transition: text-decoration-color var(--nw-dur-fast) var(--nw-ease);
+}
+.nw-link:hover { text-decoration-color: var(--nw-accent-text); }
+
 ul, ol { margin: 0; padding: 0; list-style: none; }
 
 :focus-visible {
@@ -125,7 +139,7 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
 .nw-lead { font-size: var(--nw-text-lg); color: var(--nw-fg-secondary); }
 
 .nw-editorial {
-  font-family: var(--nw-font-editorial);
+  font-family: var(--nw-font-body);
   font-size: var(--nw-text-lg);
   line-height: var(--nw-leading-loose);
 }

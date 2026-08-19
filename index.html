@@ -16,40 +16,42 @@
 <!-- @partial:header -->
 <a class="nw-skip-link" href="#main">Skip to content</a>
 <header class="nw-header" data-nav>
-  <div class="nw-header__shell">
-    <div class="nw-header__bar">
-      <a class="nw-header__logo" href="index.html" aria-label="neuwerk, home">
-        <img src="assets/brand/neuwerk-navy.svg" alt="neuwerk" width="132" height="20">
-      </a>
+  <div class="nw-header__group">
+    <div class="nw-header__shell">
+      <div class="nw-header__bar">
+        <a class="nw-header__logo" href="index.html" aria-label="neuwerk, home">
+          <img src="assets/brand/neuwerk-navy.svg" alt="neuwerk" width="132" height="20">
+        </a>
 
-      <nav class="nw-header__inline" aria-label="Main">
-        <a href="index.html#who-we-are">Who we are</a>
-        <a href="index.html#solutions">Solutions</a>
-        <a href="identity.html">Identity</a>
-        <a href="career.html">Career</a>
-        <a href="media.html">Media</a>
-      </nav>
+        <nav class="nw-header__inline" aria-label="Main">
+          <a href="index.html#who-we-are">Who we are</a>
+          <a href="index.html#solutions">Solutions</a>
+          <a href="identity.html">Identity</a>
+          <a href="career.html">Career</a>
+          <a href="media.html">Media</a>
+        </nav>
 
-      <div class="nw-header__actions">
-        <a class="nw-btn nw-btn--sun nw-btn--sm" href="contact.html">Contact</a>
-        <button class="nw-header__toggle" type="button"
-                aria-expanded="false" aria-controls="nw-menu" data-nav-toggle>
-          <span class="nw-sr-only">Menu</span>
-          <span class="nw-header__bars" aria-hidden="true"></span>
-        </button>
+        <div class="nw-header__actions">
+          <button class="nw-header__toggle" type="button"
+                  aria-expanded="false" aria-controls="nw-menu" data-nav-toggle>
+            <span class="nw-sr-only">Menu</span>
+            <span class="nw-header__bars" aria-hidden="true"></span>
+          </button>
+        </div>
+      </div>
+
+      <div class="nw-header__panel" id="nw-menu" hidden>
+        <nav class="nw-header__big" aria-label="All pages">
+          <a href="index.html#who-we-are"><span>Who we are</span></a>
+          <a href="index.html#solutions"><span>Solutions</span></a>
+          <a href="identity.html"><span>Identity</span></a>
+          <a href="career.html"><span>Career</span></a>
+          <a href="media.html"><span>Media</span></a>
+          <a href="contact.html"><span>Contact</span></a>
+        </nav>
       </div>
     </div>
-
-    <div class="nw-header__panel" id="nw-menu" hidden>
-      <nav class="nw-header__big" aria-label="All pages">
-        <a href="index.html#who-we-are"><span>Who we are</span></a>
-        <a href="index.html#solutions"><span>Solutions</span></a>
-        <a href="identity.html"><span>Identity</span></a>
-        <a href="career.html"><span>Career</span></a>
-        <a href="media.html"><span>Media</span></a>
-        <a href="contact.html"><span>Contact</span></a>
-      </nav>
-    </div>
+    <a class="nw-btn nw-btn--sun nw-btn--sm nw-header__contact" href="contact.html">Contact</a>
   </div>
 </header>
 <!-- /@partial:header -->
@@ -140,24 +142,11 @@
          zarodik ossze a sav lapozas kozben. Felirat nincs -- a szekcio cime
          mar elmondta, amit a korabbi cimke ismetelt. -->
     <div class="nw-brandband" data-pattern aria-hidden="true">
-      <span class="nw-brandband__shape" data-depth="0.30"></span>
-      <span class="nw-brandband__shape" data-depth="0.55"></span>
-      <span class="nw-brandband__shape" data-depth="0.38"></span>
-      <span class="nw-brandband__shape" data-depth="0.62"></span>
-      <span class="nw-brandband__shape" data-depth="0.34"></span>
-      <span class="nw-brandband__shape" data-depth="0.50"></span>
-      <span class="nw-brandband__shape" data-depth="0.42"></span>
+      <img class="nw-brandband__img" src="assets/img/brandband.svg" alt="" data-depth="0.35">
     </div>
   </section>
 
   <section class="nw-section nw-theme-sunk" id="footprint">
-    <div class="nw-pattern" data-pattern aria-hidden="true">
-      <span class="nw-pattern__shape" data-depth="0.10"
-            style="left:-18%;top:-10%;width:78vmin;height:34vmin"></span>
-      <span class="nw-pattern__shape" data-depth="0.18"
-            style="right:-24%;bottom:-16%;width:92vmin;height:40vmin"></span>
-    </div>
-
     <div class="nw-shell">
       <h2 data-reveal>Combining global capabilities<br>with local customer proximity</h2>
       <p class="nw-lead" data-reveal data-reveal-delay="80">
@@ -172,6 +161,10 @@
         <p class="nw-map__note">
           Each marker is a country where neuwerk operates.
         </p>
+        <div class="nw-map__detail" data-map-detail hidden>
+          <p class="nw-map__detail-label">Europe, in detail</p>
+          <ul class="nw-map__detail-list" data-map-detail-list></ul>
+        </div>
       </div>
 
       <dl class="nw-stats">
@@ -191,11 +184,6 @@
   </section>
 
   <section class="nw-section nw-theme-dark" id="solutions" data-solutions>
-    <div class="nw-pattern" data-pattern aria-hidden="true">
-      <span class="nw-pattern__shape" data-depth="0.10"
-            style="right:-26%;top:-14%;width:86vmin;height:36vmin"></span>
-    </div>
-
     <div class="nw-shell">
       <h2 data-reveal>Engineering Solutions<br>That Create Value</h2>
       <p class="nw-lead nw-solutions__intro" data-reveal data-reveal-delay="80">
@@ -295,13 +283,6 @@
   </section>
 
   <section class="nw-section nw-theme-light nw-ambition" id="ambition">
-    <div class="nw-pattern" data-pattern aria-hidden="true">
-      <span class="nw-pattern__shape" data-depth="0.14"
-            style="left:-24%;top:-12%;width:96vmin;height:42vmin"></span>
-      <span class="nw-pattern__shape" data-depth="0.22"
-            style="right:-30%;bottom:-22%;width:104vmin;height:44vmin"></span>
-    </div>
-
     <div class="nw-shell">
       <div>
         <p class="nw-eyebrow">Our ambition</p>

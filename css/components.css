@@ -23,10 +23,20 @@
 }
 .nw-btn--sun:hover { background: var(--nw-white); color: var(--nw-navy); border-color: var(--nw-white); }
 
+/* A Contact gomb hoveren opak feherre valt (lasd feljebb), a lebego
+   fejlec hattere viszont attetszo -- navy szegely nelkul a gomb
+   elveszne a mogotte atlatszo hatteren. */
+.nw-header__contact:hover { border-color: var(--nw-navy); }
+
 /* Nagy valtozat: ahol a gomb a szekcio fo tartalma, nem melleklete. */
 .nw-btn--lg {
   padding: 1rem 2rem;
   font-size: var(--nw-text-base);
+}
+/* Kis valtozat: a lebego fejlec 56px-es savjahoz meretezve. Korabban
+   a markup hasznalta, de a class-hoz nem tartozott szabaly. */
+.nw-btn--sm {
+  padding: 0.5rem 1.1rem;
 }
 /* Kulso linket jelzo nyil. A gombban all, tehat currentColor -- a Sun-gomb
    navy feliratan navy, hoverben ugyanugy valt. */
@@ -56,14 +66,25 @@
   pointer-events: none;
 }
 
+/* A csoport tartja ossze a menu-shellt es a kulon lebego Contact gombot:
+   egy sorban, kozepre igazitva, hogy a ketto egyutt viselkedjen ugy, mint
+   korabban az egyetlen doboz. A toggle csak mobilon lathato, es akkor a
+   Contact gomb el van rejtve -- tehat a shell nyitott (magasabb) allapota
+   soha nem talalkozik a kulon gombbal, az `align-items:center` biztonsagos. */
+.nw-header__group {
+  pointer-events: none;
+  display: flex; align-items: center; gap: var(--nw-space-1);
+  inline-size: 100%; max-inline-size: var(--nw-max-width);
+}
+
 .nw-header__shell {
   pointer-events: auto;
-  inline-size: 100%;
-  max-inline-size: var(--nw-max-width);
+  flex: 1 1 auto; min-inline-size: 0;
+  /* Dinamikus attetszoseg: a hatter a mogotte gorgeteo tartalomtol fugg,
+     nem fix feher -- ezert backdrop-filter, nem sima szin. */
   background: rgb(255 255 255 / 0.82);
   -webkit-backdrop-filter: blur(14px) saturate(150%);
   backdrop-filter: blur(14px) saturate(150%);
-  border: 1px solid var(--nw-line);
   border-radius: var(--nw-nav-radius);
   box-shadow: var(--nw-shadow-nav);
   overflow: clip;
@@ -79,6 +100,8 @@
   border-radius: var(--nw-nav-radius-open);
   background: rgb(255 255 255 / 0.97);
 }
+
+.nw-header__contact { pointer-events: auto; flex-shrink: 0; }
 
 .nw-header__bar {
   display: flex; align-items: center; gap: var(--nw-space-3);
@@ -118,18 +141,26 @@
   background: none; border: 0; padding: 0; cursor: pointer;
   border-radius: var(--nw-r-sm);
 }
-.nw-header__bars, .nw-header__bars::before, .nw-header__bars::after {
+.nw-header__bars {
+  position: relative;
   display: block; inline-size: 18px; block-size: 2px; border-radius: 2px;
   background: var(--nw-ink);
-  transition: transform var(--nw-dur-base) var(--nw-ease),
-              background var(--nw-dur-fast) var(--nw-ease);
+  transition: background var(--nw-dur-fast) var(--nw-ease);
 }
-.nw-header__bars::before, .nw-header__bars::after { content: ""; position: relative; }
-.nw-header__bars::before { top: -6px; }
-.nw-header__bars::after  { top: 4px; }
+/* Abszolút pozíció, hogy a nyitott (X) állásban a ket vonal PONTOSAN a
+   kozeppontban keresztezze egymast -- relative+top eseten a normal flow
+   miatt a ket szar aszimmetrikus lett. */
+.nw-header__bars::before, .nw-header__bars::after {
+  content: ""; position: absolute; inset-inline-start: 0;
+  inline-size: 18px; block-size: 2px; border-radius: 2px;
+  background: var(--nw-ink);
+  transition: transform var(--nw-dur-base) var(--nw-ease);
+}
+.nw-header__bars::before { inset-block-start: -6px; }
+.nw-header__bars::after  { inset-block-start: 6px; }
 .nw-header[data-open] .nw-header__bars { background: transparent; }
 .nw-header[data-open] .nw-header__bars::before { transform: translateY(6px) rotate(45deg); }
-.nw-header[data-open] .nw-header__bars::after  { transform: translateY(-4px) rotate(-45deg); }
+.nw-header[data-open] .nw-header__bars::after  { transform: translateY(-6px) rotate(-45deg); }
 
 /* A kinyíló panel UGYANEBBEN a konténerben. */
 .nw-header__panel {
@@ -180,13 +211,13 @@
 @media (max-width: 900px) {
   .nw-header__inline { display: none; }
   .nw-header__actions { margin-inline-start: auto; }
-  .nw-header__actions .nw-btn { display: none; }
+  .nw-header__contact { display: none; }
 }
 
 /* --- Footer --------------------------------------------------- */
 .nw-footer {
   background: var(--nw-bg); color: var(--nw-fg);
-  padding-block: var(--nw-space-12) var(--nw-space-4);
+  padding-block: var(--nw-space-8) var(--nw-space-4);
 }
 .nw-footer__claim {
   font-family: var(--nw-font-display);
@@ -200,7 +231,7 @@
   display: grid; gap: var(--nw-space-4);
   grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
   padding-block: var(--nw-space-4);
-  border-block: 1px solid var(--nw-rule);
+  border-block-end: 1px solid var(--nw-rule);
 }
 .nw-footer__cols h4 {
   font-size: var(--nw-text-xs); letter-spacing: var(--nw-tracking-wide);
@@ -209,7 +240,7 @@
 }
 .nw-footer__cols li + li { margin-top: 0.5rem; }
 .nw-footer__cols a { font-size: var(--nw-text-sm); text-decoration: none; }
-.nw-footer__cols a:hover { color: var(--nw-sun); }
+.nw-footer__cols a:hover { color: var(--nw-blue-4); }
 .nw-footer__ext {
   font-size: var(--nw-text-xs);
   letter-spacing: var(--nw-tracking-wide);
@@ -222,20 +253,13 @@
   justify-content: space-between; gap: var(--nw-space-2);
   padding-top: var(--nw-space-4);
 }
-/* A Regent-lockup FUGGOLEGES, nem egy sorba fuzott "A [logo] company".
-
-   Az egysoros valtozat azert esett szet, mert harom kulonbozo dolgot probalt
-   kozos alapvonalra huzni: ket kisbetus szotoredeket es egy verzalis
-   wordmarkot, ami folott ott ul a korona. A wordmark optikai kozepe nem esik
-   egybe a kep geometriai kozepevel, ezert barmilyen flex-igazitas mellett
-   vagy a szoveg, vagy a logo csuszott el -- es a korona miatt a sor
-   magassaga is ugralt.
-
-   A fuggoleges lockup ezt a problemat nem megoldja, hanem megszunteti:
-   nincs kozos alapvonal, amit el lehetne veteni. Ez egyben a szokasos
-   "endorsed by parent brand" elrendezes is. */
+/* Egysoros lockup: a korabbi fuggoleges valtozat a baseline-problemat
+   ugy kerulte meg, hogy nem probalt kozos alapvonalra hozni szoveget es
+   kepet. Itt `align-items: center` old ja meg ugyanezt -- a sor
+   kozepvonalahoz igazit mindkettot, nem a szoveg baseline-jahoz, tehat a
+   wordmark koronaja nem tud sormagassagot ugratni. */
 .nw-footer__owner {
-  display: flex; flex-direction: column; align-items: flex-start;
+  display: flex; flex-direction: row; align-items: center;
   gap: 0.5rem; margin: 0;
 }
 .nw-footer__owner-label {
@@ -246,7 +270,7 @@
   text-transform: uppercase;
   color: var(--nw-fg-secondary);
 }
-.nw-footer__owner img { height: 32px; width: auto; opacity: 0.9; }
+.nw-footer__owner img { height: 18px; width: auto; opacity: 0.9; }
 .nw-footer__copy { font-size: var(--nw-text-xs); color: var(--nw-fg-secondary); margin: 0; }
 
 /* --- Placeholder badge ----------------------------------------

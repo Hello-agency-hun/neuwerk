@@ -38,7 +38,7 @@ main > article > header.nw-section {
   position: relative; z-index: 2;
   padding-block: var(--nw-space-12) var(--nw-space-8);
 }
-.nw-hero__title { font-size: var(--nw-text-4xl); margin-bottom: var(--nw-space-3); }
+.nw-hero__title { font-size: var(--nw-text-4xl); margin-bottom: var(--nw-space-3); color: var(--nw-white); }
 .nw-hero__lead {
   font-size: var(--nw-text-lg);
   color: var(--nw-blue-4);
@@ -128,6 +128,33 @@ main > article > header.nw-section {
   color: var(--nw-fg-secondary);
 }
 .nw-who__block p:last-child { margin: 0; }
+
+/* --- Career: "At neuwerk" dobozok --------------------------------
+   Sajat osztaly, nem a megosztott .nw-who__block ujrafelhasznalasa --
+   igy a fooldal es az identity oldal sorozott, also-vonalas valtozata
+   erintetlen marad. Nem linkek, tehat NINCS hover-lift/szinvaltas: az
+   affordancia csak a valodi kattinthato elemeken jelenik meg. */
+.nw-career__blocks {
+  display: grid; gap: var(--nw-space-3);
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  margin-top: var(--nw-space-4);
+}
+.nw-career__block {
+  padding: var(--nw-space-4);
+  border: 1px solid var(--nw-rule);
+  border-radius: var(--nw-radius-card);
+  box-shadow: var(--nw-shadow-nav);
+}
+.nw-career__label {
+  margin: 0 0 var(--nw-space-2);
+  font-family: var(--nw-font-display);
+  font-size: var(--nw-text-xs);
+  font-weight: var(--nw-fw-semibold);
+  letter-spacing: var(--nw-tracking-wide);
+  text-transform: uppercase;
+  color: var(--nw-accent-text);
+}
+.nw-career__block p:last-child { margin: 0; color: var(--nw-fg); }
 
 /* --- Teljes szélességű képsáv ------------------------------------
    Átvezet a világos Who we are-ből a sötét Global footprintbe. */
@@ -252,11 +279,51 @@ main > article > header.nw-section {
 }
 .nw-map__note { font-size: var(--nw-text-sm); color: var(--nw-fg-secondary); margin-top: var(--nw-space-2); }
 
+/* A klaszter-jelolo statikusan is megkulonbozteti magat a tobbi ponttol
+   -- nem csak hoverre derul ki, hogy ez tobb orszagot takar. */
+.nw-map__dot--cluster::before { inline-size: 14px; block-size: 14px; }
+.nw-map__dot--cluster::after {
+  opacity: 1; transform: scale(1);
+  border-color: var(--nw-blue-1); border-width: 2px; border-style: dashed;
+}
+.nw-map__dot--cluster:hover::after,
+.nw-map__dot--cluster[data-active]::after { border-style: solid; }
+
+/* A zsufolt regio reszletlistaja: mindig lathato, nem hoverre jelenik meg
+   -- pont azert kell, mert a fo terkepen a nevek szamara nincs hely. */
+.nw-map__detail {
+  margin-top: var(--nw-space-3);
+  padding: var(--nw-space-3);
+  background: var(--nw-white);
+  border-radius: var(--nw-radius-card);
+}
+.nw-map__detail-label {
+  margin: 0;
+  font-family: var(--nw-font-display);
+  font-size: var(--nw-text-sm);
+  font-weight: var(--nw-fw-semibold);
+  color: var(--nw-fg);
+}
+.nw-map__detail-list {
+  display: flex; flex-wrap: wrap;
+  gap: 0.5rem 1.25rem;
+  margin-top: var(--nw-space-2);
+}
+.nw-map__detail-item {
+  display: inline-flex; align-items: center; gap: 0.45rem;
+  font-size: var(--nw-text-sm);
+  color: var(--nw-fg);
+}
+.nw-map__detail-dot {
+  inline-size: 7px; block-size: 7px; border-radius: 50%;
+  background: var(--nw-blue-1);
+  flex: none;
+}
+
 .nw-stats {
   display: grid; gap: var(--nw-space-4);
   grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
   margin: 0; padding-top: var(--nw-space-4);
-  border-top: 1px solid var(--nw-rule);
 }
 .nw-stats dt {
   font-family: var(--nw-font-display);
@@ -405,7 +472,6 @@ main > article > header.nw-section {
   margin-block: var(--nw-space-6) var(--nw-space-3);
   font-size: var(--nw-text-lg);
   font-weight: var(--nw-fw-semibold);
-  max-inline-size: 34ch;
 }
 
 .nw-lifecycle__steps {
@@ -463,7 +529,7 @@ main > article > header.nw-section {
   max-inline-size: 62ch;
 }
 .nw-stack__body > * + * { margin-top: var(--nw-space-2); }
-.nw-stack__body p { color: var(--nw-fg-secondary); }
+.nw-stack__body p { color: var(--nw-fg); }
 
 /* Ketoszlopos editorial. Korabban a cim teljes szelessegben allt, alatta
    62ch-re fogott szoveg, a jobb fel meg ures maradt -- es a negy elv
@@ -549,10 +615,20 @@ main > article > header.nw-section {
   transition: transform var(--nw-dur-base) var(--nw-ease),
               border-color var(--nw-dur-base) var(--nw-ease);
 }
-.nw-cards a:hover { transform: translateY(-4px); border-color: var(--nw-blue-1); }
+.nw-cards a:hover { transform: translateY(-4px); border-color: var(--nw-accent-text); }
 .nw-cards h3 { margin-bottom: 0.5rem; }
 .nw-cards p  { font-size: var(--nw-text-sm); color: var(--nw-fg-secondary); }
-.nw-cards__go { display: inline-block; margin-top: var(--nw-space-2); color: var(--nw-accent-text); }
+.nw-cards__go {
+  display: flex; align-items: center; justify-content: center;
+  inline-size: 2rem; block-size: 2rem;
+  margin-top: var(--nw-space-2);
+  border-radius: 50%;
+  border: 1px solid var(--nw-rule);
+  color: var(--nw-fg);
+  transition: transform var(--nw-dur-fast) var(--nw-ease),
+              border-color var(--nw-dur-fast) var(--nw-ease);
+}
+.nw-cards a:hover .nw-cards__go { transform: translateX(4px); border-color: var(--nw-navy); }
 
 /* --- Aloldal-hero --------------------------------------------- */
 .nw-subhero { min-block-size: 60svh; display: grid; align-items: end; }
@@ -597,29 +673,25 @@ main > article > header.nw-section {
   transition: transform var(--nw-dur-base) var(--nw-ease),
               border-color var(--nw-dur-base) var(--nw-ease);
 }
-.nw-news a:hover { transform: translateY(-4px); border-color: var(--nw-blue-1); }
+.nw-news a:hover { transform: translateY(-4px); border-color: var(--nw-accent-text); }
 /* A kep a kartya teljes szelesseget elfoglalja, a padding ala nyulva.
    Fix 16:9 arany, hogy a harom kartya egy vonalban alljon meg akkor is,
    ha kesobb mas meretu kepet toltenek fel. */
 .nw-news__media {
+  /* Szandekosan NINCS inline-size megadva: a szelesseget a negativ
+     margoval egyutt a "width:auto" hataroza meg, hogy a doboz PONTOSAN
+     a kartya szeleig erjen mindket oldalon. Ha a szelesseg is explicit
+     (100%) VOLNA, a width/margin-left/margin-right harmasa
+     tulhatarozott lenne, es a bongeszo a margin-right-ot szamolja at --
+     ettol a doboz a bal szelen jol veruzik, de a jobb szelen nem,
+     tehat elcsusznak nezett ki. */
   display: block;
+  aspect-ratio: 16 / 9;
   margin: calc(var(--nw-space-3) * -1) calc(var(--nw-space-3) * -1) var(--nw-space-3);
   border-start-start-radius: calc(var(--nw-radius-card) - 1px);
   border-start-end-radius: calc(var(--nw-radius-card) - 1px);
   overflow: hidden;
   background: var(--nw-sunk);
-}
-.nw-news__media img {
-  display: block;
-  inline-size: 100%;
-  aspect-ratio: 16 / 9;
-  object-fit: cover;
-  transition: transform var(--nw-dur-slow, 600ms) var(--nw-ease);
-}
-.nw-news a:hover .nw-news__media img { transform: scale(1.04); }
-@media (prefers-reduced-motion: reduce) {
-  .nw-news__media img { transition: none; }
-  .nw-news a:hover .nw-news__media img { transform: none; }
 }
 
 .nw-news time {
@@ -658,7 +730,7 @@ main > article > header.nw-section {
   transition: transform var(--nw-dur-base) var(--nw-ease),
               border-color var(--nw-dur-base) var(--nw-ease);
 }
-.nw-doclist a:hover { transform: translateY(-4px); border-color: var(--nw-fg); }
+.nw-doclist a:hover { transform: translateY(-4px); border-color: var(--nw-accent-text); }
 .nw-doclist h3 { font-size: var(--nw-text-lg); margin-bottom: 0.5rem; }
 .nw-doclist p  { font-size: var(--nw-text-sm); color: var(--nw-fg-secondary); flex: 1; }
 .nw-doclist__meta {
@@ -677,10 +749,10 @@ main > article > header.nw-section {
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
   margin-top: var(--nw-space-6);
 }
-.nw-contact li { padding-top: var(--nw-space-2); border-top: 2px solid var(--nw-rule); }
+.nw-contact li { padding-top: var(--nw-space-2); }
 .nw-contact h3 { font-size: var(--nw-text-base); margin-bottom: var(--nw-space-1); }
 .nw-contact p  { font-size: var(--nw-text-sm); margin-bottom: 0.35rem; }
-.nw-contact__addr { color: var(--nw-fg-secondary); }
+.nw-contact__addr { color: var(--nw-fg); }
 
 /* --- Képes aloldal-hero ------------------------------------------
    Az Identity panasza az volt, hogy tömör szövegfal. A hero így
@@ -708,6 +780,12 @@ main > article > header.nw-section {
   position: absolute; inset: 0; z-index: 0;
   overflow: clip;
   background: var(--nw-deep);
+}
+.nw-subhero__pattern-img {
+  position: absolute; inset: 0;
+  inline-size: 100%; block-size: 100%;
+  object-fit: cover; object-position: center;
+  transform: scale(1.06);
 }
 
 /* Széles kinetikus mondat: aloldalon a vezérmondat egy sor, nem blokk. */
@@ -748,53 +826,6 @@ main > article > header.nw-section {
 .nw-jobgroup__list { margin-block-start: 0.25rem; }
 .nw-job__title { font-size: var(--nw-text-base); font-weight: var(--nw-fw-semibold); }
 
-/* --- Pill-primitiv ------------------------------------------------
-   A 45 fokban dontott pasztilla a brand alapformaja. Ket helyen hasznaljuk:
-   a contact/legal hero hatterekent (.nw-subhero__shapes) es a brand-savban.
-   A geometria kozos, ezert sajat osztalyt kapott -- korabban a brand-sav
-   osztalya alatt lakott, es a sav atepitese magaval rantotta volna a
-   heroket is.
-
-   A meret a KONTENER magassagahoz kepest van megadva (--k), a hossz pedig
-   aranybol (--r). A ketto szorzata korlatos: a 45 fokban elforgatott, majd
-   1,12-re felskalazott forma fuggoleges kiterjedese (k * (r + 1)) * 0,707 *
-   1,12, aminek a konteneren belul kell maradnia -- kulonben kilognak a
-   lekerekitett vegek. Ezert minden formanal k * (r + 1) ~ 1,22. */
-.nw-pill {
-  position: absolute;
-  inset-block-start: 50%;
-  inline-size: calc(var(--nw-bh) * var(--k));
-  aspect-ratio: 1 / var(--r);
-  border-radius: var(--nw-radius-pill);
-  background: var(--nw-deeper);
-  /* A translateY a rotate ELOTT all, igy a szulo fuggoleges tengelye
-     menten kozepez -- a forgatas mar a kozepre huzott formara hat. */
-  transform: translateY(-50%) rotate(-45deg);
-  will-change: transform, opacity;
-}
-.nw-pill:nth-child(1) { --k: 0.42; --r: 1.90; inset-inline-start: -5%; }
-.nw-pill:nth-child(2) { --k: 0.34; --r: 2.55; inset-inline-start:  6%; }
-.nw-pill:nth-child(3) { --k: 0.46; --r: 1.65; inset-inline-start: 17%; }
-.nw-pill:nth-child(4) { --k: 0.30; --r: 3.05; inset-inline-start: 28%; }
-.nw-pill:nth-child(5) { --k: 0.40; --r: 2.05; inset-inline-start: 39%; }
-.nw-pill:nth-child(6) { --k: 0.36; --r: 2.35; inset-inline-start: 50%; }
-.nw-pill:nth-child(7) { --k: 0.44; --r: 1.75; inset-inline-start: 61%; }
-.nw-pill:nth-child(8) { --k: 0.32; --r: 2.80; inset-inline-start: 72%; }
-.nw-pill:nth-child(9) { --k: 0.38; --r: 2.20; inset-inline-start: 84%; }
-
-/* Vilagosabb tonusok a melyseghez. */
-.nw-pill:nth-child(2),
-.nw-pill:nth-child(6) { background: color-mix(in oklab, var(--nw-blue-2) 62%, var(--nw-deep)); }
-.nw-pill:nth-child(4),
-.nw-pill:nth-child(8) { background: color-mix(in oklab, var(--nw-blue-2) 45%, var(--nw-deep)); }
-
-/* Keskeny kepernyon kilenc forma osszemosodna: harom kimarad. */
-@media (max-width: 40rem) {
-  .nw-pill:nth-child(3),
-  .nw-pill:nth-child(6),
-  .nw-pill:nth-child(9) { display: none; }
-}
-
 /* --- Brand-sav ----------------------------------------------------
    Masodik nekifutas. Az elso valtozat kilenc pasztillaja MAGATOL mozgott:
    mindegyik sajat idozitessel uszott, nott-zsugorodott es halvanyodott.
@@ -832,85 +863,17 @@ main > article > header.nw-section {
   overflow: clip;
   isolation: isolate;
 }
-.nw-brandband__shape {
-  position: absolute;
-  inset-block-start: 50%;
-  inline-size: calc(var(--nw-bh) * var(--k));
-  aspect-ratio: 1 / var(--r);
-  border-radius: var(--nw-radius-pill);
-
-  /* A formak ATTETSZOEK, nem tomorek.
-
-     Ez a legnagyobb kulonbseg a korabbi valtozathoz kepest. Tomor foltokkal
-     az atfedes ott is csak annyit jelent, hogy az egyik takarja a masikat --
-     harom elore kiosztott tonus, es a szem azonnal latja, hogy generalt.
-     Attetszoen viszont minden keresztezes SAJAT tonust hoz letre: a hat
-     formabol tizenegy-tizenket arnyalat all elo magatol, ugy, ahogy a
-     nyomtatott markaanyagok retegzett fedvenyei. A tonusok igy nem
-     kiosztottak, hanem szarmaztatottak.
-
-     A --tone valtozo miatt az alfa egy helyen van megadva, nem hatszor. */
-  --tone: var(--nw-deeper);
-  background: color-mix(in oklab, var(--tone) 82%, transparent);
-
-  /* A --dy fuggoleges szorast ad: enelkul mind a hat forma pontosan a sav
-     kozepvonalan ul, ami vonalzoval huzottnak latszik. */
-  transform: translate3d(var(--shift, 0px), var(--dy, 0px), 0)
-             translateY(-50%) rotate(-45deg);
+/* A generalt pasztilla-mezot lecserelte egy kesz kepasset (ugyanaz a
+   formanyelv, csak raszterezve) -- egyetlen kep tolti ki a savot, a
+   meglevo [data-pattern]/[data-depth] scroll-shift mechanika valtozatlanul
+   viszi tovabb az enyhe parallaxot. */
+.nw-brandband__img {
+  position: absolute; inset: 0;
+  inline-size: 100%; block-size: 100%;
+  object-fit: cover;
+  transform: translate3d(var(--shift, 0px), 0, 0);
   will-change: transform;
 }
-/* Hat forma, nem kilenc -- de mindegyik NYULANKABB es nagyobb.
-
-   Ket meretezesi korlat feszul egymasnak:
-
-   1. A forma legyen felismerhetoen a marka pasztillaja, tehat hosszu
-      (r ~ 2,3-3,3). Kerek forma nem az.
-   2. A sav legyen OSSZEFUGGO, ne kulon uszo pasztillak. Ehhez a formak
-      vizszintes kiterjedesenek nagyobbnak kell lennie, mint a kozottuk levo
-      tavolsag. A kiterjedes ~ a sav magassaga (a lenti 1,03-as szorzo), a
-      tavolsag viszont a viewport szazaleka -- tehat a legszelesebb kepernyo
-      a szuk keresztmetszet. 1920 px-en 17% = 326 px, a kiterjedes 350 px:
-      eppen atfednek. Ennel ritkabban mar szetesne a sav.
-
-   A k * (r + 1) szorzat itt ~1,46, tehat a fuggoleges kiterjedes a sav
-   magassaganak 1,03-szorosa: a formak vegei EPPEN kilognak, es a sav
-   levagja oket. Ez szandekos -- a brandbook nagy leptekben, vagva keri a
-   patternt, es igy nem latszik, hogy kulonallo elemekbol all. */
-/* HET forma, es a sorozat MINDKET szelen tulfut a savon.
-
-   Ket dolog hagyott ureseket az elozo valtozatban:
-
-   1. A sorozat a bal oldalon tulfutott (-6%), a jobb oldalon viszont a
-      78,5%-os utolso formanal veget ert -- a jobb szelen maradt egy ures
-      navy sav. Ezert jott a hetedik, 94,5%-on: az mar a savon kivulre log,
-      es a jobb elet is levagja.
-   2. A -45 fokos atlok a JOBB FELSO es a BAL ALSO sarkot elvi okbol nem
-      erik el, ha a formak eppen csak a sav magassagaig ernek. Ezert a
-      k * (r + 1) szorzat 1,46-rol 1,77-re nott: a formak fuggoleges
-      kiterjedese most a sav magassaganak 1,25-szorose, tehat a vegeik
-      rendesen kilognak fent es lent, es kozben a sarkokat is befedik.
-      Egyben nyulankabbak is lettek, ami kozelebb all a logo aranyaihoz.
-
-   A vizszintes osztas SZANDEKOSAN nem egyenletes: pontosan 17 szazalekonkent
-   a sav metronomnak latszott. A legnagyobb hezag 17% -- 1920 px-en 326 px,
-   a formak vizszintes kiterjedese ~425 px, tehat boven fedik egymast. */
-.nw-brandband__shape:nth-child(1) { --k: 0.40; --r: 3.42; --dy: -0.6%;
-  inset-inline-start: -6%; }
-.nw-brandband__shape:nth-child(2) { --k: 0.36; --r: 3.91; --dy: 1.4%;
-  --tone: color-mix(in oklab, var(--nw-blue-2) 58%, var(--nw-deep));
-  inset-inline-start: 10.5%; }
-.nw-brandband__shape:nth-child(3) { --k: 0.44; --r: 3.02; --dy: -1.8%;
-  inset-inline-start: 27%; }
-.nw-brandband__shape:nth-child(4) { --k: 0.38; --r: 3.65; --dy: 0.9%;
-  --tone: color-mix(in oklab, var(--nw-blue-2) 34%, var(--nw-deep));
-  inset-inline-start: 44%; }
-.nw-brandband__shape:nth-child(5) { --k: 0.42; --r: 3.21; --dy: -1.1%;
-  inset-inline-start: 60.5%; }
-.nw-brandband__shape:nth-child(6) { --k: 0.34; --r: 4.20; --dy: 1.7%;
-  --tone: color-mix(in oklab, var(--nw-blue-2) 48%, var(--nw-deep));
-  inset-inline-start: 77.5%; }
-.nw-brandband__shape:nth-child(7) { --k: 0.41; --r: 3.31; --dy: -1.4%;
-  inset-inline-start: 94.5%; }
 
 /* Szemcse a sav folott. A .nw-brandband-en mar van isolation: isolate,
    ezert az overlay blend CSAK a savon belul hat -- nem szivarog at a
@@ -1003,25 +966,17 @@ video.nw-subhero__bg { object-fit: cover; }
   .nw-statement__line .nw-kw > span { transform: none; transition: none; }
 }
 
-/* --- Lebego pill-formak a heroban ---------------------------------
-   A contact es a legal-compliance hero hatteren a formak tovabbra is
-   magatol usznak: ott nincs mogottuk gorgetheto szekcio, amihez kotni
-   lehetne oket, es a hero tetejen a lassu mozgas a videos herok
-   megfeleloje. A brand-sav ezt mar NEM hasznalja. */
+/* --- Lebego kep-hatter a heroban -----------------------------------
+   A contact es a legal-compliance hero hatteren a kep onallo, gorgetestol
+   fuggetlen, nagyon visszafogott lebegtetest kap -- nem parallax, csak
+   annyi mozgas, hogy a felulet ne alljon meg teljesen. Nincs mogottuk
+   gorgetheto szekcio, amihez a brand-sav parallaxat kotni lehetne. */
 @media (prefers-reduced-motion: no-preference) {
-  .nw-subhero__shapes .nw-pill { animation: nw-drift 6s ease-in-out infinite alternate; }
-  .nw-subhero__shapes .nw-pill:nth-child(2) { animation-duration: 4.6s; animation-delay: -1.4s; }
-  .nw-subhero__shapes .nw-pill:nth-child(3) { animation-duration: 7.1s; animation-delay: -2.9s; }
-  .nw-subhero__shapes .nw-pill:nth-child(4) { animation-duration: 5.3s; animation-delay: -0.7s; }
-  .nw-subhero__shapes .nw-pill:nth-child(5) { animation-duration: 6.6s; animation-delay: -3.8s; }
-  .nw-subhero__shapes .nw-pill:nth-child(6) { animation-duration: 4.9s; animation-delay: -2.1s; }
-  .nw-subhero__shapes .nw-pill:nth-child(7) { animation-duration: 7.4s; animation-delay: -5.2s; }
-  .nw-subhero__shapes .nw-pill:nth-child(8) { animation-duration: 5.7s; animation-delay: -1.9s; }
-  .nw-subhero__shapes .nw-pill:nth-child(9) { animation-duration: 6.3s; animation-delay: -4.4s; }
+  .nw-subhero__pattern-img { animation: nw-drift-img 16s ease-in-out infinite alternate; }
 }
-@keyframes nw-drift {
-  from { transform: translateY(-50%) rotate(-45deg) translate3d(-9%, 0, 0) scale(0.88); opacity: 0.5; }
-  to   { transform: translateY(-50%) rotate(-45deg) translate3d(7%, 0, 0)  scale(1.12); opacity: 1; }
+@keyframes nw-drift-img {
+  from { transform: scale(1.06) translate3d(-1.2%, 0, 0); }
+  to   { transform: scale(1.1) translate3d(1.2%, 0, 0); }
 }
 
 
