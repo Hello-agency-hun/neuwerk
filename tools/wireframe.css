@@ -113,7 +113,8 @@
    NEM kerdezunk, es csak elvinnek a figyelmet. */
 .nw-pattern,
 .nw-subhero__shapes,
-.nw-brandband__shape,
+.nw-brandband__img,
+.nw-subhero__pattern-img,
 .nw-hero__scrim,
 .nw-subhero__scrim,
 .nw-solutions__progress {
@@ -128,6 +129,7 @@
    agyazott keret latszik, kozottuk egy ures csikkal -- ami ugy nezett
    ki, mintha lenne ott meg egy ures sav. */
 .nw-header,
+.nw-header__group,
 .nw-header__shell {
   position: static !important;
   inset: auto !important;
@@ -137,6 +139,8 @@
   max-inline-size: none !important;
 }
 .nw-header { background: none !important; margin: 0 0 6mm !important; padding: 0 !important; }
+/* A group tartja egy sorban a menu-shellt es a kulon lebego Contact gombot. */
+.nw-header__group { display: flex !important; align-items: center; gap: var(--nw-space-1); }
 .nw-header__shell {
   background: #fafafa !important;
   border: 1px solid var(--nw-line-strong);
@@ -151,9 +155,14 @@
 .nw-header__inline a { font-size: 9.5pt !important; white-space: nowrap; }
 .nw-header__bar { gap: var(--nw-space-1) !important; }
 /* A Contact GOMB a header elsodleges CTA-ja, es a components.css 900 px
-   alatt elrejti. Allo A4 794 px, tehat kiesett -- vagyis az ugyfel olyan
-   headert hagyott volna jova, amiben nincs Contact. */
-.nw-header__actions .nw-btn { display: inline-flex !important; }
+   alatt elrejti. A wireframe 794 px-en rendereli az oldalt, tehat enelkul
+   kiesne, es az ugyfel olyan headert hagyna jova, amiben nincs Contact.
+
+   A szelektor a .nw-header__contact-ra is szol: a gomb 2026-08-18 ota nem a
+   .nw-header__actions-ben ul, hanem kulon lebego elemkent a .nw-header__group
+   -ban. A regi szelektor csendben elvesztette, es a gomb eltunt a PDF-bol. */
+.nw-header__actions .nw-btn,
+.nw-header__contact { display: inline-flex !important; }
 
 /* A kinyilo hamburger-panel NEM latszik.
 
