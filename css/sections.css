@@ -868,8 +868,19 @@ main > article > header.nw-section {
    meglevo [data-pattern]/[data-depth] scroll-shift mechanika valtozatlanul
    viszi tovabb az enyhe parallaxot. */
 .nw-brandband__img {
-  position: absolute; inset: 0;
-  inline-size: 100%; block-size: 100%;
+  position: absolute;
+  inset-block: 0;
+  /* A kep szelesebb, mint a doboz -- pontosan annyival, amennyit a
+     max. --shift (data-depth 0.35 * 260px = ~91px) igenyel. Enelkul a
+     sav gorgetesre a kep szelen tul mozdul, es a doboz sotet hattere
+     latszik ki az elen a minta folytatasa helyett. A szulon mar van
+     overflow:clip, tehat a tobblet nyugalmi allapotban nem latszik. */
+  inset-inline-start: -100px;
+  /* A base.css globalis `img{max-width:100%}` reset enelkul visszavagna
+     a szelesseget a doboz meretere -- pont azt a tobbletet nyelve el,
+     amiert az egesz szabaly itt van. */
+  inline-size: calc(100% + 200px); max-inline-size: none;
+  block-size: 100%;
   object-fit: cover;
   transform: translate3d(var(--shift, 0px), 0, 0);
   will-change: transform;
