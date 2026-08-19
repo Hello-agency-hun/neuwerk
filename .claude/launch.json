@@ -5,14 +5,32 @@
     {
       "name": "neuwerk",
       "runtimeExecutable": "python",
-      "runtimeArgs": ["tools/serve.py"],
+      "runtimeArgs": [
+        "tools/serve.py"
+      ],
       "port": 8000
     },
     {
       "name": "neuwerk-review",
       "runtimeExecutable": "php",
-      "runtimeArgs": ["-S", "127.0.0.1:8123", "-t", "uj-neuwerk"],
+      "runtimeArgs": [
+        "-S",
+        "127.0.0.1:8123",
+        "-t",
+        "uj-neuwerk"
+      ],
       "port": 8123
+    },
+    {
+      "name": "teo-deploy",
+      "runtimeExecutable": "php",
+      "runtimeArgs": [
+        "-S",
+        "127.0.0.1:8124",
+        "-t",
+        "teo-deploy"
+      ],
+      "port": 8124
     }
   ]
 }

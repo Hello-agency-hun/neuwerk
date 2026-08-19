@@ -56,10 +56,14 @@ A neuwerk weboldal jelenlegi állapota, végigkattintható formában, plusz egy
 megjegyzés-gyűjtő. Nem a végleges csomag: abban nincs PHP és nincs widget.
 
 10 oldal van benne. A korábbi „Acting responsibly" aloldal megszűnt: a szövege
-a Legal & Compliance oldal élére került. A főoldali és az Identity-oldali
-brand-sáv már NEM magától mozog, hanem görgetésre csúszik; az aloldalak
-fejlécében rövid klip vagy animált minta fut — ha valakinél ezek állnak, az a
-gép „csökkentett mozgás" beállítása, nem hiba.
+a Legal & Compliance oldal élére került.
+
+A brand-mintát mostantól egyetlen vektoros kép viszi: ez fut a főoldali és az
+Identity-oldali sávban, és ez tölti ki az aloldalak fejlécét is, a korábbi
+klipek és pasztilla-animációk helyett. A fejlécben a Contact gomb külön,
+lebegő elem a menü mellett. A főoldali térképen a közép-európai telephelyek
+egyetlen jelölőbe vannak összevonva, a részletes lista mindig látszik
+mellette.
 
 Fontos: ez KÜLÖN mappa az előző körtől. Ha a régi is fent van a tárhelyen,
 töltsd EZT egy másik almappába, különben a két kör megjegyzései egy
